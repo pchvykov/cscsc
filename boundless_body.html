@@ -1,0 +1,3838 @@
+<!-- Landing page for CSCSC community website / illustration animation
+Built by Pavel Chvykov
+to run, run this in terminal: python3 -m http.server 8000
+Then go to http://localhost:8000/boundless_body.html 
+Although just double-clicking html will work almost as good.
+-->
+
+<!doctype html>
+<html lang="en" data-theme="dark">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>
+            CSCSC — Complexity Science & Contemplative Studies Consortium
+        </title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap"
+            rel="stylesheet"
+        />
+
+        <!-- GSAP + ScrollTrigger -->
+        <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+        <!-- D3 for force-directed network -->
+        <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+
+        <style>
+            /* ─── Reset ─────────────────────────────────────────────── */
+            *,
+            *::before,
+            *::after {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+
+            html {
+                scroll-behavior: smooth;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+
+            body {
+                font-family: "Cormorant Garamond", Georgia, serif;
+                background: #0a0b0f;
+                color: #f0ede8;
+                overflow-x: hidden;
+            }
+
+            /* ─── Experience wrapper ─────────────────────────────────── */
+            #experience {
+                position: relative;
+                width: 100%;
+                height: 100vh;
+                overflow: hidden;
+                background: #0a0b0f;
+            }
+
+            /* ─── Canvas layers ──────────────────────────────────────── */
+            #particle-canvas {
+                position: absolute;
+                inset: 0;
+                width: 100%;
+                height: 100%;
+                opacity: 1;
+                transition: opacity 0.8s ease;
+            }
+
+            #network-svg {
+                position: absolute;
+                inset: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+            }
+
+            #network-svg.interactive {
+                pointer-events: all;
+            }
+
+            /* ─── Text overlay ───────────────────────────────────────── */
+            #text-overlay {
+                position: absolute;
+                inset: 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                pointer-events: none;
+                z-index: 10;
+            }
+
+            .stage-text {
+                position: absolute;
+                width: min(680px, 90vw);
+                text-align: center;
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.8s ease;
+                /* Soft scrim so text stays legible over busy animations */
+                background: radial-gradient(
+                    ellipse 110% 160% at 50% 58%,
+                    rgba(10, 11, 15, 0.82) 0%,
+                    rgba(10, 11, 15, 0.48) 45%,
+                    transparent 72%
+                );
+                padding: 2rem 3rem;
+            }
+
+            .stage-text p {
+                font-size: clamp(1.1rem, 2vw, 1.5rem);
+                font-weight: 300;
+                line-height: 1.75;
+                color: #f0ede8;
+                letter-spacing: 0.01em;
+                max-width: 60ch;
+                margin: 0 auto;
+            }
+
+            .stage-text p em {
+                font-style: italic;
+                color: rgba(255, 240, 200, 0.9);
+            }
+
+            #stage-1-text {
+                top: auto;
+                bottom: 10%;
+                transition: none;
+            }
+
+            #stage-1b-text {
+                top: auto;
+                bottom: 10%;
+                transition: none;
+            }
+
+            #stage-2-text {
+                top: auto;
+                bottom: 4%;  /* long text over busy boids — pushed low */
+            }
+
+            /* ── Single-beat texts: larger, to match the punchy one-liners ── */
+            #stage-1b-text p,
+            #stage-2b-text p {
+                font-size: clamp(1.35rem, 2.8vw, 2rem);
+                font-weight: 300;
+                font-style: italic;
+                letter-spacing: 0.03em;
+            }
+
+            #stage-3b-text {
+                top: auto;
+                bottom: 8%;
+            }
+
+            #stage-3b-text p {
+                font-size: clamp(1.6rem, 4vw, 2.8rem);
+                font-weight: 300;
+                font-style: italic;
+                letter-spacing: 0.08em;
+            }
+
+            /* ── Research topic list inside #final-text ── */
+            .research-topics {
+                display: block;
+                font-weight: 400;
+                font-style: normal;
+                letter-spacing: 0.07em;
+                color: rgba(255, 240, 200, 0.72);
+                font-size: 0.93em;
+                margin: 0.5em 0 0.6em;
+                line-height: 1.9;
+            }
+
+            #stage-3-text {
+                top: auto;
+                bottom: 8%;
+            }
+
+            #stage-4-text {
+                top: auto;
+                bottom: 4%;  /* long text over busy network — pushed low */
+            }
+
+            #stage-4b-text {
+                top: auto;
+                bottom: 8%;
+            }
+
+            #network-svg.drag-active .nodes circle {
+                cursor: grab;
+            }
+            #network-svg.drag-active .nodes circle:active {
+                cursor: grabbing;
+            }
+
+            #stage-5-text {
+                top: auto;
+                bottom: 8%;
+            }
+
+            /* Final CTA */
+            #final-text {
+                position: absolute;
+                bottom: 6%;
+                left: 50%;
+                transform: translateX(-50%);
+                width: min(600px, 90vw);
+                text-align: center;
+                opacity: 0;
+                transition: opacity 1.2s ease;
+                z-index: 11;
+                pointer-events: none;
+                background: radial-gradient(
+                    ellipse 110% 160% at 50% 58%,
+                    rgba(10, 11, 15, 0.82) 0%,
+                    rgba(10, 11, 15, 0.48) 45%,
+                    transparent 72%
+                );
+                padding: 2rem 3rem;
+            }
+
+            #final-text p {
+                font-size: clamp(1rem, 1.8vw, 1.35rem);
+                font-weight: 300;
+                line-height: 1.85;
+                color: rgba(255, 240, 200, 0.88);
+                letter-spacing: 0.015em;
+                margin-bottom: 1.5rem;
+            }
+
+            #final-text a {
+                display: inline-block;
+                color: rgba(255, 200, 80, 0.9);
+                font-size: clamp(1rem, 1.5vw, 1.2rem);
+                font-weight: 400;
+                letter-spacing: 0.12em;
+                text-decoration: none;
+                border-bottom: 1px solid rgba(255, 200, 80, 0.3);
+                padding-bottom: 2px;
+                transition:
+                    color 0.3s ease,
+                    border-color 0.3s ease;
+            }
+
+            #final-text a:hover {
+                color: rgba(255, 200, 80, 1);
+                border-color: rgba(255, 200, 80, 0.8);
+            }
+
+            /* ─── Landing title (visible on load, fades out on scroll) ─── */
+            /* Position + width are set dynamically by positionLandingTitle() in JS.
+               Fine-tune placement by editing these constants in that function:
+                 TITLE_LEFT_FRAC  — left offset from image-rect left edge (fraction of drawW)
+                 TITLE_TOP_FRAC   — top  offset from image-rect top  edge (fraction of drawH)
+                 TITLE_WIDTH_FRAC — text block max-width (fraction of drawW) */
+            #landing-title {
+                position: absolute;
+                top: 3%;           /* fallback until JS positions it */
+                left: 34%;         /* fallback until JS positions it */
+                z-index: 20;
+                opacity: 1;
+                transition: opacity 0.8s ease;
+                text-align: left;
+                pointer-events: none;
+                width: min(420px, 55vw); /* fallback */
+            }
+
+            /* Font overrides for landing title — uses same classes as end logo
+               for visual consistency; sizes are slightly larger here. */
+            #landing-title .logo-abbr {
+                /* ── ABBR FONT SIZE ── */
+                font-size: clamp(1.8rem, 3vw, 2.8rem);
+            }
+
+            #landing-title .logo-name {
+                /* ── SUBTITLE FONT SIZE ── */
+                font-size: clamp(0.75rem, 1.15vw, 1rem);
+            }
+
+            /* ─── Logo (kept for future use, hidden) ─────────────────── */
+            #logo {
+                position: absolute;
+                top: 2rem;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 20;
+                opacity: 0;
+                pointer-events: none;
+                text-align: center;
+            }
+
+            #logo span {
+                font-family: "Cormorant Garamond", Georgia, serif;
+                font-size: clamp(0.7rem, 1.2vw, 0.9rem);
+                font-weight: 300;
+                letter-spacing: 0.3em;
+                color: rgba(255, 240, 200, 0.35);
+                text-transform: uppercase;
+            }
+
+            /* ─── Scroll indicator ───────────────────────────────────── */
+            #scroll-hint {
+                position: absolute;
+                bottom: 2.5rem;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 20;
+                opacity: 1;
+                transition: opacity 0.6s ease;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 0.6rem;
+            }
+
+            #scroll-hint span {
+                font-family: "Cormorant Garamond", Georgia, serif;
+                font-size: clamp(0.9rem, 2.5vw, 1.65rem);
+                font-weight: 300;
+                font-style: italic;
+                letter-spacing: 0.28em;
+                color: rgba(255, 240, 200, 0.72);
+                text-transform: lowercase;
+                animation: hintPulse 3s ease-in-out infinite;
+            }
+
+            @keyframes hintPulse {
+                0%, 100% { opacity: 0.55; }
+                50%       { opacity: 1; }
+            }
+
+            .scroll-line {
+                width: 1px;
+                height: 48px;
+                background: linear-gradient(
+                    to bottom,
+                    rgba(255, 240, 200, 0.55),
+                    transparent
+                );
+                animation: scrollPulse 2s ease-in-out infinite;
+            }
+
+            @keyframes scrollPulse {
+                0%,
+                100% {
+                    opacity: 0.4;
+                    transform: scaleY(1);
+                }
+
+                50% {
+                    opacity: 0.9;
+                    transform: scaleY(1.15);
+                }
+            }
+
+            /* ─── Add Your Thread prompt ─────────────────────────────── */
+            #thread-prompt {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                z-index: 12;
+                text-align: center;
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 1s ease;
+                background: radial-gradient(
+                    ellipse 140% 180% at 50% 50%,
+                    rgba(10, 11, 15, 0.66) 0%,
+                    rgba(10, 11, 15, 0.34) 50%,
+                    transparent 75%
+                );
+                padding: 1.5rem 2.5rem;
+            }
+
+            #thread-prompt p {
+                font-size: clamp(1rem, 2vw, 1.7rem);
+                font-weight: 300;
+                font-style: italic;
+                color: rgba(255, 200, 80, 0.75);
+                letter-spacing: 0.05em;
+            }
+
+            /* ─── Post-experience section ────────────────────────────── */
+            #post-section {
+                background: #0a0b0f;
+                min-height: 60vh;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding: 6rem 2rem;
+                text-align: center;
+            }
+
+            #post-section .logo-mark {
+                width: 64px;
+                height: 64px;
+                margin: 0 auto 2.5rem;
+                opacity: 0.6;
+            }
+
+            #post-section h2 {
+                font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+                font-weight: 300;
+                letter-spacing: 0.05em;
+                color: rgba(255, 240, 200, 0.9);
+                margin-bottom: 1.5rem;
+                max-width: 50ch;
+            }
+
+            #post-section p {
+                font-size: clamp(1rem, 1.5vw, 1.2rem);
+                font-weight: 300;
+                line-height: 1.8;
+                color: rgba(255, 240, 200, 0.55);
+                max-width: 55ch;
+                margin: 0 auto 2.5rem;
+            }
+
+            #post-section a.cta-link {
+                display: inline-block;
+                font-size: clamp(0.85rem, 1.2vw, 1rem);
+                font-weight: 400;
+                letter-spacing: 0.2em;
+                text-transform: uppercase;
+                color: rgba(255, 200, 80, 0.85);
+                text-decoration: none;
+                border: 1px solid rgba(255, 200, 80, 0.25);
+                padding: 0.75rem 2rem;
+                transition:
+                    border-color 0.3s ease,
+                    color 0.3s ease,
+                    background 0.3s ease;
+            }
+
+            #post-section a.cta-link:hover {
+                color: rgba(255, 200, 80, 1);
+                border-color: rgba(255, 200, 80, 0.6);
+                background: rgba(255, 200, 80, 0.04);
+            }
+
+            /* ─── Spacer for GSAP pin ────────────────────────────────── */
+            #scroll-spacer {
+                height: 900vh;
+                background: #0a0b0f;
+            }
+
+
+            #outline-canvas {
+                position: absolute;
+                inset: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+                z-index: 2;
+                opacity: 0;
+                transition: opacity 0.4s ease;
+            }
+
+            /* ─── Breathing animation for silhouette wrapper ─────────── */
+            @keyframes breathe {
+                0%,
+                100% {
+                    transform: scale(1);
+                }
+
+                50% {
+                    transform: scale(1.025);
+                }
+            }
+
+            #breath-wrapper {
+                position: absolute;
+                inset: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                pointer-events: none;
+            }
+
+            #breath-wrapper.breathing {
+                animation: breathe 4s ease-in-out infinite;
+            }
+
+            /* ─── Responsive overrides ──────────────────────────────────── */
+
+            /* Narrow screens (phones, small tablets) */
+            @media (max-width: 600px) {
+                #landing-title {
+                    left: 5% !important;
+                    top: 5% !important;
+                    width: 88vw !important;
+                    text-align: left;
+                }
+                #landing-title .logo-abbr {
+                    font-size: clamp(1.5rem, 6vw, 2.2rem) !important;
+                }
+                #landing-title .logo-name {
+                    font-size: clamp(0.7rem, 3vw, 0.9rem) !important;
+                }
+                .stage-text {
+                    width: 96vw;
+                    padding: 1.25rem 1.25rem;
+                }
+                .stage-text p {
+                    font-size: clamp(0.9rem, 4.2vw, 1.15rem);
+                    line-height: 1.65;
+                    max-width: 100%;
+                }
+                #final-text {
+                    width: 96vw;
+                    padding: 1.25rem 1.25rem;
+                }
+                #final-text p {
+                    font-size: clamp(0.85rem, 3.8vw, 1.1rem);
+                }
+                .logo-abbr {
+                    font-size: clamp(1.5rem, 6vw, 2.2rem);
+                }
+                .logo-name {
+                    font-size: clamp(0.75rem, 3.2vw, 1rem);
+                }
+                #logo-title {
+                    max-width: 55vw;
+                }
+            }
+
+            /* Landscape phones (short viewport, wide) */
+            @media (max-height: 500px) and (orientation: landscape) {
+                .stage-text {
+                    padding: 0.75rem 2rem;
+                }
+                .stage-text p {
+                    font-size: clamp(0.8rem, 2vh, 1.05rem);
+                    line-height: 1.5;
+                }
+                #stage-2-text  { bottom: 2%; }
+                #stage-4-text  { bottom: 2%; }
+                #stage-3-text  { bottom: 4%; }
+                #stage-4b-text { bottom: 4%; }
+            }
+
+            /* Tablets in portrait */
+            @media (min-width: 601px) and (max-width: 900px) and (orientation: portrait) {
+                .stage-text {
+                    width: 92vw;
+                    padding: 1.5rem 2rem;
+                }
+                #logo-title {
+                    max-width: 50vw;
+                }
+            }
+
+            /* ─── Logo image overlay (stage 6) ──────────────────────────── */
+            #logo-img {
+                position: absolute;
+                opacity: 0;
+                pointer-events: none;
+                z-index: 15;
+                object-fit: contain;
+                /* Initial size and position are set dynamically in JS.
+                   To adjust initial image size relative to network, change
+                   IMG_FRACTION in the stage 6 block of transitionTo(). */
+            }
+
+            /* ─── Logo title (stage 6, appears to right of shrunk image) ── */
+            #logo-title {
+                position: absolute;
+                opacity: 0;
+                pointer-events: none;
+                z-index: 16;
+                text-align: left;
+            }
+
+            .logo-abbr {
+                font-family: "Apple Chancery", "Palatino Linotype", Palatino,
+                    "Book Antiqua", Georgia, serif;
+                font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+                font-weight: 400;
+                color: rgba(255, 240, 200, 0.92);
+                letter-spacing: 0.12em;
+                line-height: 1.1;
+                margin-bottom: 0.4rem;
+            }
+
+            .logo-name {
+                font-family: "Apple Chancery", "Palatino Linotype", Palatino,
+                    "Book Antiqua", Georgia, serif;
+                font-size: clamp(0.65rem, 1.2vw, 1.05rem);
+                font-weight: 300;
+                font-style: italic;
+                color: rgba(255, 240, 200, 0.65);
+                letter-spacing: 0.04em;
+                line-height: 1.6;
+            }
+        </style>
+
+        <!-- Landing image (embedded) -->
+        <img
+            id="landing-img"
+            src="landing_image_mid.png"
+            style="display: none"
+            alt="landing figure"
+        />
+        <img
+            id="outline-img"
+            src="landing_image_outline.png"
+            style="display: none"
+            alt="figure outline"
+        />
+    </head>
+
+    <body>
+        <!-- GSAP scroll spacer wraps experience -->
+        <div id="scroll-spacer">
+            <div id="experience">
+                <!-- Landing title: full name, visible on load, fades out on scroll -->
+                <div id="landing-title">
+                    <div class="logo-abbr">CSCSC</div>
+                    <div class="logo-name">
+                        Complexity Science &amp;<br />
+                        Contemplative Studies<br />
+                        Consortium
+                    </div>
+                </div>
+
+                <!-- Logo (hidden, kept for legacy) -->
+                <div id="logo">
+                    <span>CSCSC</span>
+                </div>
+
+                <!-- Canvas: particle system (Stages 1–3) -->
+                <canvas id="particle-canvas"></canvas>
+
+                <!-- Canvas: figure outline overlay (transition) -->
+                <canvas id="outline-canvas"></canvas>
+
+                <!-- SVG: D3 network (Stages 4–5) -->
+                <svg
+                    id="network-svg"
+                    xmlns="http://www.w3.org/2000/svg"
+                    style="opacity: 0"
+                ></svg>
+
+                <!-- Text overlays -->
+                <div id="text-overlay">
+                    <div id="stage-1-text" class="stage-text">
+                        <!-- <p>
+                            We are taught to see ourselves as a solid object, a
+                            machine.<br />
+                            Made of distinct, localized parts to be fixed and controled.<br />
+                            <em
+                                >A heart. A brain. A university degree. A
+                                name.</em
+                            >
+                        </p> -->
+                        <p>We are taught control.<br />
+                        It gave us planes, algorithms, antibiotics. <br />
+                        <em>But not happiness. Not love. Not peace.</em></p>
+                    </div>
+
+                    <div id="stage-1b-text" class="stage-text">
+                        <!-- <p>But look closer.</p> -->
+                         <p>Because you are not a machine.</p>
+                    </div>
+
+                    <div id="stage-2-text" class="stage-text">
+                        <p>
+                            You are a society.<br />
+                            How do 30 trillion cells heal a wound without a commander?<br />
+                            Yogis called this 'body wisdom'. 
+                            Now it opens the door to regenerative medicine. <br />
+                            An intelligence arising from countless local encounters... <em>you.</em>
+                        </p>
+                    </div>
+
+                    <div id="stage-2b-text" class="stage-text">
+                        <p>
+                            <!-- <em>COMPLEXITY SCIENCE is the study of how systems flourish
+                            <br /> without anyone in charge.</em> -->
+                            <em>Where do your boundaries end?</em>
+                        </p>
+                    </div>
+
+                    <div id="stage-3b-text" class="stage-text">
+                        <p><em>Interbeing.</em></p>
+                    </div>
+
+                    <div id="stage-3-text" class="stage-text">
+                        <p>
+                            Your cells don't know where 'you' begin. <br /> Neither do your ideas. <br /> 
+                            <em
+                                >You are the air. You are your house.<br />
+                                You are the language you speak.<br />
+                                You are the unspoken rules of your culture.</em
+                            >
+                        </p>
+                    </div>
+
+                    <div id="stage-4-text" class="stage-text">
+                        <p>
+                            Here, linear cause-and-effect breaks
+                            down.<br />
+                            Change cannot come from any <em>one</em> – only from the system. <br />
+                            Buddhist tradition called this
+                            <em>dependent origination</em> – Karma.<br />
+                        </p>
+                    </div>
+
+                    <div id="stage-4b-text" class="stage-text" style="opacity:0">
+                        <p>
+                            Instead, we map these causal webs mathematically<br  />
+                            to support natural unfolding of minds and societies <br  />
+                            This is emergence: <br  />
+                            <em>how systems flourish without anyone in charge. </em><br  />
+                            <!-- <em>Or… let it find its own harmony.</em><br />
+                            This is emergence.<br />
+                            How systems flourish without anyone at the top. -->
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Stage 4 prompt -->
+                <div id="thread-prompt">
+                    <p>Untangling it is tough (try dragging...)</p>
+                </div>
+
+                <!-- Final CTA text -->
+                <div id="final-text" style="opacity: 0">
+                    <p>
+                        We are building the scientific culture we wish
+                        existed:<br />
+                        connecting rigorous science with contemplative wisdom. <br />
+                        <span class="research-topics">Bayesian models of meditation.<br />Agency of collective imaginaries.<br />Relational construction of reality.</span>
+                        <em>A new frontier of research, guiding a new way of being. </em>
+                        <!-- Rigorous complexity science. Lived contemplative
+                        wisdom.<br />
+                        A community where the joy of discovery is our guiding
+                        currency. -->
+                    </p>
+                    <a
+                        href="https://cscsc.notion.site/CSCSC-286d8cae0cfe813290abf9eb6acd731c"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >Visit CSCSC →</a
+                    >
+                </div>
+
+                <!-- Stage 6: logo image overlay (fades in over network, shrinks to top) -->
+                <img id="logo-img" src="empty_white.png" alt="CSCSC" />
+
+                <!-- Stage 6: logo title (appears to the right of the shrunk image) -->
+                <div id="logo-title">
+                    <div class="logo-abbr">CSCSC</div>
+                    <div class="logo-name">
+                        Complex Systems &amp;<br />
+                        Contemplative Studies <br />
+                        Consortium
+                    </div>
+                </div>
+
+                <!-- Scroll hint -->
+                <div id="scroll-hint">
+                    <div class="scroll-line"></div>
+                    <span>scroll slowly</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Post-experience section -->
+        <section id="post-section">
+            <svg
+                class="logo-mark"
+                viewBox="0 0 64 64"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-label="CSCSC logo mark"
+            >
+                <circle
+                    cx="22"
+                    cy="32"
+                    r="18"
+                    stroke="rgba(255,240,200,0.5)"
+                    stroke-width="1.2"
+                    fill="none"
+                />
+                <circle
+                    cx="42"
+                    cy="32"
+                    r="18"
+                    stroke="rgba(150,200,255,0.5)"
+                    stroke-width="1.2"
+                    fill="none"
+                />
+                <path
+                    d="M32 15.5 C36.5 22 36.5 42 32 48.5 C27.5 42 27.5 22 32 15.5Z"
+                    fill="rgba(255,200,80,0.12)"
+                    stroke="rgba(255,200,80,0.3)"
+                    stroke-width="0.8"
+                />
+            </svg>
+            <h2>Complexity Science &amp; Contemplative Studies Consortium</h2>
+            <p>
+                A research community bridging the mathematical rigor of
+                complexity science with the lived depth of contemplative wisdom
+                — independently arriving at the same description of reality.
+            </p>
+            <a
+                class="cta-link"
+                href="https://cscsc.notion.site/CSCSC-286d8cae0cfe813290abf9eb6acd731c"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Visit CSCSC →</a
+            >
+        </section>
+
+        <script>
+            // ═══════════════════════════════════════════════════════════════
+            // CSCSC Interactive Visualization
+            // ═══════════════════════════════════════════════════════════════
+
+            (function () {
+                "use strict";
+
+                // ─── Canvas setup ──────────────────────────────────────────────
+                const canvas = document.getElementById("particle-canvas");
+                const ctx = canvas.getContext("2d");
+                const networkSvg = document.getElementById("network-svg");
+
+                let W, H;
+
+                // Scale factor relative to a 1440×900 reference desktop.
+                // Use this to proportionally scale any px constant that lives
+                // in screen-space (node radii, link widths, force distances…).
+                function vpScale() { return Math.min(W, H) / 900; }
+
+                // ─── Position landing title relative to the figure image ──────────
+                // X and width track the image rect so they scale with screen width.
+                // Y tracks viewport height — the figure top is always at H*0.08
+                // (the scale formula fixes figure height to 60% of H, centred at H*0.38).
+                // Edit the constants below to fine-tune placement on all screens:
+                function positionLandingTitle() {
+                    const el = document.getElementById("landing-title");
+                    if (!el || window.innerWidth <= 600) return; // mobile uses CSS overrides
+                    if (!landingImg || !landingImg.naturalWidth) return;
+                    const { drawX, drawW } = getLandingImgRect();
+                    const TITLE_LEFT_FRAC  = 0.04;  // left  — fraction of drawW from image-rect left edge
+                    const TITLE_TOP_VH     = 0.03;  // top   — fraction of viewport height (figure top ≈ 0.08)
+                    const TITLE_WIDTH_FRAC = 0.38;  // width — fraction of drawW
+                    el.style.left      = (drawX + drawW * TITLE_LEFT_FRAC) + "px";
+                    el.style.top       = (H * TITLE_TOP_VH) + "px";
+                    el.style.width     = (drawW * TITLE_WIDTH_FRAC) + "px";
+                    el.style.transform = "none";
+                }
+
+                function resize() {
+                    W = canvas.width = window.innerWidth;
+                    H = canvas.height = window.innerHeight;
+                    if (insidePixels) {
+                        if (outlineImgLoaded) {
+                            try { buildOutlineImageMask(); } catch(e) { buildPolygonMask(); }
+                        } else {
+                            buildPolygonMask();
+                        }
+                        buildMaskCanvas();
+                        try { buildOutlineImageCanvas(); } catch(e) {}
+                    }
+                    // Keep D3 force centre and radial anchor tracking the new viewport
+                    if (d3Sim) {
+                        d3Sim.force("center", d3.forceCenter(W / 2, H / 2).strength(0.04));
+                        const netRadialR = Math.min(W, H) * (W < H ? 0.30 : 0.38);
+                        d3Sim.force("radial",
+                            d3.forceRadial(netRadialR, W / 2, H / 2).strength(0.025));
+                    }
+                    positionLandingTitle();
+                }
+                window.addEventListener("resize", resize);
+
+                // ─── Offscreen canvas for silhouette mask ──────────────────────
+                let offCanvas = null,
+                    offCtx = null;
+                let insidePixels = null; // flat Uint8 lookup
+
+                // ─── Landing image (replaces SVG silhouette for Stage 1) ────────
+                const landingImg = document.getElementById("landing-img");
+                let landingImgLoaded = false;
+                if (landingImg.complete && landingImg.naturalWidth > 0) {
+                    landingImgLoaded = true;
+                    positionLandingTitle();
+                } else {
+                    landingImg.onload = () => { landingImgLoaded = true; positionLandingTitle(); };
+                }
+
+                // ─── Outline image (used for boid mask + outline canvas) ──────────
+                const outlineImg = document.getElementById("outline-img");
+                let outlineImgLoaded = false;
+                if (outlineImg.complete && outlineImg.naturalWidth > 0) {
+                    outlineImgLoaded = true;
+                } else {
+                    outlineImg.onload = () => { outlineImgLoaded = true; };
+                }
+
+                // Outline canvas (for the glowing edge transition)
+                const outlineCanvas = document.getElementById("outline-canvas");
+                const outlineCtx = outlineCanvas.getContext("2d");
+                let outlineBuilt = false;
+                let outlineAlpha = 0; // 0→1→0 during transition
+
+                // We still keep these as null; mask is built from image instead
+                let visualSvgImg = null;
+                let visualSvgLoaded = false;
+                function loadVisualSvg() {} // no-op, image used instead
+
+                // Legacy helper kept for ghost shapes (Stage 3)
+                function buildOffscreenSVG(
+                    svgStr,
+                    svgW,
+                    svgH,
+                    canvasW,
+                    canvasH,
+                ) {
+                    return new Promise((resolve) => {
+                        const blob = new Blob([svgStr], {
+                            type: "image/svg+xml",
+                        });
+                        const url = URL.createObjectURL(blob);
+                        const img = new Image();
+                        img.onload = function () {
+                            const oc = document.createElement("canvas");
+                            oc.width = canvasW;
+                            oc.height = canvasH;
+                            const ot = oc.getContext("2d");
+                            const scale = (canvasH * 0.52) / svgH;
+                            const dw = svgW * scale;
+                            const dh = svgH * scale;
+                            const dx = (canvasW - dw) / 2;
+                            const dy = (canvasH - dh) / 2 - canvasH * 0.03;
+                            ot.drawImage(img, dx, dy, dw, dh);
+                            URL.revokeObjectURL(url);
+                            resolve({
+                                canvas: oc,
+                                ctx: ot,
+                                dx,
+                                dy,
+                                dw,
+                                dh,
+                                scale,
+                            });
+                        };
+                        img.src = url;
+                    });
+                }
+
+                // ─── Build silhouette mask from a hand-crafted polygon ──────────
+                // ─── Build silhouette mask from outline image ────────────────────
+                // Draws the outline PNG at the same rect as the main image, then BFS
+                // flood-fills from the figure center to produce insidePixels.
+                function buildOutlineImageMask() {
+                    const { drawX, drawY, drawW, drawH } = getLandingImgRect();
+
+                    // Draw outline image onto a temp canvas
+                    const tc = document.createElement("canvas");
+                    tc.width = W; tc.height = H;
+                    const tctx = tc.getContext("2d");
+                    tctx.drawImage(outlineImg, drawX, drawY, drawW, drawH);
+                    const imgData = tctx.getImageData(0, 0, W, H);
+                    const pix = imgData.data;
+
+                    // Bright pixels (r+g+b > threshold) are "wall" (the outline edge)
+                    const THRESHOLD = 80;
+                    const wall = new Uint8Array(W * H);
+                    for (let i = 0; i < W * H; i++) {
+                        const brightness = pix[i * 4] + pix[i * 4 + 1] + pix[i * 4 + 2];
+                        if (pix[i * 4 + 3] > 10 && brightness > THRESHOLD) wall[i] = 1;
+                    }
+
+                    // BFS flood fill from figure center to find interior pixels
+                    insidePixels = new Uint8Array(W * H);
+                    const seedX = Math.round(drawX + 0.2971 * drawW);
+                    const seedY = Math.round(drawY + 0.5287 * drawH);
+                    const seedIdx = seedY * W + seedX;
+
+                    if (!wall[seedIdx]) {
+                        insidePixels[seedIdx] = 1;
+                        const queue = [seedIdx];
+                        let head = 0;
+                        while (head < queue.length) {
+                            const idx = queue[head++];
+                            const x = idx % W, y = (idx / W) | 0;
+                            if (x > 0     && !wall[idx - 1] && !insidePixels[idx - 1]) { insidePixels[idx - 1] = 1; queue.push(idx - 1); }
+                            if (x < W - 1 && !wall[idx + 1] && !insidePixels[idx + 1]) { insidePixels[idx + 1] = 1; queue.push(idx + 1); }
+                            if (y > 0     && !wall[idx - W] && !insidePixels[idx - W]) { insidePixels[idx - W] = 1; queue.push(idx - W); }
+                            if (y < H - 1 && !wall[idx + W] && !insidePixels[idx + W]) { insidePixels[idx + W] = 1; queue.push(idx + W); }
+                        }
+                    }
+
+                    // Compute bounding box from filled pixels
+                    let minX = W, maxX = 0, minY = H, maxY = 0;
+                    for (let y = 0; y < H; y++) {
+                        for (let x = 0; x < W; x++) {
+                            if (insidePixels[y * W + x]) {
+                                if (x < minX) minX = x;
+                                if (x > maxX) maxX = x;
+                                if (y < minY) minY = y;
+                                if (y > maxY) maxY = y;
+                            }
+                        }
+                    }
+                    silhouetteBounds = { dx: minX, dy: minY, dw: maxX - minX, dh: maxY - minY };
+                }
+
+                // ─── Polygon-based mask (fallback if outline image can't be read) ──
+                // Polygon points are fractions of [W, H], traced from pixel analysis of the image.
+                // Going clockwise from head-top. cx ≈ 0.500 (horizontally centered).
+                function getFigurePolygon() {
+                    // Points are defined in IMAGE space as fractions of (IMG_W, IMG_H),
+                    // then mapped through getLandingImgRect() to screen pixels.
+                    // This makes the polygon always align with the figure at any screen size.
+                    //
+                    // The source image is 1922×1080. The figure occupies roughly:
+                    //   x: 0.223–0.530 of image width  (center at FIG_CX_FRAC=0.2971 from left... wait,
+                    //   the figure center in image coords is at ix=0.2971, iy=0.5287)
+                    //   figure height spans ~FIG_H_FRAC=0.7009 of image height
+                    //
+                    // Outline landmarks measured in image-fraction coords (ix, iy):
+                    // (derived from pixel analysis: screen coords → back-projected through drawX/drawY/scale)
+
+                    const { drawX, drawY, drawW, drawH } = getLandingImgRect();
+
+                    // Helper: image-fraction (ix 0–1, iy 0–1) → screen pixel [x, y]
+                    function ip(ix, iy) {
+                        return [drawX + ix * drawW, drawY + iy * drawH];
+                    }
+
+                    // Outline in image fractions — scaled 1.2x wider and 1.3x taller around figure center
+                    // (cx=0.297, cy=0.529 in image space). Invariant to screen size via ip().
+                    return [
+                        // ── Right side, top to bottom ──
+                        ip(0.297, 0.153), // head top (anchor — 1.2x wider, 0.85x taller from here)
+                        ip(0.32, 0.165),
+                        ip(0.335, 0.2),
+                        ip(0.335, 0.244), // widest head
+                        ip(0.332, 0.28), // jaw
+                        ip(0.322, 0.32), // neck narrowest
+                        ip(0.327, 0.362), // neck base
+                        ip(0.352, 0.388), // shoulder start
+                        ip(0.391, 0.415), // shoulder
+                        ip(0.398, 0.445), // upper torso
+                        ip(0.40, 0.49), // mid torso
+                        ip(0.404, 0.548),
+                        ip(0.408, 0.63), // 12 lower torso
+                        ip(0.42, 0.645), // 13 wrist/hand
+                        ip(0.451, 0.696),
+                        // lotus legs — jump outward
+                        ip(0.475, 0.678), //15
+                        ip(0.485, 0.712),
+                        ip(0.48, 0.75), // right knee widest
+                        ip(0.482, 0.8),
+                        ip(0.47, 0.84),
+                        ip(0.415, 0.867), // 20 bottom right
+                        ip(0.297, 0.877), // bottom center
+                        // ── Left side, bottom to top — exact mirror of right (lx = 0.594 - rx) ──
+                        ip(0.179, 0.867), // bottom left  ← mirror of ip(0.415, 0.867)
+                        ip(0.124, 0.84),  //              ← mirror of ip(0.47,  0.84)
+                        ip(0.112, 0.8),   //              ← mirror of ip(0.482, 0.8)
+                        ip(0.114, 0.75),  // left knee widest ← mirror of ip(0.48, 0.75)
+                        ip(0.109, 0.712), //              ← mirror of ip(0.485, 0.712)
+                        ip(0.119, 0.678), //              ← mirror of ip(0.475, 0.678)
+                        ip(0.143, 0.696), // inward to wrist ← mirror of ip(0.451, 0.696)
+                        ip(0.174, 0.645), // wrist/hand   ← mirror of ip(0.42,  0.645)
+                        ip(0.186, 0.63),  // lower torso  ← mirror of ip(0.408, 0.63)
+                        ip(0.190, 0.548), //              ← mirror of ip(0.404, 0.548)
+                        ip(0.194, 0.49),  // mid torso    ← mirror of ip(0.40,  0.49)
+                        ip(0.196, 0.445), // upper torso  ← mirror of ip(0.398, 0.445)
+                        ip(0.203, 0.415), // shoulder     ← mirror of ip(0.391, 0.415)
+                        ip(0.242, 0.388), // shoulder start ← mirror of ip(0.352, 0.388)
+                        ip(0.267, 0.362), // neck base    ← mirror of ip(0.327, 0.362)
+                        ip(0.272, 0.32),  // neck narrowest ← mirror of ip(0.322, 0.32)
+                        ip(0.262, 0.28),  // jaw          ← mirror of ip(0.332, 0.28)
+                        ip(0.259, 0.244), // widest head  ← mirror of ip(0.335, 0.244)
+                        ip(0.259, 0.2),   //              ← mirror of ip(0.335, 0.2)
+                        ip(0.274, 0.165), //              ← mirror of ip(0.32,  0.165)
+                        ip(0.297, 0.153), // close (head top)
+                    ];
+                }
+
+                // Build the insidePixels mask by rasterizing the unzoomed polygon.
+                // Zoom is applied at render time only — physics/mask always use zoom=1 coords.
+                function buildPolygonMask() {
+                    const poly = getFigurePolygon(); // always unzoomed screen pixels
+                    insidePixels = new Uint8Array(W * H);
+
+                    // Scanline fill
+                    for (let y = 0; y < H; y++) {
+                        const intersections = [];
+                        for (let i = 0; i < poly.length; i++) {
+                            const [x0, y0] = poly[i];
+                            const [x1, y1] = poly[(i + 1) % poly.length];
+                            if ((y0 <= y && y < y1) || (y1 <= y && y < y0)) {
+                                const t = (y - y0) / (y1 - y0);
+                                intersections.push(x0 + t * (x1 - x0));
+                            }
+                        }
+                        intersections.sort((a, b) => a - b);
+                        for (let k = 0; k + 1 < intersections.length; k += 2) {
+                            const xL = Math.max(
+                                0,
+                                Math.floor(intersections[k]),
+                            );
+                            const xR = Math.min(
+                                W - 1,
+                                Math.ceil(intersections[k + 1]),
+                            );
+                            for (let x = xL; x <= xR; x++) {
+                                insidePixels[y * W + x] = 1;
+                            }
+                        }
+                    }
+
+                    // Compute bounding box
+                    let minX = W,
+                        maxX = 0,
+                        minY = H,
+                        maxY = 0;
+                    for (const [px, py] of poly) {
+                        const x = Math.round(px),
+                            y = Math.round(py);
+                        if (x < minX) minX = x;
+                        if (x > maxX) maxX = x;
+                        if (y < minY) minY = y;
+                        if (y > maxY) maxY = y;
+                    }
+                    silhouetteBounds = {
+                        dx: minX,
+                        dy: minY,
+                        dw: maxX - minX,
+                        dh: maxY - minY,
+                    };
+                }
+
+                async function rebuildSilhouetteMask() {
+                    return new Promise((resolve) => {
+                        function doRebuild() {
+                            // Use outline-image BFS mask if available, else polygon fallback
+                            if (outlineImgLoaded) {
+                                try {
+                                    buildOutlineImageMask();
+                                } catch (e) {
+                                    console.warn("Outline mask failed, using polygon:", e);
+                                    buildPolygonMask();
+                                }
+                            } else {
+                                buildPolygonMask();
+                            }
+                            try { buildOutlineImageCanvas(); } catch (e) {}
+                            buildMaskCanvas();
+                            resolve();
+                        }
+
+                        let landingReady = landingImg.complete && landingImg.naturalWidth > 0;
+                        let outlineReady = outlineImg.complete && outlineImg.naturalWidth > 0;
+                        if (landingReady) landingImgLoaded = true;
+                        if (outlineReady) outlineImgLoaded = true;
+
+                        let pending = 0;
+                        if (!landingReady) {
+                            pending++;
+                            landingImg.onload = () => { landingImgLoaded = true; landingReady = true; if (--pending === 0) doRebuild(); };
+                            landingImg.onerror = () => { landingReady = true; if (--pending === 0) doRebuild(); };
+                        }
+                        if (!outlineReady) {
+                            pending++;
+                            outlineImg.onload = () => { outlineImgLoaded = true; outlineReady = true; if (--pending === 0) doRebuild(); };
+                            outlineImg.onerror = () => { if (--pending === 0) doRebuild(); };
+                        }
+                        if (pending === 0) doRebuild();
+                    });
+                }
+
+                // ─── Compute image placement rect ───────────────────────────────
+                // Figure in source image (1922×1080):
+                //   center x ≈ 29.7% from left (col 571)
+                //   center y ≈ 52.9% from top  (row 571)
+                //   figure height ≈ 70% of image height
+                // We scale so the figure is 60% of screen height, and center it.
+                function getLandingImgRect() {
+                    if (!landingImg.naturalWidth)
+                        return { drawX: 0, drawY: 0, drawW: W, drawH: H };
+                    const IMG_W = landingImg.naturalWidth;
+                    const IMG_H = landingImg.naturalHeight;
+                    const FIG_CX_FRAC = 0.2971; // figure center x as fraction of image width
+                    const FIG_CY_FRAC = 0.5287; // figure center y as fraction of image height
+                    const FIG_H_FRAC = 0.7009; // figure height as fraction of image height
+                    // Scale so figure occupies 60% of screen height
+                    const scale = (H * 0.6) / (IMG_H * FIG_H_FRAC);
+                    const drawW = IMG_W * scale;
+                    const drawH = IMG_H * scale;
+                    // Center figure horizontally; place figure center at 40% of screen height
+                    // (leaves ~text space in the bottom 30%)
+                    const drawX = W / 2 - FIG_CX_FRAC * drawW;
+                    const drawY = H * 0.38 - FIG_CY_FRAC * drawH;
+                    return { drawX, drawY, drawW, drawH };
+                }
+
+                // ─── Build outline canvas from the polygon ───────────────────────
+                // Draws the smooth polygon outline with a glowing golden style.
+                function buildPolygonOutlineCanvas() {
+                    outlineCanvas.width = W;
+                    outlineCanvas.height = H;
+                    outlineCtx.clearRect(0, 0, W, H);
+
+                    const poly = getFigurePolygon(); // already in screen pixels
+                    if (poly.length < 3) {
+                        outlineBuilt = true;
+                        return;
+                    }
+
+                    outlineCtx.save();
+
+                    // ── Flash fill: silhouette floods with light color during the transition ──
+                    // // Change the color below to adjust the crossfade flash color:
+                    // outlineCtx.fillStyle = 'rgba(255,245,220,0.32)'; // <--- FLASH COLOR (warm white)
+                    // outlineCtx.shadowColor = 'rgba(255,240,200,0.5)';
+                    // outlineCtx.shadowBlur = 30;
+                    // outlineCtx.beginPath();
+                    // outlineCtx.moveTo(poly[0][0], poly[0][1]);
+                    // for (let i = 1; i < poly.length; i++) {
+                    //   const [x0, y0] = poly[i - 1], [x1, y1] = poly[i];
+                    //   const mx = (x0 + x1) / 2, my = (y0 + y1) / 2;
+                    //   outlineCtx.quadraticCurveTo(x0, y0, mx, my);
+                    // }
+                    // outlineCtx.closePath();
+                    // outlineCtx.fill();
+                    // outlineCtx.shadowBlur = 0;
+
+                    // Outer glow layer (wide blur)
+                    outlineCtx.shadowColor = "rgba(255,200,80,0.9)";
+                    outlineCtx.shadowBlur = 18;
+                    outlineCtx.strokeStyle = "rgba(255,230,140,0.5)";
+                    outlineCtx.lineWidth = 4;
+                    outlineCtx.lineJoin = "round";
+                    outlineCtx.lineCap = "round";
+                    outlineCtx.setLineDash([]);
+                    outlineCtx.beginPath();
+                    outlineCtx.moveTo(poly[0][0], poly[0][1]);
+                    for (let i = 1; i < poly.length; i++) {
+                        const [x0, y0] = poly[i - 1],
+                            [x1, y1] = poly[i];
+                        const mx = (x0 + x1) / 2,
+                            my = (y0 + y1) / 2;
+                        outlineCtx.quadraticCurveTo(x0, y0, mx, my);
+                    }
+                    outlineCtx.closePath();
+                    outlineCtx.stroke();
+
+                    // Inner crisp stroke
+                    outlineCtx.shadowBlur = 6;
+                    outlineCtx.strokeStyle = "rgba(255,245,180,0.85)";
+                    outlineCtx.lineWidth = 1.5;
+                    outlineCtx.setLineDash([3, 6]);
+                    outlineCtx.beginPath();
+                    outlineCtx.moveTo(poly[0][0], poly[0][1]);
+                    for (let i = 1; i < poly.length; i++) {
+                        const [x0, y0] = poly[i - 1],
+                            [x1, y1] = poly[i];
+                        const mx = (x0 + x1) / 2,
+                            my = (y0 + y1) / 2;
+                        outlineCtx.quadraticCurveTo(x0, y0, mx, my);
+                    }
+                    outlineCtx.closePath();
+                    outlineCtx.stroke();
+
+                    // Glowing dots at polygon vertices
+                    outlineCtx.setLineDash([]);
+                    outlineCtx.shadowBlur = 10;
+                    for (const [vx, vy] of poly) {
+                        const grad = outlineCtx.createRadialGradient(
+                            vx,
+                            vy,
+                            0,
+                            vx,
+                            vy,
+                            4,
+                        );
+                        grad.addColorStop(0, "rgba(255,250,200,1)");
+                        grad.addColorStop(1, "rgba(255,200,80,0)");
+                        outlineCtx.fillStyle = grad;
+                        outlineCtx.beginPath();
+                        outlineCtx.arc(vx, vy, 4, 0, Math.PI * 2);
+                        outlineCtx.fill();
+                    }
+
+                    outlineCtx.restore();
+                    outlineBuilt = true;
+                }
+
+                // ─── Build outline canvas from the outline PNG ───────────────────
+                // Draws the outline image with a golden glow composite onto outlineCanvas.
+                function buildOutlineImageCanvas() {
+                    outlineCanvas.width = W;
+                    outlineCanvas.height = H;
+                    outlineCtx.clearRect(0, 0, W, H);
+
+                    if (!outlineImgLoaded) { outlineBuilt = false; return; }
+
+                    const { drawX, drawY, drawW, drawH } = getLandingImgRect();
+
+                    outlineCtx.save();
+
+                    // Golden glow: draw the outline PNG twice — wide blur then crisp
+                    outlineCtx.shadowColor = "rgba(255,200,80,0.9)";
+                    outlineCtx.shadowBlur = 18;
+                    outlineCtx.globalAlpha = 0.7;
+                    outlineCtx.drawImage(outlineImg, drawX, drawY, drawW, drawH);
+
+                    outlineCtx.shadowBlur = 6;
+                    outlineCtx.globalAlpha = 1.0;
+                    outlineCtx.drawImage(outlineImg, drawX, drawY, drawW, drawH);
+
+                    outlineCtx.restore();
+                    outlineBuilt = true;
+                }
+
+                // Keep old signature for any stale references (no-op now)
+                function buildOutlineCanvas(srcCtx, d, threshold) {
+                    buildOutlineImageCanvas();
+                }
+
+                function isInside(x, y) {
+                    const xi = Math.round(x),
+                        yi = Math.round(y);
+                    if (xi < 0 || xi >= W || yi < 0 || yi >= H) return false;
+                    return insidePixels[yi * W + xi] === 1;
+                }
+
+                let silhouetteBounds = null;
+
+                // Ghost shapes (Stage 3) — simple SVG-defined offscreen canvases
+                const GHOST_SHAPES = [
+                    // House (pentagon) — offset left
+                    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+    <path d="M60 10 L110 55 L110 110 L10 110 L10 55 Z" fill="white"/>
+   </svg>`,
+                    // Tree — offset right
+                    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 130" width="80" height="130">
+    <polygon points="40,5 75,70 5,70" fill="white"/>
+    <polygon points="40,38 72,90 8,90" fill="white"/>
+    <rect x="32" y="88" width="16" height="35" rx="2" fill="white"/>
+   </svg>`,
+                    // Second human — offset right, smaller
+                    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 260" width="200" height="260">
+    <ellipse cx="100" cy="38" rx="22" ry="25" fill="white"/>
+    <rect x="90" y="58" width="20" height="16" rx="4" fill="white"/>
+    <path d="M60 74 Q100 68 140 74 L148 160 Q100 168 52 160 Z" fill="white"/>
+    <path d="M52 158 Q30 165 18 185 Q22 200 40 198 Q62 190 75 172 Z" fill="white"/>
+    <path d="M148 158 Q170 165 182 185 Q178 200 160 198 Q138 190 125 172 Z" fill="white"/>
+    <path d="M75 172 Q100 182 125 172 Q125 195 100 200 Q75 195 75 172Z" fill="white"/>
+    <path d="M60 100 Q42 120 38 148 Q44 158 55 152 Q68 130 72 108 Z" fill="white"/>
+    <path d="M140 100 Q158 120 162 148 Q156 158 145 152 Q132 130 128 108 Z" fill="white"/>
+    <ellipse cx="72" cy="162" rx="12" ry="10" fill="white"/>
+    <ellipse cx="128" cy="162" rx="12" ry="10" fill="white"/>
+   </svg>`,
+                ];
+
+                let ghostCanvases = [];
+                let ghostPositions = [];
+
+                async function buildGhostShapes() {
+                    // House: left quarter of screen
+                    const houseRes = await buildOffscreenSVG(
+                        GHOST_SHAPES[0],
+                        120,
+                        120,
+                        W,
+                        H,
+                    );
+                    ghostCanvases[0] = houseRes.canvas;
+                    // Place house at left side
+                    ghostPositions[0] = {
+                        dx: W * 0.1 - 60 * ((H * 0.22) / 120),
+                        dy: H * 0.3,
+                        dw: 120 * ((H * 0.22) / 120),
+                        dh: H * 0.22,
+                        pixels: null,
+                    };
+
+                    // Tree: far right
+                    const treeRes = await buildOffscreenSVG(
+                        GHOST_SHAPES[1],
+                        80,
+                        130,
+                        W,
+                        H,
+                    );
+                    ghostCanvases[1] = treeRes.canvas;
+                    ghostPositions[1] = {
+                        dx: W * 0.78,
+                        dy: H * 0.28,
+                        dw: 80 * ((H * 0.28) / 130),
+                        dh: H * 0.28,
+                        pixels: null,
+                    };
+
+                    // Second human: right side
+                    const human2Res = await buildOffscreenSVG(
+                        GHOST_SHAPES[2],
+                        200,
+                        260,
+                        W,
+                        H,
+                    );
+                    ghostCanvases[2] = human2Res.canvas;
+                    ghostPositions[2] = {
+                        dx: W * 0.62,
+                        dy: H * 0.18,
+                        dw: 200 * ((H * 0.42) / 260),
+                        dh: H * 0.42,
+                        pixels: null,
+                    };
+                }
+
+                // ─── Stage 1: Landing image display ────────────────────────────
+                let solidAlpha = 1.0;
+                let solidInvert = 0.0; // 0→1: gradually invert image colors before fade-out
+                let zoomScale = 1.0; // 1→3 zoom into chest during Stage 1 transition (render-only, never affects physics/mask)
+                let particleRadiusMultiplier = 2.0; // 2→1 as fade completes (shrinks as swarm appears)
+                // solidSvgImg / solidSvgLoaded kept for compat but unused
+                let solidSvgImg = null;
+                let solidSvgLoaded = true; // always "ready" since we use landingImg
+
+                function loadSolidSvg() {} // no-op
+
+                // ─── Particles (Boids) ─────────────────────────────────────────
+                const NUM_PARTICLES = 1000;
+                let particles = [];
+                let boundaryStrength = 1.0; // 1.0 = full constraint, 0 = free
+                let boundaryPermeability = 0.0; // 0 = solid wall, 0.05 = 5% chance to pass through
+                let flockingStrength = 0.0; // 0 = random drift, 1 = full flocking
+                let particlesRandomized = false; // flag: velocities randomized before first reveal
+                let stage3Progress = 0; // 0→1
+
+                // Secondary attractor strengths for ghost shapes (Stage 3)
+                let ghostAttractStrength = 0;
+
+                class Particle {
+                    constructor() {
+                        this.reset();
+                    }
+                    reset() {
+                        // Start near chest center (zoom anchor), reject if outside mask
+                        const { drawX, drawY, drawW, drawH } = getLandingImgRect();
+                        const cx = drawX + 0.2971 * drawW;
+                        const cy = drawY + 0.5287 * drawH;
+                        const spread = Math.min(drawW, drawH) * 0.25;
+                        let attempts = 0;
+                        do {
+                            this.x = cx + (Math.random() - 0.5) * spread * 2;
+                            this.y = cy + (Math.random() - 0.5) * spread * 2;
+                            attempts++;
+                        } while (!isInside(this.x, this.y) && attempts < 80);
+                        this.vx = (Math.random() - 0.5) * 12;
+                        this.vy = (Math.random() - 0.5) * 12;
+                        this.alpha = 0.5 + Math.random() * 0.5;
+                    }
+                }
+
+                function initParticles() {
+                    particles = [];
+                    for (let i = 0; i < NUM_PARTICLES; i++) {
+                        particles.push(new Particle());
+                    }
+                }
+
+                // ─── Zen Hall geometry (Feiyan double-wall) ──────────────────────
+                // Two nested polygons define the hall:
+                //   hallOuterPoly — outer face of the building (including wall thickness)
+                //   hallInnerPoly — inner room boundary
+                // Wall boids:  isInsideOuter && !isInsideInner  (amber, highlight structure)
+                // Air  boids:  isInsideInner && !isInside(fig)  (blue, room atmosphere)
+                //
+                // Feiyan (飞檐) roof: cubic bezier, sweeps down then upswept past columns.
+                // All coords in image-fraction space relative to getLandingImgRect().
+
+                function cubicBez(p0, p1, p2, p3, t) {
+                    const m = 1 - t;
+                    return [
+                        m*m*m*p0[0] + 3*m*m*t*p1[0] + 3*m*t*t*p2[0] + t*t*t*p3[0],
+                        m*m*m*p0[1] + 3*m*m*t*p1[1] + 3*m*t*t*p2[1] + t*t*t*p3[1],
+                    ];
+                }
+                function sampleCubic(p0, p1, p2, p3, n) {
+                    const pts = [];
+                    for (let i = 0; i <= n; i++) pts.push(cubicBez(p0, p1, p2, p3, i / n));
+                    return pts;
+                }
+
+                function buildHallPolygons() {
+                    const { drawX, drawY, drawW, drawH } = getLandingImgRect();
+                    function ip(ix, iy) { return [drawX + ix * drawW, drawY + iy * drawH]; }
+                    // Mirror around figure horizontal center (cx = 0.297) in fraction space
+                    const CX = 0.297;
+                    // mirrorCurve takes raw fraction coord arrays [ix,iy], mirrors in fraction space,
+                    // converts to screen pixels, samples, and reverses for CW winding.
+                    function mirrorCurve(f0, f1, f2, f3, n) {
+                        function mip(f) { return ip(2*CX - f[0], f[1]); }
+                        return sampleCubic(mip(f0), mip(f1), mip(f2), mip(f3), n).reverse();
+                    }
+
+                    // ── Wall thickness (as fraction of drawW) ──
+                    const W_COL  = 0.05;  // column wall thickness (narrow gap)
+                    const W_FLOR = 0.0; // floor thickness
+
+                    // ── Inner polygon (room boundary) ──────────────────────────────
+                    // Right roof: center arch ceiling down to inner column top
+                    const iRoofR_p0 = [CX,   -0.07];
+                    const iRoofR_p1 = [0.42, -0.04];
+                    const iRoofR_p2 = [0.58,  0.10];
+                    const iRoofR_p3 = [0.67,  0.13];
+                    const innerRoofR = sampleCubic(ip(...iRoofR_p0), ip(...iRoofR_p1), ip(...iRoofR_p2), ip(...iRoofR_p3), 8);
+                    const innerRoofL = mirrorCurve(iRoofR_p0, iRoofR_p1, iRoofR_p2, iRoofR_p3, 8);
+
+                    const innerPoly = [
+                        ...innerRoofR,
+                        ip(0.67,  0.13),               // right inner column top (dup end of curve)
+                        ip(0.67,  0.99),               // right inner column bottom
+                        ip(-0.08, 0.99),               // inner floor  (mir of 0.67 = 0.594-0.67=-0.076≈-0.08)
+                        ip(-0.08, 0.13),               // left inner column top
+                        ...innerRoofL.slice(1),
+                    ];
+
+                    // ── Outer polygon (outer face — narrow gap outside inner) ──────
+                    // Feiyan roof curve: right side defined explicitly, left auto-mirrored
+                    const oRoofR_p0 = [CX,   -0.25];  // center ridge
+                    const oRoofR_p1 = [0.44, -0.1];  // ctrl1
+                    const oRoofR_p2 = [0.78,  0.16];  // ctrl2
+                    const oRoofR_p3 = [0.95,  -0.04];  // right eave tip (upswept)
+                    const outerRoofR = sampleCubic(ip(...oRoofR_p0), ip(...oRoofR_p1), ip(...oRoofR_p2), ip(...oRoofR_p3), 10);
+                    const outerRoofL = mirrorCurve(oRoofR_p0, oRoofR_p1, oRoofR_p2, oRoofR_p3, 10);
+
+                    // Outer column x = inner column x + W_COL (narrow wall)
+                    const oColRx = 0.67 + W_COL;        // right outer column x
+                    const oColLx = -0.08 - W_COL;       // left  outer column x (mirrored)
+                    const oFloorY = 0.99 + W_FLOR;
+
+                    const outerPoly = [
+                        ...outerRoofR,                   // center → right eave tip
+                        ip(oColRx, 0.18),                // right outer column top
+                        ip(oColRx, oFloorY),             // right outer column bottom
+                        ip(oColLx, oFloorY),             // floor
+                        ip(oColLx, 0.18),                // left outer column top
+                        ...outerRoofL.slice(1),          // left eave tip → center
+                    ];
+
+                    return { outerPoly, innerPoly };
+                }
+
+                function polyContains(poly, x, y) {
+                    if (!poly || poly.length < 3) return false;
+                    let inside = false;
+                    for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
+                        const xi = poly[i][0], yi = poly[i][1];
+                        const xj = poly[j][0], yj = poly[j][1];
+                        if ((yi > y) !== (yj > y) &&
+                            x < (xj - xi) * (y - yi) / (yj - yi) + xi) {
+                            inside = !inside;
+                        }
+                    }
+                    return inside;
+                }
+
+                let hallOuterCache = null;
+                let hallInnerCache = null;
+                function refreshHallCache() {
+                    const { outerPoly, innerPoly } = buildHallPolygons();
+                    hallOuterCache = outerPoly;
+                    hallInnerCache = innerPoly;
+                }
+                function isInsideHallOuter(x, y) { return polyContains(hallOuterCache, x, y); }
+                function isInsideHallInner(x, y) { return polyContains(hallInnerCache, x, y); }
+
+                // ─── Permeability for all hall boundaries (change here to tune leaking) ───
+                const HALL_PERMEABILITY = 0.35; // 0 = solid, 1 = fully open
+
+                // ─── SCENE_OBJECTS ─────────────────────────────────────────────────────
+                // Appears as camera zooms out in Stage 3 Phase C.
+                // cx/cy: image-fraction coords (0–1 = image bounds; negatives/> 1 = outside).
+                //        Figure center is at (0.297, 0.529); hall spans roughly x:-0.13–1.02.
+                // scale: multiplies the template polygon (1 = same size as main figure).
+                // permeability: 0 = solid wall, 1 = fully open boundary.
+                // numBoids: particle count for this shape.
+                // color: [R, G, B] render color.
+                // ── ADJUST THIS ARRAY to reposition / rescale / add objects ──
+                // 9 objects → Tensegrity ring1 nodes 2–10.  Node 1 = figure+hall.
+                const OBJECT_PERM = 0.35;
+                const SCENE_OBJECTS = [
+                    // Humans — warm white, seated posture like main figure
+                    { type:'human', cx:-2.70, cy:4.55, scale:0.65, permeability: OBJECT_PERM, numBoids:50, color:[255,228,200] },
+                    { type:'human', cx: 3.05, cy:-1.50, scale:1.15, permeability: OBJECT_PERM, numBoids:80, color:[255,228,200] },
+                    { type:'human', cx: 5.30, cy:3.40, scale:1.20, permeability: OBJECT_PERM, numBoids:70, color:[255,228,200] },
+                    { type:'human', cx: 2.30, cy:2.40, scale:1.20, permeability: OBJECT_PERM, numBoids:150, color:[255,228,200] },
+                    // Trees — green-white
+                    { type:'tree',  cx:-3.40, cy:1.35, scale:2.00, permeability: OBJECT_PERM, numBoids:60, color:[180,255,180] },
+                    { type:'tree',  cx: 4.90, cy:-2.30, scale:2.10, permeability: OBJECT_PERM, numBoids:60, color:[180,255,180] },
+                    { type:'tree',  cx:-1.20, cy:0.25, scale:2.90, permeability: OBJECT_PERM, numBoids:230, color:[180,255,180] },
+                    { type:'tree',  cx: 2.90, cy:4.35, scale:1.85, permeability: OBJECT_PERM, numBoids:55, color:[180,255,180] },
+                    { type:'tree',  cx:-7.20, cy:-2.25, scale:2.90, permeability: OBJECT_PERM, numBoids:115, color:[180,255,180] }
+                ];
+
+                // Template fractions for a simple pine tree, centered at (0, 0).
+                // Width: ±0.12 canopy, ±0.05 trunk; height: apex at -0.30, roots at +0.28.
+                function getTreeFracs() {
+                    return [
+                        [ 0.00, -0.30],  // apex
+                        [ 0.12, 0.14],  // canopy right edge
+                        [ 0.03, 0.12],  // step inward (canopy→trunk right)
+                        [ 0.03,  0.28],  // trunk bottom right
+                        [-0.03,  0.28],  // trunk bottom left
+                        [-0.03, 0.12],  // step inward (trunk→canopy left)
+                        [-0.12, 0.14],  // canopy left edge
+                    ];
+                }
+
+                // Build screen-pixel polygon for one scene object (using current drawRect).
+                function buildSceneObjectPoly(obj) {
+                    const { drawX, drawY, drawW, drawH } = getLandingImgRect();
+                    function ip(ix, iy) { return [drawX + ix * drawW, drawY + iy * drawH]; }
+
+                    if (obj.type === 'human') {
+                        // Figure fracs relative to canonical center (0.297, 0.529)
+                        const FIG_CX = 0.297, FIG_CY = 0.529;
+                        const origFracs = [
+                            [0.297,0.161],[0.307,0.164],[0.338,0.18],[0.343,0.244],[0.325,0.28],
+                            [0.314,0.316],[0.321,0.362],[0.352,0.388],[0.391,0.415],[0.4,0.445],
+                            [0.406,0.49],[0.404,0.548],[0.406,0.618],[0.404,0.67],[0.421,0.685],
+                            [0.471,0.699],[0.506,0.712],[0.525,0.729],[0.515,0.751],[0.485,0.77],
+                            [0.415,0.784],[0.297,0.789],
+                            [0.179,0.784],[0.109,0.77],[0.079,0.751],[0.071,0.729],[0.088,0.712],
+                            [0.123,0.699],[0.173,0.685],[0.189,0.67],[0.189,0.618],[0.191,0.548],
+                            [0.189,0.49],[0.195,0.445],[0.203,0.415],[0.242,0.388],[0.273,0.362],
+                            [0.281,0.316],[0.269,0.28],[0.253,0.244],[0.256,0.18],[0.287,0.164],
+                        ];
+                        return origFracs.map(([ix, iy]) =>
+                            ip(obj.cx + (ix - FIG_CX) * obj.scale,
+                               obj.cy + (iy - FIG_CY) * obj.scale)
+                        );
+                    } else { // 'tree'
+                        return getTreeFracs().map(([rx, ry]) =>
+                            ip(obj.cx + rx * obj.scale, obj.cy + ry * obj.scale)
+                        );
+                    }
+                }
+
+                // Sample n boids uniformly inside a polygon (rejection sampling within bbox).
+                function sampleInPoly(poly, n) {
+                    if (!poly || poly.length < 3) return [];
+                    let minX=Infinity, maxX=-Infinity, minY=Infinity, maxY=-Infinity;
+                    for (const [x,y] of poly) {
+                        minX=Math.min(minX,x); maxX=Math.max(maxX,x);
+                        minY=Math.min(minY,y); maxY=Math.max(maxY,y);
+                    }
+                    const out = [];
+                    for (let a = 0; a < n*200 && out.length < n; a++) {
+                        const x = minX + Math.random()*(maxX-minX);
+                        const y = minY + Math.random()*(maxY-minY);
+                        if (polyContains(poly, x, y)) out.push(makeBoid(x, y));
+                    }
+                    return out;
+                }
+
+                let sceneFlocks = [];      // one particle[] per SCENE_OBJECTS entry
+                let scenePolyCache = [];   // rebuilt each frame
+                let sceneObjectsInitialized = false;
+
+                function initSceneObjects() {
+                    sceneFlocks = SCENE_OBJECTS.map(obj => {
+                        const poly = buildSceneObjectPoly(obj);
+                        return sampleInPoly(poly, obj.numBoids);
+                    });
+                }
+
+                // Update one scene-object flock: brownian motion + single boundary.
+                function updateSceneObjectFlock(particles, poly, permeability) {
+                    // Precompute bbox for hard-reset
+                    let minX=Infinity, maxX=-Infinity, minY=Infinity, maxY=-Infinity;
+                    for (const [x,y] of poly) {
+                        minX=Math.min(minX,x); maxX=Math.max(maxX,x);
+                        minY=Math.min(minY,y); maxY=Math.max(maxY,y);
+                    }
+                    const bW = maxX-minX, bH = maxY-minY;
+
+                    for (const p of particles) {
+                        // Brownian noise
+                        const angle = Math.random() * Math.PI * 2;
+                        p.vx += Math.cos(angle) * 0.08;
+                        p.vy += Math.sin(angle) * 0.08;
+
+                        // Cursor repulsion for scene boids
+                        const curDx = p.x - cursorX;
+                        const curDy = p.y - cursorY;
+                        const curD2 = curDx * curDx + curDy * curDy;
+                        const curRepel2 = BOIDS.cursorRepel * BOIDS.cursorRepel;
+                        if (curD2 < curRepel2 && curD2 > 0) {
+                            const curD = Math.sqrt(curD2);
+                            const factor = (1 - curD / BOIDS.cursorRepel) * BOIDS.cursorRepelForce;
+                            p.vx += (curDx / curD) * factor * 0.5;
+                            p.vy += (curDy / curD) * factor * 0.5;
+                        }
+
+                        const spd = Math.sqrt(p.vx*p.vx + p.vy*p.vy);
+                        const maxSpd = BOIDS.speed * 0.8;
+                        if (spd > maxSpd) { p.vx = p.vx/spd*maxSpd; p.vy = p.vy/spd*maxSpd; }
+
+                        // Boundary: only check while currently inside
+                        if (polyContains(poly, p.x, p.y)) {
+                            const nx = p.x + p.vx*3, ny = p.y + p.vy*3;
+                            if (!polyContains(poly, nx, ny)) {
+                                if (Math.random() >= permeability) { p.vx *= -0.5; p.vy *= -0.5; }
+                            }
+                        }
+
+                        p.x += p.vx;
+                        p.y += p.vy;
+
+                        // Hard reset if escaped very far from bbox
+                        if (p.x < minX-bW || p.x > maxX+bW || p.y < minY-bH || p.y > maxY+bH) {
+                            for (let a = 0; a < 60; a++) {
+                                const x = minX + Math.random()*bW;
+                                const y = minY + Math.random()*bH;
+                                if (polyContains(poly, x, y)) { p.x=x; p.y=y; break; }
+                            }
+                        }
+                    }
+                }
+
+                function updateSceneObjects() {
+                    scenePolyCache = SCENE_OBJECTS.map(obj => buildSceneObjectPoly(obj));
+                    for (let i = 0; i < sceneFlocks.length; i++) {
+                        updateSceneObjectFlock(sceneFlocks[i], scenePolyCache[i], SCENE_OBJECTS[i].permeability);
+                    }
+                }
+
+                // ─── Wall boids (between outer and inner walls) ───────────────────
+                // ─── Air  boids (inside room, outside figure) ─────────────────────
+                const NUM_WALL_PARTICLES = 300;
+                const NUM_AIR_PARTICLES  = 60;
+                let wallParticles = [];
+                let airParticles  = [];
+                let hallParticlesInitialized = false;
+
+                function makeBoid(x, y) {
+                    return { x, y,
+                        vx: (Math.random() - 0.5) * BOIDS.speed,
+                        vy: (Math.random() - 0.5) * BOIDS.speed,
+                        alpha: 0.35 + Math.random() * 0.45 };
+                }
+
+                function sampleRegion(testFn, n, attempts) {
+                    const { drawX, drawY, drawW, drawH } = getLandingImgRect();
+                    const out = [];
+                    for (let a = 0; a < attempts && out.length < n; a++) {
+                        const x = drawX + (Math.random() * 1.6 - 0.3) * drawW;
+                        const y = drawY + (Math.random() * 1.4 - 0.2) * drawH;
+                        if (testFn(x, y)) out.push(makeBoid(x, y));
+                    }
+                    return out;
+                }
+
+                function initHallParticles() {
+                    refreshHallCache();
+                    wallParticles = sampleRegion(
+                        (x, y) => isInsideHallOuter(x, y) && !isInsideHallInner(x, y),
+                        NUM_WALL_PARTICLES, 40000
+                    );
+                    airParticles = sampleRegion(
+                        (x, y) => isInsideHallInner(x, y) && !isInside(x, y),
+                        NUM_AIR_PARTICLES, 40000
+                    );
+                }
+
+                function updateOneFlock(particles, testInner, testOuter, innerPermeable, outerPermeable) {
+                    for (const p of particles) {
+                        const angle = Math.random() * Math.PI * 2;
+                        p.vx += Math.cos(angle) * 0.08;
+                        p.vy += Math.sin(angle) * 0.08;
+
+                        // Cursor repulsion for hall boids
+                        const curDx = p.x - cursorX;
+                        const curDy = p.y - cursorY;
+                        const curD2 = curDx * curDx + curDy * curDy;
+                        const curRepel2 = BOIDS.cursorRepel * BOIDS.cursorRepel;
+                        if (curD2 < curRepel2 && curD2 > 0) {
+                            const curD = Math.sqrt(curD2);
+                            const factor = (1 - curD / BOIDS.cursorRepel) * BOIDS.cursorRepelForce;
+                            p.vx += (curDx / curD) * factor * 0.5;
+                            p.vy += (curDy / curD) * factor * 0.5;
+                        }
+
+                        const spd = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
+                        const maxSpd = BOIDS.speed * 0.8;
+                        if (spd > maxSpd) { p.vx = p.vx / spd * maxSpd; p.vy = p.vy / spd * maxSpd; }
+
+                        // Only apply boundary forces while particle is currently in-bounds.
+                        // Once it escapes (permeability let it through), it roams freely.
+                        const inOuter = !testOuter || testOuter(p.x, p.y);
+                        const inInner = testInner && testInner(p.x, p.y);
+                        if (inOuter && !inInner) {
+                            // Particle is in its valid zone — check predicted next pos
+                            const nx = p.x + p.vx * 3, ny = p.y + p.vy * 3;
+                            if (testOuter && !testOuter(nx, ny)) {
+                                // Heading out through outer wall
+                                if (Math.random() >= outerPermeable) { p.vx *= -0.5; p.vy *= -0.5; }
+                            } else if (testInner && testInner(nx, ny)) {
+                                // Heading into inner exclusion zone
+                                if (Math.random() >= innerPermeable) { p.vx *= -0.5; p.vy *= -0.5; }
+                            }
+                        }
+                        // If already escaped — no forces, let it drift until hard-reset
+
+                        p.x += p.vx;
+                        p.y += p.vy;
+
+                        // Hard reset only if very far off screen
+                        if (p.x < -W || p.x > 2*W || p.y < -H || p.y > 2*H) {
+                            const { drawX, drawY, drawW, drawH } = getLandingImgRect();
+                            for (let a = 0; a < 60; a++) {
+                                const x = drawX + (Math.random() * 1.6 - 0.3) * drawW;
+                                const y = drawY + (Math.random() * 1.4 - 0.2) * drawH;
+                                const ok = testOuter
+                                    ? (testOuter(x, y) && !(testInner && testInner(x, y)))
+                                    : (testInner && testInner(x, y));
+                                if (ok) { p.x = x; p.y = y; break; }
+                            }
+                        }
+                    }
+                }
+
+                function updateHallBoids() {
+                    refreshHallCache();
+                    // Wall boids: outer wall permeable, inner wall solid
+                    updateOneFlock(wallParticles,
+                        isInsideHallInner,
+                        isInsideHallOuter,
+                        0, HALL_PERMEABILITY);
+                    // Air boids: room boundary solid, figure boundary solid
+                    updateOneFlock(airParticles,
+                        (x, y) => insidePixels && isInside(x, y),
+                        isInsideHallInner,
+                        0, 0);
+                }
+
+                // Use spatial grid for boids performance (O(n) instead of O(n²))
+                const CELL = 60; // grid cell size
+                let grid = {};
+
+                function gridKey(x, y) {
+                    return `${Math.floor(x / CELL)},${Math.floor(y / CELL)}`;
+                }
+
+                function buildGrid() {
+                    grid = {};
+                    for (let i = 0; i < particles.length; i++) {
+                        const k = gridKey(particles[i].x, particles[i].y);
+                        if (!grid[k]) grid[k] = [];
+                        grid[k].push(i);
+                    }
+                }
+
+                function getNeighborIndices(x, y, radius) {
+                    const result = [];
+                    const cells = Math.ceil(radius / CELL);
+                    const cx = Math.floor(x / CELL),
+                        cy = Math.floor(y / CELL);
+                    for (let dx = -cells; dx <= cells; dx++) {
+                        for (let dy = -cells; dy <= cells; dy++) {
+                            const k = `${cx + dx},${cy + dy}`;
+                            if (grid[k]) result.push(...grid[k]);
+                        }
+                    }
+                    return result;
+                }
+
+                // Boids parameters — tuned so particles spread across the silhouette
+                const BOIDS = {
+                    separation: 6, // Detection radius for avoiding neighbors
+                    separationForce: 1, // How strongly they push away from each other
+                    alignment: 15, // Detection radius for aligning direction
+                    alignmentForce: 1.8, // How strongly they match their neighbors' direction
+                    cohesion: 15, // Detection radius for finding group centers
+                    cohesionForce: 0.08, // Very weak — prevents collapse
+                    speed: 2.0, // Maximum velocity
+                    maxForce: 1.6, // Steering limit
+                    cursorRepel: 70, // Detection radius for cursor repulsion
+                    cursorRepelForce: 0.8, // Strength of repulsion from cursor
+                };
+
+                function updateBoids() {
+                    buildGrid();
+
+                    for (let i = 0; i < particles.length; i++) {
+                        const p = particles[i];
+                        let sepX = 0,
+                            sepY = 0,
+                            sepN = 0;
+                        let aliVx = 0,
+                            aliVy = 0,
+                            aliN = 0;
+                        let cohX = 0,
+                            cohY = 0,
+                            cohN = 0;
+
+                        const neighbors = getNeighborIndices(
+                            p.x,
+                            p.y,
+                            BOIDS.cohesion,
+                        );
+                        for (const j of neighbors) {
+                            if (i === j) continue;
+                            const q = particles[j];
+                            const dx = p.x - q.x,
+                                dy = p.y - q.y;
+                            const d2 = dx * dx + dy * dy;
+
+                            if (
+                                d2 < BOIDS.separation * BOIDS.separation &&
+                                d2 > 0
+                            ) {
+                                const d = Math.sqrt(d2);
+                                sepX += dx / d / d;
+                                sepY += dy / d / d;
+                                sepN++;
+                            }
+                            if (d2 < BOIDS.alignment * BOIDS.alignment) {
+                                aliVx += q.vx;
+                                aliVy += q.vy;
+                                aliN++;
+                            }
+                            if (d2 < BOIDS.cohesion * BOIDS.cohesion) {
+                                cohX += q.x;
+                                cohY += q.y;
+                                cohN++;
+                            }
+                        }
+
+                        let fx = 0,
+                            fy = 0;
+                        if (sepN > 0) {
+                            fx += (sepX / sepN) * BOIDS.separationForce * flockingStrength;
+                            fy += (sepY / sepN) * BOIDS.separationForce * flockingStrength;
+                        }
+                        if (aliN > 0) {
+                            fx +=
+                                (aliVx / aliN - p.vx) *
+                                0.08 *
+                                BOIDS.alignmentForce *
+                                flockingStrength;
+                            fy +=
+                                (aliVy / aliN - p.vy) *
+                                0.08 *
+                                BOIDS.alignmentForce *
+                                flockingStrength;
+                        }
+                        if (cohN > 0) {
+                            fx +=
+                                (cohX / cohN - p.x) *
+                                BOIDS.cohesionForce *
+                                0.001 *
+                                flockingStrength;
+                            fy +=
+                                (cohY / cohN - p.y) *
+                                BOIDS.cohesionForce *
+                                0.001 *
+                                flockingStrength;
+                        }
+
+                        // Cursor repulsion
+                        const curDx = p.x - cursorX;
+                        const curDy = p.y - cursorY;
+                        const curD2 = curDx * curDx + curDy * curDy;
+                        const curRepel2 = BOIDS.cursorRepel * BOIDS.cursorRepel;
+                        if (curD2 < curRepel2 && curD2 > 0) {
+                            const curD = Math.sqrt(curD2);
+                            // Normalized direction from cursor to boid (repulsion direction)
+                            const nx = curDx / curD;
+                            const ny = curDy / curD;
+                            // Linear falloff: strongest at cursor, zero at edge of radius
+                            const strength = (1 - curD / BOIDS.cursorRepel) * BOIDS.cursorRepelForce;
+                            fx += nx * strength;
+                            fy += ny * strength;
+                        }
+
+                        // Clamp force
+                        const fl = Math.sqrt(fx * fx + fy * fy);
+                        if (fl > BOIDS.maxForce) {
+                            fx = (fx / fl) * BOIDS.maxForce;
+                            fy = (fy / fl) * BOIDS.maxForce;
+                        }
+
+                        p.vx += fx;
+                        p.vy += fy;
+
+                        // Speed cap
+                        const spd = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
+                        if (spd > BOIDS.speed) {
+                            p.vx = (p.vx / spd) * BOIDS.speed;
+                            p.vy = (p.vy / spd) * BOIDS.speed;
+                        }
+                        if (spd < 0.3) {
+                            // minimum drift
+                            const angle = Math.random() * Math.PI * 2;
+                            p.vx += Math.cos(angle) * 0.2;
+                            p.vy += Math.sin(angle) * 0.2;
+                        }
+
+                        // Silhouette boundary — solid wall, optionally permeable
+                        // boundaryStrength: overall on/off (0 = no boundary at all)
+                        // boundaryPermeability: fraction that slip through each frame (0=solid, 0.05=5% leak)
+                        if (boundaryStrength > 0.01 && insidePixels) {
+                            if (isInside(p.x, p.y)) {
+                                // Particle is inside — check if it's about to cross the boundary
+                                const nx = p.x + p.vx * 3;
+                                const ny = p.y + p.vy * 3;
+                                if (!isInside(nx, ny)) {
+                                    if (Math.random() >= boundaryPermeability) {
+                                        // Reflect and nudge toward center
+                                        p.vx *= -0.5;
+                                        p.vy *= -0.5;
+                                        const cx = silhouetteBounds
+                                            ? silhouetteBounds.dx + silhouetteBounds.dw / 2
+                                            : W / 2;
+                                        const cy = silhouetteBounds
+                                            ? silhouetteBounds.dy + silhouetteBounds.dh * 0.42
+                                            : H / 2;
+                                        const toCx = cx - p.x, toCy = cy - p.y;
+                                        const toCL = Math.sqrt(toCx * toCx + toCy * toCy) || 1;
+                                        p.vx += (toCx / toCL) * 0.3 * boundaryStrength;
+                                        p.vy += (toCy / toCL) * 0.3 * boundaryStrength;
+                                    }
+                                    // else: permeable — particle crosses freely and roams
+                                }
+                            } else if (boundaryPermeability === 0) {
+                                // Already outside and boundary is solid — snap back
+                                const cx = silhouetteBounds
+                                    ? silhouetteBounds.dx + silhouetteBounds.dw / 2
+                                    : W / 2;
+                                const cy = silhouetteBounds
+                                    ? silhouetteBounds.dy + silhouetteBounds.dh * 0.42
+                                    : H / 2;
+                                p.x += (cx - p.x) * 0.1;
+                                p.y += (cy - p.y) * 0.1;
+                            }
+                            // If outside and permeability > 0: let it roam freely
+                        }
+
+                        // Ghost attractors (Stage 3)
+                        if (
+                            ghostAttractStrength > 0 &&
+                            ghostPositions.length > 0
+                        ) {
+                            // Assign ~1/3 of particles to each ghost shape as attractor
+                            const gIdx = i % ghostPositions.length;
+                            const gp = ghostPositions[gIdx];
+                            const gcx = gp.dx + gp.dw / 2;
+                            const gcy = gp.dy + gp.dh / 2;
+                            const gdx = gcx - p.x,
+                                gdy = gcy - p.y;
+                            const dl = Math.sqrt(gdx * gdx + gdy * gdy) || 1;
+                            if (dl < 400) {
+                                p.vx += (gdx / dl) * 0.1 * ghostAttractStrength;
+                                p.vy += (gdy / dl) * 0.1 * ghostAttractStrength;
+                            }
+                        }
+
+                        // Gentle chest attractor — set to 0 to disable center pull
+                        // (strength was 0.018; re-enable by restoring that value below)
+                        // const chestX = W * 0.5, chestY = H * 0.32;
+                        // const cdx = chestX - p.x, cdy = chestY - p.y;
+                        // const cdist = Math.sqrt(cdx*cdx + cdy*cdy) || 1;
+                        // const strength = 0.018 * (1 - Math.min(cdist / (W * 0.22), 1));
+                        // p.vx += (cdx / cdist) * strength;
+                        // p.vy += (cdy / cdist) * strength;
+
+                        p.x += p.vx;
+                        p.y += p.vy;
+
+                        // Hard boundary fallback
+                        if (
+                            p.x < -50 ||
+                            p.x > W + 50 ||
+                            p.y < -50 ||
+                            p.y > H + 50
+                        ) {
+                            p.reset();
+                        }
+                    }
+                }
+
+                // Electrical signals
+                let signals = [];
+
+                function maybeCreateSignal() {
+                    if (particles.length < 2) return;
+                    for (let i = 0; i < particles.length; i++) {
+                        const p = particles[i];
+                        for (let j = i + 1; j < particles.length; j++) {
+                            const q = particles[j];
+                            const dx = p.x - q.x,
+                                dy = p.y - q.y;
+                            if (dx * dx + dy * dy < 900) {
+                                // 30px max distance between particles to spark
+                                if (Math.random() < 0.0008) {
+                                    // <--- Adjust electricity arc frequency here (higher = more arcs)
+                                    signals.push({
+                                        x1: p.x,
+                                        y1: p.y,
+                                        x2: q.x,
+                                        y2: q.y,
+                                        life: 20,
+                                        maxLife: 20,
+                                    });
+                                    if (signals.length > 60) signals.shift();
+                                }
+                            }
+                        }
+                    }
+                }
+
+                function getSilhouetteDims() {
+                    // Returns the landing image rect as the "silhouette dims" for compat
+                    const r = getLandingImgRect();
+                    return {
+                        scale: 1,
+                        dw: r.drawW,
+                        dh: r.drawH,
+                        dx: r.drawX,
+                        dy: r.drawY,
+                    };
+                }
+
+                // ─── Mask canvas: white where figure is, used to clip the image ──
+                let maskCanvas = null;
+
+                function buildMaskCanvas() {
+                    if (!insidePixels) return;
+                    maskCanvas = document.createElement("canvas");
+                    maskCanvas.width = W;
+                    maskCanvas.height = H;
+                    const mc = maskCanvas.getContext("2d");
+                    const imgData = mc.createImageData(W, H);
+                    const d = imgData.data;
+                    for (let i = 0; i < W * H; i++) {
+                        if (insidePixels[i]) {
+                            d[i * 4] = 255;
+                            d[i * 4 + 1] = 255;
+                            d[i * 4 + 2] = 255;
+                            d[i * 4 + 3] = 255;
+                        }
+                        // else transparent (default)
+                    }
+                    mc.putImageData(imgData, 0, 0);
+                }
+
+                // ─── Draw landing image for Stage 1 ─────────────────────────────
+                function getChestScreenPos() {
+                    const { drawX, drawY, drawW, drawH } = getLandingImgRect();
+                    return {
+                        cx: drawX + 0.2971 * drawW,
+                        cy: drawY + 0.529 * drawH,
+                    };
+                }
+
+                // Apply zoom to the outline canvas via CSS transform.
+                // Called every frame from drawParticles — pure CSS, no side effects.
+                function applyZoomToOutlineCanvas() {
+                    if (zoomScale <= 1.001) {
+                        outlineCanvas.style.transform = "none";
+                        outlineCanvas.style.transformOrigin = "50% 50%";
+                    } else {
+                        const { cx, cy } = getChestScreenPos();
+                        outlineCanvas.style.transformOrigin =
+                            cx + "px " + cy + "px";
+                        outlineCanvas.style.transform =
+                            "scale(" + zoomScale + ")";
+                    }
+                }
+
+                function drawLandingImage(alpha, invert = 0) {
+                    if (!landingImgLoaded || alpha < 0.005) return;
+                    const { drawX, drawY, drawW, drawH } = getLandingImgRect();
+
+                    ctx.save();
+                    ctx.globalAlpha = alpha;
+
+                    // Apply brightness + optional inversion filter
+                    // invert is 0→1; merged here so both can coexist
+                    const invertStr =
+                        invert > 0.001
+                            ? ` invert(${Math.round(invert * 100)}%)`
+                            : "";
+                    ctx.filter = `brightness(1.8) contrast(1.1)${invertStr}`; // <--- FLASH: add/change filters here
+                    ctx.globalCompositeOperation = "source-over";
+                    ctx.drawImage(landingImg, drawX, drawY, drawW, drawH);
+                    ctx.filter = "none";
+
+                    // Overlay the background-colored vignette to hide the JPEG's lighter background
+                    // and fade the image edges into the page dark color
+                    ctx.globalCompositeOperation = "source-over";
+
+                    // Rectangular fade from image edges inward — covers left/right JPEG bg
+                    const vigW = drawW * 0.18; // how much to fade on left/right
+                    const vigH = drawH * 0.12; // how much to fade top/bottom
+
+                    // Left edge fade
+                    const gl = ctx.createLinearGradient(
+                        drawX,
+                        0,
+                        drawX + vigW,
+                        0,
+                    );
+                    gl.addColorStop(0, "rgba(10,11,15,1)");
+                    gl.addColorStop(1, "rgba(10,11,15,0)");
+                    ctx.fillStyle = gl;
+                    ctx.fillRect(drawX, drawY, vigW, drawH);
+
+                    // Right edge fade
+                    const gr = ctx.createLinearGradient(
+                        drawX + drawW,
+                        0,
+                        drawX + drawW - vigW,
+                        0,
+                    );
+                    gr.addColorStop(0, "rgba(10,11,15,1)");
+                    gr.addColorStop(1, "rgba(10,11,15,0)");
+                    ctx.fillStyle = gr;
+                    ctx.fillRect(drawX + drawW - vigW, drawY, vigW, drawH);
+
+                    // Top edge
+                    const gt = ctx.createLinearGradient(
+                        0,
+                        drawY,
+                        0,
+                        drawY + vigH,
+                    );
+                    gt.addColorStop(0, "rgba(10,11,15,1)");
+                    gt.addColorStop(1, "rgba(10,11,15,0)");
+                    ctx.fillStyle = gt;
+                    ctx.fillRect(drawX, drawY, drawW, vigH);
+
+                    // Bottom edge
+                    const gb = ctx.createLinearGradient(
+                        0,
+                        drawY + drawH,
+                        0,
+                        drawY + drawH - vigH,
+                    );
+                    gb.addColorStop(0, "rgba(10,11,15,1)");
+                    gb.addColorStop(1, "rgba(10,11,15,0)");
+                    ctx.fillStyle = gb;
+                    ctx.fillRect(drawX, drawY + drawH - vigH, drawW, vigH);
+
+                    // Left & right outside the image rect (page is darker than JPEG bg)
+                    ctx.fillStyle = "rgba(10,11,15,1)";
+                    if (drawX > 0) ctx.fillRect(0, 0, drawX, H);
+                    if (drawX + drawW < W)
+                        ctx.fillRect(drawX + drawW, 0, W - drawX - drawW, H);
+                    if (drawY > 0) ctx.fillRect(0, 0, W, drawY);
+                    if (drawY + drawH < H)
+                        ctx.fillRect(0, drawY + drawH, W, H - drawY - drawH);
+
+                    ctx.restore();
+                }
+
+                function drawParticles(particleAlpha) {
+                    ctx.clearRect(0, 0, W, H);
+
+                    // Apply global zoom centred on chest — affects ALL canvas drawing.
+                    // zoomScale is a pure render variable; physics/mask always use zoom=1 coords.
+                    const zooming = Math.abs(zoomScale - 1.0) > 0.001;
+                    if (zooming) {
+                        const { cx, cy } = getChestScreenPos();
+                        ctx.save();
+                        ctx.translate(cx, cy);
+                        ctx.scale(zoomScale, zoomScale);
+                        ctx.translate(-cx, -cy);
+                    }
+
+                    // Stage 1: draw landing image (with optional color inversion for transition)
+                    if (solidAlpha > 0.01) {
+                        drawLandingImage(solidAlpha, solidInvert);
+                    }
+                    // ── DEBUG: polygon outline ──────────────────────────────────
+                    const DEBUG_POLYGON = false; // ← toggle here
+                    if (DEBUG_POLYGON) {
+                        const poly = getFigurePolygon();
+                        ctx.save();
+                        ctx.beginPath();
+                        ctx.moveTo(poly[0][0], poly[0][1]);
+                        for (let i = 1; i < poly.length; i++) ctx.lineTo(poly[i][0], poly[i][1]);
+                        ctx.closePath();
+                        ctx.strokeStyle = "rgba(255,80,80,0.85)";
+                        ctx.lineWidth = 2;
+                        ctx.stroke();
+                        // Number each vertex so you know which ip() call to edit
+                        ctx.font = "11px monospace";
+                        ctx.fillStyle = "rgba(255,150,80,0.9)";
+                        for (let i = 0; i < poly.length; i++) {
+                            ctx.fillText(i, poly[i][0] + 4, poly[i][1] - 4);
+                        }
+                        ctx.restore();
+                    }
+                    // ────────────────────────────────────────────────────────────
+
+
+                    // Outline canvas during transition (Stage 1→2)
+                    if (outlineBuilt && outlineAlpha > 0.01) {
+                        outlineCanvas.style.opacity = outlineAlpha;
+                        applyZoomToOutlineCanvas();
+                    } else if (outlineCanvas.style.opacity !== "0") {
+                        outlineCanvas.style.opacity = "0";
+                    }
+
+                    // Ghost outlines (Stage 3)
+                    if (stage3Progress > 0.05 && ghostCanvases.length >= 3) {
+                        const gAlpha = Math.min(stage3Progress * 1.5, 1) * 0.07;
+                        ctx.save();
+                        ctx.globalAlpha = gAlpha;
+                        ctx.globalCompositeOperation = "screen";
+                        const offsets = [
+                            {
+                                dx: W * 0.1 - 60 * ((H * 0.22) / 120),
+                                dy: H * 0.32,
+                                dw: 120 * ((H * 0.22) / 120),
+                                dh: H * 0.22,
+                            },
+                            {
+                                dx: W * 0.78,
+                                dy: H * 0.27,
+                                dw: 80 * ((H * 0.28) / 130),
+                                dh: H * 0.28,
+                            },
+                            {
+                                dx: W * 0.62,
+                                dy: H * 0.19,
+                                dw: 200 * ((H * 0.42) / 260),
+                                dh: H * 0.42,
+                            },
+                        ];
+                        for (let gi = 0; gi < 3; gi++) {
+                            const blob = new Blob([GHOST_SHAPES[gi]], {
+                                type: "image/svg+xml",
+                            });
+                        }
+                        ctx.restore();
+                    }
+
+                    // Particles (threshold 0.001 so screen-blend accumulation fades fully before cutoff)
+                    if (particleAlpha > 0.001) {
+                        ctx.save();
+                        ctx.globalAlpha = particleAlpha;
+                        ctx.globalCompositeOperation = "screen";
+                        for (const p of particles) {
+                            // Counteract the global zoom; radius shrinks 2x→1x as swarm matures
+                            const r = Math.max(0.7, 5 * particleRadiusMultiplier / zoomScale);
+                            const grad = ctx.createRadialGradient(
+                                p.x,
+                                p.y,
+                                0,
+                                p.x,
+                                p.y,
+                                r,
+                            );
+                            grad.addColorStop(
+                                0,
+                                `rgba(255,240,200,${p.alpha})`,
+                            );
+                            grad.addColorStop(1, "rgba(255,240,200,0)");
+                            ctx.beginPath();
+                            ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
+                            ctx.fillStyle = grad;
+                            ctx.fill();
+                        }
+                        ctx.restore();
+
+                        // DEBUG: draw hall outer + inner polygon outlines
+                        if (stage3Progress > 0) {
+                            function drawDebugPoly(poly, color) {
+                                if (!poly || poly.length < 3) return;
+                                ctx.save();
+                                ctx.strokeStyle = color;
+                                ctx.lineWidth = 1.5 / zoomScale;
+                                ctx.setLineDash([5 / zoomScale, 3 / zoomScale]);
+                                ctx.beginPath();
+                                ctx.moveTo(poly[0][0], poly[0][1]);
+                                for (let i = 1; i < poly.length; i++) ctx.lineTo(poly[i][0], poly[i][1]);
+                                ctx.closePath();
+                                ctx.stroke();
+                                ctx.setLineDash([]);
+                                ctx.restore();
+                            }
+                            // drawDebugPoly(hallOuterCache, "rgba(255,200,80,0.40)");
+                            // drawDebugPoly(hallInnerCache, "rgba(100,180,255,0.30)");
+                        }
+
+                        // Wall boids (warm amber, trace the structure)
+                        // Air  boids (cool blue, room atmosphere)
+                        const hallFadeAlpha = Math.min(stage3Progress * 4, 1);
+                        if (hallFadeAlpha > 0.01) {
+                            ctx.save();
+                            ctx.globalAlpha = particleAlpha * hallFadeAlpha;
+                            ctx.globalCompositeOperation = "screen";
+                            const hr = Math.max(0.5, 5 * particleRadiusMultiplier / zoomScale);
+
+                            // Wall boids — amber
+                            for (const p of wallParticles) {
+                                const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, hr);
+                                grad.addColorStop(0, `rgba(255,210,120,${p.alpha})`);
+                                grad.addColorStop(1, "rgba(255,210,120,0)");
+                                ctx.beginPath();
+                                ctx.arc(p.x, p.y, hr, 0, Math.PI * 2);
+                                ctx.fillStyle = grad;
+                                ctx.fill();
+                            }
+
+                            // Air boids — blue-white
+                            for (const p of airParticles) {
+                                const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, hr);
+                                grad.addColorStop(0, `rgba(190,215,255,${p.alpha})`);
+                                grad.addColorStop(1, "rgba(190,215,255,0)");
+                                ctx.beginPath();
+                                ctx.arc(p.x, p.y, hr, 0, Math.PI * 2);
+                                ctx.fillStyle = grad;
+                                ctx.fill();
+                            }
+
+                            ctx.restore();
+                        }
+
+                        // Scene objects (humans + trees outside the hall, Phase C zoom-out)
+                        if (sceneObjectsInitialized && sceneAlpha > 0.01) {
+                            ctx.save();
+                            ctx.globalCompositeOperation = "screen";
+                            const sr = Math.max(0.5, 5 * particleRadiusMultiplier / zoomScale);
+                            for (let i = 0; i < sceneFlocks.length; i++) {
+                                const obj = SCENE_OBJECTS[i];
+                                const [rc, gc, bc] = obj.color;
+                                const objAlpha = particleAlpha * sceneAlpha * hallFadeAlpha;
+                                if (objAlpha < 0.01) continue;
+                                ctx.globalAlpha = objAlpha;
+                                for (const p of sceneFlocks[i]) {
+                                    const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, sr);
+                                    grad.addColorStop(0, `rgba(${rc},${gc},${bc},${p.alpha})`);
+                                    grad.addColorStop(1, `rgba(${rc},${gc},${bc},0)`);
+                                    ctx.beginPath();
+                                    ctx.arc(p.x, p.y, sr, 0, Math.PI * 2);
+                                    ctx.fillStyle = grad;
+                                    ctx.fill();
+                                }
+                            }
+                            ctx.restore();
+                        }
+
+                        // Electrical signals
+                        for (let i = signals.length - 1; i >= 0; i--) {
+                            const s = signals[i];
+                            const t = s.life / s.maxLife;
+                            ctx.save();
+                            ctx.globalAlpha = particleAlpha * t * 0.85;
+                            ctx.strokeStyle = `rgba(150,200,255,${t * 0.85})`;
+                            ctx.lineWidth = 2.5 / zoomScale; // <--- Adjust electricity / signal line thickness here
+                            ctx.shadowColor = "rgba(150,200,255,0.8)";
+                            ctx.shadowBlur = 4;
+                            ctx.beginPath();
+                            ctx.moveTo(s.x1, s.y1);
+                            // Slight arc
+                            const mx =
+                                (s.x1 + s.x2) / 2 + (Math.random() - 0.5) * 8;
+                            const my =
+                                (s.y1 + s.y2) / 2 + (Math.random() - 0.5) * 8;
+                            ctx.quadraticCurveTo(mx, my, s.x2, s.y2);
+                            ctx.stroke();
+                            ctx.restore();
+                            s.life--;
+                            if (s.life <= 0) signals.splice(i, 1);
+                        }
+                    }
+
+                    // Close the global zoom transform
+                    if (zooming) {
+                        ctx.restore();
+                    }
+                }
+
+                // ─── Stage 4–5: D3 Force Network ──────────────────────────────
+                // ── Tensegrity Star G9 (51 nodes) ─────────────────────────────────
+                // Node layout: 0=hub, 1-10=ring1, 11-20=ring2, 21-30=ring3,
+                //              31-40=ring4, 41-50=ring5
+                // Rings 1-10 (nodes 1-10) are "anchored" at boid cluster centers
+                // during the crossfade, then released when force-sim kicks in.
+                const NUM_NODES = 51;
+                let networkNodes = [];
+                let networkLinks = [];
+                let d3Sim = null;
+                let networkAlpha = 0; // current render opacity
+                let sceneAlpha = 0;  // scene objects fade-in alpha (Phase C)
+                let simStrength = 0; // 0=paused, 1=fully active (scroll-driven)
+                let networkPositionsSet = false;  // anchor ring1 nodes once
+                let networkNodesUnfrozen = false; // release fx/fy when sim starts
+                let dragEnabled = false;          // true while "drag to organize" is active
+                let simKickGiven = false;         // one-shot random velocity kick at sim start
+
+                function buildNetwork() {
+                    // ── Nodes ─────────────────────────────────────────────────────
+                    // Positions are in SVG/screen coords (no zoom transform on SVG).
+                    // We compute them at the final zoom level (ZOOM=0.025) so they
+                    // appear on screen when the network fades in at stage 4.
+                    // setNetworkNodePositions() will later pin ring1 via fx/fy to
+                    // the exact boid-cluster locations.
+                    const ZOOM = 0.025;
+                    const { drawX, drawY, drawW, drawH } = getLandingImgRect();
+                    const { cx: figX, cy: figY } = getChestScreenPos();
+
+                    // Convert zoom=1 canvas coord → screen at ZOOM
+                    function z(bx, by) {
+                        return [
+                            figX + (bx - figX) * ZOOM,
+                            figY + (by - figY) * ZOOM,
+                        ];
+                    }
+
+                    // Anchor positions in screen coords
+                    const [hubSx, hubSy] = z(figX, figY); // = (figX, figY) since zoom around itself
+                    const anchorScreen = [[hubSx, hubSy]];
+                    for (const obj of SCENE_OBJECTS) {
+                        const bx = drawX + obj.cx * drawW;
+                        const by = drawY + obj.cy * drawH;
+                        anchorScreen.push(z(bx, by));
+                    }
+
+                    // Build positions layer by layer using G9 topology.
+                    // All radii from hub use Math.min(W,H) as base → radially symmetric.
+                    // Outer rings start beyond maxAnchorR so no node sits between figures.
+                    const half = Math.min(W, H) * 0.1;
+
+                    const pos = new Array(51);
+                    pos[0] = [hubSx, hubSy];
+                    for (let i = 0; i < 9; i++) pos[i+1] = anchorScreen[i+1];
+                    const maxAnchorR = anchorScreen.slice(1).reduce(
+                        (m,[x,y]) => Math.max(m, Math.hypot(x-hubSx,y-hubSy)), 0) || half*0.1;
+                    pos[10] = [hubSx+(Math.random()-0.5)*maxAnchorR*0.4,
+                               hubSy+(Math.random()-0.5)*maxAnchorR*0.4];
+
+                    // Fixed radii from hub for each outer ring — all > maxAnchorR.
+                    // Adjust multipliers to taste; a few nodes may go off-screen.
+                    const r2 = Math.max(maxAnchorR * 1., half * 0.22);
+                    const r3 = Math.max(maxAnchorR * 1.3, half * 0.32);
+                    const r4 = Math.max(maxAnchorR * 1.8, half * 0.40);
+                    const r5 = Math.max(maxAnchorR * 2.1, half * 0.48);
+
+                    // Place a node at the angular midpoint of two parents (from hub),
+                    // at a fixed radius, with angular jitter.
+                    function placeOuter(pA, pB, radius) {
+                        let a1 = Math.atan2(pA[1]-hubSy, pA[0]-hubSx);
+                        let a2 = Math.atan2(pB[1]-hubSy, pB[0]-hubSx);
+                        let diff = a2 - a1;
+                        while (diff >  Math.PI) diff -= 2*Math.PI;
+                        while (diff < -Math.PI) diff += 2*Math.PI;
+                        const angle = a1 + diff/2 + (Math.random()-0.5)*0.45;
+                        const r = radius * (0.85 + Math.random()*0.30);
+                        return [hubSx + Math.cos(angle)*r, hubSy + Math.sin(angle)*r];
+                    }
+
+                    for (let i = 0; i < 10; i++)
+                        pos[11+i] = placeOuter(pos[i+1], pos[(i+1)%10+1], r2);
+                    for (let i = 0; i < 10; i++)
+                        pos[21+i] = placeOuter(pos[11+i], pos[11+(i+1)%10], r3);
+                    for (let i = 0; i < 10; i++)
+                        pos[31+i] = placeOuter(pos[21+i], pos[21+(i+1)%10], r4);
+                    for (let i = 0; i < 10; i++) {
+                        const angle = Math.atan2(pos[31+i][1]-hubSy, pos[31+i][0]-hubSx)
+                                    + (Math.random()-0.5)*0.30;
+                        pos[41+i] = [hubSx + Math.cos(angle)*r5*(0.85+Math.random()*0.30),
+                                     hubSy + Math.sin(angle)*r5*(0.85+Math.random()*0.30)];
+                    }
+
+                    networkNodes = [];
+                    for (let i = 0; i <= 50; i++) {
+                        networkNodes.push({ id: i, x: pos[i][0], y: pos[i][1], links: [], pulse: 0 });
+                    }
+
+                    // ── Edges — G9 Tensegrity Star ───────────────────────────────
+                    networkLinks = [];
+                    function addEdge(i, j) {
+                        networkLinks.push({ source: i, target: j, pulse: 0, pulseMax: 0 });
+                    }
+                    for (let i = 1; i <= 10; i++) addEdge(0, i);          // hub→ring1
+                    for (let i = 0; i < 10; i++) {
+                        addEdge(i+1,  11+i);       // ring1→ring2
+                        addEdge(i+1,  11+(i+1)%10);
+                    }
+                    for (let i = 0; i < 10; i++) {
+                        addEdge(11+i,         21+i);  // ring2→ring3
+                        addEdge(11+(i+1)%10,  21+i);
+                    }
+                    for (let i = 0; i < 10; i++) {
+                        addEdge(21+i,         31+i);  // ring3→ring4
+                        addEdge(21+(i+1)%10,  31+i);
+                    }
+                    for (let i = 0; i < 10; i++) addEdge(31+i, 41+i); // ring4→ring5
+
+                    // ── D3 force simulation — starts STOPPED, scroll kicks it in ──
+                    // All distance/radius values scale with vpScale() so the graph
+                    // looks proportionally identical on any viewport size.
+                    const vpS = vpScale();
+                    // On portrait screens pull nodes into a tighter radius so the
+                    // network stays within the narrow viewport. Landscape unchanged.
+                    const netRadialR = Math.min(W, H) * (W < H ? 0.30 : 0.38);
+                    d3Sim = d3.forceSimulation(networkNodes)
+                        .force("link", d3.forceLink(networkLinks).id(d => d.id)
+                            .distance(Math.max(25, Math.round(50 * vpS))).strength(0.6))
+                        .force("charge", d3.forceManyBody().strength(Math.max(-80, -180 * vpS)))
+                        .force("center", d3.forceCenter(W / 2, H / 2).strength(0.04))
+                        .force("collision", d3.forceCollide(Math.max(8, Math.round(18 * vpS))))
+                        .force("radial",
+                            d3.forceRadial(netRadialR, W / 2, H / 2).strength(0.025))
+                        .alphaDecay(0)     // we manage alpha manually each frame
+                        .velocityDecay(0.45)
+                        .stop();           // don't auto-run — scroll drives it
+                }
+
+                // Called once when Phase C crossfade begins: pin ring1 nodes at boid centres.
+                function setNetworkNodePositions() {
+                    if (networkPositionsSet) return;
+                    networkPositionsSet = true;
+
+                    const { drawX, drawY, drawW, drawH } = getLandingImgRect();
+                    const { cx: chestX, cy: chestY } = getChestScreenPos();
+                    const ZOOM = 0.025; // final zoom level
+
+                    // Convert zoom=1 canvas coord → screen position at ZOOM
+                    function toScreen(bx, by) {
+                        return {
+                            x: chestX + (bx - chestX) * ZOOM,
+                            y: chestY + (by - chestY) * ZOOM,
+                        };
+                    }
+
+                    // Node 0 (hub): figure chest position at final zoom
+                    const p0 = toScreen(chestX, chestY);
+                    networkNodes[0].x = networkNodes[0].fx = p0.x;
+                    networkNodes[0].y = networkNodes[0].fy = p0.y;
+
+                    // Nodes 1–9: one per SCENE_OBJECT
+                    for (let i = 0; i < SCENE_OBJECTS.length && i < 9; i++) {
+                        const obj = SCENE_OBJECTS[i];
+                        const bx = drawX + obj.cx * drawW;
+                        const by = drawY + obj.cy * drawH;
+                        const pos = toScreen(bx, by);
+                        networkNodes[i + 1].x = networkNodes[i + 1].fx = pos.x;
+                        networkNodes[i + 1].y = networkNodes[i + 1].fy = pos.y;
+                    }
+
+                    renderNetwork();
+                }
+
+                // Release all fixed positions so force-sim can move nodes freely.
+                function unfreezeNetworkNodes() {
+                    if (networkNodesUnfrozen) return;
+                    networkNodesUnfrozen = true;
+                    for (const n of networkNodes) { n.fx = null; n.fy = null; }
+                }
+
+                // Give each node a small random velocity so the relaxation starts
+                // with a visible wave-like ripple rather than appearing frozen.
+                function kickNetworkNodes() {
+                    if (simKickGiven) return;
+                    simKickGiven = true;
+                    const KICK = 1.8; // px/frame — tune this for stronger/softer wave
+                    for (const n of networkNodes) {
+                        n.vx = (Math.random() - 0.5) * KICK;
+                        n.vy = (Math.random() - 0.5) * KICK;
+                    }
+                }
+
+                // ── Network visual style — base values at 1440×900 reference ──
+                // Actual sizes are scaled by vpScale() inside initNetworkSvg().
+                const NET_NODE_R_BASE       = 8;   // default node radius (px @ reference)
+                const NET_NODE_R_HUB_BASE   = 12;  // hub (node 0) radius
+                const NET_NODE_R_RING1_BASE = 10;  // ring1 (nodes 1-10) radius
+                const NET_NODE_COLOR        = "rgba(200,220,255,0.70)";
+                const NET_NODE_COLOR_HUB    = "rgba(255,230,160,0.90)";
+                const NET_NODE_COLOR_RING1  = "rgba(255,210,140,0.80)";
+                const NET_LINK_COLOR        = "rgba(200,220,255,0.18)";
+                const NET_LINK_WIDTH_BASE   = 1.8; // resting stroke-width @ reference
+                // ──────────────────────────────────────────────────────────────
+
+                const svgEl = d3.select("#network-svg");
+                let linkSel, nodeSel;
+
+                function initNetworkSvg() {
+                    svgEl.selectAll("*").remove();
+
+                    // Scale all px constants to the current viewport
+                    const vpS = vpScale();
+                    const nodeR      = Math.max(4,   Math.round(NET_NODE_R_BASE       * vpS));
+                    const nodeRHub   = Math.max(6,   Math.round(NET_NODE_R_HUB_BASE   * vpS));
+                    const nodeRRing1 = Math.max(5,   Math.round(NET_NODE_R_RING1_BASE * vpS));
+                    const linkW      = Math.max(0.8, NET_LINK_WIDTH_BASE * vpS);
+                    const glowBlur   = Math.max(1.5, 3 * vpS);
+                    const brightBlur = Math.max(3,   6 * vpS);
+
+                    // Glow filter
+                    const defs = svgEl.append("defs");
+                    const filter = defs
+                        .append("filter")
+                        .attr("id", "node-glow")
+                        .attr("x", "-50%")
+                        .attr("y", "-50%")
+                        .attr("width", "200%")
+                        .attr("height", "200%");
+                    filter
+                        .append("feGaussianBlur")
+                        .attr("stdDeviation", String(glowBlur))
+                        .attr("result", "blur");
+                    const feMerge = filter.append("feMerge");
+                    feMerge.append("feMergeNode").attr("in", "blur");
+                    feMerge.append("feMergeNode").attr("in", "SourceGraphic");
+
+                    const filterBright = defs
+                        .append("filter")
+                        .attr("id", "node-bright")
+                        .attr("x", "-100%")
+                        .attr("y", "-100%")
+                        .attr("width", "300%")
+                        .attr("height", "300%");
+                    filterBright
+                        .append("feGaussianBlur")
+                        .attr("stdDeviation", String(brightBlur))
+                        .attr("result", "blur");
+                    const feMerge2 = filterBright.append("feMerge");
+                    feMerge2.append("feMergeNode").attr("in", "blur");
+                    feMerge2.append("feMergeNode").attr("in", "SourceGraphic");
+
+                    linkSel = svgEl
+                        .append("g")
+                        .attr("class", "links")
+                        .selectAll("line")
+                        .data(networkLinks)
+                        .enter()
+                        .append("line")
+                        .attr("stroke", NET_LINK_COLOR)
+                        .attr("stroke-width", linkW);
+
+                    nodeSel = svgEl
+                        .append("g")
+                        .attr("class", "nodes")
+                        .selectAll("circle")
+                        .data(networkNodes)
+                        .enter()
+                        .append("circle")
+                        .attr("r", d => d.id === 0 ? nodeRHub : d.id <= 10 ? nodeRRing1 : nodeR)
+                        .attr("fill", d => d.id === 0 ? NET_NODE_COLOR_HUB : d.id <= 10 ? NET_NODE_COLOR_RING1 : NET_NODE_COLOR)
+                        .attr("filter", "url(#node-glow)")
+                        .call(d3.drag()
+                            .on("start", (event, d) => {
+                                if (!dragEnabled) return;
+                                // Snapshot every node's position so we can
+                                // compute deltas cleanly during the drag.
+                                d._dragStartX = d.x;
+                                d._dragStartY = d.y;
+                                for (const n of networkNodes) {
+                                    n._snapX = n.x;
+                                    n._snapY = n.y;
+                                }
+                                d.fx = d.x; d.fy = d.y;
+                            })
+                            .on("drag", (event, d) => {
+                                if (!dragEnabled) return;
+                                const dx = event.x - d._dragStartX;
+                                const dy = event.y - d._dragStartY;
+                                d.fx = event.x; d.fy = event.y;
+                                d.x  = event.x; d.y  = event.y;
+
+                                // Soft spring pull: walk the graph BFS-style up to
+                                // DRAG_REACH hops, applying a fraction of the drag
+                                // delta that falls off with each hop.
+                                const DRAG_REACH  = 3;    // hops to propagate
+                                const DRAG_FALLOFF = 0.38; // fraction kept per hop
+
+                                // Build adjacency from resolved link objects (D3 has
+                                // already replaced integer ids with node references).
+                                const adj = new Map();
+                                for (const l of networkLinks) {
+                                    const s = l.source, t = l.target;
+                                    if (!adj.has(s.id)) adj.set(s.id, []);
+                                    if (!adj.has(t.id)) adj.set(t.id, []);
+                                    adj.get(s.id).push(t);
+                                    adj.get(t.id).push(s);
+                                }
+
+                                // BFS
+                                const visited = new Set([d.id]);
+                                let frontier = adj.get(d.id) || [];
+                                let pull = 1.0;
+                                for (let hop = 0; hop < DRAG_REACH; hop++) {
+                                    pull *= DRAG_FALLOFF;
+                                    const next = [];
+                                    for (const nb of frontier) {
+                                        if (visited.has(nb.id)) continue;
+                                        visited.add(nb.id);
+                                        nb.x = nb._snapX + dx * pull;
+                                        nb.y = nb._snapY + dy * pull;
+                                        // Don't override fx/fy — those are only set for
+                                        // the directly-dragged node and pinned nodes.
+                                        next.push(...(adj.get(nb.id) || []));
+                                    }
+                                    frontier = next;
+                                }
+
+                                renderNetwork();
+                            })
+                            .on("end", (event, d) => {
+                                if (!dragEnabled) return;
+                                // Release dragged node; neighbors drift back naturally
+                                // once the full sim kicks in at stage 5.
+                                d.fx = null; d.fy = null;
+                            })
+                        );
+                }
+
+                function renderNetwork() {
+                    if (linkSel) {
+                        linkSel
+                            .attr("x1", (d) => d.source.x)
+                            .attr("y1", (d) => d.source.y)
+                            .attr("x2", (d) => d.target.x)
+                            .attr("y2", (d) => d.target.y);
+                    }
+                    if (nodeSel) {
+                        nodeSel.attr("cx", (d) => d.x).attr("cy", (d) => d.y);
+                    }
+                }
+
+                // BFS Signal propagation
+                function propagateSignal(startNode) {
+                    if (!networkLinks.length) return;
+                    // Ensure adjacency is built
+                    const adjLinks = new Map();
+                    for (const l of networkLinks) {
+                        const src =
+                            typeof l.source === "object"
+                                ? l.source
+                                : networkNodes[l.source];
+                        const tgt =
+                            typeof l.target === "object"
+                                ? l.target
+                                : networkNodes[l.target];
+                        if (!adjLinks.has(src.id)) adjLinks.set(src.id, []);
+                        if (!adjLinks.has(tgt.id)) adjLinks.set(tgt.id, []);
+                        adjLinks.get(src.id).push({ link: l, neighbor: tgt });
+                        adjLinks.get(tgt.id).push({ link: l, neighbor: src });
+                    }
+
+                    const visited = new Set([startNode.id]);
+                    const queue = [[startNode, 0]];
+                    while (queue.length) {
+                        const [node, depth] = queue.shift();
+                        const neighbors = adjLinks.get(node.id) || [];
+                        for (const { link, neighbor } of neighbors) {
+                            if (!visited.has(neighbor.id)) {
+                                visited.add(neighbor.id);
+                                const delay = depth * 80 + Math.random() * 40;
+                                setTimeout(
+                                    () => flashLink(link, neighbor),
+                                    delay,
+                                );
+                                queue.push([neighbor, depth + 1]);
+                            }
+                        }
+                    }
+                }
+
+                function flashLink(link, node) {
+                    if (!linkSel || !nodeSel) return;
+
+                    // Flash the link
+                    const linkEl = linkSel.filter((d) => d === link);
+                    if (!linkEl.empty()) {
+                        linkEl
+                            .attr("stroke", "rgba(150,200,255,0.95)")
+                            .attr("stroke-width", 2.5)
+                            .attr("filter", "url(#node-bright)");
+                        setTimeout(() => {
+                            linkEl
+                                .attr("stroke", "rgba(200,220,255,0.18)")
+                                .attr("stroke-width", NET_LINK_WIDTH)
+                                .attr("filter", null);
+                        }, 350);
+                    }
+
+                    // Flash the node
+                    const nodeEl = nodeSel.filter((d) => d === node);
+                    if (!nodeEl.empty()) {
+                        nodeEl
+                            .attr("r", d => (d.id === 0 ? NET_NODE_R_HUB : d.id <= 10 ? NET_NODE_R_RING1 : NET_NODE_R) * 1.3)
+                            .attr("fill", "rgba(150,200,255,1)")
+                            .attr("filter", "url(#node-bright)");
+                        setTimeout(() => {
+                            nodeEl
+                                .attr("r", d => d.id === 0 ? NET_NODE_R_HUB : d.id <= 10 ? NET_NODE_R_RING1 : NET_NODE_R)
+                                .attr("fill", d => d.id === 0 ? NET_NODE_COLOR_HUB : d.id <= 10 ? NET_NODE_COLOR_RING1 : NET_NODE_COLOR)
+                                .attr("filter", "url(#node-glow)");
+                        }, 400);
+                    }
+                }
+
+                // Auto-fire signals
+                let lastSignalTime = 0;
+                function maybeFireSignal(now) {
+                    if (currentStage >= 4 && networkAlpha > 0.3 && now - lastSignalTime > 5000) {
+                        lastSignalTime = now;
+                        const rnd =
+                            networkNodes[
+                                Math.floor(Math.random() * networkNodes.length)
+                            ];
+                        propagateSignal(rnd);
+                    }
+                }
+
+                // Mousemove signal on network
+                let lastMouseSignalTime = 0;
+                document.addEventListener("mousemove", (e) => {
+                    if (networkAlpha < 0.5) return;
+                    const now = Date.now();
+                    if (now - lastMouseSignalTime < 1000) return;
+                    lastMouseSignalTime = now;
+                    // Find nearest node
+                    let best = null,
+                        bestD = Infinity;
+                    for (const n of networkNodes) {
+                        const dx = n.x - e.clientX,
+                            dy = n.y - e.clientY;
+                        const d = dx * dx + dy * dy;
+                        if (d < bestD) {
+                            bestD = d;
+                            best = n;
+                        }
+                    }
+                    if (best && bestD < 200 * 200) {
+                        if (currentStage >= 4) propagateSignal(best);
+                    }
+                });
+
+
+                // ─── GSAP Scroll orchestration ─────────────────────────────────
+                let currentStage = 0;
+                let particleRenderAlpha = 0;
+                // outlineAlpha declared above near outlineCanvas
+                let cursorX = W / 2,
+                    cursorY = H / 2;
+
+                document.addEventListener("mousemove", (e) => {
+                    cursorX = e.clientX;
+                    cursorY = e.clientY;
+                });
+
+                function transitionTo(stage, progress) {
+                    currentStage = stage + progress;
+
+                    const threadPrompt =
+                        document.getElementById("thread-prompt");
+                    const finalText = document.getElementById("final-text");
+
+                    // Stage 1: landing image visible, particles hidden
+                    // Timeline (progress 0→1):
+                    //   0.00–0.18  fade in "We are taught..."
+                    //   0.18–0.38  hold
+                    //   0.38–0.55  fade out
+                    //   0.55–0.65  fade in "But look closer."
+                    //   0.55–1.00  zoom 1x→3x (quintic ease-in: barely moves at first, accelerates)
+                    //   0.65–0.80  hold
+                    //   0.80–0.90  fade out "But look closer"
+                    //   0.90–1.00  crossfade image→outline→particles
+                    if (stage === 1) {
+                        solidAlpha = 1;
+                        particleRenderAlpha = 0;
+                        outlineAlpha = 0;
+                        boundaryStrength = 1.0;
+                        stage3Progress = 0;
+                        sceneAlpha = 0;
+                        ghostAttractStrength = 0;
+                        networkAlpha = 0;
+                        setNetworkSvgOpacity(0);
+                        threadPrompt.style.opacity = "0";
+                        finalText.style.opacity = "0";
+                        document.getElementById("stage-4b-text").style.opacity = "0";
+                        document.getElementById("logo-img").style.opacity = "0";
+                        document.getElementById("logo-title").style.opacity = "0";
+
+                        // — Text: "We are taught..."
+                        const t1El = document.getElementById("stage-1-text");
+                        if (progress < 0.18) {
+                            t1El.style.opacity = Math.min(progress / 0.1, 1);
+                        } else if (progress < 0.38) {
+                            t1El.style.opacity = 1;
+                        } else if (progress < 0.55) {
+                            t1El.style.opacity = Math.max(
+                                0,
+                                1 - (progress - 0.38) / 0.12,
+                            );
+                        } else {
+                            t1El.style.opacity = 0;
+                        }
+
+                        // — Text: "But look closer."
+                        const t1bEl = document.getElementById("stage-1b-text");
+                        if (progress < 0.55) {
+                            t1bEl.style.opacity = 0;
+                        } else if (progress < 0.65) {
+                            t1bEl.style.opacity = Math.min(
+                                (progress - 0.55) / 0.08,
+                                1,
+                            );
+                        } else if (progress < 0.8) {
+                            t1bEl.style.opacity = 1;
+                        } else if (progress < 0.9) {
+                            t1bEl.style.opacity = Math.max(
+                                0,
+                                1 - (progress - 0.8) / 0.08,
+                            );
+                        } else {
+                            t1bEl.style.opacity = 0;
+                        }
+
+                        // — Zoom: begins at progress=0.55 (same as 'But look closer' fade-in)
+                        //   Uses quintic ease-in (t^5): near-zero at start, rapidly accelerating at end.
+                        //   At progress=0.65 (text fully visible): zoom ≈ 1.006× (imperceptible)
+                        //   At progress=0.80 (text fading out): zoom ≈ 1.09× (barely noticeable)
+                        //   At progress=0.90 (crossfade starts): zoom ≈ 1.6×
+                        //   At progress=1.00: zoom = 3×
+                        // — Zoom: pure render variable, no mask rebuild needed.
+                        //   Quintic ease-in (t^5): imperceptible at start, rockets at end.
+                        const ZOOM_START = 0.55;
+                        const ZOOM_PEAK = 1.0;
+                        const MAX_ZOOM = 3.0;
+                        if (progress <= ZOOM_START) {
+                            zoomScale = 1.0;
+                        } else if (progress >= ZOOM_PEAK) {
+                            zoomScale = MAX_ZOOM;
+                        } else {
+                            const zt =
+                                (progress - ZOOM_START) /
+                                (ZOOM_PEAK - ZOOM_START);
+                            zoomScale =
+                                1.0 +
+                                (MAX_ZOOM - 1.0) * (zt * zt * zt * zt * zt);
+                        }
+
+                        // — Invert image colors leading up to the fade (progress 0.85→0.90)
+                        // solidInvert goes 0→1 in this window, making dark silhouette turn light
+                        // var startInvert = 0.85;
+                        // var finalInvert = 1.;
+                        // if (progress > startInvert && progress <= 0.90) {
+                        //   solidInvert = finalInvert * (progress - startInvert) / (0.9 - startInvert); // <--- adjust 0.85 to start inversion earlier/later
+                        // } else if (progress <= startInvert) {
+                        //   solidInvert = 0;
+                        // } else {
+                        //   solidInvert = finalInvert;
+                        // }
+
+                        // — Crossfade image→particles
+                        // Total fade window: stage1[0.85→1.0] + stage2[0.0→0.2] = 0.35 wide
+                        // globalFadeT goes 0→1 over this window; final values reached when
+                        // "You are a society" text first appears (stage 2, showAt=0.2)
+                        const FADE_START = 0.85;
+                        const FADE_STAGE1_WIDTH = 1.0 - FADE_START; // 0.15
+                        const FADE_TOTAL = FADE_STAGE1_WIDTH + 0.20; // 0.35
+                        var startFade = FADE_START;
+                        if (progress > startFade) {
+                            const globalFadeT = Math.min(1, (progress - FADE_START) / FADE_TOTAL);
+                            solidAlpha = Math.max(0, 1 - globalFadeT);
+                            particleRenderAlpha = globalFadeT;
+                            particleRadiusMultiplier = 2 - globalFadeT; // 2→1
+                            // Randomize velocities on first reveal so boids appear chaotic
+                            if (!particlesRandomized) {
+                                particlesRandomized = true;
+                                for (const p of particles) {
+                                    p.vx = (Math.random() - 0.5) * BOIDS.speed * 2;
+                                    p.vy = (Math.random() - 0.5) * BOIDS.speed * 2;
+                                }
+                            }
+                            // Flocking ramps in during second half of fade window
+                            flockingStrength = Math.max(0, (globalFadeT - 0.5) / 0.5);
+                        } else {
+                            particlesRandomized = false;
+                            flockingStrength = 0;
+                            particleRadiusMultiplier = 2.0;
+                        }
+                    }
+
+                    // Stage 2: full particle flocking within silhouette
+                    else if (stage === 2) {
+                        // Continue the fade ramp that started in stage 1 (progress 0.85)
+                        // Completes at progress=0.2 when "You are a society" text appears
+                        const FADE_STAGE1_WIDTH = 0.15, FADE_STAGE2_WIDTH = 0.20;
+                        const FADE_TOTAL = FADE_STAGE1_WIDTH + FADE_STAGE2_WIDTH;
+                        const globalFadeT = Math.min(1, (FADE_STAGE1_WIDTH + progress) / FADE_TOTAL);
+                        solidAlpha = Math.max(0, 1 - globalFadeT);
+                        particleRenderAlpha = globalFadeT;
+                        particleRadiusMultiplier = Math.max(1, 2 - globalFadeT);
+                        flockingStrength = Math.max(0, (globalFadeT - 0.5) / 0.5);
+                        boundaryStrength = 1.0;
+                        stage3Progress = 0;
+                        sceneAlpha = 0;
+                        ghostAttractStrength = 0;
+                        networkAlpha = 0;
+                        zoomScale = 3.0; // keep zoom at 3.0 for now
+                        setNetworkSvgOpacity(0);
+                        threadPrompt.style.opacity = "0";
+                        finalText.style.opacity = "0";
+                        document.getElementById("stage-4b-text").style.opacity = "0";
+                        document.getElementById("logo-img").style.opacity = "0";
+                        document.getElementById("logo-title").style.opacity = "0";
+                    }
+
+                    // Stage 3: zoom out in two steps with text pause in between
+                    // Sub-phases (progress 0→1):
+                    //   0.00–0.35  Phase A: zoom 3.0→0.5  (smoothstep)
+                    //   0.35–0.65  Phase B: hold at 0.5, "where do your boundaries end" text
+                    //   0.65–1.00  Phase C: zoom 0.5→0.05, boids fade out in last 30%
+                    else if (stage === 3) {
+                        if (!hallParticlesInitialized && insidePixels) {
+                            hallParticlesInitialized = true;
+                            initHallParticles();
+                        }
+
+                        solidAlpha = 0;
+                        stage3Progress = progress;
+                        boundaryStrength = 1.0;
+                        boundaryPermeability = 0.05;
+                        ghostAttractStrength = 0;
+                        flockingStrength = 1.0;
+                        networkAlpha = 0;
+                        simStrength = 0;
+                        dragEnabled = false;
+                        svgEl.classed("drag-active", false);
+                        simKickGiven = false;
+                        networkNodesUnfrozen = false;
+                        setNetworkSvgOpacity(0);
+                        threadPrompt.style.opacity = "0";
+                        finalText.style.opacity = "0";
+                        document.getElementById("stage-4b-text").style.opacity = "0";
+                        document.getElementById("logo-img").style.opacity = "0";
+                        document.getElementById("logo-title").style.opacity = "0";
+
+                        const PHASE_A = 0.35, PHASE_B = 0.65;
+                        // Phase B zoom: on portrait screens zoom out further so the hall
+                        // fits horizontally. On landscape (all desktops) unchanged at 0.5.
+                        const PHASE_B_ZOOM = (W < H) ? Math.max(0.25, 0.5 * W / H) : 0.5;
+                        if (progress < PHASE_A) {
+                            // Phase A: 3.0 → PHASE_B_ZOOM
+                            const t = progress / PHASE_A;
+                            const ez = t * t * (3 - 2 * t);
+                            zoomScale = 3.0 - ez * (3.0 - PHASE_B_ZOOM);
+                            particleRenderAlpha = 1;
+                        } else if (progress < PHASE_B) {
+                            // Phase B: hold
+                            zoomScale = PHASE_B_ZOOM;
+                            particleRenderAlpha = 1;
+                        } else {
+                            // Phase C: PHASE_B_ZOOM → 0.025
+                            // ── Crossfade timing knobs (adjust these two lines) ──────────
+                            // XFADE_START: fraction of Phase C when boid→network crossfade begins (0=immediately, 1=end)
+                            // XFADE_WIN:   duration of the crossfade as a fraction of Phase C
+                            const XFADE_WIN = 0.25;
+                            // ─────────────────────────────────────────────────────────────
+                            const t = (progress - PHASE_B) / (1 - PHASE_B);
+                            // Zoom completes by t=0.65 (same as XFADE_START), then holds static
+                            const zoomT = Math.min(t / 0.65, 1.0);
+                            const ez = zoomT * zoomT * (3 - 2 * zoomT); // smoothstep
+                            zoomScale = PHASE_B_ZOOM - ez * (PHASE_B_ZOOM - 0.025);
+                            // Scene objects fade in during first half of Phase C
+                            sceneAlpha = Math.min(1, t / 0.5);
+                            // Init scene objects + pin ring1 nodes at boid centres (once)
+                            if (!sceneObjectsInitialized) {
+                                sceneObjectsInitialized = true;
+                                initSceneObjects();
+                                setNetworkNodePositions(); // anchor ring1 at boid cluster centres
+                            }
+                            // Boids fade out: XFADE_START→1.0
+                            particleRenderAlpha = Math.max(0, 1 - (t - 0.65) / XFADE_WIN);
+                            // Network fades in: XFADE_START→1.0 (crossfade)
+                            networkAlpha = Math.min(1, (t - 0.65) / XFADE_WIN);
+                            setNetworkSvgOpacity(networkAlpha);
+                        }
+                    }
+
+                    // Stage 4: network visible, static. Sequence (progress 0→1):
+                    //   0.00–0.40  "in this space…" text (stage-4-text, via updateTextVisibility)
+                    //   0.40–0.70  "Drag to organize" prompt + drag enabled
+                    //   0.70–1.00  prompt fades, force-sim ramps in with kick
+                    else if (stage === 4) {
+                        particleRenderAlpha = 0;
+                        networkAlpha = 1;
+                        sceneAlpha = 1;
+                        zoomScale = 0.025;
+                        setNetworkSvgOpacity(1);
+                        boundaryStrength = 0;
+                        boundaryPermeability = 0;
+                        ghostAttractStrength = 0;
+                        document.getElementById("network-svg").classList.add("interactive");
+                        document.getElementById("stage-4b-text").style.opacity = "0";
+                        finalText.style.opacity = "0";
+                        document.getElementById("logo-img").style.opacity = "0";
+                        document.getElementById("logo-title").style.opacity = "0";
+
+                        // "Drag to organize" window: 0.40–1.0 (drag stays on all the way)
+                        if (progress >= 0.40) {
+                            const op = Math.min((progress - 0.40) / 0.08, 1);
+                            threadPrompt.style.opacity = String(op);
+                            dragEnabled = true;
+                            svgEl.classed("drag-active", true);
+                        } else {
+                            threadPrompt.style.opacity = "0";
+                            dragEnabled = false;
+                            svgEl.classed("drag-active", false);
+                        }
+                        simStrength = 0;
+                    }
+
+                    // Stage 5: emergence text appears first, then sim kicks in, then final CTA
+                    //   0.00–0.30 → emergence text fades in; sim still off
+                    //   0.20–0.50 → sim ramps 0→1 (starts after text is visible)
+                    //   0.30–0.65 → emergence text holds
+                    //   0.65–0.80 → emergence text fades out
+                    //   0.75–1.00 → final CTA fades in
+                    else if (stage === 5) {
+                        particleRenderAlpha = 0;
+                        networkAlpha = 1;
+                        sceneAlpha = 1;
+                        zoomScale = 0.025;
+                        setNetworkSvgOpacity(1);
+                        boundaryStrength = 0;
+                        boundaryPermeability = 0;
+                        threadPrompt.style.opacity = "0";
+                        dragEnabled = false;
+                        svgEl.classed("drag-active", false);
+                        document.getElementById("network-svg").classList.add("interactive");
+
+                        // Sim ramps in starting at 0.20 (after emergence text is visible)
+                        const SIM_START = 0.20, SIM_END = 0.50;
+                        simStrength = Math.min(Math.max(0, (progress - SIM_START) / (SIM_END - SIM_START)), 1);
+                        if (simStrength > 0.01) {
+                            unfreezeNetworkNodes();
+                            kickNetworkNodes();
+                        }
+
+                        // Emergence text
+                        const s4bEl = document.getElementById("stage-4b-text");
+                        let emergeOp = 0;
+                        if (progress < 0.30) {
+                            emergeOp = Math.min(progress / 0.10, 1);
+                        } else if (progress <= 0.65) {
+                            emergeOp = 1;
+                        } else if (progress <= 0.80) {
+                            emergeOp = Math.max(0, 1 - (progress - 0.65) / 0.10);
+                        }
+                        s4bEl.style.opacity = String(emergeOp);
+
+                        finalText.style.opacity = "0";
+                        document.getElementById("logo-img").style.opacity = "0";
+                        document.getElementById("logo-title").style.opacity = "0";
+                    }
+
+                    // Stage 6: logo image fades in over network, shrinks to top, logo title + final text appear
+                    //   0.00–0.25  logo image fades in; network fades out
+                    //   0.25–0.80  image shrinks (1.0 → 0.20 of original size) and moves to top-left
+                    //   0.68–0.85  logo title fades in to the right of the shrunken image
+                    //   0.78–1.00  final text fades in below logo
+                    else if (stage === 6) {
+                        particleRenderAlpha = 0;
+                        boundaryStrength = 0;
+                        threadPrompt.style.opacity = "0";
+                        dragEnabled = false;
+                        svgEl.classed("drag-active", false);
+                        document.getElementById("stage-4b-text").style.opacity = "0";
+                        zoomScale = 0.025;
+                        sceneAlpha = 1;
+
+                        const logoImg = document.getElementById("logo-img");
+                        const logoTitle = document.getElementById("logo-title");
+
+                        // ── ADJUST INITIAL IMAGE SIZE HERE ──────────────────────────
+                        // IMG_FRACTION: initial overlay image size as a fraction of
+                        // the smaller viewport dimension (height on landscape screens).
+                        // Increase to make the image larger relative to the network.
+                        const IMG_FRACTION = 0.80;
+                        // ────────────────────────────────────────────────────────────
+                        const imgSize0 = Math.min(W, H) * IMG_FRACTION;
+
+                        // Phase 1 (0.00–0.25): image fades in, network fades out
+                        const imgFadeOp = Math.min(progress / 0.20, 0.8);
+                        logoImg.style.opacity = String(imgFadeOp);
+                        const netOp = Math.max(0, 1 - progress / 0.25);
+                        setNetworkSvgOpacity(netOp);
+                        networkAlpha = netOp;
+                        // Keep force sim running until network is fully gone
+                        simStrength = netOp > 0 ? 1 : 0;
+
+                        // Portrait vs landscape determines final logo layout
+                        const isPortrait = H > W * 1.1;
+
+                        // Phase 2 (0.25–0.80): image shrinks + moves toward final position
+                        const SHRINK_START = 0.25, SHRINK_END = 0.80;
+                        const SCALE_FINAL = 0.20; // image shrinks to 20% of original
+                        let shrinkT = 0;
+                        if (progress > SHRINK_START) {
+                            shrinkT = Math.min(
+                                (progress - SHRINK_START) / (SHRINK_END - SHRINK_START), 1
+                            );
+                        }
+                        const ez = shrinkT * shrinkT * (3 - 2 * shrinkT); // smoothstep
+
+                        const scale = 1 - (1 - SCALE_FINAL) * ez;
+                        // Final resting position of the small image:
+                        //   landscape → top-left corner (room for title to the right)
+                        //   portrait  → top-center (title stacks below)
+                        const cx0 = W * 0.50, cy0 = H * 0.50;
+                        const cx1 = isPortrait ? W * 0.50 : W * 0.22;
+                        const cy1 = isPortrait ? H * 0.09 : H * 0.12;
+                        const cx = cx0 + (cx1 - cx0) * ez;
+                        const cy = cy0 + (cy1 - cy0) * ez;
+                        const curSize = imgSize0 * scale;
+                        logoImg.style.width = curSize + "px";
+                        logoImg.style.height = curSize + "px";
+                        logoImg.style.left = (cx - curSize / 2) + "px";
+                        logoImg.style.top = (cy - curSize / 2) + "px";
+
+                        // Phase 3 (0.68–0.85): logo title fades in
+                        const titleOp = progress > 0.68
+                            ? Math.min((progress - 0.68) / 0.12, 1) : 0;
+                        logoTitle.style.opacity = String(titleOp);
+                        const finalSmallSize = imgSize0 * SCALE_FINAL;
+                        if (isPortrait) {
+                            // Stack below the image, centred
+                            logoTitle.style.left  = "50%";
+                            logoTitle.style.transform = "translateX(-50%)";
+                            logoTitle.style.textAlign = "center";
+                            logoTitle.style.top = (cy1 + finalSmallSize / 2 + 12) + "px";
+                        } else {
+                            // Sit to the right of the image
+                            logoTitle.style.left  = (cx1 + finalSmallSize / 2 + 20) + "px";
+                            logoTitle.style.top   = (cy1 - finalSmallSize / 2) + "px";
+                            logoTitle.style.transform = "";
+                            logoTitle.style.textAlign = "left";
+                        }
+
+                        // Phase 4 (0.78–1.00): final text fades in below logo
+                        const finalOp = progress > 0.78
+                            ? Math.min((progress - 0.78) / 0.15, 1) : 0;
+                        finalText.style.opacity = String(finalOp);
+                        finalText.style.pointerEvents = finalOp > 0.5 ? "all" : "none";
+                        finalText.style.bottom = "auto";
+                        // In portrait the title sits below the image, so push final text further down
+                        const finalTextOffset = isPortrait
+                            ? (cy1 + finalSmallSize / 2 + 110)  // below stacked title
+                            : (cy1 + finalSmallSize / 2 + 48);
+                        finalText.style.top = finalTextOffset + "px";
+                    }
+
+                    // Text visibility
+                    updateTextVisibility(stage, progress);
+                }
+
+                function setNetworkSvgOpacity(val) {
+                    document.getElementById("network-svg").style.opacity = val;
+                }
+
+                function updateTextVisibility(stage, progress) {
+                    // Stage-1 and stage-1b text are fully controlled inside transitionTo(1,...)
+                    // so skip them here; just ensure they’re hidden in all other stages.
+                    if (stage !== 1) {
+                        document.getElementById("stage-1-text").style.opacity =
+                            0;
+                        document.getElementById("stage-1b-text").style.opacity =
+                            0;
+                    }
+
+                    const stages = [
+                        {
+                            el: document.getElementById("stage-2-text"),
+                            showStage: 2,
+                            showAt: 0.1,
+                            hideAt: 0.5,
+                        },
+                        {
+                            el: document.getElementById("stage-2b-text"),
+                            showStage: 2,
+                            showAt: 0.65,
+                            hideAt: 1.,
+                        },
+                        {
+                            el: document.getElementById("stage-3-text"),
+                            showStage: 3,
+                            showAt: 0.38,  // Phase B starts at 0.35
+                            hideAt: 0.62,  // Phase B ends at 0.65
+                        },
+                        {
+                            el: document.getElementById("stage-3b-text"),
+                            showStage: 3,
+                            showAt: 0.7,  // Phase C: fades in just after zoom resumes
+                            hideAt: 0.77,  // fades out as network crossfade begins
+                        },
+                        {
+                            el: document.getElementById("stage-4-text"),
+                            showStage: 4,
+                            showAt: 0.03,
+                            hideAt: 0.38,
+                        },
+                    ];
+
+                    for (const s of stages) {
+                        if (stage === s.showStage) {
+                            let op = 0;
+                            if (progress >= s.showAt && progress <= s.hideAt) {
+                                op = Math.min((progress - s.showAt) / 0.15, 1);
+                            } else if (progress > s.hideAt) {
+                                op = Math.max(
+                                    0,
+                                    1 - (progress - s.hideAt) / 0.1,
+                                );
+                            }
+                            s.el.style.opacity = op;
+                        } else {
+                            s.el.style.opacity = 0;
+                        }
+                    }
+
+                    // // stage-2b: appears after stage-2-text fades (progress 0.8), holds through end
+                    // const t2b = document.getElementById("stage-2b-text");
+                    // if (stage === 2) {
+                    //     const SHOW = 0.65, HIDE = 0.95;
+                    //     let op = 0;
+                    //     if (progress >= SHOW && progress <= HIDE) {
+                    //         op = Math.min((progress - SHOW) / 0.1, 1);
+                    //     } else if (progress > HIDE) {
+                    //         op = Math.max(0, 1 - (progress - HIDE) / 0.05);
+                    //     }
+                    //     t2b.style.opacity = op;
+                    // } else {
+                    //     t2b.style.opacity = 0;
+                    // }
+                }
+
+                // ─── Main animation loop ────────────────────────────────────────
+                function animate(now) {
+                    requestAnimationFrame(animate);
+
+                    // Update boids
+                    if (particleRenderAlpha > 0.01) {
+                        updateBoids();
+                        maybeCreateSignal();
+                    }
+
+                    // Update hall boids (stage 3+)
+                    if (hallParticlesInitialized && stage3Progress > 0) {
+                        updateHallBoids(); // updates wallParticles + airParticles
+                    }
+
+                    // Update scene object flocks (appear during Stage 3 Phase C)
+                    if (sceneObjectsInitialized && sceneAlpha > 0) {
+                        updateSceneObjects();
+                    }
+
+                    // Draw particles
+                    drawParticles(particleRenderAlpha);
+
+                    // Tick D3 force sim (scroll-driven; simStrength 0=paused, 1=full)
+                    if (simStrength > 0 && d3Sim) {
+                        d3Sim.alpha(0.3 * simStrength);
+                        d3Sim.tick();
+                        renderNetwork();
+                    }
+
+                    // Fire auto signal
+                    maybeFireSignal(now);
+                }
+
+                // ─── GSAP ScrollTrigger ────────────────────────────────────────
+                gsap.registerPlugin(ScrollTrigger);
+
+                let scrollInitialized = false;
+                function initScroll() {
+                    if (scrollInitialized) return;
+                    scrollInitialized = true;
+
+                    ScrollTrigger.create({
+                        trigger: "#scroll-spacer",
+                        start: "top top",
+                        end: "bottom bottom",
+                        pin: "#experience",
+                        pinSpacing: false,
+                        scrub: 0.8,
+                        onUpdate: (self) => {
+                            const p = self.progress;
+                            const scrollHint =
+                                document.getElementById("scroll-hint");
+                            const landingTitle =
+                                document.getElementById("landing-title");
+                            if (p > 0.02) {
+                                if (scrollHint.style.opacity !== "0")   scrollHint.style.opacity   = "0";
+                                if (landingTitle.style.opacity !== "0") landingTitle.style.opacity = "0";
+                            } else {
+                                if (scrollHint.style.opacity !== "1")   scrollHint.style.opacity   = "1";
+                                if (landingTitle.style.opacity !== "1") landingTitle.style.opacity = "1";
+                            }
+
+                            // Map scroll progress → stages (900vh total)
+                            // Stages 1+2 doubled in scroll distance vs. stages 3-6.
+                            // Stage 1: 0.000–0.133  (120vh) — image + first text
+                            // Stage 2: 0.133–0.333  (180vh) — particle flocking
+                            // Stage 3: 0.333–0.708  (337.5vh) — zoom out (Phases A/B/C), crossfade to network
+                            // Stage 4: 0.708–0.833  (112.5vh) — network static, "Add your thread"
+                            // Stage 5: 0.833–0.900  (60vh)  — force sim, emergence text
+                            // Stage 6: 0.900–1.000  (90vh)  — logo image + title + final CTA
+                            if (p < 0.1333) {
+                                transitionTo(1, p / 0.1333);
+                            } else if (p < 0.3333) {
+                                transitionTo(2, (p - 0.1333) / 0.2000);
+                            } else if (p < 0.7083) {
+                                transitionTo(3, (p - 0.3333) / 0.3750);
+                            } else if (p < 0.8333) {
+                                transitionTo(4, (p - 0.7083) / 0.1250);
+                            } else if (p < 0.9000) {
+                                transitionTo(5, (p - 0.8333) / 0.0667);
+                            } else {
+                                transitionTo(6, (p - 0.9000) / 0.1000);
+                            }
+                        },
+                    });
+                }
+
+                // ─── Init ──────────────────────────────────────────────────────
+                async function init() {
+                    resize();
+                    loadSolidSvg();
+                    loadVisualSvg();
+
+                    // Set initial state IMMEDIATELY so canvas renders the image right away
+                    solidAlpha = 1;
+                    particleRenderAlpha = 0;
+                    networkAlpha = 0;
+                    document.getElementById("network-svg").style.opacity = "0";
+                    document.getElementById("thread-prompt").style.opacity =
+                        "0";
+                    document.getElementById("final-text").style.opacity = "0";
+                    document.getElementById("logo").style.opacity = "0";
+                    // Ensure all stage texts and logo elements start hidden
+                    [
+                        "stage-1-text",
+                        "stage-1b-text",
+                        "stage-2-text",
+                        "stage-2b-text",
+                        "stage-3-text",
+                        "stage-3b-text",
+                        "stage-4-text",
+                        "stage-4b-text",
+                        "logo-img",
+                        "logo-title",
+                    ].forEach((id) => {
+                        const el = document.getElementById(id);
+                        if (el) el.style.opacity = "0";
+                    });
+
+                    // Start animation immediately so the landing image appears
+                    requestAnimationFrame(animate);
+
+                    // Build mask and particles in the background
+                    await rebuildSilhouetteMask();
+                    initParticles();
+                    buildNetwork();
+                    initNetworkSvg();
+
+                    // Small delay to let GSAP load
+                    setTimeout(initScroll, 200);
+                }
+
+                init();
+            })();
+        </script>
+        <script data-pplx-inline-edit>
+            (function () {
+                if (window === window.top) return;
+                function inlineAll(orig, clone) {
+                    if (orig.nodeType !== 1) return;
+                    try {
+                        var cs = getComputedStyle(orig);
+                        var t = "";
+                        for (var i = 0; i < cs.length; i++) {
+                            t += cs[i] + ":" + cs.getPropertyValue(cs[i]) + ";";
+                        }
+                        clone.style.cssText = t;
+                    } catch (e) {}
+                    var oc = orig.children,
+                        cc = clone.children;
+                    for (var j = 0; j < oc.length && j < cc.length; j++) {
+                        inlineAll(oc[j], cc[j]);
+                    }
+                }
+                function stripExternal(clone) {
+                    var imgs = clone.querySelectorAll("img");
+                    for (var i = 0; i < imgs.length; i++) {
+                        var s = imgs[i].getAttribute("src");
+                        if (s && !s.startsWith("data:"))
+                            imgs[i].removeAttribute("src");
+                    }
+                    var all = clone.querySelectorAll("*");
+                    for (var i = 0; i < all.length; i++) {
+                        var st = all[i].style.cssText;
+                        if (st && st.indexOf("url(") >= 0) {
+                            all[i].style.cssText = st.replace(
+                                /url\(["']?(?!data:)[^)"']*["']?\)/gi,
+                                "none",
+                            );
+                        }
+                    }
+                }
+                window.addEventListener("message", function (e) {
+                    if (
+                        !e.data ||
+                        e.data.type !== "INLINE_EDIT_CAPTURE_REQUEST"
+                    )
+                        return;
+                    var scrollX = window.scrollX || window.pageXOffset || 0;
+                    var scrollY = window.scrollY || window.pageYOffset || 0;
+                    var w = window.innerWidth,
+                        h = window.innerHeight;
+                    try {
+                        var clone = document.documentElement.cloneNode(true);
+                        var rm = clone.querySelectorAll(
+                            'script,link[rel="stylesheet"],style',
+                        );
+                        for (var i = 0; i < rm.length; i++) {
+                            rm[i].remove();
+                        }
+                        inlineAll(document.documentElement, clone);
+                        stripExternal(clone);
+                        var html = new XMLSerializer().serializeToString(clone);
+                        var svg =
+                            '<svg xmlns="http://www.w3.org/2000/svg" width="' +
+                            w +
+                            '" height="' +
+                            h +
+                            '">' +
+                            '<foreignObject width="100%" height="100%">' +
+                            '<div xmlns="http://www.w3.org/1999/xhtml" style="width:' +
+                            w +
+                            "px;height:" +
+                            h +
+                            'px;overflow:hidden">' +
+                            '<div style="transform:translate(-' +
+                            scrollX +
+                            "px,-" +
+                            scrollY +
+                            'px);transform-origin:top left">' +
+                            html +
+                            "</div></div></foreignObject></svg>";
+                        var svgUrl =
+                            "data:image/svg+xml;charset=utf-8," +
+                            encodeURIComponent(svg);
+                        var img = new Image();
+                        img.onload = function () {
+                            var c = document.createElement("canvas");
+                            c.width = w;
+                            c.height = h;
+                            c.getContext("2d").drawImage(img, 0, 0);
+                            window.parent.postMessage(
+                                {
+                                    type: "INLINE_EDIT_SCREENSHOT_RESULT",
+                                    dataUrl: c.toDataURL("image/png"),
+                                    scrollX: scrollX,
+                                    scrollY: scrollY,
+                                },
+                                "*",
+                            );
+                        };
+                        img.onerror = function () {
+                            window.parent.postMessage(
+                                {
+                                    type: "INLINE_EDIT_SCREENSHOT_RESULT",
+                                    dataUrl: null,
+                                    scrollX: scrollX,
+                                    scrollY: scrollY,
+                                },
+                                "*",
+                            );
+                        };
+                        img.src = svgUrl;
+                    } catch (err) {
+                        window.parent.postMessage(
+                            {
+                                type: "INLINE_EDIT_SCREENSHOT_RESULT",
+                                dataUrl: null,
+                                scrollX: scrollX,
+                                scrollY: scrollY,
+                            },
+                            "*",
+                        );
+                    }
+                });
+            })();
+        </script>
+        <script data-pplx-inline-edit>
+            (function () {
+                if (window === window.top) return;
+                function inlineAll(orig, clone) {
+                    if (orig.nodeType !== 1) return;
+                    try {
+                        var cs = getComputedStyle(orig);
+                        var t = "";
+                        for (var i = 0; i < cs.length; i++) {
+                            t += cs[i] + ":" + cs.getPropertyValue(cs[i]) + ";";
+                        }
+                        clone.style.cssText = t;
+                    } catch (e) {}
+                    var oc = orig.children,
+                        cc = clone.children;
+                    for (var j = 0; j < oc.length && j < cc.length; j++) {
+                        inlineAll(oc[j], cc[j]);
+                    }
+                }
+                function stripExternal(clone) {
+                    var imgs = clone.querySelectorAll("img");
+                    for (var i = 0; i < imgs.length; i++) {
+                        var s = imgs[i].getAttribute("src");
+                        if (s && !s.startsWith("data:"))
+                            imgs[i].removeAttribute("src");
+                    }
+                    var all = clone.querySelectorAll("*");
+                    for (var i = 0; i < all.length; i++) {
+                        var st = all[i].style.cssText;
+                        if (st && st.indexOf("url(") >= 0) {
+                            all[i].style.cssText = st.replace(
+                                /url\(["']?(?!data:)[^)"']*["']?\)/gi,
+                                "none",
+                            );
+                        }
+                    }
+                }
+                window.addEventListener("message", function (e) {
+                    if (
+                        !e.data ||
+                        e.data.type !== "INLINE_EDIT_CAPTURE_REQUEST"
+                    )
+                        return;
+                    var scrollX = window.scrollX || window.pageXOffset || 0;
+                    var scrollY = window.scrollY || window.pageYOffset || 0;
+                    var w = window.innerWidth,
+                        h = window.innerHeight;
+                    try {
+                        var clone = document.documentElement.cloneNode(true);
+                        var rm = clone.querySelectorAll(
+                            'script,link[rel="stylesheet"],style',
+                        );
+                        for (var i = 0; i < rm.length; i++) {
+                            rm[i].remove();
+                        }
+                        inlineAll(document.documentElement, clone);
+                        stripExternal(clone);
+                        var html = new XMLSerializer().serializeToString(clone);
+                        var svg =
+                            '<svg xmlns="http://www.w3.org/2000/svg" width="' +
+                            w +
+                            '" height="' +
+                            h +
+                            '">' +
+                            '<foreignObject width="100%" height="100%">' +
+                            '<div xmlns="http://www.w3.org/1999/xhtml" style="width:' +
+                            w +
+                            "px;height:" +
+                            h +
+                            'px;overflow:hidden">' +
+                            '<div style="transform:translate(-' +
+                            scrollX +
+                            "px,-" +
+                            scrollY +
+                            'px);transform-origin:top left">' +
+                            html +
+                            "</div></div></foreignObject></svg>";
+                        var svgUrl =
+                            "data:image/svg+xml;charset=utf-8," +
+                            encodeURIComponent(svg);
+                        var img = new Image();
+                        img.onload = function () {
+                            var c = document.createElement("canvas");
+                            c.width = w;
+                            c.height = h;
+                            c.getContext("2d").drawImage(img, 0, 0);
+                            window.parent.postMessage(
+                                {
+                                    type: "INLINE_EDIT_SCREENSHOT_RESULT",
+                                    dataUrl: c.toDataURL("image/png"),
+                                    scrollX: scrollX,
+                                    scrollY: scrollY,
+                                },
+                                "*",
+                            );
+                        };
+                        img.onerror = function () {
+                            window.parent.postMessage(
+                                {
+                                    type: "INLINE_EDIT_SCREENSHOT_RESULT",
+                                    dataUrl: null,
+                                    scrollX: scrollX,
+                                    scrollY: scrollY,
+                                },
+                                "*",
+                            );
+                        };
+                        img.src = svgUrl;
+                    } catch (err) {
+                        window.parent.postMessage(
+                            {
+                                type: "INLINE_EDIT_SCREENSHOT_RESULT",
+                                dataUrl: null,
+                                scrollX: scrollX,
+                                scrollY: scrollY,
+                            },
+                            "*",
+                        );
+                    }
+                });
+            })();
+        </script>
+    </body>
+</html>
