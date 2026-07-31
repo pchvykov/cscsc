@@ -295,27 +295,10 @@ Although just double-clicking html will work almost as good.
                 line-height: 1.85;
                 color: rgba(255, 240, 200, 0.88);
                 letter-spacing: 0.015em;
-                margin-bottom: 1.5rem;
+                margin-bottom: 0;
             }
 
-            #final-text a {
-                display: inline-block;
-                color: rgba(255, 200, 80, 0.9);
-                font-size: clamp(1rem, 1.5vw, 1.2rem);
-                font-weight: 400;
-                letter-spacing: 0.12em;
-                text-decoration: none;
-                border-bottom: 1px solid rgba(255, 200, 80, 0.3);
-                padding-bottom: 2px;
-                transition:
-                    color 0.3s ease,
-                    border-color 0.3s ease;
-            }
 
-            #final-text a:hover {
-                color: rgba(255, 200, 80, 1);
-                border-color: rgba(255, 200, 80, 0.8);
-            }
 
             /* ─── Landing title (visible on load, fades out on scroll) ─── */
             /* Position + width are set dynamically by positionLandingTitle() in JS.
@@ -496,7 +479,10 @@ Although just double-clicking html will work almost as good.
                ══════════════════════════════════════════════════════════════ */
             #post-section {
                 background: #0a0b0f;
-                padding: clamp(4rem, 9vh, 7rem) 1.5rem clamp(3rem, 6vh, 5rem);
+                /* Top padding is deliberately small: the closing line of the
+                   animation sits just above, and the buttons should read as
+                   its continuation rather than as a new page. */
+                padding: clamp(1.25rem, 3vh, 2.25rem) 1.5rem clamp(3rem, 6vh, 5rem);
                 display: flex;
                 flex-direction: column;
                 align-items: center;
@@ -1012,13 +998,7 @@ Although just double-clicking html will work almost as good.
                         A community where the joy of discovery is our guiding
                         currency. -->
                     </p>
-                    <a
-                        href="https://cscsc.notion.site/CSCSC-286d8cae0cfe813290abf9eb6acd731c"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        >Visit CSCSC →</a
-                    >
-                </div>
+</div>
 
                 <!-- Stage 6: logo image overlay (fades in over network, shrinks to top) -->
                 <img
@@ -1071,7 +1051,7 @@ Although just double-clicking html will work almost as good.
                         href="https://www.notion.so/286d8cae0cfe8031833ac1a301824aa0"
                         target="_blank"
                         rel="noopener noreferrer"
-                        >Join us! Get updates and contribute</a
+                        >Add your email to join</a
                     >
                     <a
                         class="cta-link"
@@ -1165,8 +1145,7 @@ Although just double-clicking html will work almost as good.
                         >
                             <span class="name">Research directions</span>
                             <span class="desc"
-                                >The questions we are working on, and the
-                                groups working on them.</span
+                                >The questions we are interested in, with key references and essays.</span
                             >
                         </a>
                         <a
@@ -3905,7 +3884,18 @@ Although just double-clicking html will work almost as good.
                         const finalTextOffset = isPortrait
                             ? (cy1 + finalSmallSize / 2 + 110)  // below stacked title
                             : (cy1 + finalSmallSize / 2 + 48);
-                        finalText.style.top = finalTextOffset + "px";
+                        // Anchoring to the logo alone left a few hundred px of
+                        // empty canvas beneath the closing line, which read as a
+                        // gap before the content section's buttons. Sink the
+                        // block toward the bottom of the stage when there is
+                        // room; the max() keeps it from ever riding up into the
+                        // logo on short viewports.
+                        // FINAL_TEXT_BOTTOM_GAP — canvas left below the text.
+                        const FINAL_TEXT_BOTTOM_GAP = 24;
+                        const bottomAnchored =
+                            H - finalText.offsetHeight - FINAL_TEXT_BOTTOM_GAP;
+                        finalText.style.top =
+                            Math.max(finalTextOffset, bottomAnchored) + "px";
                     }
 
                     // Text visibility
