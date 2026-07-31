@@ -268,6 +268,38 @@ Although just double-clicking html will work almost as good.
                 width: min(420px, 55vw); /* fallback */
             }
 
+            /* ─── Skip link (top-right, mirrors the landing title) ────────
+               POSITION: top / right below are only the pre-JS fallback.
+               On desktop the final position is set by positionSkipLink()
+               in the JS — search for "SKIP LINK POSITION" to adjust it.
+               On phones (≤600px) the media query further down wins.        */
+            #skip-link {
+                position: absolute;
+                top: 3%; /* fallback until JS positions it */
+                right: 3%; /* fallback until JS positions it */
+                z-index: 21;
+                opacity: 1;
+                transition: opacity 0.8s ease, color 0.4s ease;
+                pointer-events: auto;
+                font-family: "Cormorant Garamond", Georgia, serif;
+                font-size: clamp(0.8rem, 1.15vw, 1.05rem);
+                font-weight: 300;
+                font-style: italic;
+                letter-spacing: 0.16em;
+                text-transform: lowercase;
+                text-decoration: none;
+                white-space: nowrap;
+                color: rgba(255, 240, 200, 0.55);
+                border-bottom: 1px solid rgba(255, 240, 200, 0.18);
+                padding-bottom: 0.15em;
+            }
+
+            #skip-link:hover,
+            #skip-link:focus-visible {
+                color: rgba(255, 240, 200, 0.95);
+                border-bottom-color: rgba(255, 240, 200, 0.5);
+            }
+
             /* Font overrides for landing title — uses same classes as end logo
                for visual consistency; sizes are slightly larger here. */
             #landing-title .logo-abbr {
@@ -499,6 +531,14 @@ Although just double-clicking html will work almost as good.
                 #landing-title .logo-abbr {
                     font-size: clamp(1.5rem, 6vw, 2.2rem) !important;
                 }
+                /* SKIP LINK POSITION — phones. Mirrors #landing-title's 5%
+                   inset, aligned with the "CSCSC" line. Edit top/right here. */
+                #skip-link {
+                    top: 5% !important;
+                    right: 5% !important;
+                    font-size: clamp(0.7rem, 3vw, 0.9rem);
+                    letter-spacing: 0.1em;
+                }
                 #landing-title .logo-name {
                     font-size: clamp(0.7rem, 3vw, 0.9rem) !important;
                 }
@@ -627,6 +667,16 @@ Although just double-clicking html will work almost as good.
                         Consortium
                     </div>
                 </div>
+
+                <!-- Skip link: mirrors the landing title, top-right.
+                     Persists through the whole animation, fades at the end. -->
+                <a
+                    id="skip-link"
+                    href="https://cscsc.notion.site/CSCSC-286d8cae0cfe813290abf9eb6acd731c"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >skip to website →</a
+                >
 
                 <!-- Logo (hidden, kept for legacy) -->
                 <div id="logo">
@@ -855,6 +905,29 @@ Although just double-clicking html will work almost as good.
                     el.style.top       = (H * TITLE_TOP_VH) + "px";
                     el.style.width     = (drawW * TITLE_WIDTH_FRAC) + "px";
                     el.style.transform = "none";
+                    positionSkipLink(drawX + drawW * TITLE_LEFT_FRAC, H * TITLE_TOP_VH);
+                }
+
+                // ─── SKIP LINK POSITION (desktop / tablet) ────────────────────────
+                // Placed symmetrically to the CSCSC title: same top, and the same
+                // inset from the RIGHT edge as the title has from the LEFT edge.
+                // Because the figure image can be wider than the viewport, that
+                // mirrored inset is clamped to stay on-screen and readable.
+                // Edit the three constants below to fine-tune placement.
+                // (Phones ≤600px are positioned by CSS — see the media query.)
+                function positionSkipLink(titleLeftPx, titleTopPx) {
+                    const el = document.getElementById("skip-link");
+                    if (!el || window.innerWidth <= 600) return; // mobile uses CSS overrides
+                    const SKIP_TOP_OFFSET_PX = 0;    // nudge down (+) / up (−) from the title's top
+                    const SKIP_RIGHT_MIN_PX  = 28;   // never closer than this to the right edge
+                    const SKIP_RIGHT_MAX_VW  = 0.16; // never further in than this fraction of width
+                    const right = Math.max(
+                        SKIP_RIGHT_MIN_PX,
+                        Math.min(titleLeftPx, W * SKIP_RIGHT_MAX_VW)
+                    );
+                    el.style.right = right + "px";
+                    el.style.top   = (titleTopPx + SKIP_TOP_OFFSET_PX) + "px";
+                    el.style.left  = "auto";
                 }
 
                 function resize() {
@@ -3491,6 +3564,11 @@ Although just double-clicking html will work almost as good.
                 // ─── GSAP ScrollTrigger ────────────────────────────────────────
                 gsap.registerPlugin(ScrollTrigger);
 
+                // SKIP LINK FADE — fraction of total scroll (0–1) at which the
+                // skip link starts fading out, as the content page comes into
+                // view. Lower it to make the link disappear earlier.
+                const SKIP_FADE_START = 0.94;
+
                 let scrollInitialized = false;
                 function initScroll() {
                     if (scrollInitialized) return;
@@ -3515,6 +3593,18 @@ Although just double-clicking html will work almost as good.
                             } else {
                                 if (scrollHint.style.opacity !== "1")   scrollHint.style.opacity   = "1";
                                 if (landingTitle.style.opacity !== "1") landingTitle.style.opacity = "1";
+                            }
+
+                            // Skip link: visible for the whole experience,
+                            // fades out only as the content page arrives.
+                            const skipLink = document.getElementById("skip-link");
+                            if (skipLink) {
+                                const want = p > SKIP_FADE_START ? "0" : "1";
+                                if (skipLink.style.opacity !== want) {
+                                    skipLink.style.opacity = want;
+                                    skipLink.style.pointerEvents =
+                                        want === "0" ? "none" : "auto";
+                                }
                             }
 
                             // Map scroll progress → stages (900vh total)
