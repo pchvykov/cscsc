@@ -3844,9 +3844,19 @@ Although just double-clicking html will work almost as good.
                         // Final resting position of the small image:
                         //   landscape → top-left corner (room for title to the right)
                         //   portrait  → top-center (title stacks below)
+                        // LOGO_FINAL_Y — resting vertical CENTRE of the shrunk
+                        // logo, as a fraction of viewport height. This is the
+                        // control for the space above the closing text: the
+                        // text is anchored to the bottom of the stage and will
+                        // not move, so lowering the logo is what closes the gap.
+                        // Raise these numbers to push the logo (and the title
+                        // beside it) further down. 0.12 puts it in the corner.
+                        const LOGO_FINAL_Y_PORTRAIT  = 0.20;
+                        const LOGO_FINAL_Y_LANDSCAPE = 0.30;
                         const cx0 = W * 0.50, cy0 = H * 0.50;
                         const cx1 = isPortrait ? W * 0.50 : W * 0.22;
-                        const cy1 = isPortrait ? H * 0.09 : H * 0.12;
+                        const cy1 = H * (isPortrait ? LOGO_FINAL_Y_PORTRAIT
+                                                    : LOGO_FINAL_Y_LANDSCAPE);
                         const cx = cx0 + (cx1 - cx0) * ez;
                         const cy = cy0 + (cy1 - cy0) * ez;
                         const curSize = imgSize0 * scale;
