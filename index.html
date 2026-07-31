@@ -13,6 +13,49 @@ Although just double-clicking html will work almost as good.
         <title>
             CSCSC — Complexity Science & Contemplative Studies Consortium
         </title>
+        <meta name="theme-color" content="#0a0b0f" />
+        <meta
+            name="description"
+            content="A research community bridging the mathematical rigor of complexity science with the lived depth of contemplative wisdom."
+        />
+        <link rel="canonical" href="https://complexitycontemplation.org/" />
+
+        <!-- Social / link previews (Slack, WhatsApp, X, LinkedIn…) -->
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="CSCSC" />
+        <meta property="og:url" content="https://complexitycontemplation.org/" />
+        <meta
+            property="og:title"
+            content="CSCSC — Complexity Science &amp; Contemplative Studies Consortium"
+        />
+        <meta
+            property="og:description"
+            content="A research community bridging the mathematical rigor of complexity science with the lived depth of contemplative wisdom."
+        />
+        <meta
+            property="og:image"
+            content="https://complexitycontemplation.org/og-image.jpg"
+        />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta
+            property="og:image:alt"
+            content="A luminous human figure dissolving into a field of particles"
+        />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+            name="twitter:title"
+            content="CSCSC — Complexity Science &amp; Contemplative Studies Consortium"
+        />
+        <meta
+            name="twitter:description"
+            content="A research community bridging the mathematical rigor of complexity science with the lived depth of contemplative wisdom."
+        />
+        <meta
+            name="twitter:image"
+            content="https://complexitycontemplation.org/og-image.jpg"
+        />
+
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
@@ -20,11 +63,22 @@ Although just double-clicking html will work almost as good.
             rel="stylesheet"
         />
 
-        <!-- GSAP + ScrollTrigger -->
-        <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+        <!-- First paint depends on this image — fetch it at top priority. -->
+        <link
+            rel="preload"
+            as="image"
+            href="landing_image_mid.webp"
+            type="image/webp"
+            fetchpriority="high"
+        />
+
+        <!-- GSAP + ScrollTrigger. `defer` keeps them off the critical path;
+             the main script waits for DOMContentLoaded, which fires after
+             all deferred scripts have executed. -->
+        <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
         <!-- D3 for force-directed network -->
-        <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/d3@7"></script>
 
         <style>
             /* ─── Reset ─────────────────────────────────────────────── */
@@ -195,6 +249,19 @@ Although just double-clicking html will work almost as good.
             #network-svg.drag-active .nodes circle:active {
                 cursor: grabbing;
             }
+            /* NODE HIT AREA — the nodes are small, and a fingertip is not.
+               `pointer-events: all` makes the (invisible) stroke band grab-able
+               as well as the fill, so the touch target is larger than the dot
+               without changing how it looks. The stroke width itself is set in
+               JS — search for NODE_HIT_EXPAND. */
+            #network-svg .nodes circle {
+                pointer-events: all;
+                stroke: transparent;
+            }
+            /* Let a drag on a node beat the browser's own scroll gesture. */
+            #network-svg.drag-active {
+                touch-action: none;
+            }
 
             #stage-5-text {
                 top: auto;
@@ -282,7 +349,9 @@ Although just double-clicking html will work almost as good.
                 transition: opacity 0.8s ease, color 0.4s ease;
                 pointer-events: auto;
                 font-family: "Cormorant Garamond", Georgia, serif;
-                font-size: clamp(0.8rem, 1.15vw, 1.05rem);
+                /* SKIP LINK FONT SIZE (desktop/tablet) — clamp(min, preferred, max).
+                   Scale all three together to resize; phones override below. */
+                font-size: clamp(1.2rem, 1.75vw, 1.6rem);
                 font-weight: 300;
                 font-style: italic;
                 letter-spacing: 0.16em;
@@ -417,67 +486,231 @@ Although just double-clicking html will work almost as good.
             }
 
             /* ─── Post-experience section ────────────────────────────── */
+            /* ═══ Content section ══════════════════════════════════════════
+               The page the animation delivers you into. It is deliberately
+               quiet: same palette, same typeface, no new visual language, so
+               arriving here feels like the last beat of the story rather than
+               a different website.
+               Link URLs are maintained in:
+                 /Users/pchvykov/Repos/personal_os/PROJECTS/cscsc-community/LINKS.md
+               ══════════════════════════════════════════════════════════════ */
             #post-section {
                 background: #0a0b0f;
-                min-height: 60vh;
+                padding: clamp(4rem, 9vh, 7rem) 1.5rem clamp(3rem, 6vh, 5rem);
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                justify-content: center;
-                padding: 6rem 2rem;
                 text-align: center;
             }
-
+            .post-inner {
+                width: 100%;
+                max-width: 60rem;
+            }
             #post-section .logo-mark {
-                width: 64px;
-                height: 64px;
-                margin: 0 auto 2.5rem;
+                width: 56px;
+                height: 56px;
+                margin: 0 auto 1.75rem;
                 opacity: 0.6;
             }
-
             #post-section h2 {
-                font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+                font-size: clamp(1.35rem, 2.4vw, 2.1rem);
                 font-weight: 300;
                 letter-spacing: 0.05em;
                 color: rgba(255, 240, 200, 0.9);
-                margin-bottom: 1.5rem;
-                max-width: 50ch;
+                margin: 0 auto 1.25rem;
+                max-width: 24ch;
+                line-height: 1.35;
             }
-
-            #post-section p {
-                font-size: clamp(1rem, 1.5vw, 1.2rem);
+            #post-section .lede {
+                font-size: clamp(1rem, 1.45vw, 1.2rem);
                 font-weight: 300;
-                line-height: 1.8;
-                color: rgba(255, 240, 200, 0.55);
-                max-width: 55ch;
-                margin: 0 auto 2.5rem;
+                line-height: 1.75;
+                color: rgba(255, 240, 200, 0.58);
+                max-width: 46ch;
+                margin: 0 auto clamp(2.5rem, 5vh, 3.5rem);
             }
 
+            /* ─── Call-to-action pair ──────────────────────────────────── */
+            .cta-row {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 1rem;
+                justify-content: center;
+                margin-bottom: clamp(3.5rem, 8vh, 5.5rem);
+            }
             #post-section a.cta-link {
                 display: inline-block;
-                font-size: clamp(0.85rem, 1.2vw, 1rem);
+                font-size: clamp(0.8rem, 1.1vw, 0.95rem);
                 font-weight: 400;
-                letter-spacing: 0.2em;
+                letter-spacing: 0.18em;
                 text-transform: uppercase;
-                color: rgba(255, 200, 80, 0.85);
+                color: rgba(255, 240, 200, 0.7);
                 text-decoration: none;
-                border: 1px solid rgba(255, 200, 80, 0.25);
-                padding: 0.75rem 2rem;
+                border: 1px solid rgba(255, 240, 200, 0.2);
+                padding: 0.85rem 1.9rem;
                 transition:
                     border-color 0.3s ease,
                     color 0.3s ease,
                     background 0.3s ease;
             }
+            #post-section a.cta-link:hover,
+            #post-section a.cta-link:focus-visible {
+                color: rgba(255, 240, 200, 1);
+                border-color: rgba(255, 240, 200, 0.45);
+                background: rgba(255, 240, 200, 0.04);
+            }
+            /* The one action we actually want: joining the list. */
+            #post-section a.cta-link.primary {
+                color: rgba(255, 200, 80, 0.92);
+                border-color: rgba(255, 200, 80, 0.35);
+                background: rgba(255, 200, 80, 0.05);
+            }
+            #post-section a.cta-link.primary:hover,
+            #post-section a.cta-link.primary:focus-visible {
+                color: rgba(255, 210, 110, 1);
+                border-color: rgba(255, 200, 80, 0.75);
+                background: rgba(255, 200, 80, 0.1);
+            }
 
-            #post-section a.cta-link:hover {
-                color: rgba(255, 200, 80, 1);
-                border-color: rgba(255, 200, 80, 0.6);
-                background: rgba(255, 200, 80, 0.04);
+            /* ─── Section blocks ───────────────────────────────────────── */
+            .block {
+                margin-bottom: clamp(3rem, 7vh, 4.5rem);
+            }
+            .block h3 {
+                font-size: clamp(0.72rem, 1vw, 0.85rem);
+                font-weight: 400;
+                letter-spacing: 0.3em;
+                text-transform: uppercase;
+                color: rgba(255, 240, 200, 0.38);
+                margin-bottom: 1.75rem;
+            }
+
+            /* ─── Upcoming events ──────────────────────────────────────── */
+            .events {
+                list-style: none;
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+                max-width: 42rem;
+                margin: 0 auto;
+            }
+            .events a {
+                display: flex;
+                align-items: baseline;
+                gap: 1.25rem;
+                text-decoration: none;
+                padding: 0.9rem 1.1rem;
+                border: 1px solid rgba(255, 240, 200, 0.09);
+                text-align: left;
+                transition:
+                    border-color 0.3s ease,
+                    background 0.3s ease;
+            }
+            .events a:hover,
+            .events a:focus-visible {
+                border-color: rgba(255, 240, 200, 0.28);
+                background: rgba(255, 240, 200, 0.03);
+            }
+            .events .when {
+                flex: 0 0 auto;
+                min-width: 9.5rem;
+                font-size: 0.85rem;
+                font-style: italic;
+                color: rgba(255, 200, 80, 0.7);
+                letter-spacing: 0.04em;
+            }
+            .events .what {
+                font-size: clamp(0.95rem, 1.2vw, 1.08rem);
+                color: rgba(255, 240, 200, 0.82);
+                line-height: 1.4;
+            }
+
+            /* ─── Explore grid ─────────────────────────────────────────── */
+            .link-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+                gap: 0.75rem;
+            }
+            .link-grid a {
+                display: block;
+                text-align: left;
+                text-decoration: none;
+                padding: 1.2rem 1.3rem;
+                border: 1px solid rgba(255, 240, 200, 0.09);
+                transition:
+                    border-color 0.3s ease,
+                    background 0.3s ease,
+                    transform 0.3s ease;
+            }
+            .link-grid a:hover,
+            .link-grid a:focus-visible {
+                border-color: rgba(150, 200, 255, 0.32);
+                background: rgba(150, 200, 255, 0.035);
+            }
+            .link-grid .name {
+                display: block;
+                font-size: clamp(1rem, 1.3vw, 1.15rem);
+                color: rgba(255, 240, 200, 0.88);
+                margin-bottom: 0.35rem;
+            }
+            .link-grid .desc {
+                display: block;
+                font-size: 0.88rem;
+                font-weight: 300;
+                line-height: 1.55;
+                color: rgba(255, 240, 200, 0.45);
+            }
+
+            /* ─── Footer ───────────────────────────────────────────────── */
+            .post-footer {
+                border-top: 1px solid rgba(255, 240, 200, 0.08);
+                padding-top: 2rem;
+                font-size: 0.9rem;
+                font-weight: 300;
+                color: rgba(255, 240, 200, 0.4);
+                line-height: 2;
+            }
+            .post-footer a {
+                color: rgba(255, 240, 200, 0.62);
+                text-decoration: none;
+                border-bottom: 1px solid rgba(255, 240, 200, 0.18);
+                transition: color 0.3s ease, border-color 0.3s ease;
+            }
+            .post-footer a:hover,
+            .post-footer a:focus-visible {
+                color: rgba(255, 240, 200, 0.95);
+                border-bottom-color: rgba(255, 240, 200, 0.5);
+            }
+
+            /* Visible focus ring for keyboard users, everywhere. */
+            a:focus-visible {
+                outline: 2px solid rgba(150, 200, 255, 0.7);
+                outline-offset: 3px;
+            }
+
+            @media (max-width: 600px) {
+                .events a {
+                    flex-direction: column;
+                    gap: 0.3rem;
+                }
+                .events .when {
+                    min-width: 0;
+                }
+                .cta-row {
+                    flex-direction: column;
+                    align-items: stretch;
+                }
+                #post-section a.cta-link {
+                    padding: 1rem 1.2rem;
+                }
             }
 
             /* ─── Spacer for GSAP pin ────────────────────────────────── */
+            /* Height is no longer hard-coded: GSAP's pinSpacing inserts exactly
+               as much scroll room as the pin needs, so the content section
+               starts the instant the animation ends — no dead gap.
+               To change the animation's length, edit SCROLL_LENGTH_VH in the JS. */
             #scroll-spacer {
-                height: 900vh;
                 background: #0a0b0f;
             }
 
@@ -536,7 +769,8 @@ Although just double-clicking html will work almost as good.
                 #skip-link {
                     top: 5% !important;
                     right: 5% !important;
-                    font-size: clamp(0.7rem, 3vw, 0.9rem);
+                    /* SKIP LINK FONT SIZE (phones) */
+                    font-size: clamp(1.05rem, 4.5vw, 1.35rem);
                     letter-spacing: 0.1em;
                 }
                 #landing-title .logo-name {
@@ -639,16 +873,20 @@ Although just double-clicking html will work almost as good.
             }
         </style>
 
-        <!-- Landing image (embedded) -->
+        <!-- Landing images. WebP cuts these from 1.6 MB to 235 KB; the
+             onerror handlers fall back to the original PNGs (still in the
+             repo) on any browser that can't decode WebP. -->
         <img
             id="landing-img"
-            src="landing_image_mid.png"
+            src="landing_image_mid.webp"
+            onerror="this.onerror=null;this.src='landing_image_mid.png'"
             style="display: none"
             alt="landing figure"
         />
         <img
             id="outline-img"
-            src="landing_image_outline.png"
+            src="landing_image_outline.webp"
+            onerror="this.onerror=null;this.src='landing_image_outline.png'"
             style="display: none"
             alt="figure outline"
         />
@@ -801,7 +1039,12 @@ Although just double-clicking html will work almost as good.
                 </div>
 
                 <!-- Stage 6: logo image overlay (fades in over network, shrinks to top) -->
-                <img id="logo-img" src="empty_white.png" alt="CSCSC" />
+                <img
+                    id="logo-img"
+                    src="empty_white.webp"
+                    onerror="this.onerror=null;this.src='empty_white.png'"
+                    alt="CSCSC"
+                />
 
                 <!-- Stage 6: logo title (appears to the right of the shrunk image) -->
                 <div id="logo-title">
@@ -821,52 +1064,233 @@ Although just double-clicking html will work almost as good.
             </div>
         </div>
 
-        <!-- Post-experience section -->
+        <!-- ═══ Content section ═══════════════════════════════════════════
+             Everything below is the actual website: where a visitor goes once
+             the animation has done its job. It follows the pinned experience
+             with no gap (GSAP's pinSpacing supplies exactly the scroll room
+             the animation needs and not one pixel more).
+
+             ALL URLs BELOW ARE MIRRORED FROM THE CANONICAL LIST AT:
+               /Users/pchvykov/Repos/personal_os/PROJECTS/cscsc-community/LINKS.md
+             If a link changes, change it there first, then here.
+             ═══════════════════════════════════════════════════════════════ -->
         <section id="post-section">
-            <svg
-                class="logo-mark"
-                viewBox="0 0 64 64"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-label="CSCSC logo mark"
-            >
-                <circle
-                    cx="22"
-                    cy="32"
-                    r="18"
-                    stroke="rgba(255,240,200,0.5)"
-                    stroke-width="1.2"
+            <div class="post-inner">
+                <svg
+                    class="logo-mark"
+                    viewBox="0 0 64 64"
                     fill="none"
-                />
-                <circle
-                    cx="42"
-                    cy="32"
-                    r="18"
-                    stroke="rgba(150,200,255,0.5)"
-                    stroke-width="1.2"
-                    fill="none"
-                />
-                <path
-                    d="M32 15.5 C36.5 22 36.5 42 32 48.5 C27.5 42 27.5 22 32 15.5Z"
-                    fill="rgba(255,200,80,0.12)"
-                    stroke="rgba(255,200,80,0.3)"
-                    stroke-width="0.8"
-                />
-            </svg>
-            <h2>Complexity Science &amp; Contemplative Studies Consortium</h2>
-            <p>
-                A research community bridging the mathematical rigor of
-                complexity science with the lived depth of contemplative wisdom
-                - for a better description of reality.
-            </p>
-            <a
-                class="cta-link"
-                href="https://cscsc.notion.site/CSCSC-286d8cae0cfe813290abf9eb6acd731c"
-                target="_blank"
-                rel="noopener noreferrer"
-                >Visit CSCSC →</a
-            >
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                >
+                    <circle
+                        cx="22"
+                        cy="32"
+                        r="18"
+                        stroke="rgba(255,240,200,0.5)"
+                        stroke-width="1.2"
+                        fill="none"
+                    />
+                    <circle
+                        cx="42"
+                        cy="32"
+                        r="18"
+                        stroke="rgba(150,200,255,0.5)"
+                        stroke-width="1.2"
+                        fill="none"
+                    />
+                    <path
+                        d="M32 15.5 C36.5 22 36.5 42 32 48.5 C27.5 42 27.5 22 32 15.5Z"
+                        fill="rgba(255,200,80,0.12)"
+                        stroke="rgba(255,200,80,0.3)"
+                        stroke-width="0.8"
+                    />
+                </svg>
+
+                <h2>Complexity Science &amp; Contemplative Studies Consortium</h2>
+                <p class="lede">
+                    A research community bridging the mathematical rigor of
+                    complexity science with the lived depth of contemplative
+                    wisdom.
+                </p>
+
+                <!-- The one thing we most want a moved visitor to do, and the
+                     one thing they most likely want next. -->
+                <div class="cta-row">
+                    <a
+                        class="cta-link primary"
+                        href="https://www.notion.so/286d8cae0cfe8031833ac1a301824aa0"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >Join our mailing list</a
+                    >
+                    <a
+                        class="cta-link"
+                        href="https://cscsc.notion.site/CSCSC-286d8cae0cfe813290abf9eb6acd731c"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >Explore the full site →</a
+                    >
+                </div>
+
+                <div class="block">
+                    <h3>Upcoming gatherings</h3>
+                    <ul class="events">
+                        <li>
+                            <a
+                                href="https://cscsc.notion.site/Honest-Science-Workshop-303d8cae0cfe81d1bb87d6d473d189fa"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <span class="when">20 Sept · France</span>
+                                <span class="what">Honest Science Workshop</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="https://cscsc.notion.site/Work-Alive-Retreat-30cd8cae0cfe80689dc2e31f910d2303"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <span class="when">27 Sept · France</span>
+                                <span class="what">Work Alive Retreat</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="https://cscsc.notion.site/Complex-Systems-and-Contemplative-Studies-CCS26-31bd8cae0cfe809fa99af7a5fed7585f"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <span class="when">15 Oct · New York</span>
+                                <span class="what"
+                                    >Complex Systems &amp; Contemplative
+                                    Studies — CCS26 satellite</span
+                                >
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="https://cscsc.notion.site/30cd8cae0cfe8035b132f5ba0d4ddc55?v=30cd8cae0cfe80a29eba000c185bc0a6"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <span class="when">ongoing</span>
+                                <span class="what"
+                                    >Full community calendar →</span
+                                >
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="block">
+                    <h3>Explore</h3>
+                    <div class="link-grid">
+                        <a
+                            href="https://cscsc.notion.site/Learning-center-286d8cae0cfe81f49136c6a07e20fdbe"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <span class="name">Learning Center</span>
+                            <span class="desc"
+                                >Where to start: readings, talks and primers on
+                                complexity and contemplative science.</span
+                            >
+                        </a>
+                        <a
+                            href="https://cscsc.notion.site/BLOG-UPDATES-286d8cae0cfe8154963be1012a87f930"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <span class="name">Blog &amp; updates</span>
+                            <span class="desc"
+                                >What the community is thinking about and
+                                working on right now.</span
+                            >
+                        </a>
+                        <a
+                            href="https://docs.google.com/document/d/1jlTDx8yc_r8ZHHClTNSIMCFoIYBrQdmEUo05Dv4aae4/edit"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <span class="name">Research directions</span>
+                            <span class="desc"
+                                >Our working groups — starting with the
+                                causality reading group.</span
+                            >
+                        </a>
+                        <a
+                            href="https://www.hylo.com/groups/cscsc/join/FfOYDYCOfG"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <span class="name">Community forum</span>
+                            <span class="desc"
+                                >Join the conversation on Hylo, and find others
+                                near you on the member map.</span
+                            >
+                        </a>
+                        <a
+                            href="https://www.youtube.com/@cscs.conference/videos"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <span class="name">Talks &amp; recordings</span>
+                            <span class="desc"
+                                >Every session we have recorded, on our YouTube
+                                channel.</span
+                            >
+                        </a>
+                        <a
+                            href="https://meet.jit.si/CSCSCconnect"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <span class="name">Community call</span>
+                            <span class="desc"
+                                >Our open meeting room — see the calendar for
+                                when we gather.</span
+                            >
+                        </a>
+                    </div>
+                </div>
+
+                <div class="post-footer">
+                    Questions, or want to get involved?
+                    <a href="mailto:cscs.conference@gmail.com"
+                        >cscs.conference@gmail.com</a
+                    >
+                </div>
+            </div>
         </section>
+
+        <!-- Without JavaScript the animation above renders nothing, so the
+             essentials appear here instead. -->
+        <noscript>
+            <div
+                style="
+                    background: #0a0b0f;
+                    color: rgba(255, 240, 200, 0.75);
+                    padding: 3rem 1.5rem;
+                    text-align: center;
+                    font-family: 'Cormorant Garamond', Georgia, serif;
+                    line-height: 1.8;
+                "
+            >
+                <p style="max-width: 46ch; margin: 0 auto 1.5rem">
+                    This page opens with an animated introduction that needs
+                    JavaScript. Everything it leads to is linked below.
+                </p>
+                <p>
+                    <a
+                        href="https://cscsc.notion.site/CSCSC-286d8cae0cfe813290abf9eb6acd731c"
+                        style="color: rgba(255, 200, 80, 0.9)"
+                        >Visit the CSCSC site →</a
+                    >
+                </p>
+            </div>
+        </noscript>
 
         <script>
             // ═══════════════════════════════════════════════════════════════
@@ -875,6 +1299,81 @@ Although just double-clicking html will work almost as good.
 
             (function () {
                 "use strict";
+
+                // ─── Device capability tiers ───────────────────────────────────
+                // The particle flock and the D3 force simulation are the two
+                // expensive parts of this page. Rather than ship one budget to
+                // every device, we pick a tier once at load and scale counts by
+                // it. Safari (desktop and iOS) is deliberately treated as one
+                // step slower than Chromium: its canvas fill-rate and SVG
+                // reflow costs are materially higher for this workload.
+                //
+                // PERFORMANCE DIAL — raise/lower these to trade smoothness for
+                // visual density. 1.0 = the original (Chromium-on-Mac) budget.
+                const QUALITY = {
+                    high: 1.0,   // desktop Chromium / Firefox
+                    mid: 0.62,  // desktop Safari, tablets
+                    low: 0.38,  // phones
+                };
+
+                function isPhone() {
+                    return (
+                        window.matchMedia("(max-width: 600px)").matches ||
+                        window.matchMedia("(pointer: coarse)").matches &&
+                            window.innerWidth <= 900
+                    );
+                }
+
+                const IS_SAFARI =
+                    /^((?!chrome|android|crios|fxios).)*safari/i.test(
+                        navigator.userAgent
+                    );
+
+                function pickQuality() {
+                    const cores = navigator.hardwareConcurrency || 4;
+                    if (isPhone()) return QUALITY.low;
+                    if (IS_SAFARI || cores <= 4) return QUALITY.mid;
+                    return QUALITY.high;
+                }
+
+                // Single scale factor applied to every particle/node budget.
+                const Q = pickQuality();
+
+                // Scales a count by the quality tier, never below `min`.
+                function budget(n, min) {
+                    return Math.max(min || 1, Math.round(n * Q));
+                }
+
+                // ─── Glow sprite cache ─────────────────────────────────────────
+                // Every particle used to allocate its own radial gradient on
+                // every frame (1000+ gradients × 60fps). That allocation, not
+                // the particle count, was the main reason the flock stuttered on
+                // Safari and iOS. Each colour is now baked once into a small
+                // offscreen canvas and blitted with drawImage — visually
+                // identical, roughly an order of magnitude cheaper.
+                const SPRITE_R = 32; // sprite half-size in px; scaled when drawn
+                const spriteCache = new Map();
+                function glowSprite(r, g, b) {
+                    const key = r + "," + g + "," + b;
+                    const hit = spriteCache.get(key);
+                    if (hit) return hit;
+                    const c = document.createElement("canvas");
+                    c.width = c.height = SPRITE_R * 2;
+                    const sctx = c.getContext("2d");
+                    const grad = sctx.createRadialGradient(
+                        SPRITE_R, SPRITE_R, 0,
+                        SPRITE_R, SPRITE_R, SPRITE_R
+                    );
+                    grad.addColorStop(0, `rgba(${r},${g},${b},1)`);
+                    grad.addColorStop(1, `rgba(${r},${g},${b},0)`);
+                    sctx.fillStyle = grad;
+                    sctx.fillRect(0, 0, SPRITE_R * 2, SPRITE_R * 2);
+                    spriteCache.set(key, c);
+                    return c;
+                }
+                const SPRITE_BODY = glowSprite(255, 240, 200); // body particles
+                const SPRITE_WALL = glowSprite(255, 210, 120); // wall boids, amber
+                const SPRITE_AIR  = glowSprite(190, 215, 255); // air boids, blue
 
                 // ─── Canvas setup ──────────────────────────────────────────────
                 const canvas = document.getElementById("particle-canvas");
@@ -1508,7 +2007,9 @@ Although just double-clicking html will work almost as good.
                 function loadSolidSvg() {} // no-op
 
                 // ─── Particles (Boids) ─────────────────────────────────────────
-                const NUM_PARTICLES = 1000;
+                // Scaled by device tier — see the QUALITY table at the top.
+                // Full budget on desktop Chromium; ~620 on Safari; ~380 on phones.
+                const NUM_PARTICLES = budget(1000, 300);
                 let particles = [];
                 let boundaryStrength = 1.0; // 1.0 = full constraint, 0 = free
                 let boundaryPermeability = 0.0; // 0 = solid wall, 0.05 = 5% chance to pass through
@@ -1818,8 +2319,8 @@ Although just double-clicking html will work almost as good.
 
                 // ─── Wall boids (between outer and inner walls) ───────────────────
                 // ─── Air  boids (inside room, outside figure) ─────────────────────
-                const NUM_WALL_PARTICLES = 300;
-                const NUM_AIR_PARTICLES  = 60;
+                const NUM_WALL_PARTICLES = budget(300, 110);
+                const NUM_AIR_PARTICLES  = budget(60, 24);
                 let wallParticles = [];
                 let airParticles  = [];
                 let hallParticlesInitialized = false;
@@ -2260,23 +2761,48 @@ Although just double-clicking html will work almost as good.
                     }
                 }
 
+                // Pre-baked brightness/contrast pass over the landing image.
+                // ctx.filter on a full-screen drawImage is a per-frame software
+                // blit in Safari; baking it once and re-blitting is far cheaper.
+                // Rebuilt only when the draw size changes (i.e. on resize).
+                let filteredLanding = null;
+                let filteredLandingKey = "";
+                function getFilteredLanding(w, h) {
+                    const key = Math.round(w) + "x" + Math.round(h);
+                    if (filteredLanding && filteredLandingKey === key)
+                        return filteredLanding;
+                    const c = document.createElement("canvas");
+                    c.width = Math.max(1, Math.round(w));
+                    c.height = Math.max(1, Math.round(h));
+                    const cctx = c.getContext("2d");
+                    cctx.filter = "brightness(1.8) contrast(1.1)";
+                    cctx.drawImage(landingImg, 0, 0, c.width, c.height);
+                    filteredLanding = c;
+                    filteredLandingKey = key;
+                    return c;
+                }
+
                 function drawLandingImage(alpha, invert = 0) {
                     if (!landingImgLoaded || alpha < 0.005) return;
                     const { drawX, drawY, drawW, drawH } = getLandingImgRect();
 
                     ctx.save();
                     ctx.globalAlpha = alpha;
-
-                    // Apply brightness + optional inversion filter
-                    // invert is 0→1; merged here so both can coexist
-                    const invertStr =
-                        invert > 0.001
-                            ? ` invert(${Math.round(invert * 100)}%)`
-                            : "";
-                    ctx.filter = `brightness(1.8) contrast(1.1)${invertStr}`; // <--- FLASH: add/change filters here
                     ctx.globalCompositeOperation = "source-over";
-                    ctx.drawImage(landingImg, drawX, drawY, drawW, drawH);
-                    ctx.filter = "none";
+
+                    if (invert > 0.001) {
+                        // Inversion flash — brief, so the live filter is fine.
+                        // <--- FLASH: add/change filters here
+                        ctx.filter = `brightness(1.8) contrast(1.1) invert(${Math.round(invert * 100)}%)`;
+                        ctx.drawImage(landingImg, drawX, drawY, drawW, drawH);
+                        ctx.filter = "none";
+                    } else {
+                        // Steady state — blit the pre-filtered copy.
+                        ctx.drawImage(
+                            getFilteredLanding(drawW, drawH),
+                            drawX, drawY, drawW, drawH
+                        );
+                    }
 
                     // Overlay the background-colored vignette to hide the JPEG's lighter background
                     // and fade the image edges into the page dark color
@@ -2421,11 +2947,8 @@ Although just double-clicking html will work almost as good.
                                 dh: H * 0.42,
                             },
                         ];
-                        for (let gi = 0; gi < 3; gi++) {
-                            const blob = new Blob([GHOST_SHAPES[gi]], {
-                                type: "image/svg+xml",
-                            });
-                        }
+                        // (An unused per-frame Blob allocation used to sit here;
+                        //  it produced nothing but garbage-collector pressure.)
                         ctx.restore();
                     }
 
@@ -2434,26 +2957,13 @@ Although just double-clicking html will work almost as good.
                         ctx.save();
                         ctx.globalAlpha = particleAlpha;
                         ctx.globalCompositeOperation = "screen";
+                        // Counteract the global zoom; radius shrinks 2x→1x as swarm matures.
+                        // Hoisted out of the loop — it doesn't vary per particle.
+                        const r = Math.max(0.7, 5 * particleRadiusMultiplier / zoomScale);
+                        const d = r * 2;
                         for (const p of particles) {
-                            // Counteract the global zoom; radius shrinks 2x→1x as swarm matures
-                            const r = Math.max(0.7, 5 * particleRadiusMultiplier / zoomScale);
-                            const grad = ctx.createRadialGradient(
-                                p.x,
-                                p.y,
-                                0,
-                                p.x,
-                                p.y,
-                                r,
-                            );
-                            grad.addColorStop(
-                                0,
-                                `rgba(255,240,200,${p.alpha})`,
-                            );
-                            grad.addColorStop(1, "rgba(255,240,200,0)");
-                            ctx.beginPath();
-                            ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
-                            ctx.fillStyle = grad;
-                            ctx.fill();
+                            ctx.globalAlpha = particleAlpha * p.alpha;
+                            ctx.drawImage(SPRITE_BODY, p.x - r, p.y - r, d, d);
                         }
                         ctx.restore();
 
@@ -2486,26 +2996,19 @@ Although just double-clicking html will work almost as good.
                             ctx.globalCompositeOperation = "screen";
                             const hr = Math.max(0.5, 5 * particleRadiusMultiplier / zoomScale);
 
+                            const hd = hr * 2;
+                            const baseA = particleAlpha * hallFadeAlpha;
+
                             // Wall boids — amber
                             for (const p of wallParticles) {
-                                const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, hr);
-                                grad.addColorStop(0, `rgba(255,210,120,${p.alpha})`);
-                                grad.addColorStop(1, "rgba(255,210,120,0)");
-                                ctx.beginPath();
-                                ctx.arc(p.x, p.y, hr, 0, Math.PI * 2);
-                                ctx.fillStyle = grad;
-                                ctx.fill();
+                                ctx.globalAlpha = baseA * p.alpha;
+                                ctx.drawImage(SPRITE_WALL, p.x - hr, p.y - hr, hd, hd);
                             }
 
                             // Air boids — blue-white
                             for (const p of airParticles) {
-                                const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, hr);
-                                grad.addColorStop(0, `rgba(190,215,255,${p.alpha})`);
-                                grad.addColorStop(1, "rgba(190,215,255,0)");
-                                ctx.beginPath();
-                                ctx.arc(p.x, p.y, hr, 0, Math.PI * 2);
-                                ctx.fillStyle = grad;
-                                ctx.fill();
+                                ctx.globalAlpha = baseA * p.alpha;
+                                ctx.drawImage(SPRITE_AIR, p.x - hr, p.y - hr, hd, hd);
                             }
 
                             ctx.restore();
@@ -2521,15 +3024,11 @@ Although just double-clicking html will work almost as good.
                                 const [rc, gc, bc] = obj.color;
                                 const objAlpha = particleAlpha * sceneAlpha * hallFadeAlpha;
                                 if (objAlpha < 0.01) continue;
-                                ctx.globalAlpha = objAlpha;
+                                const sprite = glowSprite(rc, gc, bc);
+                                const sd = sr * 2;
                                 for (const p of sceneFlocks[i]) {
-                                    const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, sr);
-                                    grad.addColorStop(0, `rgba(${rc},${gc},${bc},${p.alpha})`);
-                                    grad.addColorStop(1, `rgba(${rc},${gc},${bc},0)`);
-                                    ctx.beginPath();
-                                    ctx.arc(p.x, p.y, sr, 0, Math.PI * 2);
-                                    ctx.fillStyle = grad;
-                                    ctx.fill();
+                                    ctx.globalAlpha = objAlpha * p.alpha;
+                                    ctx.drawImage(sprite, p.x - sr, p.y - sr, sd, sd);
                                 }
                             }
                             ctx.restore();
@@ -2759,6 +3258,10 @@ Although just double-clicking html will work almost as good.
 
                 // ── Network visual style — base values at 1440×900 reference ──
                 // Actual sizes are scaled by vpScale() inside initNetworkSvg().
+                // NODE_HIT_EXPAND — invisible grab margin as a multiple of the
+                // node radius. 1.0 → a hit target 1.5x the visible radius
+                // (stroke straddles the edge, so half of it lies outside).
+                const NODE_HIT_EXPAND = 1.0;
                 const NET_NODE_R_BASE       = 8;   // default node radius (px @ reference)
                 const NET_NODE_R_HUB_BASE   = 12;  // hub (node 0) radius
                 const NET_NODE_R_RING1_BASE = 10;  // ring1 (nodes 1-10) radius
@@ -2769,8 +3272,20 @@ Although just double-clicking html will work almost as good.
                 const NET_LINK_WIDTH_BASE   = 1.8; // resting stroke-width @ reference
                 // ──────────────────────────────────────────────────────────────
 
-                const svgEl = d3.select("#network-svg");
+                // Assigned in start(), not here: d3 now loads with `defer`, so
+                // it does not exist yet while this script is being parsed.
+                let svgEl;
                 let linkSel, nodeSel;
+                // Viewport-scaled resting link width, kept here so flashLink()
+                // can restore it. (It previously referenced an undefined
+                // NET_LINK_WIDTH, so flashed links never got their width back.)
+                let currentLinkW = NET_LINK_WIDTH_BASE;
+                // Same story for the node radii: flashLink() referenced
+                // NET_NODE_R / _RING1 / _HUB, which never existed, so a flashed
+                // node kept its enlarged radius instead of settling back.
+                let currentNodeR      = NET_NODE_R_BASE;
+                let currentNodeRHub   = NET_NODE_R_HUB_BASE;
+                let currentNodeRRing1 = NET_NODE_R_RING1_BASE;
 
                 function initNetworkSvg() {
                     svgEl.selectAll("*").remove();
@@ -2781,6 +3296,10 @@ Although just double-clicking html will work almost as good.
                     const nodeRHub   = Math.max(6,   Math.round(NET_NODE_R_HUB_BASE   * vpS));
                     const nodeRRing1 = Math.max(5,   Math.round(NET_NODE_R_RING1_BASE * vpS));
                     const linkW      = Math.max(0.8, NET_LINK_WIDTH_BASE * vpS);
+                    currentLinkW      = linkW;
+                    currentNodeR      = nodeR;
+                    currentNodeRHub   = nodeRHub;
+                    currentNodeRRing1 = nodeRRing1;
                     const glowBlur   = Math.max(1.5, 3 * vpS);
                     const brightBlur = Math.max(3,   6 * vpS);
 
@@ -2835,6 +3354,14 @@ Although just double-clicking html will work almost as good.
                         .append("circle")
                         .attr("r", d => d.id === 0 ? nodeRHub : d.id <= 10 ? nodeRRing1 : nodeR)
                         .attr("fill", d => d.id === 0 ? NET_NODE_COLOR_HUB : d.id <= 10 ? NET_NODE_COLOR_RING1 : NET_NODE_COLOR)
+                        // NODE HIT EXPAND — grow the grab target without growing
+                        // the dot. A transparent stroke of width r extends the
+                        // hit region by r/2 on every side, i.e. 1.5x radius.
+                        // Raise NODE_HIT_EXPAND for an even more forgiving target.
+                        .attr("stroke-width", d => {
+                            const rr = d.id === 0 ? nodeRHub : d.id <= 10 ? nodeRRing1 : nodeR;
+                            return rr * NODE_HIT_EXPAND;
+                        })
                         .attr("filter", "url(#node-glow)")
                         .call(d3.drag()
                             .on("start", (event, d) => {
@@ -2968,7 +3495,7 @@ Although just double-clicking html will work almost as good.
                         setTimeout(() => {
                             linkEl
                                 .attr("stroke", "rgba(200,220,255,0.18)")
-                                .attr("stroke-width", NET_LINK_WIDTH)
+                                .attr("stroke-width", currentLinkW)
                                 .attr("filter", null);
                         }, 350);
                     }
@@ -2977,12 +3504,12 @@ Although just double-clicking html will work almost as good.
                     const nodeEl = nodeSel.filter((d) => d === node);
                     if (!nodeEl.empty()) {
                         nodeEl
-                            .attr("r", d => (d.id === 0 ? NET_NODE_R_HUB : d.id <= 10 ? NET_NODE_R_RING1 : NET_NODE_R) * 1.3)
+                            .attr("r", d => (d.id === 0 ? currentNodeRHub : d.id <= 10 ? currentNodeRRing1 : currentNodeR) * 1.3)
                             .attr("fill", "rgba(150,200,255,1)")
                             .attr("filter", "url(#node-bright)");
                         setTimeout(() => {
                             nodeEl
-                                .attr("r", d => d.id === 0 ? NET_NODE_R_HUB : d.id <= 10 ? NET_NODE_R_RING1 : NET_NODE_R)
+                                .attr("r", d => d.id === 0 ? currentNodeRHub : d.id <= 10 ? currentNodeRRing1 : currentNodeR)
                                 .attr("fill", d => d.id === 0 ? NET_NODE_COLOR_HUB : d.id <= 10 ? NET_NODE_COLOR_RING1 : NET_NODE_COLOR)
                                 .attr("filter", "url(#node-glow)");
                         }, 400);
@@ -3562,7 +4089,8 @@ Although just double-clicking html will work almost as good.
                 }
 
                 // ─── GSAP ScrollTrigger ────────────────────────────────────────
-                gsap.registerPlugin(ScrollTrigger);
+                // (Registration happens inside initScroll(); at parse time the
+                //  deferred GSAP bundle has not executed yet.)
 
                 // SKIP LINK FADE — fraction of total scroll (0–1) at which the
                 // skip link starts fading out, as the content page comes into
@@ -3573,13 +4101,21 @@ Although just double-clicking html will work almost as good.
                 function initScroll() {
                     if (scrollInitialized) return;
                     scrollInitialized = true;
+                    gsap.registerPlugin(ScrollTrigger);
+
+                    // SCROLL LENGTH — total scroll distance of the animation, in
+                    // multiples of the viewport height. Phones get a shorter run
+                    // so the story doesn't outlast the reader's patience.
+                    // Lower = the story moves faster per swipe.
+                    const SCROLL_LENGTH_VH = isPhone() ? 6.5 : 8;
 
                     ScrollTrigger.create({
                         trigger: "#scroll-spacer",
                         start: "top top",
-                        end: "bottom bottom",
+                        end: () => "+=" + window.innerHeight * SCROLL_LENGTH_VH,
                         pin: "#experience",
-                        pinSpacing: false,
+                        pinSpacing: true,
+                        invalidateOnRefresh: true,
                         scrub: 0.8,
                         onUpdate: (self) => {
                             const p = self.progress;
@@ -3673,11 +4209,58 @@ Although just double-clicking html will work almost as good.
                     buildNetwork();
                     initNetworkSvg();
 
-                    // Small delay to let GSAP load
-                    setTimeout(initScroll, 200);
+                    // GSAP is guaranteed to be present here: init() runs on
+                    // DOMContentLoaded, which fires after every deferred script.
+                    if (window.gsap && window.ScrollTrigger) {
+                        initScroll();
+                    } else {
+                        // CDN blocked or offline — don't strand the visitor in
+                        // 900vh of dead scroll; collapse straight to content.
+                        console.warn("GSAP unavailable — falling back to static hero.");
+                        enableStaticFallback();
+                    }
                 }
 
-                init();
+                // Collapses the scroll experience to a single static screen.
+                // Used for prefers-reduced-motion and for GSAP load failure.
+                function enableStaticFallback() {
+                    document.documentElement.setAttribute("data-static", "true");
+                    const spacer = document.getElementById("scroll-spacer");
+                    if (spacer) spacer.style.height = "100vh";
+                    const hint = document.getElementById("scroll-hint");
+                    if (hint) hint.style.opacity = "0";
+                    if (window.ScrollTrigger) ScrollTrigger.refresh();
+                }
+
+                // Respect prefers-reduced-motion: skip the scroll-driven
+                // narrative entirely and show the static story instead.
+                const prefersReducedMotion = window.matchMedia(
+                    "(prefers-reduced-motion: reduce)"
+                ).matches;
+
+                function start() {
+                    // Bind the d3 selection now that the deferred libs have run.
+                    if (window.d3) svgEl = d3.select("#network-svg");
+
+                    if (prefersReducedMotion) {
+                        resize();
+                        loadSolidSvg();
+                        loadVisualSvg();
+                        solidAlpha = 1;
+                        particleRenderAlpha = 0;
+                        networkAlpha = 0;
+                        requestAnimationFrame(animate);
+                        enableStaticFallback();
+                        return;
+                    }
+                    init();
+                }
+
+                if (document.readyState === "loading") {
+                    document.addEventListener("DOMContentLoaded", start);
+                } else {
+                    start();
+                }
             })();
         </script>
         <script data-pplx-inline-edit>
