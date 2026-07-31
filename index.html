@@ -11,7 +11,7 @@ Although just double-clicking html will work almost as good.
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>
-            CSCSC — Complexity Science & Contemplative Studies Consortium
+            Complexity Science &amp; Contemplative Studies — CSCSC
         </title>
         <meta name="theme-color" content="#0a0b0f" />
         <meta
@@ -26,7 +26,7 @@ Although just double-clicking html will work almost as good.
         <meta property="og:url" content="https://complexitycontemplation.org/" />
         <meta
             property="og:title"
-            content="CSCSC — Complexity Science &amp; Contemplative Studies Consortium"
+            content="Complexity Science &amp; Contemplative Studies — CSCSC"
         />
         <meta
             property="og:description"
@@ -45,7 +45,7 @@ Although just double-clicking html will work almost as good.
         <meta name="twitter:card" content="summary_large_image" />
         <meta
             name="twitter:title"
-            content="CSCSC — Complexity Science &amp; Contemplative Studies Consortium"
+            content="Complexity Science &amp; Contemplative Studies — CSCSC"
         />
         <meta
             name="twitter:description"
@@ -1320,6 +1320,101 @@ Although just double-clicking html will work almost as good.
                 const SPRITE_BODY = glowSprite(255, 240, 200); // body particles
                 const SPRITE_WALL = glowSprite(255, 210, 120); // wall boids, amber
                 const SPRITE_AIR  = glowSprite(190, 215, 255); // air boids, blue
+
+                // ─── Analytics (optional — OFF until you set a code) ───────────
+                // GoatCounter: no cookies, no cross-site identifier, nothing
+                // stored in this repo. You read the numbers on their dashboard
+                // at https://<code>.goatcounter.com.
+                //
+                // TO TURN IT ON: create a site at goatcounter.com and put its
+                // subdomain here, e.g. "cscsc". While this string is empty the
+                // page issues ZERO extra requests, defines no globals, and
+                // behaves byte-for-byte as it does today.
+                const GOATCOUNTER_CODE = "";
+
+                // Everything below is written so that analytics can never
+                // degrade the page: the script is async (never blocks paint),
+                // a blocked or failed load is swallowed, events are buffered
+                // until it is ready, and every call sits inside try/catch. If
+                // an ad blocker removes it the page is simply unaffected.
+                const analyticsQueue = [];
+                const trackedOnce = new Set();
+                let analyticsReady = false;
+
+                function sendEvent(name) {
+                    try {
+                        window.goatcounter.count({
+                            path: name,
+                            title: name,
+                            event: true,
+                        });
+                    } catch (e) {
+                        /* analytics must never surface to the visitor */
+                    }
+                }
+
+                // Fire-and-forget, deduplicated. Safe to call before the script
+                // has loaded, or if it never loads at all.
+                function track(name) {
+                    if (!GOATCOUNTER_CODE || trackedOnce.has(name)) return;
+                    trackedOnce.add(name);
+                    if (analyticsReady) sendEvent(name);
+                    else analyticsQueue.push(name);
+                }
+
+                function initAnalytics() {
+                    if (!GOATCOUNTER_CODE) return;
+                    // Honour an explicit Do Not Track signal.
+                    if (navigator.doNotTrack === "1") return;
+                    const s = document.createElement("script");
+                    s.async = true;
+                    s.src = "https://gc.zgo.at/count.js";
+                    s.setAttribute(
+                        "data-goatcounter",
+                        "https://" + GOATCOUNTER_CODE + ".goatcounter.com/count"
+                    );
+                    s.onload = () => {
+                        analyticsReady = true;
+                        analyticsQueue.splice(0).forEach(sendEvent);
+                    };
+                    // Blocked, offline, or service down — drop it silently.
+                    s.onerror = () => {
+                        analyticsQueue.length = 0;
+                    };
+                    document.head.appendChild(s);
+                }
+
+                // Which milestones of the scroll story a visitor actually
+                // reached — the funnel that says whether the length earns itself.
+                const FUNNEL = [
+                    [0.02, "reached/opening"],
+                    [0.34, "reached/zoom-out"],
+                    [0.71, "reached/network"],
+                    [0.90, "reached/closing"],
+                    [0.99, "reached/end"],
+                ];
+
+                function trackFunnel(p) {
+                    if (!GOATCOUNTER_CODE) return;
+                    for (const [threshold, name] of FUNNEL) {
+                        if (p >= threshold) track(name);
+                    }
+                }
+
+                function initAnalyticsClicks() {
+                    if (!GOATCOUNTER_CODE) return;
+                    document.addEventListener("click", (e) => {
+                        const a = e.target.closest && e.target.closest("a");
+                        if (!a) return;
+                        if (a.id === "skip-link") track("click/skip-to-website");
+                        else if (a.classList.contains("cta-link"))
+                            track(
+                                a.classList.contains("primary")
+                                    ? "click/join"
+                                    : "click/explore"
+                            );
+                    }, { passive: true });
+                }
 
                 // ─── Canvas setup ──────────────────────────────────────────────
                 const canvas = document.getElementById("particle-canvas");
@@ -4086,6 +4181,7 @@ Although just double-clicking html will work almost as good.
                         scrub: 0.8,
                         onUpdate: (self) => {
                             const p = self.progress;
+                            trackFunnel(p);
                             const scrollHint =
                                 document.getElementById("scroll-hint");
                             const landingTitle =
@@ -4206,6 +4302,9 @@ Although just double-clicking html will work almost as good.
                 ).matches;
 
                 function start() {
+                    initAnalytics();
+                    initAnalyticsClicks();
+
                     // Bind the d3 selection now that the deferred libs have run.
                     if (window.d3) svgEl = d3.select("#network-svg");
 
