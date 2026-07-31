@@ -274,7 +274,10 @@ Although just double-clicking html will work almost as good.
                 bottom: 6%;
                 left: 50%;
                 transform: translateX(-50%);
-                width: min(600px, 90vw);
+                /* Wide enough that the two buttons sit side by side rather
+                   than wrapping. The paragraph's line breaks are explicit
+                   <br>s, so widening does not reflow the copy. */
+                width: min(760px, 92vw);
                 text-align: center;
                 opacity: 0;
                 transition: opacity 1.2s ease;
@@ -499,9 +502,9 @@ Although just double-clicking html will work almost as good.
                 flex-wrap: wrap;
                 gap: 1rem;
                 justify-content: center;
-                margin-bottom: clamp(3.5rem, 8vh, 5.5rem);
+                margin-top: 1.9rem;
             }
-            #post-section a.cta-link {
+            a.cta-link {
                 display: inline-block;
                 font-size: clamp(0.8rem, 1.1vw, 0.95rem);
                 font-weight: 400;
@@ -516,20 +519,20 @@ Although just double-clicking html will work almost as good.
                     color 0.3s ease,
                     background 0.3s ease;
             }
-            #post-section a.cta-link:hover,
-            #post-section a.cta-link:focus-visible {
+            a.cta-link:hover,
+            a.cta-link:focus-visible {
                 color: rgba(255, 240, 200, 1);
                 border-color: rgba(255, 240, 200, 0.45);
                 background: rgba(255, 240, 200, 0.04);
             }
             /* The one action we actually want: joining the list. */
-            #post-section a.cta-link.primary {
+            a.cta-link.primary {
                 color: rgba(255, 200, 80, 0.92);
                 border-color: rgba(255, 200, 80, 0.35);
                 background: rgba(255, 200, 80, 0.05);
             }
-            #post-section a.cta-link.primary:hover,
-            #post-section a.cta-link.primary:focus-visible {
+            a.cta-link.primary:hover,
+            a.cta-link.primary:focus-visible {
                 color: rgba(255, 210, 110, 1);
                 border-color: rgba(255, 200, 80, 0.75);
                 background: rgba(255, 200, 80, 0.1);
@@ -667,9 +670,11 @@ Although just double-clicking html will work almost as good.
                 .cta-row {
                     flex-direction: column;
                     align-items: stretch;
+                    gap: 0.6rem;
+                    margin-top: 1.3rem;
                 }
-                #post-section a.cta-link {
-                    padding: 1rem 1.2rem;
+                a.cta-link {
+                    padding: 0.85rem 1rem;
                 }
             }
 
@@ -747,6 +752,20 @@ Although just double-clicking html will work almost as good.
                 .stage-text {
                     width: 96vw;
                     padding: 1.25rem 1.25rem;
+                }
+                /* The prompt shrink-wraps to ~50vw by default (it is absolutely
+                   positioned from left:50%), which chopped it into four ragged
+                   lines. Give it real width and break it in exactly one place:
+                   statement on line 1, parenthetical aside on line 2. */
+                #thread-prompt {
+                    width: 92vw;
+                    padding: 1.25rem 1rem;
+                }
+                #thread-prompt p {
+                    font-size: clamp(1rem, 4.4vw, 1.3rem);
+                }
+                .prompt-aside {
+                    display: block;
                 }
                 .stage-text p {
                     font-size: clamp(0.9rem, 4.2vw, 1.15rem);
@@ -982,7 +1001,10 @@ Although just double-clicking html will work almost as good.
 
                 <!-- Stage 4 prompt -->
                 <div id="thread-prompt">
-                    <p>Untangling it is tough (try dragging...)</p>
+                    <p>
+                        Untangling it is tough
+                        <span class="prompt-aside">(try dragging…)</span>
+                    </p>
                 </div>
 
                 <!-- Final CTA text -->
@@ -998,7 +1020,28 @@ Although just double-clicking html will work almost as good.
                         A community where the joy of discovery is our guiding
                         currency. -->
                     </p>
-</div>
+
+                    <!-- The call to action lives in the animation's last frame,
+                         at the emotional peak, so it needs no scroll to reach.
+                         The content section below therefore opens straight on
+                         "Upcoming gatherings" rather than repeating it. -->
+                    <div class="cta-row">
+                        <a
+                            class="cta-link primary"
+                            href="https://www.notion.so/286d8cae0cfe8031833ac1a301824aa0"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            >Add your email to join</a
+                        >
+                        <a
+                            class="cta-link"
+                            href="https://cscsc.notion.site/CSCSC-286d8cae0cfe813290abf9eb6acd731c"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            >Explore the full site →</a
+                        >
+                    </div>
+                </div>
 
                 <!-- Stage 6: logo image overlay (fades in over network, shrinks to top) -->
                 <img
@@ -1043,24 +1086,7 @@ Although just double-clicking html will work almost as good.
                      on screen as this section arrives. Restating it made the
                      page read as a second, separate site. -->
 
-                <!-- The one thing we most want a moved visitor to do, and the
-                     one thing they most likely want next. -->
-                <div class="cta-row">
-                    <a
-                        class="cta-link primary"
-                        href="https://www.notion.so/286d8cae0cfe8031833ac1a301824aa0"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        >Add your email to join</a
-                    >
-                    <a
-                        class="cta-link"
-                        href="https://cscsc.notion.site/CSCSC-286d8cae0cfe813290abf9eb6acd731c"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        >Explore the full site →</a
-                    >
-                </div>
+
 
                 <div class="block">
                     <h3>Upcoming gatherings</h3>
@@ -1227,10 +1253,13 @@ Although just double-clicking html will work almost as good.
                 //
                 // PERFORMANCE DIAL — raise/lower these to trade smoothness for
                 // visual density. 1.0 = the original (Chromium-on-Mac) budget.
+                // These were set before the glow-sprite rewrite, when every
+                // particle allocated a gradient per frame. That cost is gone, so
+                // the lower tiers were leaving the flock needlessly sparse.
                 const QUALITY = {
                     high: 1.0,   // desktop Chromium / Firefox
-                    mid: 0.62,  // desktop Safari, tablets
-                    low: 0.38,  // phones
+                    mid: 0.80,  // desktop Safari, tablets
+                    low: 0.62,  // phones
                 };
 
                 function isPhone() {
@@ -3851,8 +3880,8 @@ Although just double-clicking html will work almost as good.
                         // not move, so lowering the logo is what closes the gap.
                         // Raise these numbers to push the logo (and the title
                         // beside it) further down. 0.12 puts it in the corner.
-                        const LOGO_FINAL_Y_PORTRAIT  = 0.20;
-                        const LOGO_FINAL_Y_LANDSCAPE = 0.30;
+                        const LOGO_FINAL_Y_PORTRAIT  = 0.09;
+                        const LOGO_FINAL_Y_LANDSCAPE = 0.12;
                         const cx0 = W * 0.50, cy0 = H * 0.50;
                         const cx1 = isPortrait ? W * 0.50 : W * 0.22;
                         const cy1 = H * (isPortrait ? LOGO_FINAL_Y_PORTRAIT
