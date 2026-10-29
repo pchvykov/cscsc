@@ -396,24 +396,29 @@
 <script src="../assets/proto.js"></script>
 <script>document.querySelectorAll("a.mail").forEach((a) => { a.href = "mailto:" + a.dataset.u + "@" + a.dataset.d; });</script>
 <script>
-  // People carousel: arrows, dots, auto-advance every 6 s (paused on hover and under reduced motion).
+  // People carousel: arrows, dots, auto-advance every 6 s.
+  // One timer only; it pauses while the pointer or keyboard focus is on the
+  // carousel, and a click restarts the full 6 s count for the chosen photo.
   (() => {
     const c = document.querySelector(".carousel"); if (!c) return;
     const imgs = [...c.querySelectorAll("img")], dots = [...c.querySelectorAll(".dots button")], cap = c.querySelector("figcaption");
-    let i = 0, timer;
+    const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let i = 0, timer = null, hover = false, focus = false;
     const show = (n) => {
       imgs[i].classList.remove("on"); dots[i].removeAttribute("aria-current");
       i = (n + imgs.length) % imgs.length;
       imgs[i].classList.add("on"); dots[i].setAttribute("aria-current", "true"); cap.textContent = imgs[i].alt;
     };
-    const start = () => { if (!matchMedia("(prefers-reduced-motion: reduce)").matches) timer = setInterval(() => show(i + 1), 6000); };
-    const stop = () => clearInterval(timer);
-    c.querySelector(".prev").onclick = () => { stop(); show(i - 1); start(); };
-    c.querySelector(".next").onclick = () => { stop(); show(i + 1); start(); };
-    dots.forEach((d, n) => d.onclick = () => { stop(); show(n); start(); });
-    c.addEventListener("mouseenter", stop); c.addEventListener("mouseleave", start);
-    c.addEventListener("focusin", stop); c.addEventListener("focusout", start);
-    start();
+    const stop = () => { clearInterval(timer); timer = null; };
+    const sync = () => { stop(); if (!still && !hover && !focus) timer = setInterval(() => show(i + 1), 6000); };
+    c.querySelector(".prev").addEventListener("click", () => { show(i - 1); sync(); });
+    c.querySelector(".next").addEventListener("click", () => { show(i + 1); sync(); });
+    dots.forEach((d, n) => d.addEventListener("click", () => { show(n); sync(); }));
+    c.addEventListener("mouseenter", () => { hover = true; sync(); });
+    c.addEventListener("mouseleave", () => { hover = false; sync(); });
+    c.addEventListener("focusin", () => { focus = true; sync(); });
+    c.addEventListener("focusout", (e) => { if (!c.contains(e.relatedTarget)) { focus = false; sync(); } });
+    sync();
   })();
 </script>
 <script>
