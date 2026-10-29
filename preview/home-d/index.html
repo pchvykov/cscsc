@@ -126,12 +126,15 @@
 
   /* People */
   /* People gallery: a slow, endless strip; pauses on hover, static under reduced motion */
-  .gallery { overflow: hidden; margin: 0 calc(50% - 50vw) 28px; padding: 0 16px; mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent); }
-  .gallery .track { display: flex; gap: 12px; width: max-content; animation: drift 90s linear infinite; }
+  .gallery { position: relative; overflow: hidden; width: 100vw; margin: 0 0 28px; left: 50%; transform: translateX(-50%); }
+  .gallery::before, .gallery::after { content: ""; position: absolute; top: 0; bottom: 0; width: 48px; z-index: 1; pointer-events: none; }
+  .gallery::before { left: 0; background: linear-gradient(90deg, var(--bg), transparent); }
+  .gallery::after { right: 0; background: linear-gradient(270deg, var(--bg), transparent); }
+  .gallery .track { display: flex; gap: 12px; width: max-content; padding: 0 16px; will-change: transform; animation: drift 90s linear infinite; }
   .gallery:hover .track, .gallery:focus-within .track { animation-play-state: paused; }
-  @keyframes drift { to { transform: translateX(calc(-50% - 6px)); } }
+  @keyframes drift { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(calc(-50% - 6px), 0, 0); } }
   .gallery figure { margin: 0; flex: none; position: relative; }
-  .gallery img { height: 260px; width: auto; aspect-ratio: auto; border-radius: 4px; object-fit: cover; max-width: 420px; }
+  .gallery img { height: 260px; width: auto; border-radius: 4px; object-fit: cover; max-width: 420px; }
   .gallery figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 22px 10px 8px; font-size: 0.78rem; color: #fbf6ec; background: linear-gradient(transparent, rgba(0,0,0,0.6)); border-radius: 0 0 4px 4px; }
   @media (max-width: 640px) { .gallery img { height: 190px; } }
   @media (prefers-reduced-motion: reduce) { .gallery { overflow-x: auto; } .gallery .track { animation: none; } .gallery figure[aria-hidden] { display: none; } }
@@ -164,6 +167,7 @@
   .join-sec .btn.solid { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
   @media (max-width: 760px) { .join-sec .wrap { grid-template-columns: 1fr; } }
   .site-footer { margin-top: 72px; }
+  html, body { overflow-x: clip; }
   .site-footer .lockup .enso { width: 36px; }
   .site-footer .lockup b { font-size: 1.2rem; }
 </style>
@@ -290,30 +294,30 @@
     <div class="section-head"><h2 id="who-h">People</h2><a href="#">People and advisors →</a></div>
     <div class="gallery" aria-label="Photos from our gatherings, calls and retreats">
       <div class="track">
-          <figure><img src="../assets/group.webp" alt="Honest Science participants, French Pyrenees, 2026" loading="lazy" /><figcaption>Honest Science participants, French Pyrenees, 2026</figcaption></figure>
-          <figure><img src="../assets/g-cscsc25.webp" alt="CSCSC25, our first conference, online, October 2025" loading="lazy" /><figcaption>CSCSC25, our first conference, online, October 2025</figcaption></figure>
-          <figure><img src="../assets/talk.webp" alt="Talks at the Honest Science workshop, 2026" loading="lazy" /><figcaption>Talks at the Honest Science workshop, 2026</figcaption></figure>
-          <figure><img src="../assets/chalkboard.webp" alt="Alan Rodrigues, keynote at the CCS26 satellite, Binghamton NY" loading="lazy" /><figcaption>Alan Rodrigues, keynote at the CCS26 satellite, Binghamton NY</figcaption></figure>
-          <figure><img src="../assets/g-call.webp" alt="Monthly community call, June 2026" loading="lazy" /><figcaption>Monthly community call, June 2026</figcaption></figure>
-          <figure><img src="../assets/g-trailer45.webp" alt="Working side by side at INTP, 2026" loading="lazy" /><figcaption>Working side by side at INTP, 2026</figcaption></figure>
-          <figure><img src="../assets/g-board.webp" alt="The questions board from Honest Science" loading="lazy" /><figcaption>The questions board from Honest Science</figcaption></figure>
-          <figure><img src="../assets/g-qigong.webp" alt="Morning practice by the waterfall, INTP retreat, 2025" loading="lazy" /><figcaption>Morning practice by the waterfall, INTP retreat, 2025</figcaption></figure>
-          <figure><img src="../assets/g-levin25.webp" alt="Michael Levin at CSCSC25" loading="lazy" /><figcaption>Michael Levin at CSCSC25</figcaption></figure>
-          <figure><img src="../assets/hillside.webp" alt="Discussion on the hillside above INTP, 2026" loading="lazy" /><figcaption>Discussion on the hillside above INTP, 2026</figcaption></figure>
-          <figure><img src="../assets/g-cooking.webp" alt="Cooking together, Honest Science, 2026" loading="lazy" /><figcaption>Cooking together, Honest Science, 2026</figcaption></figure>
-          <figure><img src="../assets/postits.webp" alt="Mapping the room's research questions, 2026" loading="lazy" /><figcaption>Mapping the room's research questions, 2026</figcaption></figure>
-          <figure aria-hidden="true"><img src="../assets/group.webp" alt="" loading="lazy" /><figcaption>Honest Science participants, French Pyrenees, 2026</figcaption></figure>
-          <figure aria-hidden="true"><img src="../assets/g-cscsc25.webp" alt="" loading="lazy" /><figcaption>CSCSC25, our first conference, online, October 2025</figcaption></figure>
-          <figure aria-hidden="true"><img src="../assets/talk.webp" alt="" loading="lazy" /><figcaption>Talks at the Honest Science workshop, 2026</figcaption></figure>
-          <figure aria-hidden="true"><img src="../assets/chalkboard.webp" alt="" loading="lazy" /><figcaption>Alan Rodrigues, keynote at the CCS26 satellite, Binghamton NY</figcaption></figure>
-          <figure aria-hidden="true"><img src="../assets/g-call.webp" alt="" loading="lazy" /><figcaption>Monthly community call, June 2026</figcaption></figure>
-          <figure aria-hidden="true"><img src="../assets/g-trailer45.webp" alt="" loading="lazy" /><figcaption>Working side by side at INTP, 2026</figcaption></figure>
-          <figure aria-hidden="true"><img src="../assets/g-board.webp" alt="" loading="lazy" /><figcaption>The questions board from Honest Science</figcaption></figure>
-          <figure aria-hidden="true"><img src="../assets/g-qigong.webp" alt="" loading="lazy" /><figcaption>Morning practice by the waterfall, INTP retreat, 2025</figcaption></figure>
-          <figure aria-hidden="true"><img src="../assets/g-levin25.webp" alt="" loading="lazy" /><figcaption>Michael Levin at CSCSC25</figcaption></figure>
-          <figure aria-hidden="true"><img src="../assets/hillside.webp" alt="" loading="lazy" /><figcaption>Discussion on the hillside above INTP, 2026</figcaption></figure>
-          <figure aria-hidden="true"><img src="../assets/g-cooking.webp" alt="" loading="lazy" /><figcaption>Cooking together, Honest Science, 2026</figcaption></figure>
-          <figure aria-hidden="true"><img src="../assets/postits.webp" alt="" loading="lazy" /><figcaption>Mapping the room's research questions, 2026</figcaption></figure>
+          <figure><img src="../assets/group.webp" alt="Honest Science participants, French Pyrenees, 2026" /><figcaption>Honest Science participants, French Pyrenees, 2026</figcaption></figure>
+          <figure><img src="../assets/g-cscsc25.webp" alt="CSCSC25, our first conference, online, October 2025" /><figcaption>CSCSC25, our first conference, online, October 2025</figcaption></figure>
+          <figure><img src="../assets/talk.webp" alt="Talks at the Honest Science workshop, 2026" /><figcaption>Talks at the Honest Science workshop, 2026</figcaption></figure>
+          <figure><img src="../assets/chalkboard.webp" alt="Alan Rodrigues, keynote at the CCS26 satellite, Binghamton NY" /><figcaption>Alan Rodrigues, keynote at the CCS26 satellite, Binghamton NY</figcaption></figure>
+          <figure><img src="../assets/g-call.webp" alt="Monthly community call, June 2026" /><figcaption>Monthly community call, June 2026</figcaption></figure>
+          <figure><img src="../assets/g-trailer45.webp" alt="Working side by side at INTP, 2026" /><figcaption>Working side by side at INTP, 2026</figcaption></figure>
+          <figure><img src="../assets/g-board.webp" alt="The questions board from Honest Science" /><figcaption>The questions board from Honest Science</figcaption></figure>
+          <figure><img src="../assets/g-qigong.webp" alt="Morning practice by the waterfall, INTP retreat, 2025" /><figcaption>Morning practice by the waterfall, INTP retreat, 2025</figcaption></figure>
+          <figure><img src="../assets/g-levin25.webp" alt="Michael Levin at CSCSC25" /><figcaption>Michael Levin at CSCSC25</figcaption></figure>
+          <figure><img src="../assets/hillside.webp" alt="Discussion on the hillside above INTP, 2026" /><figcaption>Discussion on the hillside above INTP, 2026</figcaption></figure>
+          <figure><img src="../assets/g-cooking.webp" alt="Cooking together, Honest Science, 2026" /><figcaption>Cooking together, Honest Science, 2026</figcaption></figure>
+          <figure><img src="../assets/postits.webp" alt="Mapping the room's research questions, 2026" /><figcaption>Mapping the room's research questions, 2026</figcaption></figure>
+          <figure aria-hidden="true"><img src="../assets/group.webp" alt="" /><figcaption>Honest Science participants, French Pyrenees, 2026</figcaption></figure>
+          <figure aria-hidden="true"><img src="../assets/g-cscsc25.webp" alt="" /><figcaption>CSCSC25, our first conference, online, October 2025</figcaption></figure>
+          <figure aria-hidden="true"><img src="../assets/talk.webp" alt="" /><figcaption>Talks at the Honest Science workshop, 2026</figcaption></figure>
+          <figure aria-hidden="true"><img src="../assets/chalkboard.webp" alt="" /><figcaption>Alan Rodrigues, keynote at the CCS26 satellite, Binghamton NY</figcaption></figure>
+          <figure aria-hidden="true"><img src="../assets/g-call.webp" alt="" /><figcaption>Monthly community call, June 2026</figcaption></figure>
+          <figure aria-hidden="true"><img src="../assets/g-trailer45.webp" alt="" /><figcaption>Working side by side at INTP, 2026</figcaption></figure>
+          <figure aria-hidden="true"><img src="../assets/g-board.webp" alt="" /><figcaption>The questions board from Honest Science</figcaption></figure>
+          <figure aria-hidden="true"><img src="../assets/g-qigong.webp" alt="" /><figcaption>Morning practice by the waterfall, INTP retreat, 2025</figcaption></figure>
+          <figure aria-hidden="true"><img src="../assets/g-levin25.webp" alt="" /><figcaption>Michael Levin at CSCSC25</figcaption></figure>
+          <figure aria-hidden="true"><img src="../assets/hillside.webp" alt="" /><figcaption>Discussion on the hillside above INTP, 2026</figcaption></figure>
+          <figure aria-hidden="true"><img src="../assets/g-cooking.webp" alt="" /><figcaption>Cooking together, Honest Science, 2026</figcaption></figure>
+          <figure aria-hidden="true"><img src="../assets/postits.webp" alt="" /><figcaption>Mapping the room's research questions, 2026</figcaption></figure>
       </div>
     </div>
     <div class="people">
