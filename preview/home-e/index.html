@@ -92,7 +92,7 @@
   /* Draw the ensō in once, like a brush stroke (skipped under reduced motion) */
   @property --sweep { syntax: "<angle>"; inherits: false; initial-value: 360deg; }
   @media (prefers-reduced-motion: no-preference) {
-    .hero-mark .draw { -webkit-mask: conic-gradient(from 200deg, #000 var(--sweep), transparent 0); mask: conic-gradient(from 200deg, #000 var(--sweep), transparent 0); animation: sweep 2.6s cubic-bezier(.45,.05,.3,1) .2s both; }
+    .hero-mark .draw { -webkit-mask: conic-gradient(from 180deg, #000 var(--sweep), transparent 0); mask: conic-gradient(from 180deg, #000 var(--sweep), transparent 0); animation: sweep 2.6s cubic-bezier(.45,.05,.3,1) .2s both; }
     @keyframes sweep { from { --sweep: 0deg; } to { --sweep: 360deg; } }
     .hero-mark figcaption { animation: fade 1.4s ease 2.4s both; }
     @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
