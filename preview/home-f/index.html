@@ -76,7 +76,7 @@
   .hero-mark .draw { display: block; width: 100%; }
   .hero-mark .enso { display: block; width: 100%; color: var(--ink); }
   .hero-mark figcaption { margin-top: 14px; text-align: center; font-family: var(--font-display); font-style: italic; color: var(--muted); font-size: 1.05rem; }
-  .hero h1 { font-size: clamp(2.3rem, 4.4vw, 3.6rem); line-height: 1.06; }
+  .hero h1 { text-wrap: balance; font-size: clamp(2.3rem, 4.4vw, 3.6rem); line-height: 1.06; }
   .hero .sub { font-size: 1.16rem; margin: 22px 0 30px; max-width: 30em; color: var(--muted); }
   .hero .btn .play { display: inline-block; width: 0; height: 0; border-left: 8px solid currentColor; border-top: 5px solid transparent; border-bottom: 5px solid transparent; margin-right: 8px; vertical-align: 1px; }
   .hero .facts { color: var(--muted); font-size: 0.96rem; margin: 0 0 24px; }
@@ -111,6 +111,7 @@
   .credits p { margin: 0; line-height: 1.8; }
   .credits i { color: var(--muted); font-size: 0.85em; }
   .credits .nm { white-space: nowrap; }
+  .credits .nm + .nm::before { content: "·"; margin: 0 .55em; color: var(--muted); }
   .credits .k { display: block; font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin: 12px 0 0; }
   .credits + section { padding-top: 72px; }
   .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 24px; border-bottom: 1px solid var(--rule); padding-bottom: 10px; }
@@ -265,7 +266,7 @@
     <div class="wrap">
       <figure class="hero-mark" style="margin:0">
         <span class="tile big"><span class="draw"><span class="enso" role="img" aria-label="Ensō, a brush-drawn circle"></span></span></span>
-        <figcaption>Everything arises from relations.</figcaption>
+        <figcaption><a href="#why" style="text-decoration:none">Everything arises from relations.</a></figcaption>
       </figure>
       <div class="copy">
         <h1>We study how life knows itself.</h1>
@@ -279,35 +280,43 @@
   </section>
 
   <section class="wrap credits" aria-label="Advisors and speakers">
-    <p><span class="k">Advisors</span><span class="nm">John Dunne <i>UW-Madison</i></span> · <span class="nm">Francis Heylighen <i>VUB</i></span></p>
-    <p><span class="k">Speakers have included</span><span class="nm">Michael Levin <i>Tufts</i></span> · <span class="nm">Neil Theise <i>NYU</i></span> · <span class="nm">Gary Lupyan <i>UW-Madison</i></span> · <span class="nm">Adam Safron <i>Tufts</i></span> · <span class="nm">Chaitanya Gokhale <i>Würzburg</i></span> · <span class="nm">Alan Rodrigues <i>Rockefeller</i></span> · <span class="nm">Marc Santolini <i>Learning Planet Institute</i></span></p>
+    <p><span class="k">Advisors</span><span class="nm">John Dunne <i>UW-Madison</i></span> <span class="nm">Francis Heylighen <i>VUB</i></span></p>
+    <p><span class="k">Speakers have included</span><span class="nm">Michael Levin <i>Tufts</i></span> <span class="nm">Neil Theise <i>NYU</i></span> <span class="nm">Gary Lupyan <i>UW-Madison</i></span> <span class="nm">Adam Safron <i>Tufts</i></span> <span class="nm">Chaitanya Gokhale <i>Würzburg</i></span> <span class="nm">Alan Rodrigues <i>Rockefeller</i></span> <span class="nm">Marc Santolini <i>Learning Planet Institute</i></span></p>
   </section>
 
   <section class="wrap" id="what" aria-labelledby="what-h">
     <div class="section-head"><h2 id="what-h">What we do</h2></div>
-    <p class="lead">We are building the scientific culture we wish existed. The way we work is itself the experiment.</p>
+    <p class="lead">Contemplative traditions suggest the hypotheses. Complexity science looks for the mechanisms. Our gatherings keep us honest by making us practice what we study.</p>
     <div class="doing">
       <a href="#">
         <div class="thumb"><img src="../assets/research-map.webp" style="object-fit: contain; background: #faf8f3" alt="Diagram from the Honest Science proceedings: world, self and others, linked by knowing and acting" loading="lazy" /></div>
         <span class="verb">Research</span>
-        <h3>Open questions, worked on together</h3>
-        <p>A review paper on a complexity theory of mindfulness (in preparation), a shared map of the field, and ongoing discussion of goals and contexts, and of causality in complex systems.</p>
+        <h3>Theory for contemplative science</h3>
+        <p>Contemplative research has many experiments and little theory. We are writing a review toward a complexity theory of mindfulness, and mapping the field's open questions.</p>
         <span class="more">Research directions →</span>
       </a>
       <a href="#">
-        <div class="thumb"><img src="../assets/chalk2.webp" style="object-position: 50% 60%" alt="Alan Rodrigues at a chalkboard during his keynote at the CCS26 satellite" loading="lazy" /></div>
+        <div class="thumb"><img src="../assets/talk.webp" alt="A talk in a wood-beamed hall, participants seated informally" loading="lazy" /></div>
         <span class="verb">Gatherings</span>
-        <h3>Meetings designed to think well</h3>
+        <h3>Gatherings designed for thinking well</h3>
         <p>Week-long research retreats at INTP in the Pyrenees, a satellite session at the Complex Systems conference, and a monthly call.</p>
         <span class="more">Upcoming and past →</span>
       </a>
       <a href="#">
         <div class="thumb labelled"><img src="../assets/hs-title.webp" alt="Title card of the film Honest Science: science that includes the scientist" loading="lazy" /><span class="chip"><span class="tri" aria-hidden="true"></span>Film · 4 min</span></div>
         <span class="verb">Tools &amp; media</span>
-        <h3>Things you can use</h3>
+        <h3>Things we make</h3>
         <p><em>Honest Science</em>, a short film about science that includes the scientist. Work Alive, an app that guides focused work as a practice. Recorded talks, proceedings, and a questionnaire on how researchers come to know things.</p>
         <span class="more">Talks, films and tools →</span>
       </a>
+    </div>
+  </section>
+
+  <section class="wrap" aria-labelledby="room-h">
+    <div class="section-head"><h2 id="room-h">From the room</h2></div>
+    <div class="pair">
+      <blockquote><span class="k">Asked the room</span><p>Asked where an observer's influence is most underestimated, 6 of 10 answers pointed to the step before measurement: choosing what to study.</p><footer>Poll, CCS26 satellite session, October 2026</footer></blockquote>
+      <blockquote><span class="k">A feeling</span><p>"I feel calm, unlike most conference days."</p><footer>Participant, same session</footer></blockquote>
     </div>
   </section>
 
@@ -316,13 +325,6 @@
     <ul class="latest" id="latest"></ul>
   </section>
 
-  <section class="wrap" aria-labelledby="room-h">
-    <div class="section-head"><h2 id="room-h">From the room</h2></div>
-    <div class="pair">
-      <blockquote><span class="k">A finding</span><p>Asked where an observer's influence is most underestimated, 6 of 10 answers pointed to the step before measurement: choosing what to study.</p><footer>Poll, CCS26 satellite session, October 2026</footer></blockquote>
-      <blockquote><span class="k">A feeling</span><p>"I feel calm, unlike most conference days."</p><footer>Participant, same session</footer></blockquote>
-    </div>
-  </section>
 
   <section class="wrap" aria-labelledby="who-h">
     <div class="section-head"><h2 id="who-h">People</h2><a href="#">People and advisors →</a></div>
@@ -330,20 +332,17 @@
       <figure class="carousel" aria-roledescription="carousel" aria-label="Photos from our gatherings">
         <div class="frame">
           <img src="../assets/group.webp" alt="Honest Science participants, French Pyrenees, 2026" style="object-position:50% 50%" class="on" />
-          <img src="../assets/talk.webp" alt="A talk at the Honest Science workshop, 2026" style="object-position:50% 55%" />
-          <img src="../assets/s-cowork.webp" alt="Working side by side, INTP retreat, 2025" style="object-position:50% 50%" />
-          <img src="../assets/g-cscsc25.webp" alt="CSCSC25, our first conference, online, October 2025" style="object-position:50% 50%" />
-          <img src="../assets/s-qigong.webp" alt="Morning practice in the forest, INTP retreat, 2025" style="object-position:50% 45%" />
+          <img src="../assets/g-trailer45.webp" alt="Working side by side at INTP, 2026" style="object-position:50% 50%" />
           <img src="../assets/c-lunch.webp" alt="Lunch on the terrace, Honest Science, 2026" style="object-position:50% 40%" />
-          <img src="../assets/s-cave.webp" alt="Exploring the caves, Honest Science, 2026" style="object-position:50% 45%" />
-          <img src="../assets/c-fire.webp" alt="The closing circle by the fire, Honest Science, 2026" style="object-position:50% 50%" />
+          <img src="../assets/s-qigong.webp" alt="Morning practice in the forest, INTP retreat, 2025" style="object-position:50% 45%" />
+          <img src="../assets/c-fire.webp" alt="Last evening, Honest Science, 2026" style="object-position:50% 50%" />
           <button class="arrow prev" type="button" aria-label="Previous photo">‹</button>
           <button class="arrow next" type="button" aria-label="Next photo">›</button>
         </div>
-        <div class="under"><figcaption>Honest Science participants, French Pyrenees, 2026</figcaption><div class="dots"><button type="button" aria-label="Photo 1" aria-current="true"></button><button type="button" aria-label="Photo 2"></button><button type="button" aria-label="Photo 3"></button><button type="button" aria-label="Photo 4"></button><button type="button" aria-label="Photo 5"></button><button type="button" aria-label="Photo 6"></button><button type="button" aria-label="Photo 7"></button><button type="button" aria-label="Photo 8"></button></div></div>
+        <div class="under"><figcaption>Honest Science participants, French Pyrenees, 2026</figcaption><div class="dots"><button type="button" aria-label="Photo 1" aria-current="true"></button><button type="button" aria-label="Photo 2"></button><button type="button" aria-label="Photo 3"></button><button type="button" aria-label="Photo 4"></button><button type="button" aria-label="Photo 5"></button></div></div>
       </figure>
       <div>
-        <p>Physicists, biologists, cognitive scientists, philosophers and anthropologists, many with long contemplative practice. The community is run by volunteers and is still young: its shape is being worked out in public.</p>
+        <p>About 150 physicists, biologists, cognitive scientists, philosophers and contemplative practitioners, meeting since 2025. The community is run by volunteers and is still young: its shape is being worked out in public.</p>
         <p class="partners">With <b>INTP</b>, Institut Natura e Teoria en Pirenèus · a satellite of <b>CCS26</b>, the Conference on Complex Systems</p>
       </div>
     </div>
@@ -362,7 +361,7 @@
 
   <section class="join-sec" id="join" aria-labelledby="join-h">
     <div class="wrap">
-      <h2 id="join-h">Join the community</h2>
+      <h2 id="join-h">Help build the scientific culture we wish existed</h2>
       <div>
         <ul>
           <li>One email a month: calls, gatherings, new talks and writing, research and funding openings</li>
@@ -380,7 +379,7 @@
     <div>
       <a class="lockup" href="./"><span class="tile"><span class="enso" aria-hidden="true"></span></span><span><b>CSCSC</b></span></a>
       <p style="margin:10px 0 0">Complexity Science &amp; Contemplative Studies Consortium</p>
-      <p>cscs.conference at gmail dot com</p>
+      <p><a href="#" class="mail" data-u="cscs.conference" data-d="gmail.com">Write to us</a></p>
     </div>
     <div><h4>Explore</h4><ul><li><a href="#">Research</a></li><li><a href="#">Gatherings</a></li><li><a href="#">Tools &amp; media</a></li><li><a href="#">Writing</a></li></ul></div>
     <div><h4>Watch</h4><ul><li><a href="../../">The vision animation</a></li><li><a href="#">Films and talks</a></li></ul></div>
@@ -392,6 +391,7 @@
 
 <script src="../assets/data.js"></script>
 <script src="../assets/proto.js"></script>
+<script>document.querySelectorAll("a.mail").forEach((a) => { a.href = "mailto:" + a.dataset.u + "@" + a.dataset.d; });</script>
 <script>
   // People carousel: arrows, dots, auto-advance every 6 s (paused on hover and under reduced motion).
   (() => {
@@ -409,6 +409,7 @@
     c.querySelector(".next").onclick = () => { stop(); show(i + 1); start(); };
     dots.forEach((d, n) => d.onclick = () => { stop(); show(n); start(); });
     c.addEventListener("mouseenter", stop); c.addEventListener("mouseleave", start);
+    c.addEventListener("focusin", stop); c.addEventListener("focusout", start);
     start();
   })();
 </script>
