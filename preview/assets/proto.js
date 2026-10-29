@@ -26,13 +26,15 @@
   if (note) {
     const b = document.createElement("button");
     const modes = ["auto", "light", "dark"];
-    let i = 0;
-    try { i = Math.max(0, modes.indexOf(localStorage.getItem("proto-theme") || "auto")); } catch (e) {}
+    // A page can set its default with <html data-default-theme="light">.
+    const dflt = document.documentElement.dataset.defaultTheme || "auto";
+    let i = modes.indexOf(dflt);
+    try { const k = "proto-theme:" + location.pathname; const v = localStorage.getItem(k); if (v) i = modes.indexOf(v); } catch (e) {}
     const apply = () => {
       const m = modes[i];
       if (m === "auto") document.documentElement.removeAttribute("data-theme"); else document.documentElement.setAttribute("data-theme", m);
       b.textContent = "theme: " + m;
-      try { localStorage.setItem("proto-theme", m); } catch (e) {}
+      try { localStorage.setItem("proto-theme:" + location.pathname, m); } catch (e) {}
     };
     b.addEventListener("click", () => { i = (i + 1) % modes.length; apply(); });
     note.append(" · ", b);
