@@ -53,9 +53,11 @@
 
   /* Fold */
   .hero { padding: 40px 0 16px; position: relative; }
-  .hero .wrap { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 56px; align-items: center; }
+  .hero .wrap { display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 56px; align-items: center; }
+  .hero .copy { order: 1; }
+  .hero .hero-mark { order: 2; }
   .hero-mark { position: relative; display: grid; place-items: center; }
-  .hero-mark .draw { display: block; width: min(100%, 440px); }
+  .hero-mark .draw { display: block; width: min(100%, 340px); }
   .hero-mark .enso { display: block; width: 100%; color: var(--ink); }
   .hero-mark figcaption { margin-top: 14px; text-align: center; font-family: var(--font-display); font-style: italic; color: var(--muted); font-size: 1.05rem; }
   .hero h1 { font-size: clamp(2.3rem, 4.4vw, 3.6rem); line-height: 1.06; }
@@ -67,8 +69,10 @@
   .proof b { color: var(--ink); font-weight: 600; }
   .proof span { display: block; margin-top: 4px; }
   @media (max-width: 860px) {
-    .hero .wrap { grid-template-columns: 1fr; gap: 20px; }
-    .hero-mark .draw { width: 58vw; }
+    .hero .wrap { grid-template-columns: 1fr; gap: 12px; }
+    .hero .hero-mark { order: 0; justify-items: start; }
+    .hero-mark figcaption { text-align: left; }
+    .hero-mark .draw { width: 120px; }
   }
 
   /* Draw the ensō in once, like a brush stroke (skipped under reduced motion) */
@@ -223,19 +227,18 @@
     <div class="wrap">
       <figure class="hero-mark" style="margin:0">
         <span class="draw"><span class="enso" role="img" aria-label="Ensō, a brush-drawn circle"></span></span>
-        <figcaption>To understand how life knows itself</figcaption>
+        <figcaption><a href="#why" style="text-decoration:none">Everything arises from relations.</a></figcaption>
       </figure>
-      <div>
-        <p class="eyebrow">Complexity Science &amp; Contemplative Studies Consortium</p>
+      <div class="copy">
         <h1>Science studies the world. We also study the one looking.</h1>
-        <p class="sub">A research community asking how order arises without anyone in charge, in cells, minds and societies, with mathematics and with first-person practice.</p>
-        <p class="facts">About 150 researchers · retreats in the Pyrenees and conference sessions in the US · a monthly call open to all</p>
+        <p class="sub">A research community asking how order arises without anyone in charge, in cells, minds and societies, using mathematics and trained attention.</p>
+        <p class="facts">Since 2025 · about 150 people on our list · retreats in the Pyrenees, online conferences and a satellite at CCS26 · a monthly call open to all</p>
         <div class="actions">
           <a class="btn solid" href="#join">Join the community</a>
           <a class="btn ghost" href="#what">See what we do</a>
         </div>
         <p class="proof">Advisors: <b>John Dunne</b> (UW-Madison), <b>Francis Heylighen</b> (VUB)
-          <span>Speakers have included <b>Michael Levin</b> (Tufts), <b>Martin Nowak</b> (Harvard), <b>Gary Lupyan</b> (UW-Madison)</span></p>
+          <span>Speakers have included <b>Michael Levin</b> (Tufts) and <b>Gary Lupyan</b> (UW-Madison)</span></p>
       </div>
     </div>
   </section>
@@ -244,25 +247,25 @@
     <div class="section-head"><h2 id="what-h">What we do</h2></div>
     <div class="doing">
       <a href="#">
-        <div class="thumb"><img class="diagram" src="../assets/part1-loop-map.svg" alt="Diagram of world, self and collective linked by knowing and acting" loading="lazy" /></div>
+        <div class="thumb"><img src="../assets/chalkboard.webp" style="object-position: 50% 78%" alt="A speaker at a chalkboard diagram linking feeling for truth, concepts and measurement" loading="lazy" /></div>
         <span class="verb">Research</span>
         <h3>Open questions, worked on together</h3>
-        <p>A science of goals and contexts, causality in complex systems, a shared map of the field, and a review paper on a complexity theory of mindfulness, in preparation.</p>
+        <p>A review paper on a complexity theory of mindfulness (in preparation), a shared map of the field, and ongoing discussion of goals and contexts, and of causality in complex systems.</p>
         <span class="more">Research directions →</span>
       </a>
       <a href="#">
-        <div class="thumb"><img src="../assets/hillside.webp" alt="Retreat participants in discussion on a wooded hillside above a valley" loading="lazy" /></div>
+        <div class="thumb"><img src="../assets/talk.webp" alt="A talk in a wood-beamed hall, participants seated informally" loading="lazy" /></div>
         <span class="verb">Gatherings</span>
         <h3>Meetings designed to think well</h3>
         <p>Week-long research retreats at INTP in the Pyrenees, a satellite session at the Complex Systems conference, and a monthly call.</p>
         <span class="more">Upcoming and past →</span>
       </a>
       <a href="#">
-        <div class="thumb"><img src="../assets/app.webp" alt="The Work Alive app: a glowing form in a circle, labelled Grow" loading="lazy" /></div>
+        <div class="thumb"><img src="../assets/levin-talk.webp" alt="Title slide of Michael Levin's talk, Thoughts as Thinkers" loading="lazy" /></div>
         <span class="verb">Tools &amp; media</span>
         <h3>Things you can use</h3>
-        <p>Work Alive, an app that guides focused work as a practice. Films and recorded talks, proceedings, and a questionnaire on how researchers come to know things.</p>
-        <span class="more">Tools and media →</span>
+        <p>Recorded talks and films, proceedings, a questionnaire on how researchers come to know things, and Work Alive, an app that guides focused work as a practice.</p>
+        <span class="more">Talks, films and tools →</span>
       </a>
     </div>
   </section>
@@ -296,11 +299,11 @@
   </section>
 
   <div class="wrap">
-    <div class="why">
+    <div class="why" id="why">
       <span class="enso" aria-hidden="true"></span>
       <div>
         <h2>Why an ensō?</h2>
-        <p>The brush-drawn circle stands for emptiness. In Buddhist thought, emptiness means nothing exists on its own: everything arises from relations, which complexity science calls emergence. The circle also points to silence as where understanding starts. Every theory after that is a model, useful and incomplete.</p>
+        <p>The brush-drawn circle stands for emptiness. In Buddhist thought, nothing exists on its own: everything arises from relations, which complexity science studies as networks of interaction out of which new order emerges. Drawn in one stroke and left open, the circle is an open system. And it points to silence as where understanding starts. Every theory after that is a model, useful and incomplete.</p>
         <a href="../../">New to all this? Start with the vision, an animated introduction →</a>
       </div>
     </div>
