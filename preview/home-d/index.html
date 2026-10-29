@@ -36,6 +36,18 @@
     -webkit-mask: url("../assets/enso-mask.webp") center / contain no-repeat;
             mask: url("../assets/enso-mask.webp") center / contain no-repeat; }
 
+  /* The ensō is always black ink on paper. In dark theme it sits on a paper tile. */
+  :root { --enso-ink: #1c1d1f; --enso-paper: transparent; }
+  .tile { display: inline-grid; place-items: center; background: var(--enso-paper); border-radius: 6px; }
+  .tile .enso { color: var(--enso-ink) !important; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --enso-paper: #f4f1ea; } }
+  :root[data-theme="dark"] { --enso-paper: #f4f1ea; }
+  :root[data-theme="dark"] .tile, :root:not([data-theme="light"]) .tile { padding: 4px; }
+  :root[data-theme="dark"] .tile.big { padding: 28px; border-radius: 14px; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .tile.big { padding: 28px; border-radius: 14px; } }
+  @media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) .tile { padding: 0; } }
+  .tile.big { width: min(100%, 400px); }
+
   /* Header lockup: bigger mark, full name beside it */
   .site-header .wrap { min-height: 76px; }
   .lockup { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--ink); }
@@ -54,7 +66,7 @@
   .hero .copy { order: 1; }
   .hero .hero-mark { order: 2; }
   .hero-mark { position: relative; display: grid; place-items: center; }
-  .hero-mark .draw { display: block; width: min(100%, 400px); }
+  .hero-mark .draw { display: block; width: 100%; }
   .hero-mark .enso { display: block; width: 100%; color: var(--ink); }
   .hero-mark figcaption { margin-top: 14px; text-align: center; font-family: var(--font-display); font-style: italic; color: var(--muted); font-size: 1.05rem; }
   .hero h1 { font-size: clamp(2.3rem, 4.4vw, 3.6rem); line-height: 1.06; }
@@ -62,14 +74,19 @@
   .hero .facts { color: var(--muted); font-size: 0.96rem; margin: 0 0 24px; }
   .hero .actions { display: flex; flex-wrap: wrap; gap: 12px; }
   .hero .btn.solid { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
-  .proof { margin-top: 26px; padding-top: 14px; border-top: 1px solid var(--rule-soft); font-size: 0.9rem; color: var(--muted); max-width: 38em; }
+  .vision-cta { display: flex; gap: 10px; align-items: baseline; margin-top: 18px; text-decoration: none; color: var(--muted); max-width: 34em; font-size: 0.96rem; }
+  .vision-cta b { color: var(--accent); font-weight: 600; }
+  .vision-cta:hover b { text-decoration: underline; }
+  .vision-cta .play { flex: none; width: 0; height: 0; border-left: 9px solid var(--accent); border-top: 6px solid transparent; border-bottom: 6px solid transparent; transform: translateY(1px); }
+  .proof { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--rule-soft); font-size: 0.9rem; color: var(--muted); max-width: 38em; }
   .proof b { color: var(--ink); font-weight: 600; }
   .proof span { display: block; margin-top: 4px; }
   @media (max-width: 860px) {
     .hero .wrap { grid-template-columns: 1fr; gap: 12px; }
     .hero .hero-mark { order: 0; justify-items: start; }
     .hero-mark figcaption { text-align: left; }
-    .hero-mark .draw { width: 150px; }
+    .tile.big { width: 150px; }
+    :root[data-theme="dark"] .tile.big { padding: 12px; }
   }
 
   /* Draw the ensō in once, like a brush stroke (skipped under reduced motion) */
@@ -125,20 +142,12 @@
   @media (max-width: 760px) { .pair { grid-template-columns: 1fr; gap: 32px; } }
 
   /* People */
-  /* People gallery: a slow, endless strip; pauses on hover, static under reduced motion */
-  .gallery { position: relative; overflow: hidden; width: 100vw; margin: 0 0 28px; left: 50%; transform: translateX(-50%); }
-  .gallery::before, .gallery::after { content: ""; position: absolute; top: 0; bottom: 0; width: 48px; z-index: 1; pointer-events: none; }
-  .gallery::before { left: 0; background: linear-gradient(90deg, var(--bg), transparent); }
-  .gallery::after { right: 0; background: linear-gradient(270deg, var(--bg), transparent); }
-  .gallery .track { display: flex; gap: 12px; width: max-content; padding: 0 16px; will-change: transform; animation: drift 90s linear infinite; }
-  .gallery:hover .track, .gallery:focus-within .track { animation-play-state: paused; }
-  @keyframes drift { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(calc(-50% - 6px), 0, 0); } }
-  .gallery figure { margin: 0; flex: none; position: relative; }
-  .gallery img { height: 260px; width: auto; border-radius: 4px; object-fit: cover; max-width: 420px; }
-  .gallery figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 22px 10px 8px; font-size: 0.78rem; color: #fbf6ec; background: linear-gradient(transparent, rgba(0,0,0,0.6)); border-radius: 0 0 4px 4px; }
-  @media (max-width: 640px) { .gallery img { height: 190px; } }
-  @media (prefers-reduced-motion: reduce) { .gallery { overflow-x: auto; } .gallery .track { animation: none; } .gallery figure[aria-hidden] { display: none; } }
-  .people { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: start; }
+  .slides { margin: 0; }
+  .slides .frame { position: relative; aspect-ratio: 3 / 2; border-radius: 4px; overflow: hidden; background: var(--hover); }
+  .slides img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.4s ease; }
+  .slides img.on { opacity: 1; }
+  .slides figcaption { font-size: 0.8rem; color: var(--muted); margin-top: 8px; min-height: 1.3em; }
+  .people { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: center; }
   .people figure { margin: 0; }
   .people img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 4px; }
   .people figcaption { font-size: 0.8rem; color: var(--muted); margin-top: 8px; }
@@ -167,7 +176,6 @@
   .join-sec .btn.solid { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
   @media (max-width: 760px) { .join-sec .wrap { grid-template-columns: 1fr; } }
   .site-footer { margin-top: 72px; }
-  html, body { overflow-x: clip; }
   .site-footer .lockup .enso { width: 36px; }
   .site-footer .lockup b { font-size: 1.2rem; }
 </style>
@@ -178,7 +186,7 @@
 <header class="site-header">
   <div class="wrap">
     <a class="lockup" href="./" aria-label="CSCSC home">
-      <span class="enso" aria-hidden="true"></span>
+      <span class="tile"><span class="enso" aria-hidden="true"></span></span>
       <span><b>CSCSC</b><i>Complexity Science &amp;<br />Contemplative Studies Consortium</i></span>
     </a>
     <nav class="nav" id="nav" aria-label="Main">
@@ -233,7 +241,7 @@
   <section class="hero">
     <div class="wrap">
       <figure class="hero-mark" style="margin:0">
-        <span class="draw"><span class="enso" role="img" aria-label="Ensō, a brush-drawn circle"></span></span>
+        <span class="tile big"><span class="draw"><span class="enso" role="img" aria-label="Ensō, a brush-drawn circle"></span></span></span>
         <figcaption><a href="#why" style="text-decoration:none">Everything arises from relations.</a></figcaption>
       </figure>
       <div class="copy">
@@ -244,8 +252,9 @@
           <a class="btn solid" href="#join">Join the community</a>
           <a class="btn ghost" href="#what">See what we do</a>
         </div>
+        <a class="vision-cta" href="../../"><span class="play" aria-hidden="true"></span><span><b>Watch the vision</b> - the easiest way into why we do this. An animated introduction, at your own pace.</span></a>
         <p class="proof">Advisors: <b>John Dunne</b> (UW-Madison), <b>Francis Heylighen</b> (VUB)
-          <span>Speakers have included <b>Michael Levin</b> (Tufts), <b>Neil Theise</b> (NYU), <b>Gary Lupyan</b> (UW-Madison), <b>Adam Safron</b> (Tufts) and <b>Chaitanya Gokhale</b> (Würzburg)</span></p>
+          <span>Speakers have included <b>Michael Levin</b> (Tufts), <b>Neil Theise</b> (NYU), <b>Gary Lupyan</b> (UW-Madison), <b>Adam Safron</b> (Tufts), <b>Chaitanya Gokhale</b> (Würzburg), <b>Marc Santolini</b> (Learning Planet Institute) and <b>Alan Rodrigues</b></span></p>
       </div>
     </div>
   </section>
@@ -292,40 +301,21 @@
 
   <section class="wrap" aria-labelledby="who-h">
     <div class="section-head"><h2 id="who-h">People</h2><a href="#">People and advisors →</a></div>
-    <div class="gallery" aria-label="Photos from our gatherings, calls and retreats">
-      <div class="track">
-          <figure><img src="../assets/group.webp" alt="Honest Science participants, French Pyrenees, 2026" /><figcaption>Honest Science participants, French Pyrenees, 2026</figcaption></figure>
-          <figure><img src="../assets/g-cscsc25.webp" alt="CSCSC25, our first conference, online, October 2025" /><figcaption>CSCSC25, our first conference, online, October 2025</figcaption></figure>
-          <figure><img src="../assets/talk.webp" alt="Talks at the Honest Science workshop, 2026" /><figcaption>Talks at the Honest Science workshop, 2026</figcaption></figure>
-          <figure><img src="../assets/chalkboard.webp" alt="Alan Rodrigues, keynote at the CCS26 satellite, Binghamton NY" /><figcaption>Alan Rodrigues, keynote at the CCS26 satellite, Binghamton NY</figcaption></figure>
-          <figure><img src="../assets/g-call.webp" alt="Monthly community call, June 2026" /><figcaption>Monthly community call, June 2026</figcaption></figure>
-          <figure><img src="../assets/g-trailer45.webp" alt="Working side by side at INTP, 2026" /><figcaption>Working side by side at INTP, 2026</figcaption></figure>
-          <figure><img src="../assets/g-board.webp" alt="The questions board from Honest Science" /><figcaption>The questions board from Honest Science</figcaption></figure>
-          <figure><img src="../assets/g-qigong.webp" alt="Morning practice by the waterfall, INTP retreat, 2025" /><figcaption>Morning practice by the waterfall, INTP retreat, 2025</figcaption></figure>
-          <figure><img src="../assets/g-levin25.webp" alt="Michael Levin at CSCSC25" /><figcaption>Michael Levin at CSCSC25</figcaption></figure>
-          <figure><img src="../assets/hillside.webp" alt="Discussion on the hillside above INTP, 2026" /><figcaption>Discussion on the hillside above INTP, 2026</figcaption></figure>
-          <figure><img src="../assets/g-cooking.webp" alt="Cooking together, Honest Science, 2026" /><figcaption>Cooking together, Honest Science, 2026</figcaption></figure>
-          <figure><img src="../assets/postits.webp" alt="Mapping the room's research questions, 2026" /><figcaption>Mapping the room's research questions, 2026</figcaption></figure>
-          <figure aria-hidden="true"><img src="../assets/group.webp" alt="" /><figcaption>Honest Science participants, French Pyrenees, 2026</figcaption></figure>
-          <figure aria-hidden="true"><img src="../assets/g-cscsc25.webp" alt="" /><figcaption>CSCSC25, our first conference, online, October 2025</figcaption></figure>
-          <figure aria-hidden="true"><img src="../assets/talk.webp" alt="" /><figcaption>Talks at the Honest Science workshop, 2026</figcaption></figure>
-          <figure aria-hidden="true"><img src="../assets/chalkboard.webp" alt="" /><figcaption>Alan Rodrigues, keynote at the CCS26 satellite, Binghamton NY</figcaption></figure>
-          <figure aria-hidden="true"><img src="../assets/g-call.webp" alt="" /><figcaption>Monthly community call, June 2026</figcaption></figure>
-          <figure aria-hidden="true"><img src="../assets/g-trailer45.webp" alt="" /><figcaption>Working side by side at INTP, 2026</figcaption></figure>
-          <figure aria-hidden="true"><img src="../assets/g-board.webp" alt="" /><figcaption>The questions board from Honest Science</figcaption></figure>
-          <figure aria-hidden="true"><img src="../assets/g-qigong.webp" alt="" /><figcaption>Morning practice by the waterfall, INTP retreat, 2025</figcaption></figure>
-          <figure aria-hidden="true"><img src="../assets/g-levin25.webp" alt="" /><figcaption>Michael Levin at CSCSC25</figcaption></figure>
-          <figure aria-hidden="true"><img src="../assets/hillside.webp" alt="" /><figcaption>Discussion on the hillside above INTP, 2026</figcaption></figure>
-          <figure aria-hidden="true"><img src="../assets/g-cooking.webp" alt="" /><figcaption>Cooking together, Honest Science, 2026</figcaption></figure>
-          <figure aria-hidden="true"><img src="../assets/postits.webp" alt="" /><figcaption>Mapping the room's research questions, 2026</figcaption></figure>
-      </div>
-    </div>
     <div class="people">
+      <figure class="slides" aria-roledescription="slideshow">
+        <div class="frame">
+          <img src="../assets/group.webp" alt="Honest Science participants, French Pyrenees, 2026" data-cap="Honest Science participants, French Pyrenees, 2026" style="object-position:50% 50%" class="on" />
+          <img src="../assets/s-mapping.webp" alt="Reading the map of the room's research questions, 2026" data-cap="Reading the map of the room's research questions, 2026" style="object-position:50% 35%" />
+          <img src="../assets/s-cowork.webp" alt="Working side by side, INTP retreat, 2025" data-cap="Working side by side, INTP retreat, 2025" style="object-position:50% 50%" />
+          <img src="../assets/s-qigong.webp" alt="Morning practice in the forest, INTP retreat, 2025" data-cap="Morning practice in the forest, INTP retreat, 2025" style="object-position:50% 45%" />
+          <img src="../assets/g-cscsc25.webp" alt="CSCSC25, our first conference, online, October 2025" data-cap="CSCSC25, our first conference, online, October 2025" style="object-position:50% 50%" />
+          <img src="../assets/s-cave.webp" alt="Exploring the caves, Honest Science, 2026" data-cap="Exploring the caves, Honest Science, 2026" style="object-position:50% 45%" />
+        </div>
+        <figcaption>Honest Science participants, French Pyrenees, 2026</figcaption>
+      </figure>
       <div>
         <p>Physicists, biologists, cognitive scientists, philosophers and anthropologists, many with long contemplative practice. The community is run by volunteers and is still young: its shape is being worked out in public.</p>
-      </div>
-      <div>
-        <div class="advisors" style="margin-top:0;border-top:0;padding-top:0"><span class="k">Advisors</span><b>John Dunne</b> <span>contemplative studies, UW-Madison</span><br /><b>Francis Heylighen</b> <span>complex systems, VUB</span></div>
+        <div class="advisors"><span class="k">Advisors</span><b>John Dunne</b> <span>contemplative studies, UW-Madison</span><br /><b>Francis Heylighen</b> <span>complex systems, VUB</span></div>
         <p class="partners">With <b>INTP</b>, Institut Natura e Teoria en Pirenèus · a satellite of <b>CCS26</b>, the Conference on Complex Systems</p>
       </div>
     </div>
@@ -333,7 +323,7 @@
 
   <div class="wrap">
     <div class="why" id="why">
-      <span class="enso" aria-hidden="true"></span>
+      <span class="tile"><span class="enso" aria-hidden="true"></span></span>
       <div>
         <h2>Why an ensō?</h2>
         <p>The brush-drawn circle stands for emptiness. In Buddhist thought, nothing exists on its own: everything arises from relations, which complexity science studies as networks of interaction out of which new order emerges. Drawn in one stroke and left open, the circle is an open system. And it points to silence as where understanding starts. Every theory after that is a model, useful and incomplete.</p>
@@ -360,7 +350,7 @@
 <footer class="site-footer">
   <div class="wrap cols">
     <div>
-      <a class="lockup" href="./"><span class="enso" aria-hidden="true"></span><span><b>CSCSC</b></span></a>
+      <a class="lockup" href="./"><span class="tile"><span class="enso" aria-hidden="true"></span></span><span><b>CSCSC</b></span></a>
       <p style="margin:10px 0 0">Complexity Science &amp; Contemplative Studies Consortium</p>
       <p>cscs.conference at gmail dot com</p>
     </div>
@@ -374,5 +364,18 @@
 
 <script src="../assets/data.js"></script>
 <script src="../assets/proto.js"></script>
+<script>
+  // People slideshow: crossfade every 5 s; holds still under reduced motion.
+  (() => {
+    const fig = document.querySelector(".slides"); if (!fig) return;
+    const imgs = [...fig.querySelectorAll("img")], cap = fig.querySelector("figcaption");
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let i = 0;
+    setInterval(() => {
+      imgs[i].classList.remove("on"); i = (i + 1) % imgs.length; imgs[i].classList.add("on");
+      cap.textContent = imgs[i].dataset.cap;
+    }, 5000);
+  })();
+</script>
 </body>
 </html>
