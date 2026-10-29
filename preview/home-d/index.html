@@ -38,15 +38,23 @@
 
   /* The ensō is always black ink on paper. In dark theme it sits on a paper tile. */
   :root { --enso-ink: #1c1d1f; --enso-paper: transparent; }
-  .tile { display: inline-grid; place-items: center; background: var(--enso-paper); border-radius: 6px; }
+  .tile { display: inline-grid; place-items: center; background: var(--enso-paper); border-radius: 1px; }
   .tile .enso { color: var(--enso-ink) !important; }
   @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --enso-paper: #f4f1ea; } }
   :root[data-theme="dark"] { --enso-paper: #f4f1ea; }
   :root[data-theme="dark"] .tile, :root:not([data-theme="light"]) .tile { padding: 4px; }
-  :root[data-theme="dark"] .tile.big { padding: 28px; border-radius: 14px; }
-  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .tile.big { padding: 28px; border-radius: 14px; } }
+  :root[data-theme="dark"] .tile.big { padding: 28px; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .tile.big { padding: 28px; } }
   @media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) .tile { padding: 0; } }
   .tile.big { width: min(100%, 400px); }
+  /* Dark theme: the big ensō hangs as a scroll (kakejiku) - rice paper in a
+     narrow silk mounting, a thin rod above and a roller with knobs below. */
+  :root.scroll-on .tile.big { position: relative; width: min(100%, 330px); border-radius: 1px; padding: 96px 30px 54px;
+    background: #efe8d8 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .38 0 0 0 0 .28 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    box-shadow: inset 0 0 0 1px rgba(90,70,40,0.18), 0 0 0 10px #3a3226, 0 0 0 11px #57493a, 0 18px 40px rgba(0,0,0,0.45); margin: 14px 0 22px; }
+  .scroll-on .tile.big::before, .scroll-on .tile.big::after { content: ""; position: absolute; left: -16px; right: -16px; background: linear-gradient(#5a4330, #2b1f15); border-radius: 3px; }
+  .scroll-on .tile.big::before { top: -16px; height: 7px; }
+  .scroll-on .tile.big::after { bottom: -22px; height: 12px; left: -24px; right: -24px; border-radius: 6px; background: linear-gradient(90deg, #1d1510 0 10px, transparent 10px calc(100% - 10px), #1d1510 calc(100% - 10px)), linear-gradient(#6a4f38, #2b1f15); }
 
   /* Header lockup: bigger mark, full name beside it */
   .site-header .wrap { min-height: 76px; }
@@ -375,6 +383,15 @@
       imgs[i].classList.remove("on"); i = (i + 1) % imgs.length; imgs[i].classList.add("on");
       cap.textContent = imgs[i].dataset.cap;
     }, 5000);
+  })();
+</script>
+<script>
+  // The scroll frame shows only when the page is dark (paper tile visible).
+  (() => {
+    const r = document.documentElement, mq = matchMedia("(prefers-color-scheme: dark)");
+    const sync = () => r.classList.toggle("scroll-on", r.dataset.theme ? r.dataset.theme === "dark" : mq.matches);
+    sync(); mq.addEventListener("change", sync);
+    new MutationObserver(sync).observe(r, { attributes: true, attributeFilter: ["data-theme"] });
   })();
 </script>
 </body>

@@ -38,15 +38,23 @@
 
   /* The ensō is always black ink on paper. In dark theme it sits on a paper tile. */
   :root { --enso-ink: #1c1d1f; --enso-paper: transparent; }
-  .tile { display: inline-grid; place-items: center; background: var(--enso-paper); border-radius: 6px; }
+  .tile { display: inline-grid; place-items: center; background: var(--enso-paper); border-radius: 1px; }
   .tile .enso { color: var(--enso-ink) !important; }
   @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --enso-paper: #f4f1ea; } }
   :root[data-theme="dark"] { --enso-paper: #f4f1ea; }
   :root[data-theme="dark"] .tile, :root:not([data-theme="light"]) .tile { padding: 4px; }
-  :root[data-theme="dark"] .tile.big { padding: 28px; border-radius: 14px; }
-  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .tile.big { padding: 28px; border-radius: 14px; } }
+  :root[data-theme="dark"] .tile.big { padding: 28px; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .tile.big { padding: 28px; } }
   @media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) .tile { padding: 0; } }
   .tile.big { width: min(100%, 400px); }
+  /* Dark theme: the big ensō hangs as a scroll (kakejiku) - rice paper in a
+     narrow silk mounting, a thin rod above and a roller with knobs below. */
+  :root.scroll-on .tile.big { position: relative; width: min(100%, 330px); border-radius: 1px; padding: 96px 30px 54px;
+    background: #efe8d8 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .38 0 0 0 0 .28 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    box-shadow: inset 0 0 0 1px rgba(90,70,40,0.18), 0 0 0 10px #3a3226, 0 0 0 11px #57493a, 0 18px 40px rgba(0,0,0,0.45); margin: 14px 0 22px; }
+  .scroll-on .tile.big::before, .scroll-on .tile.big::after { content: ""; position: absolute; left: -16px; right: -16px; background: linear-gradient(#5a4330, #2b1f15); border-radius: 3px; }
+  .scroll-on .tile.big::before { top: -16px; height: 7px; }
+  .scroll-on .tile.big::after { bottom: -22px; height: 12px; left: -24px; right: -24px; border-radius: 6px; background: linear-gradient(90deg, #1d1510 0 10px, transparent 10px calc(100% - 10px), #1d1510 calc(100% - 10px)), linear-gradient(#6a4f38, #2b1f15); }
 
   /* Header lockup: bigger mark, full name beside it */
   .site-header .wrap { min-height: 76px; }
@@ -98,13 +106,13 @@
     @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
   }
 
-  section { padding: 96px 0 0; }
-  .credits { padding-top: 72px; display: grid; gap: 6px; text-align: center; color: var(--muted); font-size: 0.95rem; }
+  section { padding: 120px 0 0; }
+  .credits { padding-top: 48px; display: grid; gap: 6px; text-align: center; color: var(--muted); font-size: 0.95rem; }
   .credits p { margin: 0; }
   .credits .k { display: block; font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; margin: 10px 0 2px; }
-  .credits + section { padding-top: 88px; }
-  .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 24px; border-bottom: 1px solid var(--rule); padding-bottom: 10px; }
-  .section-head h2 { font-size: clamp(1.7rem, 3vw, 2.2rem); }
+  .credits + section { padding-top: 96px; }
+  .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 28px; }
+  .section-head h2 { font-size: clamp(1.7rem, 2.6vw, 2rem); }
   .section-head a { font-size: 0.92rem; text-decoration: none; color: var(--muted); }
   .section-head a:hover { color: var(--ink); }
 
@@ -137,6 +145,13 @@
   .latest li.next { background: color-mix(in srgb, var(--accent) 7%, transparent); border-radius: 8px; padding: 18px 16px; margin: 0 -16px; border-bottom: 0; }
   @media (max-width: 640px) { .latest li { grid-template-columns: 1fr; gap: 4px; } }
 
+  .latest-min { list-style: none; margin: 0; padding: 0; }
+  .latest-min li { display: grid; grid-template-columns: 8rem 1fr; gap: 20px; padding: 12px 0; }
+  .latest-min time { color: var(--muted); font-size: 0.95rem; padding-top: 3px; }
+  .latest-min a { text-decoration: none; font-family: var(--font-display); font-size: 1.4rem; line-height: 1.25; }
+  .latest-min a:hover { text-decoration: underline; text-decoration-color: var(--rule); }
+  .finding { margin-top: 36px; font-family: var(--font-display); font-style: italic; font-size: 1.3rem; line-height: 1.4; max-width: 40em; color: var(--muted); }
+  @media (max-width: 640px) { .latest-min li { grid-template-columns: 1fr; gap: 0; } }
   /* From the room */
   .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
   .pair blockquote { margin: 0; }
@@ -165,21 +180,25 @@
   @media (max-width: 760px) { .people { grid-template-columns: 1fr; gap: 20px; } }
 
   /* Why an ensō */
-  .why { margin-top: 88px; display: grid; grid-template-columns: 120px 1fr; gap: 28px; align-items: center; padding: 32px; border: 1px solid var(--rule-soft); border-radius: 10px; background: var(--bg-raised); }
+  .why { margin-top: 120px; border: 0 !important; background: none !important; padding: 0 !important; display: grid; grid-template-columns: 120px 1fr; gap: 28px; align-items: center; padding: 32px; border: 1px solid var(--rule-soft); border-radius: 10px; background: var(--bg-raised); }
   .why .enso { width: 110px; color: var(--ink); }
   .why h2 { font-size: 1.6rem; margin-bottom: 8px; }
   .why p { margin: 0 0 12px; color: var(--muted); max-width: 44em; }
   .why a { font-size: 0.95rem; }
   @media (max-width: 640px) { .why { grid-template-columns: 1fr; } .why .enso { width: 72px; } }
 
-  .join-sec { margin-top: 80px; border-top: 1px solid var(--rule); padding: 56px 0 0; }
+  .join-sec { margin-top: 120px; border-top: 0; padding: 56px 0 0; }
   .join-sec .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
   .join-sec h2 { font-size: clamp(1.8rem, 3.2vw, 2.4rem); }
   .join-sec ul { margin: 0 0 18px; padding-left: 1.1em; color: var(--muted); }
   .join-sec .actions { display: flex; flex-wrap: wrap; gap: 12px; }
   .join-sec .btn.solid { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
   @media (max-width: 760px) { .join-sec .wrap { grid-template-columns: 1fr; } }
-  .site-footer { margin-top: 72px; }
+  .site-footer { margin-top: 120px; }
+  .foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 28px; }
+  .foot nav { display: flex; flex-wrap: wrap; gap: 6px 20px; }
+  .foot nav a { text-decoration: none; }
+  .foot nav a:hover { text-decoration: underline; }
   .site-footer .lockup .enso { width: 36px; }
   .site-footer .lockup b { font-size: 1.2rem; }
 </style>
@@ -195,45 +214,11 @@
     </a>
     <nav class="nav" id="nav" aria-label="Main">
       <ul>
-        <li><button class="top" aria-expanded="false">Research</button>
-          <ul class="sub">
-            <li><a href="#">Research overview</a></li>
-            <li><a href="#">Questions and directions<small>Where our questions sit: the map</small></a></li>
-            <li><a href="#">Research threads<small>Goals and contexts · causality · the field map</small></a></li>
-            <li><a href="#">Publications and proceedings</a></li>
-            <li><a href="#">For researchers<small>Funding, centers, journals</small></a></li>
-          </ul></li>
-        <li><button class="top" aria-expanded="false">Gatherings</button>
-          <ul class="sub">
-            <li><a href="#">Upcoming</a></li>
-            <li><a href="#">Honest Science<small>Research retreats in the Pyrenees</small></a></li>
-            <li><a href="#">Conferences and satellites<small>CSCSC25 · CCS26</small></a></li>
-            <li><a href="#">Work Alive retreats</a></li>
-            <li><a href="#">Monthly call<small>Open to anyone curious</small></a></li>
-            <li><a href="#">Past gatherings</a></li>
-          </ul></li>
-        <li><button class="top" aria-expanded="false">Tools &amp; media</button>
-          <ul class="sub">
-            <li><a href="#">Overview</a></li>
-            <li><a href="#">Work Alive app<small>Focused work as a practice</small></a></li>
-            <li><a href="#">Films and talks</a></li>
-            <li><a href="#">Episteme questionnaire<small>How do you come to know things?</small></a></li>
-            <li><a href="#">Practice menu<small>10-minute practices across traditions</small></a></li>
-          </ul></li>
-        <li><button class="top" aria-expanded="false">Learn</button>
-          <ul class="sub">
-            <li><a href="#">Learning center</a></li>
-            <li><a href="#">Writing<small>Essays and reflections</small></a></li>
-            <li><a href="#">Our language<small>A shared glossary</small></a></li>
-          </ul></li>
-        <li><button class="top" aria-expanded="false">About</button>
-          <ul class="sub">
-            <li><a href="#">About CSCSC</a></li>
-            <li><a href="#">Why we exist<small>A short film</small></a></li>
-            <li><a href="#">People and advisors</a></li>
-            <li><a href="../../">The vision<small>An animated introduction</small></a></li>
-            <li><a href="#">Contact</a></li>
-          </ul></li>
+        <li><a href="#">Research</a></li>
+        <li><a href="#">Gatherings</a></li>
+        <li><a href="#">Tools &amp; media</a></li>
+        <li><a href="#">Learn</a></li>
+        <li><a href="#">About</a></li>
       </ul>
       <a class="btn join" href="#join">Join</a>
       <button class="menu-toggle" aria-expanded="false" aria-controls="nav">Menu</button>
@@ -250,7 +235,7 @@
       </figure>
       <div class="copy">
         <h1>Science studies the world. We also study the one looking.</h1>
-        <p class="sub">We are researchers asking how order arises with no one in charge, in cells, minds and societies, and we work on it with mathematics and with trained attention.</p>
+        <p class="sub">We're researchers asking how order arises with no one in charge, in cells, minds and societies. We work on it with mathematics and with trained attention.</p>
         <div class="actions">
           <a class="btn solid" href="#join">Join us</a>
           <a class="btn ghost" href="../../"><span class="play" aria-hidden="true"></span>Watch the vision</a>
@@ -260,7 +245,7 @@
   </section>
 
   <section class="wrap credits" aria-label="Advisors and speakers">
-    <p><span class="k">Advisors</span>John Dunne · Francis Heylighen</p>
+    <p><span class="k">Advisors</span>John Dunne (UW-Madison) · Francis Heylighen (VUB)</p>
     <p><span class="k">Speakers have included</span>Michael Levin · Neil Theise · Gary Lupyan · Adam Safron · Chaitanya Gokhale · Marc Santolini · Alan Rodrigues</p>
   </section>
 
@@ -270,35 +255,25 @@
       <a href="#">
         <div class="thumb"><img src="../assets/chalkboard.webp" style="object-position: 50% 78%" alt="A speaker at a chalkboard diagram linking feeling for truth, concepts and measurement" loading="lazy" /></div>
         <h3>Research</h3>
-        <p>A review paper on a complexity theory of mindfulness, and a shared map of the field.</p>
-        <span class="more">Explore →</span>
+        <p>Writing a review paper on a complexity theory of mindfulness, and mapping the field together.</p>
       </a>
       <a href="#">
         <div class="thumb"><img src="../assets/talk.webp" alt="A talk in a wood-beamed hall, participants seated informally" loading="lazy" /></div>
         <h3>Gatherings</h3>
-        <p>Research retreats in the Pyrenees, conference sessions, and a monthly open call.</p>
-        <span class="more">Explore →</span>
+        <p>Research retreats in the Pyrenees, sessions at complexity conferences, and a monthly call anyone can join.</p>
       </a>
       <a href="#">
         <div class="thumb labelled"><img src="../assets/hs-title.webp" alt="Title card of the film Honest Science: science that includes the scientist" loading="lazy" /><span class="chip"><span class="tri" aria-hidden="true"></span>Film · 4 min</span></div>
         <h3>Tools &amp; media</h3>
-        <p>Films, recorded talks, and Work Alive, an app for focused work as practice.</p>
-        <span class="more">Explore →</span>
+        <p>Films, recorded talks, and Work Alive, an app for doing focused work as a practice.</p>
       </a>
     </div>
   </section>
 
   <section class="wrap" aria-labelledby="latest-h">
     <div class="section-head"><h2 id="latest-h">Latest</h2><a href="#">All gatherings and outputs →</a></div>
-    <ul class="latest" id="latest"></ul>
-  </section>
-
-  <section class="wrap" aria-labelledby="room-h">
-    <div class="section-head"><h2 id="room-h">From the room</h2></div>
-    <div class="pair">
-      <blockquote><span class="k">A finding</span><p>Asked where an observer's influence is most underestimated, 6 of 10 answers pointed to the step before measurement: choosing what to study.</p><footer>Poll, CCS26 satellite session, October 2026</footer></blockquote>
-      <blockquote><span class="k">A feeling</span><p>"I feel calm, unlike most conference days."</p><footer>Participant, same session</footer></blockquote>
-    </div>
+    <ul class="latest-min" id="latest-min"></ul>
+    <p class="finding">From the CCS26 session: asked where an observer's influence is most underestimated, 6 of 10 answers pointed to the step before any measurement, choosing what to study.</p>
   </section>
 
   <section class="wrap" aria-labelledby="who-h">
@@ -316,8 +291,8 @@
         <figcaption>Honest Science participants, French Pyrenees, 2026</figcaption>
       </figure>
       <div>
-        <p>About 150 physicists, biologists, cognitive scientists, philosophers and practitioners, meeting since 2025. Volunteer-run, and still finding its shape.</p>
-                <p class="partners">With <b>INTP</b> in the Pyrenees, and the <b>Conference on Complex Systems</b>.</p>
+        <p>About 150 physicists, biologists, cognitive scientists, philosophers and contemplative practitioners, meeting since 2025. Run by volunteers, and still finding its shape.</p>
+        <p class="partners">With <b>INTP</b> in the Pyrenees, and the <b>Conference on Complex Systems</b>.</p>
       </div>
     </div>
   </section>
@@ -327,8 +302,7 @@
       <span class="tile"><span class="enso" aria-hidden="true"></span></span>
       <div>
         <h2>Why an ensō?</h2>
-        <p>The circle stands for emptiness: nothing exists on its own, everything arises from relations. Complexity science calls the same thing emergence. It also points to silence as where understanding starts. Every theory after that is a model.</p>
-        <a href="../../">Watch the vision, an animated introduction →</a>
+        <p>The ensō is drawn in one stroke and left open. In Buddhist thought it stands for emptiness: nothing exists on its own, everything arises from relations. Complexity science studies how new order emerges from those relations. Understanding starts in silence; every theory after that is a model.</p>
       </div>
     </div>
   </div>
@@ -337,23 +311,18 @@
     <div class="wrap">
       <h2 id="join-h">Join us</h2>
       <div>
-        <p class="muted" style="margin-bottom:18px">One email a month, and an open call. No affiliation needed.</p>
-        <div class="actions"><a class="btn solid" href="#">Get the monthly email</a><a class="btn ghost" href="#">Join the forum</a></div>
+        <p class="muted" style="margin-bottom:18px">One email a month, and a monthly call anyone can join. No affiliation needed.</p>
+        <div class="actions" style="align-items:center"><a class="btn solid" href="#">Get the monthly email</a><a href="#" class="muted">or join the forum</a></div>
       </div>
     </div>
   </section>
 </main>
 
 <footer class="site-footer">
-  <div class="wrap cols">
-    <div>
-      <a class="lockup" href="./"><span class="tile"><span class="enso" aria-hidden="true"></span></span><span><b>CSCSC</b></span></a>
-      <p style="margin:10px 0 0">Complexity Science &amp; Contemplative Studies Consortium</p>
-      <p>cscs.conference at gmail dot com</p>
-    </div>
-    <div><h4>Explore</h4><ul><li><a href="#">Research</a></li><li><a href="#">Gatherings</a></li><li><a href="#">Tools &amp; media</a></li><li><a href="#">Writing</a></li></ul></div>
-    <div><h4>Watch</h4><ul><li><a href="../../">The vision animation</a></li><li><a href="#">Films and talks</a></li></ul></div>
-    <div><h4>Connect</h4><ul><li><a href="#">Monthly email</a></li><li><a href="#">Forum (Hylo)</a></li><li><a href="#">Calendar</a></li></ul></div>
+  <div class="wrap foot">
+    <a class="lockup" href="./"><span class="tile"><span class="enso" aria-hidden="true"></span></span><span><b>CSCSC</b></span></a>
+    <nav aria-label="Footer"><a href="#">Research</a><a href="#">Gatherings</a><a href="#">Tools &amp; media</a><a href="#">Writing</a><a href="../../">The vision</a><a href="#">Forum</a></nav>
+    <span class="muted">cscs.conference at gmail dot com</span>
   </div>
 </footer>
 
@@ -361,6 +330,14 @@
 
 <script src="../assets/data.js"></script>
 <script src="../assets/proto.js"></script>
+<script>
+  // Latest: three items, date and title only. The build will generate this.
+  (() => {
+    const D = window.CSCSC, ul = document.getElementById("latest-min"); if (!D || !ul) return;
+    const items = [...D.now].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 3);
+    ul.innerHTML = items.map((x) => `<li><time datetime="${x.date}">${D.fmt(x.date)}</time><a href="${x.href}">${x.title}</a></li>`).join("");
+  })();
+</script>
 <script>
   // People slideshow: crossfade every 5 s; holds still under reduced motion.
   (() => {
@@ -372,6 +349,15 @@
       imgs[i].classList.remove("on"); i = (i + 1) % imgs.length; imgs[i].classList.add("on");
       cap.textContent = imgs[i].dataset.cap;
     }, 5000);
+  })();
+</script>
+<script>
+  // The scroll frame shows only when the page is dark (paper tile visible).
+  (() => {
+    const r = document.documentElement, mq = matchMedia("(prefers-color-scheme: dark)");
+    const sync = () => r.classList.toggle("scroll-on", r.dataset.theme ? r.dataset.theme === "dark" : mq.matches);
+    sync(); mq.addEventListener("change", sync);
+    new MutationObserver(sync).observe(r, { attributes: true, attributeFilter: ["data-theme"] });
   })();
 </script>
 </body>
