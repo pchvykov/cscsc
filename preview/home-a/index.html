@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>CSCSC - Complexity Science and Contemplative Studies Consortium</title>
+<meta name="description" content="A research community where complexity scientists and contemplatives work on the same questions." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/base.css" />
+<style>
+  /* Direction A - "Threshold": a dark band that is the animation's world,
+     then a light paper body. Questions first. */
+  :root {
+    --bg: #f6f3ee; --bg-raised: #fffdf9; --ink: #1d1c1a; --muted: #6b665e;
+    --rule: #cfc8bc; --rule-soft: #e4ded3; --hover: #ece6dc;
+    --accent: #8a5a12; --on-accent: #fff8ec;
+    --night: #0a0b0f; --night-ink: #f0ede8; --gold: #e2b65a;
+    --font-display: "Cormorant Garamond", Georgia, serif;
+    --font-body: "Source Serif 4", Georgia, serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #121317; --bg-raised: #1a1b20; --ink: #ece8e1; --muted: #a39d93;
+      --rule: #3a3a40; --rule-soft: #26272c; --hover: #22232a; --accent: #e2b65a; --on-accent: #16120a; --logo-filter: invert(0.9);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #121317; --bg-raised: #1a1b20; --ink: #ece8e1; --muted: #a39d93;
+    --rule: #3a3a40; --rule-soft: #26272c; --hover: #22232a; --accent: #e2b65a; --on-accent: #16120a; --logo-filter: invert(0.9);
+  }
+
+  /* Header sits on the night band, so it takes the night palette */
+  .site-header { background: color-mix(in srgb, var(--night) 90%, transparent); border-bottom-color: #1f2026; --ink: var(--night-ink); --hover: #1c1d23; --rule: #3a3a40; --bg: var(--night); --bg-raised: #15161b; --rule-soft: #26272c; --muted: #9a958c; --logo-filter: invert(0.9); color: var(--night-ink); }
+  .site-header .btn.join { background: transparent; color: var(--gold); border-color: color-mix(in srgb, var(--gold) 60%, transparent); }
+  .site-header .btn.join:hover { background: rgba(226,182,90,0.1); }
+
+  .hero { position: relative; background: var(--night); color: var(--night-ink); overflow: hidden; }
+  .hero::before { content: ""; position: absolute; inset: 0; background: url("../../landing_image_mid.webp") left center / auto 100% no-repeat; opacity: 0.9; }
+  .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(10,11,15,0) 20%, rgba(10,11,15,0.85) 52%, var(--night) 75%); }
+  .hero .wrap { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1.1fr; min-height: min(78vh, 640px); align-items: center; }
+  .hero-text { grid-column: 2; padding: 64px 0; }
+  .hero h1 { font-size: clamp(2.2rem, 4.4vw, 3.5rem); line-height: 1.08; letter-spacing: -0.005em; }
+  .hero .sub { font-size: 1.15rem; color: rgba(240,237,232,0.82); margin: 22px 0 10px; max-width: 34em; }
+  .hero .topics { font-family: var(--font-display); font-style: italic; font-size: 1.2rem; color: rgba(255,240,200,0.72); margin: 0 0 32px; }
+  .hero .actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .hero .btn.solid { background: var(--gold); border-color: var(--gold); color: #16120a; }
+  .hero .btn.ghost { color: var(--night-ink); border-color: rgba(240,237,232,0.35); }
+  .hero .btn.ghost:hover { background: rgba(255,255,255,0.06); }
+  .hint { flex-basis: 100%; font-size: 0.85rem; color: rgba(240,237,232,0.55); font-style: italic; }
+  .play { display: inline-block; width: 0; height: 0; border-left: 8px solid currentColor; border-top: 5px solid transparent; border-bottom: 5px solid transparent; margin-right: 8px; vertical-align: 1px; }
+  @media (max-width: 760px) {
+    .hero::before { background-position: 20% top; background-size: auto 62%; opacity: 0.7; }
+    .hero::after { background: linear-gradient(180deg, rgba(10,11,15,0) 10%, rgba(10,11,15,0.9) 46%, var(--night) 62%); }
+    .hero .wrap { grid-template-columns: 1fr; min-height: 0; }
+    .hero-text { grid-column: 1; padding: 64vw 0 48px; }
+  }
+
+  section { padding: 80px 0 0; }
+  .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 28px; border-bottom: 1px solid var(--rule); padding-bottom: 10px; }
+  .section-head h2 { font-size: clamp(1.7rem, 3vw, 2.2rem); }
+  .section-head a { font-size: 0.92rem; text-decoration: none; color: var(--muted); }
+  .section-head a:hover { color: var(--ink); }
+
+  /* Latest */
+  .latest { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+  .latest li { display: grid; grid-template-columns: 9.5rem 1fr; gap: 24px; padding: 20px 0; border-bottom: 1px solid var(--rule-soft); }
+  .latest .when { font-size: 0.85rem; color: var(--muted); padding-top: 4px; }
+  .latest .when b { display: block; font-weight: 600; color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.7rem; margin-bottom: 2px; }
+  .latest h3 { font-size: 1.45rem; margin-bottom: 4px; }
+  .latest h3 a { text-decoration: none; }
+  .latest h3 a:hover { text-decoration: underline; text-decoration-color: var(--rule); }
+  .latest p { margin: 0; color: var(--muted); max-width: 46em; }
+  .latest li.next { background: color-mix(in srgb, var(--accent) 7%, transparent); border-radius: 10px; padding: 20px 18px; margin: 0 -18px; border-bottom: 0; }
+  @media (max-width: 640px) { .latest li { grid-template-columns: 1fr; gap: 4px; } }
+
+  /* Questions */
+  .q-intro { max-width: 40em; color: var(--muted); margin-bottom: 20px; }
+  .questions { list-style: none; margin: 0; padding: 0; counter-reset: q; }
+  .questions li { counter-increment: q; border-bottom: 1px solid var(--rule-soft); }
+  .questions a { display: grid; grid-template-columns: 3rem 1fr auto; align-items: baseline; gap: 12px; padding: 18px 0; text-decoration: none; }
+  .questions a::before { content: counter(q, lower-roman); font-family: var(--font-display); font-style: italic; color: var(--muted); font-size: 1.1rem; }
+  .questions .q { font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.1rem); line-height: 1.2; }
+  .questions .arrow { color: var(--muted); transition: transform .2s; }
+  .questions a:hover .arrow { transform: translateX(4px); color: var(--accent); }
+  .questions small { grid-column: 2; display: block; font-size: 0.9rem; color: var(--muted); margin-top: -6px; }
+
+  /* People and place */
+  .place { display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; align-items: center; }
+  .place figure { margin: 0; }
+  .place img { border-radius: 4px; aspect-ratio: 4/3; object-fit: cover; width: 100%; }
+  .place figcaption { font-size: 0.82rem; color: var(--muted); margin-top: 8px; }
+  .place blockquote { margin: 0 0 24px; font-family: var(--font-display); font-size: 1.6rem; line-height: 1.3; font-style: italic; }
+  .place blockquote footer { font-family: var(--font-body); font-style: normal; font-size: 0.85rem; color: var(--muted); margin-top: 8px; }
+  .record { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 24px 0; border-top: 1px solid var(--rule-soft); padding-top: 18px; }
+  .record b { display: block; font-family: var(--font-display); font-size: 2rem; font-weight: 500; line-height: 1; }
+  .record span { font-size: 0.82rem; color: var(--muted); }
+  .people { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 0.92rem; }
+  .people span { color: var(--muted); }
+  @media (max-width: 760px) { .place { grid-template-columns: 1fr; gap: 24px; } }
+
+  /* Join */
+  .join-band { margin-top: 96px; background: var(--night); color: var(--night-ink); padding: 72px 0; text-align: center; }
+  .join-band h2 { font-size: clamp(1.9rem, 3.6vw, 2.6rem); margin-bottom: 12px; }
+  .join-band p { color: rgba(240,237,232,0.75); max-width: 36em; margin: 0 auto 28px; }
+  .join-band .actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+  .join-band .btn.solid { background: var(--gold); border-color: var(--gold); color: #16120a; }
+  .join-band .btn.ghost { color: var(--night-ink); border-color: rgba(240,237,232,0.35); }
+  .site-footer { margin-top: 0; }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="./"><img src="../assets/enso.png" alt="" /><b>CSCSC</b><span>Complexity Science and Contemplative Studies Consortium</span></a>
+    <nav class="nav" id="nav" aria-label="Main">
+      <ul>
+        <li><button class="top" aria-expanded="false">About</button>
+          <ul class="sub">
+            <li><a href="#">About overview</a></li>
+            <li><a href="#">Why we exist<small>A 3-minute film</small></a></li>
+            <li><a href="#">Approach and shared assumptions</a></li>
+            <li><a href="#">People</a></li>
+            <li><a href="../../">Vision<small>The animated introduction</small></a></li>
+            <li><a href="#">Contact</a></li>
+          </ul></li>
+        <li><button class="top" aria-expanded="false">Research</button>
+          <ul class="sub">
+            <li><a href="#">Research overview</a></li>
+            <li><a href="#">Core questions</a></li>
+            <li><a href="#">Research directions</a></li>
+            <li><a href="#">Working groups<small>Telics · Causality · the research map</small></a></li>
+            <li><a href="#">Outputs<small>Proceedings, talks, the episteme survey</small></a></li>
+            <li><a href="#">For researchers<small>Funding, centers, journals</small></a></li>
+          </ul></li>
+        <li><button class="top" aria-expanded="false">Initiatives</button>
+          <ul class="sub">
+            <li><a href="#">Initiatives overview</a></li>
+            <li><a href="#">Honest Science<small>Research retreats in the Pyrenees</small></a></li>
+            <li><a href="#">Work Alive<small>Work as practice: retreats, co-working, the app</small></a></li>
+            <li><a href="#">Conferences and satellites<small>CSCSC25 · CCS26</small></a></li>
+          </ul></li>
+        <li><button class="top" aria-expanded="false">Events</button>
+          <ul class="sub">
+            <li><a href="#">Events overview</a></li>
+            <li><a href="#">Upcoming</a></li>
+            <li><a href="#">Community calls<small>Monthly, open to all</small></a></li>
+            <li><a href="#">Past events</a></li>
+            <li><a href="#">Add to your calendar</a></li>
+          </ul></li>
+        <li><button class="top" aria-expanded="false">Learn</button>
+          <ul class="sub">
+            <li><a href="#">Learn overview</a></li>
+            <li><a href="#">Learning center</a></li>
+            <li><a href="#">Practice menu<small>10-minute practices across traditions</small></a></li>
+            <li><a href="#">Our language<small>A shared glossary</small></a></li>
+            <li><a href="#">Talks and films</a></li>
+          </ul></li>
+        <li><a href="#">Writing</a></li>
+      </ul>
+      <a class="btn join" href="#join">Join</a>
+      <button class="menu-toggle" aria-expanded="false" aria-controls="nav">Menu</button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" style="padding:0">
+    <div class="wrap">
+      <div class="hero-text">
+        <p class="eyebrow" style="color:rgba(255,240,200,0.6)">Complexity Science and Contemplative Studies Consortium</p>
+        <h1 id="hero-h1">How do systems flourish without anyone in charge?</h1>
+        <p class="sub" id="hero-sub">We are researchers in complexity science and contemplative studies, working on that question with equations and with meditation.</p>
+        <div class="actions">
+          <a class="btn solid" href="#join">Join the community</a>
+          <a class="btn ghost" href="../../"><span class="play" aria-hidden="true"></span>Watch the vision</a>
+          <span class="hint">an animated introduction, scroll at your own pace</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" aria-labelledby="latest-h">
+    <div class="section-head"><h2 id="latest-h">Latest</h2><a href="#">All events and outputs →</a></div>
+    <ul class="latest" id="latest"></ul>
+  </section>
+
+  <section class="wrap" aria-labelledby="q-h">
+    <div class="section-head"><h2 id="q-h">Questions we work on</h2><a href="#">Research directions →</a></div>
+    <p class="q-intro">Bayesian models of meditation. Agency of collective imaginaries. Relational construction of reality. Underneath the projects sit five questions, which the Honest Science workshop put on the wall in September 2026.</p>
+    <ol class="questions" id="questions"></ol>
+  </section>
+
+  <section class="wrap" aria-labelledby="who-h">
+    <div class="section-head"><h2 id="who-h">Who we are</h2><a href="#">People →</a></div>
+    <div class="place">
+      <figure>
+        <img src="../assets/road.webp" alt="Workshop participants walking down a village road toward a limestone peak" loading="lazy" />
+        <figcaption>Honest Science workshop, INTP, French Pyrenees, September 2026</figcaption>
+      </figure>
+      <div>
+        <blockquote>"I feel calm, unlike most conference days."<footer>Participant, CCS26 satellite, October 2026</footer></blockquote>
+        <p><strong>Since 2025: four gatherings, two working groups, 150+ researchers on the list.</strong> Physicists, biologists, cognitive scientists, philosophers and long-time practitioners from many traditions. We meet monthly online and a few times a year in person.</p>
+        <div class="people"><a href="#">Pavel Chvykov</a><a href="#">Matthew McCarthy</a><a href="#">Matthieu Barbier</a><a href="#">Robert Marsland</a><span>and others</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="join-band" id="join" aria-labelledby="join-h">
+    <div class="wrap">
+      <h2 id="join-h">Join the community</h2>
+      <p>You get one email a month: upcoming calls and gatherings, new talks and writing, and openings for research and funding. The monthly call is open to anyone curious, no affiliation needed.</p>
+      <div class="actions">
+        <a class="btn solid" href="#">Get the monthly email</a>
+        <a class="btn ghost" href="#">Join the forum</a>
+        <a class="btn ghost" href="#">Watch talks on YouTube</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap cols">
+    <div><h4>CSCSC</h4><p style="margin:0">Complexity Science and Contemplative Studies Consortium</p><p><a href="mailto:cscs.conference@gmail.com">cscs.conference@gmail.com</a></p></div>
+    <div><h4>Explore</h4><ul><li><a href="#">Research</a></li><li><a href="#">Initiatives</a></li><li><a href="#">Events</a></li><li><a href="#">Writing</a></li></ul></div>
+    <div><h4>Watch</h4><ul><li><a href="../../">The vision animation</a></li><li><a href="#">Talks and films</a></li></ul></div>
+    <div><h4>Connect</h4><ul><li><a href="#">Monthly email</a></li><li><a href="#">Forum (Hylo)</a></li><li><a href="#">Calendar</a></li></ul></div>
+  </div>
+</footer>
+
+<div class="proto-note">Prototype A - Threshold · <a href="../">all prototypes</a></div>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/proto.js"></script>
+</body>
+</html>

@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>CSCSC - Complexity Science and Contemplative Studies Consortium</title>
+<meta name="description" content="About 150 researchers in complexity science and contemplative studies, building the scientific culture we wish existed." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/base.css" />
+<style>
+  /* Direction B - "People and place": photo-led and warm. Tests whether
+     warmth and real faces answer the "Wikipedia / AI-generated" critique. */
+  :root {
+    --bg: #f4efe6; --bg-raised: #fbf8f2; --ink: #23201b; --muted: #6e665a;
+    --rule: #d3c8b6; --rule-soft: #e6ddcf; --hover: #ebe3d5;
+    --accent: #7a4a1e; --on-accent: #fff6ea; --leaf: #4f5f3a;
+    --font-display: "Cormorant Garamond", Georgia, serif;
+    --font-body: "Source Serif 4", Georgia, serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #17150f; --bg-raised: #201d16; --ink: #efe7da; --muted: #a89e8e;
+      --rule: #3d372c; --rule-soft: #2b2720; --hover: #26221a; --accent: #e0a868; --on-accent: #1a1209; --leaf: #a8b98a; --logo-filter: invert(0.9);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #17150f; --bg-raised: #201d16; --ink: #efe7da; --muted: #a89e8e;
+    --rule: #3d372c; --rule-soft: #2b2720; --hover: #26221a; --accent: #e0a868; --on-accent: #1a1209; --leaf: #a8b98a; --logo-filter: invert(0.9);
+  }
+  .brand img { width: 30px; height: 30px; border-radius: 50%; align-self: center; }
+  .site-header .btn.join { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+
+  .hero { position: relative; min-height: min(86vh, 760px); display: flex; align-items: flex-end; color: #fbf6ec; overflow: hidden; }
+  .hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 40%; }
+  .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,16,10,0.05) 30%, rgba(20,16,10,0.72) 100%); }
+  .hero .wrap { position: relative; z-index: 1; padding: 0 0 64px; }
+  .hero h1 { font-size: clamp(2.4rem, 5.6vw, 4.4rem); line-height: 1.04; max-width: 13em; text-shadow: 0 2px 24px rgba(0,0,0,0.35); }
+  .hero .sub { font-size: 1.15rem; max-width: 33em; margin: 18px 0 28px; color: rgba(251,246,236,0.9); }
+  .hero .actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .hero .btn.solid { background: #fbf6ec; border-color: #fbf6ec; color: #23201b; }
+  .hero .btn.ghost { color: #fbf6ec; border-color: rgba(251,246,236,0.55); }
+  .hero .btn.ghost:hover { background: rgba(255,255,255,0.1); }
+  .hero .eyebrow { color: rgba(251,246,236,0.8); margin-bottom: 14px; }
+  @media (max-width: 760px) { .hero::after { background: linear-gradient(180deg, rgba(20,16,10,0.1) 15%, rgba(20,16,10,0.82) 55%, rgba(20,16,10,0.9) 100%); } }
+  .hero .credit { position: absolute; right: 16px; bottom: 12px; z-index: 1; font-size: 0.75rem; color: rgba(251,246,236,0.7); }
+  .vision-link { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: #fbf6ec; font-size: 0.95rem; }
+  .vision-link img { position: static; width: 64px; height: 36px; object-fit: cover; border-radius: 4px; border: 1px solid rgba(251,246,236,0.4); }
+  .vision-link small { display: block; font-size: 0.78rem; opacity: 0.75; font-style: italic; }
+
+  section { padding: 88px 0 0; }
+  h2.big { font-size: clamp(1.9rem, 3.4vw, 2.7rem); margin-bottom: 10px; }
+  .lede { font-size: 1.15rem; color: var(--muted); max-width: 38em; margin-bottom: 36px; }
+
+  /* People and place */
+  .mosaic { display: grid; grid-template-columns: 1.2fr 1fr 1fr; grid-template-rows: 220px 220px; gap: 10px; }
+  .mosaic figure { margin: 0; position: relative; overflow: hidden; border-radius: 6px; }
+  .mosaic img { width: 100%; height: 100%; object-fit: cover; }
+  .mosaic figure:first-child { grid-row: span 2; }
+  .mosaic figure:nth-child(4) { grid-column: span 2; }
+  .mosaic figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 24px 12px 8px; font-size: 0.8rem; color: #fbf6ec; background: linear-gradient(180deg, transparent, rgba(0,0,0,0.6)); }
+  @media (max-width: 760px) {
+    .mosaic { grid-template-columns: 1fr 1fr; grid-template-rows: 200px 160px 160px; }
+    .mosaic figure:first-child { grid-row: auto; grid-column: span 2; }
+    .mosaic figure:nth-child(4) { grid-column: span 2; }
+  }
+  .voices { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 28px; margin: 40px 0 0; }
+  .voices blockquote { margin: 0; font-family: var(--font-display); font-size: 1.45rem; line-height: 1.3; font-style: italic; border-left: 2px solid var(--accent); padding-left: 16px; }
+  .voices blockquote footer { font-family: var(--font-body); font-style: normal; font-size: 0.82rem; color: var(--muted); margin-top: 8px; }
+  .team { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--rule); }
+  .person { display: grid; grid-template-columns: 52px 1fr; gap: 12px; align-items: center; }
+  .avatar { width: 52px; height: 52px; border-radius: 50%; background: var(--hover); display: grid; place-items: center; font-family: var(--font-display); font-size: 1.3rem; color: var(--muted); }
+  .person b { display: block; font-weight: 600; font-size: 0.95rem; }
+  .person span { font-size: 0.85rem; color: var(--muted); line-height: 1.35; display: block; }
+
+  /* Latest as cards */
+  .cards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; }
+  .cards li { background: var(--bg-raised); border: 1px solid var(--rule-soft); border-radius: 10px; padding: 20px; display: flex; flex-direction: column; gap: 6px; }
+  .cards li.next { border-color: var(--accent); }
+  .cards .when { font-size: 0.8rem; color: var(--muted); }
+  .cards .when b { color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.7rem; display: block; }
+  .cards h3 { font-size: 1.3rem; }
+  .cards h3 a { text-decoration: none; }
+  .cards p { font-size: 0.92rem; color: var(--muted); margin: 0; }
+
+  /* Questions, compact */
+  .qline { display: flex; flex-wrap: wrap; gap: 10px; list-style: none; padding: 0; margin: 0; }
+  .qline a { display: inline-block; padding: 10px 16px; border: 1px solid var(--rule); border-radius: 999px; text-decoration: none; font-family: var(--font-display); font-size: 1.25rem; }
+  .qline a:hover { background: var(--hover); border-color: var(--accent); }
+
+  .join-sec { margin-top: 96px; background: var(--bg-raised); border-top: 1px solid var(--rule-soft); border-bottom: 1px solid var(--rule-soft); padding: 72px 0; }
+  .join-sec .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+  .join-sec ul { margin: 0; padding-left: 1.1em; color: var(--muted); }
+  .join-sec .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
+  @media (max-width: 760px) { .join-sec .wrap { grid-template-columns: 1fr; } }
+  .site-footer { margin-top: 0; }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="./"><img src="../assets/enso.png" alt="" /><b>CSCSC</b><span>Complexity Science and Contemplative Studies Consortium</span></a>
+    <nav class="nav" id="nav" aria-label="Main">
+      <ul>
+        <li><button class="top" aria-expanded="false">About</button>
+          <ul class="sub">
+            <li><a href="#">About overview</a></li>
+            <li><a href="#">Why we exist<small>A 3-minute film</small></a></li>
+            <li><a href="#">Approach and shared assumptions</a></li>
+            <li><a href="#">People</a></li>
+            <li><a href="../../">Vision<small>The animated introduction</small></a></li>
+            <li><a href="#">Contact</a></li>
+          </ul></li>
+        <li><button class="top" aria-expanded="false">Research</button>
+          <ul class="sub">
+            <li><a href="#">Research overview</a></li>
+            <li><a href="#">Core questions</a></li>
+            <li><a href="#">Research directions</a></li>
+            <li><a href="#">Working groups<small>Telics · Causality · the research map</small></a></li>
+            <li><a href="#">Outputs<small>Proceedings, talks, the episteme survey</small></a></li>
+            <li><a href="#">For researchers<small>Funding, centers, journals</small></a></li>
+          </ul></li>
+        <li><button class="top" aria-expanded="false">Initiatives</button>
+          <ul class="sub">
+            <li><a href="#">Initiatives overview</a></li>
+            <li><a href="#">Honest Science<small>Research retreats in the Pyrenees</small></a></li>
+            <li><a href="#">Work Alive<small>Work as practice: retreats, co-working, the app</small></a></li>
+            <li><a href="#">Conferences and satellites<small>CSCSC25 · CCS26</small></a></li>
+          </ul></li>
+        <li><button class="top" aria-expanded="false">Events</button>
+          <ul class="sub">
+            <li><a href="#">Events overview</a></li>
+            <li><a href="#">Upcoming</a></li>
+            <li><a href="#">Community calls<small>Monthly, open to all</small></a></li>
+            <li><a href="#">Past events</a></li>
+            <li><a href="#">Add to your calendar</a></li>
+          </ul></li>
+        <li><button class="top" aria-expanded="false">Learn</button>
+          <ul class="sub">
+            <li><a href="#">Learn overview</a></li>
+            <li><a href="#">Learning center</a></li>
+            <li><a href="#">Practice menu<small>10-minute practices across traditions</small></a></li>
+            <li><a href="#">Our language<small>A shared glossary</small></a></li>
+            <li><a href="#">Talks and films</a></li>
+          </ul></li>
+        <li><a href="#">Writing</a></li>
+      </ul>
+      <a class="btn join" href="#join">Join</a>
+      <button class="menu-toggle" aria-expanded="false" aria-controls="nav">Menu</button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" style="padding:0">
+    <img src="../assets/road.webp" alt="Workshop participants walking down a village road toward a limestone peak" />
+    <div class="wrap">
+      <p class="eyebrow">Complexity Science and Contemplative Studies Consortium</p>
+      <h1>We are building the scientific culture we wish existed.</h1>
+      <p class="sub">About 150 researchers in complexity science and contemplative studies. We meet on retreats, at conferences, and once a month online.</p>
+      <div class="actions">
+        <a class="btn solid" href="#join">Join us</a>
+        <a class="vision-link" href="../../"><img src="../../landing_image_mid.webp" alt="" /><span>Watch the vision<small>an animated introduction, scroll at your own pace</small></span></a>
+      </div>
+    </div>
+    <span class="credit">Honest Science workshop, French Pyrenees, 2026</span>
+  </section>
+
+  <section class="wrap" aria-labelledby="who-h">
+    <h2 class="big" id="who-h">Who we are</h2>
+    <p class="lede">Physicists, biologists, cognitive scientists, philosophers, and people with decades of contemplative practice. Since 2025 we have met four times in person, and we run two working groups and a monthly call.</p>
+    <div class="mosaic">
+      <figure><img src="../assets/postits.webp" alt="Participants placing sticky notes on a wall during a mapping session" loading="lazy" /><figcaption>Mapping the room's research questions</figcaption></figure>
+      <figure><img src="../assets/talk.webp" alt="A talk in a wood-beamed hall, audience seated informally" loading="lazy" /><figcaption>Nine talks, no podium</figcaption></figure>
+      <figure><img src="../assets/cave.webp" alt="Three people in a cave lit by headlamps, their shadow large on the wall" loading="lazy" /><figcaption>A day in the caves</figcaption></figure>
+      <figure><img src="../assets/house.webp" alt="The INTP house in a meadow below twin limestone peaks" loading="lazy" /><figcaption>INTP, our home in the Pyrenees</figcaption></figure>
+    </div>
+    <div class="voices">
+      <blockquote>"I feel calm, unlike most conference days."<footer>Participant, CCS26 satellite, 2026</footer></blockquote>
+      <blockquote>"Less fear of being misunderstood."<footer>Participant, CCS26 satellite, 2026</footer></blockquote>
+      <blockquote>"Love comes naturally to me, and yet the way I express it can bring great harm unless I'm taught."<footer>Participant, Honest Science, 2026</footer></blockquote>
+    </div>
+    <div class="team">
+      <div class="person"><div class="avatar">P</div><div><b>Pavel Chvykov</b><span>Complex systems, physics of self-organization</span></div></div>
+      <div class="person"><div class="avatar">M</div><div><b>Matthew McCarthy</b><span>Collective imaginaries, VUB</span></div></div>
+      <div class="person"><div class="avatar">M</div><div><b>Matthieu Barbier</b><span>Theoretical ecology; director, INTP</span></div></div>
+      <div class="person"><div class="avatar">R</div><div><b>Robert Marsland</b><span>Theoretical ecology, Trinitarian theology</span></div></div>
+    </div>
+  </section>
+
+  <section class="wrap" aria-labelledby="latest-h">
+    <h2 class="big" id="latest-h">What's happening</h2>
+    <p class="lede">Our latest gatherings, and what came out of them.</p>
+    <ul class="cards" id="latest"></ul>
+  </section>
+
+  <section class="wrap" aria-labelledby="q-h">
+    <h2 class="big" id="q-h">What we ask</h2>
+    <p class="lede">The questions underneath the projects. Each opens onto readings and the people working on it.</p>
+    <ul class="qline">
+      <li><a href="#">What kind of world are we in?</a></li>
+      <li><a href="#">What kind of beings are we?</a></li>
+      <li><a href="#">How can things become knowable?</a></li>
+      <li><a href="#">Whose ways of knowing count?</a></li>
+      <li><a href="#">What does knowledge do?</a></li>
+    </ul>
+  </section>
+
+  <section class="join-sec" id="join" aria-labelledby="join-h">
+    <div class="wrap">
+      <div>
+        <h2 class="big" id="join-h">Join us</h2>
+        <p class="lede" style="margin:0">Anyone curious is welcome, no affiliation needed.</p>
+      </div>
+      <div>
+        <ul>
+          <li>One email a month: calls, gatherings, new talks and writing, research and funding openings</li>
+          <li>A monthly call with open discussion</li>
+          <li>A forum with a member map, to find people near you</li>
+        </ul>
+        <div class="actions"><a class="btn solid" href="#">Get the monthly email</a><a class="btn ghost" href="#">Join the forum</a></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap cols">
+    <div><h4>CSCSC</h4><p style="margin:0">Complexity Science and Contemplative Studies Consortium</p><p><a href="mailto:cscs.conference@gmail.com">cscs.conference@gmail.com</a></p></div>
+    <div><h4>Explore</h4><ul><li><a href="#">Research</a></li><li><a href="#">Initiatives</a></li><li><a href="#">Events</a></li><li><a href="#">Writing</a></li></ul></div>
+    <div><h4>Watch</h4><ul><li><a href="../../">The vision animation</a></li><li><a href="#">Talks and films</a></li></ul></div>
+    <div><h4>Connect</h4><ul><li><a href="#">Monthly email</a></li><li><a href="#">Forum (Hylo)</a></li><li><a href="#">Calendar</a></li></ul></div>
+  </div>
+</footer>
+
+<div class="proto-note">Prototype B - People and place · <a href="../">all prototypes</a></div>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/proto.js"></script>
+</body>
+</html>

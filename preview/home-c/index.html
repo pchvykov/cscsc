@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>CSCSC - Complexity Science and Contemplative Studies Consortium</title>
+<meta name="description" content="A research community in complexity science and contemplative studies. Science studies the world; we also study the one looking." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/base.css" />
+<style>
+  /* Direction C - "Map first": the hero is the research landscape, redrawn
+     from the Honest Science Proceedings Part I loop map. Each region links
+     to a research direction. */
+  :root {
+    --bg: #f7f5f0; --bg-raised: #fffefb; --ink: #1c1d1f; --muted: #67645e;
+    --rule: #cdc8bd; --rule-soft: #e5e1d8; --hover: #ecE8df;
+    --accent: #b5562a; --on-accent: #fff7f0;
+    --world: #e9ede4; --we: #f6efe4; --self: #efdfca; --line: #46443f;
+    --font-display: "Cormorant Garamond", Georgia, serif;
+    --font-body: "Source Serif 4", Georgia, serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0f1013; --bg-raised: #17181c; --ink: #ebe7df; --muted: #9f9a91;
+      --rule: #383940; --rule-soft: #24252a; --hover: #1f2025; --accent: #e88a5a; --on-accent: #1a0f08;
+      --world: #1a2019; --we: #211d17; --self: #3a2c1e; --line: #b9b3a8; --logo-filter: invert(0.9);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0f1013; --bg-raised: #17181c; --ink: #ebe7df; --muted: #9f9a91;
+    --rule: #383940; --rule-soft: #24252a; --hover: #1f2025; --accent: #e88a5a; --on-accent: #1a0f08;
+    --world: #1a2019; --we: #211d17; --self: #3a2c1e; --line: #b9b3a8; --logo-filter: invert(0.9);
+  }
+  .brand img { width: 30px; height: 30px; border-radius: 3px; align-self: center; }
+  .site-header .btn.join { border-color: var(--accent); color: var(--accent); }
+
+  .hero { padding: 56px 0 24px; }
+  .hero .wrap { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 32px; align-items: center; }
+  .hero h1 { font-size: clamp(2.3rem, 4.6vw, 3.7rem); line-height: 1.06; }
+  .hero .sub { font-size: 1.12rem; color: var(--muted); margin: 18px 0 26px; max-width: 30em; }
+  .hero .actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .hero .btn.solid { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+  .hero .hint { display: block; font-size: 0.85rem; color: var(--muted); font-style: italic; margin-top: 12px; }
+  .play { display: inline-block; width: 0; height: 0; border-left: 8px solid currentColor; border-top: 5px solid transparent; border-bottom: 5px solid transparent; margin-right: 8px; vertical-align: 1px; }
+  @media (max-width: 860px) { .hero .wrap { grid-template-columns: 1fr; } .hero { padding-top: 36px; } }
+
+  /* The map */
+  .map svg { width: 100%; height: auto; display: block; overflow: visible; }
+  .map .ring { stroke: var(--line); stroke-width: 1.4; }
+  .map .flow { fill: none; stroke: var(--line); stroke-width: 2.6; }
+  .map .thin { fill: none; stroke: var(--line); stroke-width: 1.2; opacity: 0.8; }
+  .map .loop { fill: none; stroke: var(--accent); stroke-width: 1.8; }
+  .map .tie { stroke: var(--line); stroke-width: 1; opacity: 0.35; }
+  .map text { font-family: var(--font-body); fill: var(--ink); }
+  .map .big { font-family: var(--font-display); font-size: 26px; font-weight: 500; letter-spacing: 0.06em; }
+  .map .small { font-size: 11px; fill: var(--muted); font-style: italic; }
+  .map .flowlabel { font-family: var(--font-display); font-style: italic; font-size: 19px; }
+  .map a.node { cursor: pointer; }
+  .map a.node circle { fill: var(--ink); transition: fill .2s, r .2s; }
+  .map a.node .num { fill: var(--bg); font-size: 13px; font-weight: 600; text-anchor: middle; dominant-baseline: central; pointer-events: none; }
+  .map a.node .lbl { font-size: 15px; font-weight: 600; }
+  .map a.node:hover circle, .map a.node:focus circle, .map a.node.on circle { fill: var(--accent); }
+  .map a.node:hover .lbl, .map a.node.on .lbl { fill: var(--accent); }
+  @media (prefers-reduced-motion: no-preference) {
+    .map .flow, .map .loop { stroke-dasharray: 6 0; }
+    .map .breath { animation: breath 7s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+    @keyframes breath { 0%,100% { opacity: 0.55; } 50% { opacity: 1; } }
+  }
+  .map-caption { font-size: 0.82rem; color: var(--muted); margin-top: 6px; text-align: right; }
+
+  /* Six directions */
+  section { padding: 72px 0 0; }
+  .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 24px; border-bottom: 1px solid var(--rule); padding-bottom: 10px; }
+  .section-head h2 { font-size: clamp(1.7rem, 3vw, 2.2rem); }
+  .section-head a { font-size: 0.92rem; text-decoration: none; color: var(--muted); }
+  .dirs { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 0 32px; }
+  .dirs li { border-bottom: 1px solid var(--rule-soft); }
+  .dirs a { display: grid; grid-template-columns: 30px 1fr; gap: 4px 12px; padding: 18px 8px 20px; text-decoration: none; border-radius: 8px; transition: background .2s; }
+  .dirs a:hover, .dirs a.on { background: var(--hover); }
+  .dirs .n { width: 26px; height: 26px; border-radius: 50%; background: var(--ink); color: var(--bg); display: grid; place-items: center; font-size: 0.8rem; font-weight: 600; margin-top: 4px; }
+  .dirs a.on .n, .dirs a:hover .n { background: var(--accent); }
+  .dirs h3 { font-size: 1.5rem; }
+  .dirs .q { grid-column: 2; font-size: 1rem; }
+  .dirs .poles { grid-column: 2; display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .dirs .poles span { font-size: 0.78rem; padding: 3px 9px; border-radius: 4px; background: var(--world); color: var(--muted); }
+  .dirs .poles span + span { background: var(--we); }
+  .dirs .poles i { font-style: normal; font-size: 0.78rem; color: var(--muted); align-self: center; }
+
+  /* Latest */
+  .latest { list-style: none; margin: 0; padding: 0; }
+  .latest li { display: grid; grid-template-columns: 9.5rem 1fr; gap: 24px; padding: 18px 0; border-bottom: 1px solid var(--rule-soft); }
+  .latest .when { font-size: 0.85rem; color: var(--muted); padding-top: 4px; }
+  .latest .when b { display: block; font-weight: 600; color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.7rem; margin-bottom: 2px; }
+  .latest h3 { font-size: 1.4rem; margin-bottom: 4px; }
+  .latest h3 a { text-decoration: none; }
+  .latest p { margin: 0; color: var(--muted); }
+  @media (max-width: 640px) { .latest li { grid-template-columns: 1fr; gap: 4px; } }
+
+  .people-row { display: grid; grid-template-columns: 1fr 1.2fr; gap: 36px; align-items: center; }
+  .people-row img { border-radius: 4px; aspect-ratio: 4/3; object-fit: cover; width: 100%; }
+  .people-row p { color: var(--muted); }
+  .people-row .names { color: var(--ink); font-size: 0.95rem; }
+  @media (max-width: 760px) { .people-row { grid-template-columns: 1fr; } }
+
+  .join-sec { margin-top: 88px; border-top: 1px solid var(--rule); padding: 56px 0 0; }
+  .join-sec .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .join-sec h2 { font-size: clamp(1.8rem, 3.2vw, 2.4rem); }
+  .join-sec ul { margin: 0 0 18px; padding-left: 1.1em; color: var(--muted); }
+  .join-sec .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+  .join-sec .btn.solid { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+  @media (max-width: 760px) { .join-sec .wrap { grid-template-columns: 1fr; } }
+  .site-footer { margin-top: 72px; }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="./"><img src="../assets/enso.png" alt="" /><b>CSCSC</b><span>Complexity Science and Contemplative Studies Consortium</span></a>
+    <nav class="nav" id="nav" aria-label="Main">
+      <ul>
+        <li><button class="top" aria-expanded="false">About</button>
+          <ul class="sub">
+            <li><a href="#">About overview</a></li>
+            <li><a href="#">Why we exist<small>A 3-minute film</small></a></li>
+            <li><a href="#">Approach and shared assumptions</a></li>
+            <li><a href="#">People</a></li>
+            <li><a href="../../">Vision<small>The animated introduction</small></a></li>
+            <li><a href="#">Contact</a></li>
+          </ul></li>
+        <li><button class="top" aria-expanded="false">Research</button>
+          <ul class="sub">
+            <li><a href="#">Research overview</a></li>
+            <li><a href="#">Core questions</a></li>
+            <li><a href="#">Research directions</a></li>
+            <li><a href="#">Working groups<small>Telics · Causality · the research map</small></a></li>
+            <li><a href="#">Outputs<small>Proceedings, talks, the episteme survey</small></a></li>
+            <li><a href="#">For researchers<small>Funding, centers, journals</small></a></li>
+          </ul></li>
+        <li><button class="top" aria-expanded="false">Initiatives</button>
+          <ul class="sub">
+            <li><a href="#">Initiatives overview</a></li>
+            <li><a href="#">Honest Science<small>Research retreats in the Pyrenees</small></a></li>
+            <li><a href="#">Work Alive<small>Work as practice: retreats, co-working, the app</small></a></li>
+            <li><a href="#">Conferences and satellites<small>CSCSC25 · CCS26</small></a></li>
+          </ul></li>
+        <li><button class="top" aria-expanded="false">Events</button>
+          <ul class="sub">
+            <li><a href="#">Events overview</a></li>
+            <li><a href="#">Upcoming</a></li>
+            <li><a href="#">Community calls<small>Monthly, open to all</small></a></li>
+            <li><a href="#">Past events</a></li>
+            <li><a href="#">Add to your calendar</a></li>
+          </ul></li>
+        <li><button class="top" aria-expanded="false">Learn</button>
+          <ul class="sub">
+            <li><a href="#">Learn overview</a></li>
+            <li><a href="#">Learning center</a></li>
+            <li><a href="#">Practice menu<small>10-minute practices across traditions</small></a></li>
+            <li><a href="#">Our language<small>A shared glossary</small></a></li>
+            <li><a href="#">Talks and films</a></li>
+          </ul></li>
+        <li><a href="#">Writing</a></li>
+      </ul>
+      <a class="btn join" href="#join">Join</a>
+      <button class="menu-toggle" aria-expanded="false" aria-controls="nav">Menu</button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Complexity Science and Contemplative Studies Consortium</p>
+        <h1>Science studies the world. We also study the one looking.</h1>
+        <p class="sub">A research community in complexity science and contemplative studies. The map shows where our questions sit. Choose a region to see the work.</p>
+        <div class="actions">
+          <a class="btn solid" href="#join">Join the community</a>
+          <a class="btn ghost" href="../../"><span class="play" aria-hidden="true"></span>Watch the vision</a>
+        </div>
+        <span class="hint">The vision is an animated introduction; scroll at your own pace.</span>
+      </div>
+
+      <figure class="map" style="margin:0">
+        <svg viewBox="0 0 640 440" role="img" aria-labelledby="map-t map-d">
+          <title id="map-t">Map of CSCSC research questions</title>
+          <desc id="map-d">A world, and a collective of knowers with a self inside it. Shared knowing flows from world to collective; acting flows back. A thin first-person channel links world and self. Both self and collective also know themselves. Six numbered regions link to research directions.</desc>
+          <defs>
+            <marker id="ah" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--line)"/></marker>
+            <marker id="ahs" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--line)"/></marker>
+            <marker id="aha" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--accent)"/></marker>
+          </defs>
+
+          <!-- world -->
+          <circle class="ring" cx="170" cy="225" r="105" fill="var(--world)"/>
+          <text class="big" x="170" y="234" text-anchor="middle">WORLD</text>
+
+          <!-- we, with I and others -->
+          <circle class="ring" cx="455" cy="225" r="135" fill="var(--we)" stroke-dasharray="5 5"/>
+          <text class="big" x="500" y="128" text-anchor="middle" style="font-size:20px">WE</text>
+          <line class="tie" x1="438" y1="210" x2="520" y2="170"/><line class="tie" x1="438" y1="240" x2="520" y2="285"/><line class="tie" x1="525" y1="196" x2="525" y2="258"/>
+          <circle cx="528" cy="168" r="30" fill="var(--bg)" stroke="var(--line)" stroke-dasharray="3 3" opacity="0.8"/>
+          <circle cx="528" cy="288" r="30" fill="var(--bg)" stroke="var(--line)" stroke-dasharray="3 3" opacity="0.8"/>
+          <text class="small" x="528" y="172" text-anchor="middle">other</text>
+          <text class="small" x="528" y="292" text-anchor="middle">other</text>
+          <circle cx="400" cy="225" r="44" fill="var(--self)" stroke="var(--line)" stroke-dasharray="3 3"/>
+          <text class="big" x="400" y="234" text-anchor="middle" style="font-size:24px">I</text>
+
+          <!-- flows -->
+          <path class="flow" d="M226,136 C270,60 340,62 378,104" marker-end="url(#ah)"/>
+                    <text class="small" x="232" y="104">shared</text>
+          <path class="flow" d="M372,346 C330,400 260,392 232,318" marker-end="url(#ah)"/>
+                    <path class="thin" d="M268,190 C300,166 330,174 356,206" marker-end="url(#ahs)"/>
+          <text class="small" x="282" y="168">first-person</text>
+          <path class="thin" d="M357,240 C325,282 292,282 270,262" marker-end="url(#ahs)"/>
+          <!-- self-knowing loops -->
+          <path class="loop breath" d="M392,182 C380,150 425,145 418,184" marker-end="url(#aha)"/>
+          <path class="loop breath" d="M560,140 C610,120 612,60 560,78" marker-end="url(#aha)"/>
+          <text class="small" x="512" y="410" text-anchor="middle">to me, the others are world too</text>
+
+          <!-- six regions -->
+          <a class="node" href="#d1" data-d="1"><circle cx="90" cy="148" r="15"/><text class="num" x="90" y="148">1</text><text class="lbl" x="68" y="118" >The world</text></a>
+          <a class="node" href="#d2" data-d="2"><circle cx="430" cy="270" r="15"/><text class="num" x="430" y="270">2</text><text class="lbl" x="400" y="306" text-anchor="middle">The self</text></a>
+          <a class="node" href="#d3" data-d="3"><circle cx="583" cy="300" r="15"/><text class="num" x="583" y="300">3</text><text class="lbl" x="604" y="332" text-anchor="end">The collective</text></a>
+          <a class="node" href="#d4" data-d="4"><circle cx="300" cy="80" r="15"/><text class="num" x="300" y="80">4</text><text class="lbl" x="300" y="34" text-anchor="middle">Knowing</text></a>
+          <a class="node" href="#d5" data-d="5"><circle cx="300" cy="380" r="15"/><text class="num" x="300" y="380">5</text><text class="lbl" x="276" y="384" text-anchor="end">Acting</text></a>
+          <a class="node" href="#d6" data-d="6"><circle cx="600" cy="62" r="15"/><text class="num" x="600" y="62">6</text><text class="lbl" x="578" y="38" text-anchor="end">Knowing ourselves</text></a>
+        </svg>
+        <figcaption class="map-caption">Drawn from the Honest Science workshop, September 2026</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="wrap" aria-labelledby="dirs-h">
+    <div class="section-head"><h2 id="dirs-h">Six places to start</h2><a href="#">All research directions →</a></div>
+    <ol class="dirs" id="dirs">
+      <li><a id="d1" href="#" data-d="1"><span class="n">1</span><h3>The world</h3><span class="q">What is the world made of: things, or relations?</span><span class="poles"><span>things with their own properties</span><i>or</i><span>things defined by relations</span></span></a></li>
+      <li><a id="d2" href="#" data-d="2"><span class="n">2</span><h3>The self</h3><span class="q">Where do I end?</span><span class="poles"><span>I end at my skin</span><i>or</i><span>I am what I belong to</span></span></a></li>
+      <li><a id="d3" href="#" data-d="3"><span class="n">3</span><h3>The collective</h3><span class="q">Would anyone see the same thing?</span><span class="poles"><span>anyone would see the same</span><i>or</i><span>it depends where you stand</span></span></a></li>
+      <li><a id="d4" href="#" data-d="4"><span class="n">4</span><h3>Knowing</h3><span class="q">What counts as knowing something?</span><span class="poles"><span>true statements anyone can check</span><i>or</i><span>skill and acquaintance</span></span></a></li>
+      <li><a id="d5" href="#" data-d="5"><span class="n">5</span><h3>Acting</h3><span class="q">What is action for?</span><span class="poles"><span>a chosen result at lowest cost</span><i>or</i><span>taking part is the point</span></span></a></li>
+      <li><a id="d6" href="#" data-d="6"><span class="n">6</span><h3>Knowing ourselves</h3><span class="q">Does the knower leave a trace?</span><span class="poles"><span>the knower leaves no trace</span><i>or</i><span>who I am shapes what I find</span></span></a></li>
+    </ol>
+  </section>
+
+  <section class="wrap" aria-labelledby="latest-h">
+    <div class="section-head"><h2 id="latest-h">Latest</h2><a href="#">All events and outputs →</a></div>
+    <ul class="latest" id="latest"></ul>
+  </section>
+
+  <section class="wrap" aria-labelledby="who-h">
+    <div class="section-head"><h2 id="who-h">Who we are</h2><a href="#">People →</a></div>
+    <div class="people-row">
+      <img src="../assets/postits.webp" alt="Participants placing sticky notes on a wall during a mapping session" loading="lazy" />
+      <div>
+        <p><strong style="color:var(--ink)">Since 2025: four gatherings, two working groups, 150+ researchers on the list.</strong> Physicists, biologists, cognitive scientists, philosophers, and people with long contemplative practice. This map was drawn by the people in the photo.</p>
+        <p class="names">Pavel Chvykov · Matthew McCarthy · Matthieu Barbier · Robert Marsland · <a href="#">and others</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="join-sec" id="join" aria-labelledby="join-h">
+    <div class="wrap">
+      <h2 id="join-h">Join the community</h2>
+      <div>
+        <ul>
+          <li>One email a month: calls, gatherings, new talks and writing, research and funding openings</li>
+          <li>A monthly call, open to anyone curious</li>
+          <li>A forum with a member map</li>
+        </ul>
+        <div class="actions"><a class="btn solid" href="#">Get the monthly email</a><a class="btn ghost" href="#">Join the forum</a></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap cols">
+    <div><h4>CSCSC</h4><p style="margin:0">Complexity Science and Contemplative Studies Consortium</p><p><a href="mailto:cscs.conference@gmail.com">cscs.conference@gmail.com</a></p></div>
+    <div><h4>Explore</h4><ul><li><a href="#">Research</a></li><li><a href="#">Initiatives</a></li><li><a href="#">Events</a></li><li><a href="#">Writing</a></li></ul></div>
+    <div><h4>Watch</h4><ul><li><a href="../../">The vision animation</a></li><li><a href="#">Talks and films</a></li></ul></div>
+    <div><h4>Connect</h4><ul><li><a href="#">Monthly email</a></li><li><a href="#">Forum (Hylo)</a></li><li><a href="#">Calendar</a></li></ul></div>
+  </div>
+</footer>
+
+<div class="proto-note">Prototype C - Map first · <a href="../">all prototypes</a></div>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/proto.js"></script>
+<script>
+  // Hovering a map region lights its card, and vice versa.
+  const all = document.querySelectorAll("[data-d]");
+  const set = (d) => all.forEach((el) => el.classList.toggle("on", el.dataset.d === d));
+  all.forEach((el) => {
+    el.addEventListener("mouseenter", () => set(el.dataset.d));
+    el.addEventListener("mouseleave", () => set(null));
+    el.addEventListener("focus", () => set(el.dataset.d));
+    el.addEventListener("blur", () => set(null));
+  });
+</script>
+</body>
+</html>
