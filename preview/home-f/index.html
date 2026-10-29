@@ -416,7 +416,7 @@
     dots.forEach((d, n) => d.addEventListener("click", () => { show(n); sync(); }));
     c.addEventListener("mouseenter", () => { hover = true; sync(); });
     c.addEventListener("mouseleave", () => { hover = false; sync(); });
-    c.addEventListener("focusin", () => { focus = true; sync(); });
+    c.addEventListener("focusin", (e) => { if (e.target.matches(":focus-visible")) { focus = true; sync(); } });
     c.addEventListener("focusout", (e) => { if (!c.contains(e.relatedTarget)) { focus = false; sync(); } });
     sync();
   })();
