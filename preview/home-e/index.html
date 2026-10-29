@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en" data-default-theme="light" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>CSCSC - Complexity Science &amp; Contemplative Studies Consortium</title>
+<meta name="description" content="A research community asking how order arises without anyone in charge, in cells, minds and societies, with mathematics and with first-person practice." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/base.css" />
+<style>
+  /* Direction D - the ensō as the first impression. One mask asset, drawn
+     in ink on paper (light theme) or chalk on night (dark theme). */
+  :root {
+    --bg: #f7f5f0; --bg-raised: #fffefb; --ink: #1c1d1f; --muted: #625f59;
+    --rule: #cdc8bd; --rule-soft: #e5e1d8; --hover: #ece8df;
+    --accent: #a14e26; --on-accent: #fff7f0;
+    --font-display: "Cormorant Garamond", Georgia, serif;
+    --font-body: "Source Serif 4", Georgia, serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0f1013; --bg-raised: #17181c; --ink: #ebe7df; --muted: #a29d94;
+      --rule: #383940; --rule-soft: #24252a; --hover: #1f2025; --accent: #e88a5a; --on-accent: #1a0f08;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0f1013; --bg-raised: #17181c; --ink: #ebe7df; --muted: #a29d94;
+    --rule: #383940; --rule-soft: #24252a; --hover: #1f2025; --accent: #e88a5a; --on-accent: #1a0f08;
+  }
+
+  /* The ensō mark: a mask, so it takes whatever color the text has */
+  .enso { display: inline-block; aspect-ratio: 1; background: currentColor;
+    -webkit-mask: url("../assets/enso-mask.webp") center / contain no-repeat;
+            mask: url("../assets/enso-mask.webp") center / contain no-repeat; }
+
+  /* The ensō is always black ink on paper. In dark theme it sits on a paper tile. */
+  :root { --enso-ink: #1c1d1f; --enso-paper: transparent; }
+  .tile { display: inline-grid; place-items: center; background: var(--enso-paper); border-radius: 6px; }
+  .tile .enso { color: var(--enso-ink) !important; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --enso-paper: #f4f1ea; } }
+  :root[data-theme="dark"] { --enso-paper: #f4f1ea; }
+  :root[data-theme="dark"] .tile, :root:not([data-theme="light"]) .tile { padding: 4px; }
+  :root[data-theme="dark"] .tile.big { padding: 28px; border-radius: 14px; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .tile.big { padding: 28px; border-radius: 14px; } }
+  @media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) .tile { padding: 0; } }
+  .tile.big { width: min(100%, 400px); }
+
+  /* Header lockup: bigger mark, full name beside it */
+  .site-header .wrap { min-height: 76px; }
+  .lockup { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--ink); }
+  .lockup .enso { width: 46px; }
+  .lockup b { display: block; font-family: var(--font-display); font-weight: 500; font-size: 1.5rem; letter-spacing: 0.12em; line-height: 1; }
+  .lockup i { display: block; font-family: var(--font-display); font-size: 0.86rem; line-height: 1.15; color: var(--muted); margin-top: 3px; }
+  @media (max-width: 1180px) and (min-width: 901px) { .lockup i { display: none; } }
+  @media (max-width: 480px) { .lockup i { display: none; } }
+  .site-header .btn.join { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+  .nav.open > ul { inset: 76px 0 auto 0; }
+
+  /* Fold */
+  .hero { padding: 40px 0 0; position: relative; }
+  .hero .wrap { display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 56px; align-items: center; }
+  .hero .copy { order: 1; }
+  .hero .hero-mark { order: 2; }
+  .hero-mark { position: relative; display: grid; place-items: center; }
+  .hero-mark .draw { display: block; width: 100%; }
+  .hero-mark .enso { display: block; width: 100%; color: var(--ink); }
+  .hero-mark figcaption { margin-top: 14px; text-align: center; font-family: var(--font-display); font-style: italic; color: var(--muted); font-size: 1.05rem; }
+  .hero h1 { font-size: clamp(2.3rem, 4.4vw, 3.6rem); line-height: 1.06; }
+  .hero .sub { font-size: 1.16rem; margin: 22px 0 30px; max-width: 30em; color: var(--muted); }
+  .hero .btn .play { display: inline-block; width: 0; height: 0; border-left: 8px solid currentColor; border-top: 5px solid transparent; border-bottom: 5px solid transparent; margin-right: 8px; vertical-align: 1px; }
+  .hero .facts { color: var(--muted); font-size: 0.96rem; margin: 0 0 24px; }
+  .hero .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+  .hero .btn.solid { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+  .vision-cta { display: flex; gap: 10px; align-items: baseline; margin-top: 18px; text-decoration: none; color: var(--muted); max-width: 34em; font-size: 0.96rem; }
+  .vision-cta b { color: var(--accent); font-weight: 600; }
+  .vision-cta:hover b { text-decoration: underline; }
+  .vision-cta .play { flex: none; width: 0; height: 0; border-left: 9px solid var(--accent); border-top: 6px solid transparent; border-bottom: 6px solid transparent; transform: translateY(1px); }
+  .proof { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--rule-soft); font-size: 0.9rem; color: var(--muted); max-width: 38em; }
+  .proof b { color: var(--ink); font-weight: 600; }
+  .proof span { display: block; margin-top: 4px; }
+  @media (max-width: 860px) {
+    .hero .wrap { grid-template-columns: 1fr; gap: 12px; }
+    .hero .hero-mark { order: 0; justify-items: start; }
+    .hero-mark figcaption { text-align: left; }
+    .tile.big { width: 150px; }
+    :root[data-theme="dark"] .tile.big { padding: 12px; }
+  }
+
+  /* Draw the ensō in once, like a brush stroke (skipped under reduced motion) */
+  @property --sweep { syntax: "<angle>"; inherits: false; initial-value: 360deg; }
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-mark .draw { -webkit-mask: conic-gradient(from 200deg, #000 var(--sweep), transparent 0); mask: conic-gradient(from 200deg, #000 var(--sweep), transparent 0); animation: sweep 2.6s cubic-bezier(.45,.05,.3,1) .2s both; }
+    @keyframes sweep { from { --sweep: 0deg; } to { --sweep: 360deg; } }
+    .hero-mark figcaption { animation: fade 1.4s ease 2.4s both; }
+    @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+  }
+
+  section { padding: 96px 0 0; }
+  .credits { padding-top: 72px; display: grid; gap: 6px; text-align: center; color: var(--muted); font-size: 0.95rem; }
+  .credits p { margin: 0; }
+  .credits .k { display: block; font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; margin: 10px 0 2px; }
+  .credits + section { padding-top: 88px; }
+  .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 24px; border-bottom: 1px solid var(--rule); padding-bottom: 10px; }
+  .section-head h2 { font-size: clamp(1.7rem, 3vw, 2.2rem); }
+  .section-head a { font-size: 0.92rem; text-decoration: none; color: var(--muted); }
+  .section-head a:hover { color: var(--ink); }
+
+  /* What we do */
+  .doing { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .doing a { text-decoration: none; display: flex; flex-direction: column; gap: 10px; }
+  .doing .thumb { aspect-ratio: 4 / 3; border-radius: 4px; overflow: hidden; background: var(--bg-raised); border: 1px solid var(--rule-soft); }
+  .doing .thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s; }
+  .doing .thumb img.diagram { object-position: 50% 54%; transform: scale(1.9); background: #faf9f5; }
+  .doing a:hover .thumb img { transform: scale(1.03); }
+  .doing a:hover .thumb img.diagram { transform: scale(1.95); }
+  .doing .thumb.labelled { position: relative; }
+  .doing .chip { position: absolute; left: 10px; bottom: 10px; font-size: 0.75rem; padding: 3px 9px; border-radius: 4px; background: rgba(255,255,255,0.88); color: #1c1d1f; }
+  .doing .chip .tri { display: inline-block; border-left: 7px solid currentColor; border-top: 4.5px solid transparent; border-bottom: 4.5px solid transparent; margin-right: 6px; vertical-align: 0; }
+  .doing .verb { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+  .doing h3 { font-size: 1.55rem; }
+  .doing p { margin: 0; color: var(--muted); font-size: 0.97rem; }
+  .doing .more { font-size: 0.9rem; color: var(--ink); }
+  .doing a:hover .more { text-decoration: underline; }
+  @media (max-width: 860px) { .doing { grid-template-columns: 1fr; gap: 36px; } }
+
+  /* Latest */
+  .latest { list-style: none; margin: 0; padding: 0; }
+  .latest li { display: grid; grid-template-columns: 9.5rem 1fr; gap: 24px; padding: 18px 0; border-bottom: 1px solid var(--rule-soft); }
+  .latest .when { font-size: 0.85rem; color: var(--muted); padding-top: 4px; }
+  .latest .when b { display: block; font-weight: 600; color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.7rem; margin-bottom: 2px; }
+  .latest h3 { font-size: 1.4rem; margin-bottom: 4px; }
+  .latest h3 a { text-decoration: none; }
+  .latest p { margin: 0; color: var(--muted); }
+  .latest li.next { background: color-mix(in srgb, var(--accent) 7%, transparent); border-radius: 8px; padding: 18px 16px; margin: 0 -16px; border-bottom: 0; }
+  @media (max-width: 640px) { .latest li { grid-template-columns: 1fr; gap: 4px; } }
+
+  /* From the room */
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  .pair blockquote { margin: 0; }
+  .pair .k { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; display: block; }
+  .pair p { font-family: var(--font-display); font-size: 1.65rem; line-height: 1.28; margin: 0; }
+  .pair footer { font-size: 0.85rem; color: var(--muted); margin-top: 10px; }
+  @media (max-width: 760px) { .pair { grid-template-columns: 1fr; gap: 32px; } }
+
+  /* People */
+  .slides { margin: 0; }
+  .slides .frame { position: relative; aspect-ratio: 3 / 2; border-radius: 4px; overflow: hidden; background: var(--hover); }
+  .slides img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.4s ease; }
+  .slides img.on { opacity: 1; }
+  .slides figcaption { font-size: 0.8rem; color: var(--muted); margin-top: 8px; min-height: 1.3em; }
+  .people { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: center; }
+  .people figure { margin: 0; }
+  .people img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 4px; }
+  .people figcaption { font-size: 0.8rem; color: var(--muted); margin-top: 8px; }
+  .people p { color: var(--muted); }
+  .advisors { margin: 18px 0 0; padding: 16px 0 0; border-top: 1px solid var(--rule-soft); }
+  .advisors .k { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 6px; }
+  .advisors b { font-weight: 600; }
+  .advisors span { color: var(--muted); font-size: 0.9rem; }
+  .partners { margin-top: 18px; font-size: 0.86rem; color: var(--muted); }
+  .partners b { color: var(--ink); font-weight: 600; }
+  @media (max-width: 760px) { .people { grid-template-columns: 1fr; gap: 20px; } }
+
+  /* Why an ensō */
+  .why { margin-top: 88px; display: grid; grid-template-columns: 120px 1fr; gap: 28px; align-items: center; padding: 32px; border: 1px solid var(--rule-soft); border-radius: 10px; background: var(--bg-raised); }
+  .why .enso { width: 110px; color: var(--ink); }
+  .why h2 { font-size: 1.6rem; margin-bottom: 8px; }
+  .why p { margin: 0 0 12px; color: var(--muted); max-width: 44em; }
+  .why a { font-size: 0.95rem; }
+  @media (max-width: 640px) { .why { grid-template-columns: 1fr; } .why .enso { width: 72px; } }
+
+  .join-sec { margin-top: 80px; border-top: 1px solid var(--rule); padding: 56px 0 0; }
+  .join-sec .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .join-sec h2 { font-size: clamp(1.8rem, 3.2vw, 2.4rem); }
+  .join-sec ul { margin: 0 0 18px; padding-left: 1.1em; color: var(--muted); }
+  .join-sec .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+  .join-sec .btn.solid { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+  @media (max-width: 760px) { .join-sec .wrap { grid-template-columns: 1fr; } }
+  .site-footer { margin-top: 72px; }
+  .site-footer .lockup .enso { width: 36px; }
+  .site-footer .lockup b { font-size: 1.2rem; }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="lockup" href="./" aria-label="CSCSC home">
+      <span class="tile"><span class="enso" aria-hidden="true"></span></span>
+      <span><b>CSCSC</b><i>Complexity Science &amp;<br />Contemplative Studies Consortium</i></span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Main">
+      <ul>
+        <li><button class="top" aria-expanded="false">Research</button>
+          <ul class="sub">
+            <li><a href="#">Research overview</a></li>
+            <li><a href="#">Questions and directions<small>Where our questions sit: the map</small></a></li>
+            <li><a href="#">Research threads<small>Goals and contexts · causality · the field map</small></a></li>
+            <li><a href="#">Publications and proceedings</a></li>
+            <li><a href="#">For researchers<small>Funding, centers, journals</small></a></li>
+          </ul></li>
+        <li><button class="top" aria-expanded="false">Gatherings</button>
+          <ul class="sub">
+            <li><a href="#">Upcoming</a></li>
+            <li><a href="#">Honest Science<small>Research retreats in the Pyrenees</small></a></li>
+            <li><a href="#">Conferences and satellites<small>CSCSC25 · CCS26</small></a></li>
+            <li><a href="#">Work Alive retreats</a></li>
+            <li><a href="#">Monthly call<small>Open to anyone curious</small></a></li>
+            <li><a href="#">Past gatherings</a></li>
+          </ul></li>
+        <li><button class="top" aria-expanded="false">Tools &amp; media</button>
+          <ul class="sub">
+            <li><a href="#">Overview</a></li>
+            <li><a href="#">Work Alive app<small>Focused work as a practice</small></a></li>
+            <li><a href="#">Films and talks</a></li>
+            <li><a href="#">Episteme questionnaire<small>How do you come to know things?</small></a></li>
+            <li><a href="#">Practice menu<small>10-minute practices across traditions</small></a></li>
+          </ul></li>
+        <li><button class="top" aria-expanded="false">Learn</button>
+          <ul class="sub">
+            <li><a href="#">Learning center</a></li>
+            <li><a href="#">Writing<small>Essays and reflections</small></a></li>
+            <li><a href="#">Our language<small>A shared glossary</small></a></li>
+          </ul></li>
+        <li><button class="top" aria-expanded="false">About</button>
+          <ul class="sub">
+            <li><a href="#">About CSCSC</a></li>
+            <li><a href="#">Why we exist<small>A short film</small></a></li>
+            <li><a href="#">People and advisors</a></li>
+            <li><a href="../../">The vision<small>An animated introduction</small></a></li>
+            <li><a href="#">Contact</a></li>
+          </ul></li>
+      </ul>
+      <a class="btn join" href="#join">Join</a>
+      <button class="menu-toggle" aria-expanded="false" aria-controls="nav">Menu</button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero">
+    <div class="wrap">
+      <figure class="hero-mark" style="margin:0">
+        <span class="tile big"><span class="draw"><span class="enso" role="img" aria-label="Ensō, a brush-drawn circle"></span></span></span>
+        <figcaption>Everything arises from relations.</figcaption>
+      </figure>
+      <div class="copy">
+        <h1>Science studies the world. We also study the one looking.</h1>
+        <p class="sub">We are researchers asking how order arises with no one in charge, in cells, minds and societies, and we work on it with mathematics and with trained attention.</p>
+        <div class="actions">
+          <a class="btn solid" href="#join">Join us</a>
+          <a class="btn ghost" href="../../"><span class="play" aria-hidden="true"></span>Watch the vision</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap credits" aria-label="Advisors and speakers">
+    <p><span class="k">Advisors</span>John Dunne · Francis Heylighen</p>
+    <p><span class="k">Speakers have included</span>Michael Levin · Neil Theise · Gary Lupyan · Adam Safron · Chaitanya Gokhale · Marc Santolini · Alan Rodrigues</p>
+  </section>
+
+  <section class="wrap" id="what" aria-labelledby="what-h">
+    <div class="section-head"><h2 id="what-h">What we do</h2></div>
+    <div class="doing">
+      <a href="#">
+        <div class="thumb"><img src="../assets/chalkboard.webp" style="object-position: 50% 78%" alt="A speaker at a chalkboard diagram linking feeling for truth, concepts and measurement" loading="lazy" /></div>
+        <h3>Research</h3>
+        <p>A review paper on a complexity theory of mindfulness, and a shared map of the field.</p>
+        <span class="more">Explore →</span>
+      </a>
+      <a href="#">
+        <div class="thumb"><img src="../assets/talk.webp" alt="A talk in a wood-beamed hall, participants seated informally" loading="lazy" /></div>
+        <h3>Gatherings</h3>
+        <p>Research retreats in the Pyrenees, conference sessions, and a monthly open call.</p>
+        <span class="more">Explore →</span>
+      </a>
+      <a href="#">
+        <div class="thumb labelled"><img src="../assets/hs-title.webp" alt="Title card of the film Honest Science: science that includes the scientist" loading="lazy" /><span class="chip"><span class="tri" aria-hidden="true"></span>Film · 4 min</span></div>
+        <h3>Tools &amp; media</h3>
+        <p>Films, recorded talks, and Work Alive, an app for focused work as practice.</p>
+        <span class="more">Explore →</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="wrap" aria-labelledby="latest-h">
+    <div class="section-head"><h2 id="latest-h">Latest</h2><a href="#">All gatherings and outputs →</a></div>
+    <ul class="latest" id="latest"></ul>
+  </section>
+
+  <section class="wrap" aria-labelledby="room-h">
+    <div class="section-head"><h2 id="room-h">From the room</h2></div>
+    <div class="pair">
+      <blockquote><span class="k">A finding</span><p>Asked where an observer's influence is most underestimated, 6 of 10 answers pointed to the step before measurement: choosing what to study.</p><footer>Poll, CCS26 satellite session, October 2026</footer></blockquote>
+      <blockquote><span class="k">A feeling</span><p>"I feel calm, unlike most conference days."</p><footer>Participant, same session</footer></blockquote>
+    </div>
+  </section>
+
+  <section class="wrap" aria-labelledby="who-h">
+    <div class="section-head"><h2 id="who-h">People</h2><a href="#">People and advisors →</a></div>
+    <div class="people">
+      <figure class="slides" aria-roledescription="slideshow">
+        <div class="frame">
+          <img src="../assets/group.webp" alt="Honest Science participants, French Pyrenees, 2026" data-cap="Honest Science participants, French Pyrenees, 2026" style="object-position:50% 50%" class="on" />
+          <img src="../assets/s-mapping.webp" alt="Reading the map of the room's research questions, 2026" data-cap="Reading the map of the room's research questions, 2026" style="object-position:50% 35%" />
+          <img src="../assets/s-cowork.webp" alt="Working side by side, INTP retreat, 2025" data-cap="Working side by side, INTP retreat, 2025" style="object-position:50% 50%" />
+          <img src="../assets/s-qigong.webp" alt="Morning practice in the forest, INTP retreat, 2025" data-cap="Morning practice in the forest, INTP retreat, 2025" style="object-position:50% 45%" />
+          <img src="../assets/g-cscsc25.webp" alt="CSCSC25, our first conference, online, October 2025" data-cap="CSCSC25, our first conference, online, October 2025" style="object-position:50% 50%" />
+          <img src="../assets/s-cave.webp" alt="Exploring the caves, Honest Science, 2026" data-cap="Exploring the caves, Honest Science, 2026" style="object-position:50% 45%" />
+        </div>
+        <figcaption>Honest Science participants, French Pyrenees, 2026</figcaption>
+      </figure>
+      <div>
+        <p>About 150 physicists, biologists, cognitive scientists, philosophers and practitioners, meeting since 2025. Volunteer-run, and still finding its shape.</p>
+                <p class="partners">With <b>INTP</b> in the Pyrenees, and the <b>Conference on Complex Systems</b>.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="why" id="why">
+      <span class="tile"><span class="enso" aria-hidden="true"></span></span>
+      <div>
+        <h2>Why an ensō?</h2>
+        <p>The circle stands for emptiness: nothing exists on its own, everything arises from relations. Complexity science calls the same thing emergence. It also points to silence as where understanding starts. Every theory after that is a model.</p>
+        <a href="../../">Watch the vision, an animated introduction →</a>
+      </div>
+    </div>
+  </div>
+
+  <section class="join-sec" id="join" aria-labelledby="join-h">
+    <div class="wrap">
+      <h2 id="join-h">Join us</h2>
+      <div>
+        <p class="muted" style="margin-bottom:18px">One email a month, and an open call. No affiliation needed.</p>
+        <div class="actions"><a class="btn solid" href="#">Get the monthly email</a><a class="btn ghost" href="#">Join the forum</a></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap cols">
+    <div>
+      <a class="lockup" href="./"><span class="tile"><span class="enso" aria-hidden="true"></span></span><span><b>CSCSC</b></span></a>
+      <p style="margin:10px 0 0">Complexity Science &amp; Contemplative Studies Consortium</p>
+      <p>cscs.conference at gmail dot com</p>
+    </div>
+    <div><h4>Explore</h4><ul><li><a href="#">Research</a></li><li><a href="#">Gatherings</a></li><li><a href="#">Tools &amp; media</a></li><li><a href="#">Writing</a></li></ul></div>
+    <div><h4>Watch</h4><ul><li><a href="../../">The vision animation</a></li><li><a href="#">Films and talks</a></li></ul></div>
+    <div><h4>Connect</h4><ul><li><a href="#">Monthly email</a></li><li><a href="#">Forum (Hylo)</a></li><li><a href="#">Calendar</a></li></ul></div>
+  </div>
+</footer>
+
+<div class="proto-note">Prototype E - Simpler · <a href="../">all prototypes</a></div>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/proto.js"></script>
+<script>
+  // People slideshow: crossfade every 5 s; holds still under reduced motion.
+  (() => {
+    const fig = document.querySelector(".slides"); if (!fig) return;
+    const imgs = [...fig.querySelectorAll("img")], cap = fig.querySelector("figcaption");
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let i = 0;
+    setInterval(() => {
+      imgs[i].classList.remove("on"); i = (i + 1) % imgs.length; imgs[i].classList.add("on");
+      cap.textContent = imgs[i].dataset.cap;
+    }, 5000);
+  })();
+</script>
+</body>
+</html>
