@@ -51,7 +51,10 @@
      narrow silk mounting, a thin rod above and a roller with knobs below. */
   :root.scroll-on .tile.big { position: relative; width: min(100%, 330px); border-radius: 1px; padding: 96px 30px 54px;
     background: #e9dfc9 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .38 0 0 0 0 .28 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    box-shadow: 0 14px 34px rgba(0,0,0,0.35); margin: 0 0 8px; }
+    box-shadow: 0 0 0 6px #2c2822, 0 0 0 7px #3b352c, 0 14px 34px rgba(0,0,0,0.35); margin: 8px 0 16px; }
+  :root.scroll-on .tile.big::before, :root.scroll-on .tile.big::after { content: ""; position: absolute; left: -11px; right: -11px; border-radius: 2px; background: linear-gradient(#4a3a2c, #2a2019); opacity: 0.85; }
+  :root.scroll-on .tile.big::before { top: -10px; height: 4px; }
+  :root.scroll-on .tile.big::after { bottom: -13px; height: 6px; left: -14px; right: -14px; border-radius: 3px; }
 
   .big-enso { -webkit-mask-image: url("../assets/enso-hero-mask.webp"); mask-image: url("../assets/enso-hero-mask.webp"); }
 
