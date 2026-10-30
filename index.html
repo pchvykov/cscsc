@@ -933,7 +933,7 @@ Although just double-clicking html will work almost as good.
                                 name.</em
                             >
                         </p> -->
-                        <p>We are taught control.<br />
+                        <p>We are taught to optimize ourselves, like machines.<br />
                         It gave us planes, algorithms, antibiotics. <br />
                         <em>But not happiness. Not love. Not peace.</em></p>
                     </div>
@@ -3625,7 +3625,9 @@ Although just double-clicking html will work almost as good.
                     //   0.80–0.90  fade out "But look closer"
                     //   0.90–1.00  crossfade image→outline→particles
                     if (stage === 1) {
-                        solidAlpha = 1;
+                        // Opening: the sentence first, on dark; the figure
+                        // fades in behind it over progress 0.10-0.30.
+                        solidAlpha = progress < 0.10 ? 0 : Math.min(1, (progress - 0.10) / 0.20);
                         particleRenderAlpha = 0;
                         outlineAlpha = 0;
                         boundaryStrength = 1.0;
@@ -3642,9 +3644,7 @@ Although just double-clicking html will work almost as good.
 
                         // — Text: "We are taught..."
                         const t1El = document.getElementById("stage-1-text");
-                        if (progress < 0.18) {
-                            t1El.style.opacity = Math.min(progress / 0.1, 1);
-                        } else if (progress < 0.38) {
+                        if (progress < 0.38) {
                             t1El.style.opacity = 1;
                         } else if (progress < 0.55) {
                             t1El.style.opacity = Math.max(
@@ -4237,8 +4237,9 @@ Although just double-clicking html will work almost as good.
                     loadSolidSvg();
                     loadVisualSvg();
 
-                    // Set initial state IMMEDIATELY so canvas renders the image right away
-                    solidAlpha = 1;
+                    // First paint: the opening sentence on dark, no figure yet
+                    // (the figure fades in on the first scroll, see transitionTo(1)).
+                    solidAlpha = 0;
                     particleRenderAlpha = 0;
                     networkAlpha = 0;
                     document.getElementById("network-svg").style.opacity = "0";
@@ -4262,8 +4263,9 @@ Although just double-clicking html will work almost as good.
                         const el = document.getElementById(id);
                         if (el) el.style.opacity = "0";
                     });
+                    document.getElementById("stage-1-text").style.opacity = "1";
 
-                    // Start animation immediately so the landing image appears
+                    // Start animation immediately
                     requestAnimationFrame(animate);
 
                     // Build mask and particles in the background
