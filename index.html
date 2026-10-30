@@ -911,6 +911,16 @@ Although just double-clicking html will work almost as good.
                 <!-- Canvas: particle system (Stages 1–3) -->
                 <canvas id="particle-canvas"></canvas>
 
+                <!-- Opening ensō: shown on load, crossfades into the figure on first scroll -->
+                <img
+                    id="opening-enso"
+                    src="empty_white.webp"
+                    onerror="this.onerror=null;this.src='empty_white.png'"
+                    alt=""
+                    aria-hidden="true"
+                    style="position: absolute; left: 50%; top: 38%; height: 40vh; width: auto; transform: translate(-50%, -50%); mix-blend-mode: screen; pointer-events: none; z-index: 2; opacity: 1;"
+                />
+
                 <!-- Canvas: figure outline overlay (transition) -->
                 <canvas id="outline-canvas"></canvas>
 
@@ -933,7 +943,7 @@ Although just double-clicking html will work almost as good.
                                 name.</em
                             >
                         </p> -->
-                        <p>We are taught to optimize ourselves, like machines.<br />
+                        <p>We are taught control.<br />
                         It gave us planes, algorithms, antibiotics. <br />
                         <em>But not happiness. Not love. Not peace.</em></p>
                     </div>
@@ -3609,6 +3619,10 @@ Although just double-clicking html will work almost as good.
 
                 function transitionTo(stage, progress) {
                     currentStage = stage + progress;
+                    const openingEnso = document.getElementById("opening-enso");
+                    if (openingEnso)
+                        openingEnso.style.opacity =
+                            stage === 1 ? Math.max(0, 1 - progress / 0.18) : 0;
 
                     const threadPrompt =
                         document.getElementById("thread-prompt");
@@ -3625,9 +3639,9 @@ Although just double-clicking html will work almost as good.
                     //   0.80–0.90  fade out "But look closer"
                     //   0.90–1.00  crossfade image→outline→particles
                     if (stage === 1) {
-                        // Opening: the sentence first, on dark; the figure
-                        // fades in behind it over progress 0.10-0.30.
-                        solidAlpha = progress < 0.10 ? 0 : Math.min(1, (progress - 0.10) / 0.20);
+                        // Opening: the ensō crossfades into the figure while
+                        // the first text fades in (progress 0 -> 0.18).
+                        solidAlpha = Math.min(1, progress / 0.18);
                         particleRenderAlpha = 0;
                         outlineAlpha = 0;
                         boundaryStrength = 1.0;
@@ -3644,7 +3658,9 @@ Although just double-clicking html will work almost as good.
 
                         // — Text: "We are taught..."
                         const t1El = document.getElementById("stage-1-text");
-                        if (progress < 0.38) {
+                        if (progress < 0.18) {
+                            t1El.style.opacity = Math.min(progress / 0.1, 1);
+                        } else if (progress < 0.38) {
                             t1El.style.opacity = 1;
                         } else if (progress < 0.55) {
                             t1El.style.opacity = Math.max(
@@ -4237,8 +4253,8 @@ Although just double-clicking html will work almost as good.
                     loadSolidSvg();
                     loadVisualSvg();
 
-                    // First paint: the opening sentence on dark, no figure yet
-                    // (the figure fades in on the first scroll, see transitionTo(1)).
+                    // First paint: the ensō alone; it crossfades into the figure
+                    // on the first scroll (see transitionTo(1)).
                     solidAlpha = 0;
                     particleRenderAlpha = 0;
                     networkAlpha = 0;
@@ -4263,7 +4279,6 @@ Although just double-clicking html will work almost as good.
                         const el = document.getElementById(id);
                         if (el) el.style.opacity = "0";
                     });
-                    document.getElementById("stage-1-text").style.opacity = "1";
 
                     // Start animation immediately
                     requestAnimationFrame(animate);
@@ -4317,6 +4332,7 @@ Although just double-clicking html will work almost as good.
                         solidAlpha = 1;
                         particleRenderAlpha = 0;
                         networkAlpha = 0;
+                        document.getElementById("opening-enso").style.opacity = "0";
                         requestAnimationFrame(animate);
                         enableStaticFallback();
                         return;
