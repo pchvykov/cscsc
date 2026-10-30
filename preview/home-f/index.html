@@ -14,8 +14,8 @@
   /* Direction D - the ensō as the first impression. One mask asset, drawn
      in ink on paper (light theme) or chalk on night (dark theme). */
   :root {
-    --bg: #f7f5f0; --bg-raised: #fffefb; --ink: #1c1d1f; --muted: #625f59;
-    --rule: #cdc8bd; --rule-soft: #e5e1d8; --hover: #ece8df;
+    --bg: #ede5d4; --bg-raised: #f3ecdd; --ink: #1c1d1f; --muted: #625f59;
+    --rule: #cbbfa8; --rule-soft: #ddd3bf; --hover: #e4dbc8;
     --accent: #a14e26; --on-accent: #fff7f0;
     --font-display: "Cormorant Garamond", Georgia, serif;
     --font-body: "Source Serif 4", Georgia, serif;
@@ -40,8 +40,8 @@
   :root { --enso-ink: #1c1d1f; --enso-paper: transparent; }
   .tile { display: inline-grid; place-items: center; background: var(--enso-paper); border-radius: 1px; }
   .tile .enso { color: var(--enso-ink) !important; }
-  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --enso-paper: #f4f1ea; } }
-  :root[data-theme="dark"] { --enso-paper: #f4f1ea; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --enso-paper: #e9dfc9; } }
+  :root[data-theme="dark"] { --enso-paper: #e9dfc9; }
   :root[data-theme="dark"] .tile, :root:not([data-theme="light"]) .tile { padding: 4px; }
   :root[data-theme="dark"] .tile.big { padding: 28px; }
   @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .tile.big { padding: 28px; } }
@@ -50,7 +50,7 @@
   /* Dark theme: the big ensō hangs as a scroll (kakejiku) - rice paper in a
      narrow silk mounting, a thin rod above and a roller with knobs below. */
   :root.scroll-on .tile.big { position: relative; width: min(100%, 330px); border-radius: 1px; padding: 96px 30px 54px;
-    background: #efe8d8 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .38 0 0 0 0 .28 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background: #e9dfc9 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .38 0 0 0 0 .28 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     box-shadow: inset 0 0 0 1px rgba(90,70,40,0.18), 0 0 0 10px #3a3226, 0 0 0 11px #57493a, 0 18px 40px rgba(0,0,0,0.45); margin: 14px 0 22px; }
   .scroll-on .tile.big::before, .scroll-on .tile.big::after { content: ""; position: absolute; left: -16px; right: -16px; background: linear-gradient(#5a4330, #2b1f15); border-radius: 3px; }
   .scroll-on .tile.big::before { top: -16px; height: 7px; }
@@ -127,7 +127,7 @@
   .doing a { text-decoration: none; display: flex; flex-direction: column; gap: 10px; }
   .doing .thumb { aspect-ratio: 4 / 3; border-radius: 4px; overflow: hidden; background: var(--bg-raised); border: 1px solid var(--rule-soft); }
   .doing .thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s; }
-  .doing .thumb img.diagram { object-position: 50% 54%; transform: scale(1.9); background: #faf9f5; }
+  .doing .thumb img.diagram { object-position: 50% 54%; transform: scale(1.9); background: transparent; mix-blend-mode: multiply; }
   .doing a:hover .thumb img { transform: scale(1.03); }
   .doing a:hover .thumb img.diagram { transform: scale(1.95); }
   .doing .thumb.labelled { position: relative; }
@@ -293,7 +293,7 @@
     <p class="lead">Contemplative traditions suggest the hypotheses. Complexity science looks for the mechanisms. Our gatherings keep us honest by making us practice what we study.</p>
     <div class="doing">
       <a href="#">
-        <div class="thumb"><img src="../assets/research-map.webp" style="object-fit: contain; background: #faf8f3" alt="Diagram from the Honest Science proceedings: world, self and others, linked by knowing and acting" loading="lazy" /></div>
+        <div class="thumb"><img src="../assets/research-map.webp" style="object-fit: contain; background: transparent; mix-blend-mode: multiply" alt="Diagram from the Honest Science proceedings: world, self and others, linked by knowing and acting" loading="lazy" /></div>
         <span class="verb">Research</span>
         <h3>How life knows itself</h3>
         <p>Contemplative research has many experiments and little theory. We are writing a review toward a complexity theory of mindfulness, and mapping the field's open questions.</p>
