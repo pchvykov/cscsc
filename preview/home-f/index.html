@@ -152,6 +152,16 @@
   @media (max-width: 640px) { .latest li { grid-template-columns: 1fr; gap: 4px; } }
 
   /* From the room */
+  .quotes { overflow: hidden; }
+  .qtrack { display: flex; gap: 40px; transition: transform .7s ease; }
+  .q { flex: 0 0 calc(50% - 20px); margin: 0; }
+  .q p { font-family: var(--font-display); font-size: 1.55rem; line-height: 1.3; margin: 0; }
+  .q footer { font-size: 0.85rem; color: var(--muted); margin-top: 12px; }
+  .q footer b { color: var(--ink); font-weight: 600; }
+  .qnav { display: flex; gap: 8px; }
+  .qnav button { width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--rule); background: transparent; color: var(--ink); font: 22px/1 Georgia, serif; cursor: pointer; padding-bottom: 3px; }
+  .qnav button:hover { background: var(--hover); }
+  @media (max-width: 760px) { .q { flex-basis: 100%; } }
   .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
   .pair blockquote { margin: 0; }
   .pair .k { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; display: block; }
@@ -296,31 +306,40 @@
         <div class="thumb" style="background: #efe7d6"><img src="../assets/research-map.webp" style="object-fit: contain; background: transparent; mix-blend-mode: multiply" alt="Diagram from the Honest Science proceedings: world, self and others, linked by knowing and acting" loading="lazy" /></div>
         <span class="verb">Research</span>
         <h3>How life knows itself</h3>
-        <p>Contemplative research has many experiments and little theory. We are writing a review toward a complexity theory of mindfulness, and mapping the field's open questions.</p>
+        <p>Bayesian models of meditation, the agency of collective imaginaries, the relational construction of reality: theory for a field that so far has mostly experiments.</p>
         <span class="more">Research directions →</span>
       </a>
       <a href="#">
         <div class="thumb"><img src="../assets/talk.webp" alt="A talk in a wood-beamed hall, participants seated informally" loading="lazy" /></div>
         <span class="verb">Gatherings</span>
-        <h3>Meetings for finding better questions</h3>
-        <p>Week-long research retreats at INTP in the Pyrenees, a satellite session at the Complex Systems conference, and a monthly call.</p>
+        <h3>Meetings for better questions</h3>
+        <p>Research retreats in the Pyrenees, conference sessions and a monthly call, run unlike most academic meetings: with silence, movement, and honesty about how we actually work.</p>
         <span class="more">Upcoming and past →</span>
       </a>
       <a href="#">
-        <div class="thumb labelled"><img src="../assets/hs-title.webp" alt="Title card of the film Honest Science: science that includes the scientist" loading="lazy" /><span class="chip"><span class="tri" aria-hidden="true"></span>Film · 4 min</span></div>
-        <span class="verb">Tools &amp; media</span>
+        <div class="thumb labelled"><img src="../assets/hs-title.webp" alt="Title card of the film Honest Science: science that includes the scientist" loading="lazy" /><span class="chip"><span class="tri" aria-hidden="true"></span>Trailer · 4 min</span></div>
+        <span class="verb">Practices &amp; tools</span>
         <h3>Things we make</h3>
-        <p><em>Honest Science</em>, a short film about science that includes the scientist. Work Alive, an app that guides focused work as a practice. Recorded talks, proceedings, and a questionnaire on how researchers come to know things.</p>
-        <span class="more">Talks, films and tools →</span>
+        <p>Work Alive, a guided co-working practice and app. A playbook for running research meetings differently. Talks, essays, and a 4-minute taste of our retreats.</p>
+        <span class="more">See what we make →</span>
       </a>
     </div>
   </section>
 
   <section class="wrap" aria-labelledby="room-h">
-    <div class="section-head"><h2 id="room-h">From the room</h2></div>
-    <div class="pair">
-      <blockquote><span class="k">Asked the room</span><p>Asked where an observer's influence is most underestimated, 6 of 10 answers pointed to the step before measurement: choosing what to study.</p><footer>Poll, CCS26 satellite session, October 2026</footer></blockquote>
-      <blockquote><span class="k">A feeling</span><p>"I feel calm, unlike most conference days."</p><footer>Participant, same session</footer></blockquote>
+    <div class="section-head"><h2 id="room-h">From the room</h2>
+      <div class="qnav"><button class="qprev" type="button" aria-label="Previous">‹</button><button class="qnext" type="button" aria-label="Next">›</button></div></div>
+    <div class="quotes" aria-roledescription="carousel">
+      <div class="qtrack">
+        <blockquote class="q"><p>&ldquo;Being trained to see the subjective as always a liability tends to distance people from the love and the passion that brought them into the field.&rdquo;</p><footer><b>Jordan Borgman</b> · Honest Science, 2026</footer></blockquote>
+        <blockquote class="q"><p>&ldquo;Why don't we do research as we do music together, or as we do sports?&rdquo;</p><footer><b>Matthieu Barbier</b> · Honest Science, 2026</footer></blockquote>
+        <blockquote class="q"><p>&ldquo;Sometimes your priors are a method of bias, but also sometimes they're telling you something that's true and important.&rdquo;</p><footer><b>Jordan Borgman</b> · Honest Science, 2026</footer></blockquote>
+        <blockquote class="q"><p>&ldquo;You can really feel that you're bringing your whole self and not just your facade as a scientist. I've had that in other group settings, but not among academics and scientists.&rdquo;</p><footer><b>Lana Frankle</b> · Honest Science, 2026</footer></blockquote>
+        <blockquote class="q"><p>Asked where an observer's influence is most underestimated, 6 of 10 answers pointed to the step before measurement: choosing what to study.</p><footer><b>Poll of participants</b> · CCS26 satellite, October 2026</footer></blockquote>
+        <blockquote class="q"><p>&ldquo;At first I kept thinking of how I look to the world. In the end, it turned out that it was all about how I look to myself.&rdquo;</p><footer><b>Veronica Frans</b> · Honest Science, 2026</footer></blockquote>
+        <blockquote class="q"><p>&ldquo;Natively speak at least two fields. That's where you start to understand how you might not be understood.&rdquo;</p><footer><b>Matthieu Barbier</b> · Honest Science, 2026</footer></blockquote>
+        <blockquote class="q"><p>&ldquo;I'm an extrovert. I don't believe how much I enjoyed the quiet.&rdquo;</p><footer><b>Veronica Frans</b> · Honest Science, 2026</footer></blockquote>
+      </div>
     </div>
   </section>
 
@@ -398,6 +417,25 @@
 <script src="../assets/proto.js"></script>
 <script>document.querySelectorAll("a.mail").forEach((a) => { a.href = "mailto:" + a.dataset.u + "@" + a.dataset.d; });</script>
 <script>
+  // Quotes: two visible (one on phones), step one at a time, auto every 8 s.
+  (() => {
+    const box = document.querySelector(".quotes"); if (!box) return;
+    const track = box.querySelector(".qtrack"), qs = [...track.children];
+    const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let i = 0, timer = null, hover = false;
+    const per = () => (matchMedia("(max-width: 760px)").matches ? 1 : 2);
+    const go = (n) => {
+      const max = qs.length - per(); i = n > max ? 0 : n < 0 ? max : n;
+      track.style.transform = `translateX(${-(qs[i].offsetLeft)}px)`;
+    };
+    const sync = () => { clearInterval(timer); if (!still && !hover) timer = setInterval(() => go(i + 1), 8000); };
+    document.querySelector(".qprev").addEventListener("click", () => { go(i - 1); sync(); });
+    document.querySelector(".qnext").addEventListener("click", () => { go(i + 1); sync(); });
+    box.addEventListener("mouseenter", () => { hover = true; sync(); });
+    box.addEventListener("mouseleave", () => { hover = false; sync(); });
+    addEventListener("resize", () => go(i));
+    sync();
+  })();
   // People carousel: arrows, dots, auto-advance every 6 s.
   // One timer only; it pauses while the pointer or keyboard focus is on the
   // carousel, and a click restarts the full 6 s count for the chosen photo.
