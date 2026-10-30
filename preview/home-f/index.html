@@ -56,6 +56,8 @@
   .scroll-on .tile.big::before { top: -16px; height: 7px; }
   .scroll-on .tile.big::after { bottom: -22px; height: 12px; left: -24px; right: -24px; border-radius: 6px; background: linear-gradient(90deg, #1d1510 0 10px, transparent 10px calc(100% - 10px), #1d1510 calc(100% - 10px)), linear-gradient(#6a4f38, #2b1f15); }
 
+  .big-enso { -webkit-mask-image: url("../assets/enso-hero-mask.webp"); mask-image: url("../assets/enso-hero-mask.webp"); }
+
   /* Header lockup: bigger mark, full name beside it */
   .site-header .wrap { min-height: 76px; }
   .lockup { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--ink); }
@@ -265,7 +267,7 @@
   <section class="hero">
     <div class="wrap">
       <figure class="hero-mark" style="margin:0">
-        <span class="tile big"><span class="draw"><span class="enso" role="img" aria-label="Ensō, a brush-drawn circle"></span></span></span>
+        <span class="tile big"><span class="draw"><span class="enso big-enso" role="img" aria-label="Ensō, a brush-drawn circle"></span></span></span>
         <figcaption><a href="#why" style="text-decoration:none">Everything arises from relations.</a></figcaption>
       </figure>
       <div class="copy">
