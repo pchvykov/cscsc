@@ -426,7 +426,7 @@
     const per = () => (matchMedia("(max-width: 760px)").matches ? 1 : 2);
     const go = (n) => {
       const max = qs.length - per(); i = n > max ? 0 : n < 0 ? max : n;
-      track.style.transform = `translateX(${-(qs[i].offsetLeft)}px)`;
+      track.style.transform = `translateX(${-(qs[i].offsetLeft - qs[0].offsetLeft)}px)`;
     };
     const sync = () => { clearInterval(timer); if (!still && !hover) timer = setInterval(() => go(i + 1), 8000); };
     document.querySelector(".qprev").addEventListener("click", () => { go(i - 1); sync(); });
