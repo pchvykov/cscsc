@@ -918,7 +918,7 @@ Although just double-clicking html will work almost as good.
                     onerror="this.onerror=null;this.src='empty_white.png'"
                     alt=""
                     aria-hidden="true"
-                    style="position: absolute; left: 50%; top: 38%; height: 40vh; width: auto; transform: translate(-50%, -50%); mix-blend-mode: screen; pointer-events: none; z-index: 2; opacity: 1;"
+                    style="position: absolute; left: 50%; top: 38%; height: 40vh; width: auto; transform: translate(-50%, -50%); mix-blend-mode: screen; pointer-events: none; z-index: 2; opacity: 0.8;"
                 />
 
                 <!-- Canvas: figure outline overlay (transition) -->
@@ -3622,7 +3622,7 @@ Although just double-clicking html will work almost as good.
                     const openingEnso = document.getElementById("opening-enso");
                     if (openingEnso)
                         openingEnso.style.opacity =
-                            stage === 1 ? Math.max(0, 1 - progress / 0.18) : 0;
+                            stage === 1 ? 0.8 * Math.max(0, 1 - progress / 0.18) : 0; // 0.8 = same as the closing ensō
 
                     const threadPrompt =
                         document.getElementById("thread-prompt");
