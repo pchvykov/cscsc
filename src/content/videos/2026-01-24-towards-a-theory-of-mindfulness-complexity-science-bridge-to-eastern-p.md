@@ -6,3 +6,4 @@ duration: "1:05:49"
 kind: "talk"
 event: "2026-01-pavel-talk-at-life-itself-complexity-science-as-a-bridge-to"
 ---
+

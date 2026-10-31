@@ -6,17 +6,17 @@ notion_edited: "2025-11-01"
 icon: "🪜"
 ---
 
-## Next Steps for CSCSC
+<div class="standfirst">
 
 *Community brainstorm outcomes from CSCSC25 follow-up discussions*
 
+</div>
+
 ---
 
-<aside class="callout bg-blue">
-<span class="icon" aria-hidden="true">🤝</span>
-<div class="body">
+<section class="panel">
 
-### Start Here: Personal Connections
+## Start Here: Personal Connections
 
 **Action:** Reach out to one person in the members directory for a 1-1 informal meeting!
 
@@ -28,16 +28,13 @@ One-on-one connections with people you resonate with are the best way to:
 
 Join our newsletter to access the Members Directory: [Stay in touch](https://cscsc.notion.site/286d8cae0cfe8031833ac1a301824aa0?pvs=105)
 
-</div>
-</aside>
+</section>
 
 ---
 
-<aside class="callout bg-teal">
-<span class="icon" aria-hidden="true">📅</span>
-<div class="body">
+<section class="panel">
 
-### Regular Community Gatherings
+## Regular Community Gatherings
 
 **Proposal:** Monthly topical meetings (90-120 min) for whoever can join
 
@@ -49,27 +46,24 @@ Join our newsletter to access the Members Directory: [Stay in touch](https://csc
 
 **Structure options to explore:**
 
-- 🎓 **Seminar series** - Guest speakers + discussion
-- 📚 **Reading group** - Shared texts + dialogue
-- 💬 **Office hours** - Open conversation + Q&A
+- **Seminar series** - Guest speakers + discussion
+- **Reading group** - Shared texts + dialogue
+- **Office hours** - Open conversation + Q&A
 
 **Platform considerations:**
 
 - Discord for ongoing chat?
 - Video platform for live sessions
 
-**💡 Have ideas for topics or want to help organize?** Reach out!
+**Have ideas for topics or want to help organize?** Reach out!
 
-</div>
-</aside>
+</section>
 
 ---
 
-<aside class="callout bg-purple">
-<span class="icon" aria-hidden="true">🌐</span>
-<div class="body">
+<section class="panel">
 
-### Community Platform
+## Community Platform
 
 **Under exploration:** Should we set up a dedicated space on [Hylo](https://www.hylo.com/)?
 
@@ -85,49 +79,42 @@ Join our newsletter to access the Members Directory: [Stay in touch](https://csc
 - Mailing list for updates (or is this too old-fashioned?)
 - Research update newsletter
 
-**💡 Preferences? Vote or share thoughts!**
+**Preferences? Vote or share thoughts!**
 
-</div>
-</aside>
+</section>
 
 ---
 
-<aside class="callout bg-yellow">
-<span class="icon" aria-hidden="true">🎯</span>
-<div class="body">
+<section class="panel">
 
-### Next Conference
+## Next Conference
 
 **Timing:** TBD (Spring 2026?)
 
 **Format vote:**
 
-- ✅ **In-person**
+- **In-person**
 - Co-locate with another conference? (Complexity, ISCR)
 - Host within an existing institution? e.g., Toronto
-- ✅ **Online** 
+- **Online**
 
 **Alternative idea:**
 
-🧘 **Mindful research retreat** - Similar to [this summer's](https://intp.science/en/events/mindful-research-retreat-2025)
+**Mindful research retreat** - Similar to [this summer's](https://intp.science/en/events/mindful-research-retreat-2025)
 
-**💡 Want to help plan or have venue suggestions?** Let us know!
+**Want to help plan or have venue suggestions?** Let us know!
 
-</div>
-</aside>
+</section>
 
 ---
 
-<aside class="callout">
-<span class="icon" aria-hidden="true">📬</span>
-<div class="body">
+<section class="panel">
 
-### Stay Engaged
+## Stay Engaged
 
 - **Join the conversation:** [Stay in touch](https://cscsc.notion.site/286d8cae0cfe8031833ac1a301824aa0?pvs=105)
 - **Share ideas:** Email [cscs.conference@gmail.com](mailto:cscs.conference@gmail.com)
 
-</div>
-</aside>
+</section>
 
 *Updated: October 2025*

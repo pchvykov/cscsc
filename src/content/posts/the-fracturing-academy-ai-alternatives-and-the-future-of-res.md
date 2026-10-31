@@ -11,7 +11,11 @@ icon: "📰"
 authors: ["matthew-mccarthy"]
 ---
 
+<div class="standfirst">
+
 *Based on the February 2026 Community Call discussion led by Eric Lacosse.*
+
+</div>
 
 ---
 

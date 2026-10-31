@@ -10,9 +10,7 @@ icon: "🎭"
 authors: ["matthew-mccarthy"]
 ---
 
-## Embodied Conversations Pilot: On the Why of It
-
-We've already announced the Embodied Conversations pilot, so we just wanted to dig a little deeper into the why. 
+We've already announced the Embodied Conversations pilot, so we just wanted to dig a little deeper into the why.
 
 The short version: most of our collective inquiry happens from the neck up. We read, we argue, we analyze, and somewhere along the way the rest of us — the part that tenses, softens, leans forward, goes quiet — gets left in the hallway. Embodied Conversations is one (among many other out there!) experiment in inviting that part back into the room. Not as a replacement for thinking, but as its ground. The orientation is feeling first: noticing what something does in us before we decide what we think about it, and trusting that this noticing is itself a form of inquiry. Concretely, each session is a threefold inquiry — into self, into others, and into the symbol at the center — and the real practice is holding the three together: letting what we find in ourselves, in each other, and in the thing we've gathered around inform one another rather than run on separate tracks.
 
@@ -28,7 +26,7 @@ The third is **symbol** — the thing we use to hold it all together. Each sessi
 
 That's the why, more or less: a hunch that there are modes of collective understanding that only become available when the body is included, when a conversation orbits its center rather than carving up its territory, and when the voice doing the inquiring is, at least sometimes, ours rather than mine.
 
-### A Vocabulary for the First Session
+## A Vocabulary for the First Session
 
 Since the first symbol is *The World of Wrestling*, we've been assembling a small lexicon. Not all of it is Barthes' own vocabulary — some terms are borrowed from elsewhere, some are ours — but together they circle the essay's territory: performance, drama, roles, and the various tensions and comedic possibilities that live in all of these situations. It's worth reading the essay beforehand if you can (it's short, and it's a pleasure); if you don't get to it, come anyway. Either way, this list isn't required reading so much as something to ruminate over — you may find some of these words naming things you've felt but not quite said, and they may be useful handles during the conversation itself.
 
@@ -40,7 +38,7 @@ Since the first symbol is *The World of Wrestling*, we've been assembling a smal
 
 **Dramatic nobility** — the dignity available *inside* full commitment to a role, even an embarrassing one
 
-**Doing it for the bit** — following a thread or joke (maybe too far) to its possible extreme 
+**Doing it for the bit** — following a thread or joke (maybe too far) to its possible extreme
 
 **Emphasis** — Barthes' borrowed theatrical term; nothing suggested, everything underlined
 
@@ -48,7 +46,7 @@ Since the first symbol is *The World of Wrestling*, we've been assembling a smal
 
 **Front stage / back stage** (Goffman) — the performed self vs. the self at rest; wrestling as front stage with no pretense of a back
 
-**Getting carried away** —  when someone takes their role/title too seriously at the cost of human connection (see also: role-reliance)
+**Getting carried away** — when someone takes their role/title too seriously at the cost of human connection (see also: role-reliance)
 
 **Grandiloquence** — excess raised to a style; every gesture amplified to total legibility (Barthes' own term)
 
@@ -74,7 +72,7 @@ Since the first symbol is *The World of Wrestling*, we've been assembling a smal
 
 **Theatrum mundi** — the old topos that all the world's a stage: we are never not in some role; the question is only how we hold it
 
-### Questions to Feel Our Way Through
+## Questions to Feel Our Way Through
 
 For a sense of the essay's texture before you arrive: Barthes places wrestling in the lineage of ancient theatre — the grandiloquence of Greek drama, the masks, the second-rate suburban halls standing in for amphitheatres, all of it bathed in *a light without shadow*, which for him generates an emotion without reserve. Nothing hidden, nothing held in suspense; each moment fully intelligible on its own, meaning total at every instant rather than deferred to a result.
 

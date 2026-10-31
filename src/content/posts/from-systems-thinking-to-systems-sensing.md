@@ -10,11 +10,15 @@ notion_edited: "2026-08-18"
 icon: "🪢"
 ---
 
+<div class="standfirst">
+
 *This blog post was written to summarize our community call (July, 2026) led by Marc Santolini*
+
+</div>
 
 There is a trajectory running through the history of how we think about complex systems, and it is worth tracing carefully because something interesting happens at its current edge. It begins with the recognition that living systems are not simply complicated machines — that they self-organise, maintain themselves against entropy, and produce structures that could not have been predicted from their parts alone. From Schrödinger's negentropy through Prigogine's dissipative structures to the network science that now maps everything from protein interactions to open-source collaborations, systems thinking has given us increasingly powerful tools for understanding how collective behaviour emerges. The tools are rigorous, externally measurable, and genuinely illuminating.
 
-And yet something keeps escaping them. Network analysis can tell you who is connected to whom, how information flows, where attention concentrates and where it stalls. What it cannot easily tell you is what it feels like to be inside a collaboration that is alive versus one that is going through the motions, or why two teams with identical structural properties can produce radically different work. 
+And yet something keeps escaping them. Network analysis can tell you who is connected to whom, how information flows, where attention concentrates and where it stalls. What it cannot easily tell you is what it feels like to be inside a collaboration that is alive versus one that is going through the motions, or why two teams with identical structural properties can produce radically different work.
 
 This is the opening from which a more recent line of research has been working — moving from systems thinking toward what might be called systems sensing. The distinction is not a rejection of the first tradition but a departure from it. Systems thinking studies social systems from the outside, measuring structure and behaviour with the tools of network science and statistics. Systems sensing attempts something different: to know the system from within, attending to the quality of what is happening in a room, a collaboration, a shared field of attention, before it has been captured in any external measure.
 

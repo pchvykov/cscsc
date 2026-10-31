@@ -4,10 +4,13 @@ path: "/about/"
 notion_id: "286d8cae-0cfe-8163-861c-eb37a8c3c0c0"
 notion_edited: "2026-05-09"
 icon: "🌀"
-cover: "/media/286d8cae0cfec3c0c0.webp"
 ---
 
+<div class="standfirst">
+
 *A research community bridging complexity science and contemplative studies to understand minds, societies, and human flourishing*
+
+</div>
 
 ## Welcome to the Complexity Science and Contemplative Studies Community
 
@@ -15,9 +18,7 @@ We are an emerging research community at the intersection of complexity science 
 
 ---
 
-<aside class="callout bg-blue">
-<span class="icon" aria-hidden="true">🎯</span>
-<div class="body">
+<section class="panel">
 
 ### Our Mission
 
@@ -29,14 +30,11 @@ Acknowledging the long history and challenges of attempts to formalize contempla
 - **Collectively define** the core questions and opportunities of this space
 - **Embody the ideals** of contemplation and scientific rigor in our work
 
-</div>
-</aside>
+</section>
 
 ---
 
-<aside class="callout bg-teal">
-<span class="icon" aria-hidden="true">⚖️</span>
-<div class="body">
+<section class="panel">
 
 ### Our Approach
 
@@ -50,14 +48,11 @@ We honor both subjective, first-person contemplative experience and objective, t
 
 We pursue rigorous mathematical and computational frameworks while remaining grounded in meaningful applications that address real human needs and global challenges.
 
-</div>
-</aside>
+</section>
 
 ---
 
-<aside class="callout bg-purple">
-<span class="icon" aria-hidden="true">🔬</span>
-<div class="body">
+<section class="panel">
 
 ### Key Research Themes
 
@@ -92,14 +87,11 @@ We pursue rigorous mathematical and computational frameworks while remaining gro
 - Complexity frameworks to understand contemplative practices
 - How to integrate contemplative with scientific ways of knowing
 
-</div>
-</aside>
+</section>
 
 ---
 
-<aside class="callout bg-yellow">
-<span class="icon" aria-hidden="true">🧬</span>
-<div class="body">
+<section class="panel">
 
 ### Our DNA: Ideas We Agree On
 
@@ -117,14 +109,11 @@ We pursue rigorous mathematical and computational frameworks while remaining gro
   - Complexity as humility, realizing that closure isn't possible, allowing for openness or epistemic provision
 - **Open non-sectarianism:** balance among various contemplative and scientific traditions
 
-</div>
-</aside>
+</section>
 
 ---
 
-<aside class="callout bg-orange">
-<span class="icon" aria-hidden="true">🌱</span>
-<div class="body">
+<section class="panel">
 
 ### Our Shared Assumptions
 
@@ -175,14 +164,11 @@ Critical reflection on the process of research, going beyond mere data acquisiti
 </div>
 </details>
 
-</div>
-</aside>
+</section>
 
 ---
 
-<aside class="callout bg-pink">
-<span class="icon" aria-hidden="true">💫</span>
-<div class="body">
+<section class="panel">
 
 ### Resonate? Join Our Community!
 
@@ -192,8 +178,7 @@ Whether you're a complexity researcher curious about contemplative dimensions, a
 
 [**Stay in touch**](https://cscsc.notion.site/286d8cae0cfe8031833ac1a301824aa0?pvs=105)
 
-</div>
-</aside>
+</section>
 
 ---
 
@@ -201,15 +186,15 @@ Whether you're a complexity researcher curious about contemplative dimensions, a
 
 - [Dr. Pavel Chvykov](http://pchvykov.com/) - Complex systems, AI, mindfulness; IGDORE
 - [Fr. Robert Marsland](https://robertvsiii.github.io/) - Theoretical ecology, Trinitarian theology; Pontifical University of the Holy Cross, Italy
-- Matthew McCarthy - research on collective imaginaries, VUB, Belgium. 
+- Matthew McCarthy - research on collective imaginaries, VUB, Belgium.
 - And many others - link to our full members directory in the Newsletter
 
 *Last updated: October 2025*
 
-<a class="page-link" href="/research/questions/"><span class="ic" aria-hidden="true">❓</span>Core questions</a>
+<a class="page-link" href="/research/questions/">Core questions</a>
 
-<a class="page-link" href="/learn/"><span class="ic" aria-hidden="true">🧭</span>Learning center</a>
+<a class="page-link" href="/learn/">Learning center</a>
 
-<a class="page-link" href="/learn/glossary/"><span class="ic" aria-hidden="true">📖</span>Our Language</a>
+<a class="page-link" href="/learn/glossary/">Our Language</a>
 
-<a class="page-link" href="/research/"><span class="ic" aria-hidden="true">🔬</span>Research Programs</a>
+<a class="page-link" href="/research/">Research Programs</a>

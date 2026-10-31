@@ -5,25 +5,21 @@ draft: true
 notion_id: "286d8cae-0cfe-8132-90ab-f9eb6acd731c"
 notion_edited: "2026-08-18"
 icon: "notion://custom_emoji/24716bf2-6d5a-4250-901b-819a4e14a08d/289d8cae-0cfe-807f-9652-007aaa759375"
-cover: "/media/286d8cae0cfecd731c.webp"
 ---
 
 ## Complexity Science & Contemplative Studies Consortium
 
-<aside class="callout bg-blue">
-<span class="icon" aria-hidden="true">🔗</span>
-<div class="body">
+<section class="panel">
 
 ### Bridging Rigorous Science with Contemplative Wisdom
 
 We are an emerging research community studying how complexity science and contemplative studies illuminate each other—to understand minds, societies, and human flourishing through both empirical rigor and experiential depth.
 
-[See our vision animation](/vision/) | [**▶ Watch CSCSC25 Recordings**](https://www.youtube.com/@cscs.conference/streams)
+[See our vision animation](/vision/) | [**Watch CSCSC25 Recordings**](https://www.youtube.com/@cscs.conference/streams)
 
-JOIN US!  [Add your email here for updates](https://cscsc.notion.site/286d8cae0cfe8031833ac1a301824aa0?pvs=105) on our online discussions and events
+JOIN US! [Add your email here for updates](https://cscsc.notion.site/286d8cae0cfe8031833ac1a301824aa0?pvs=105) on our online discussions and events
 
-</div>
-</aside>
+</section>
 
 ---
 
@@ -37,65 +33,53 @@ JOIN US!  [Add your email here for updates](https://cscsc.notion.site/286d8cae0c
 
 ### Community Updates
 
-> <u>SAVE THE DATE!</u>  
+> <u>SAVE THE DATE!</u>
 > **In-person CSCSC workshop in the beautiful French Pyrenees: September 20-27**
 > [Honest Science Workshop](/gatherings/honest-science-2026/)<br><br>Our Satellite meeting at the Conference for Complex Systems in New York: October 15
-> [Complex Systems and Contemplative Studies @ CCS26](/gatherings/ccs26-satellite/) 
+> [Complex Systems and Contemplative Studies @ CCS26](/gatherings/ccs26-satellite/)
 
-<aside class="callout bg-blue">
-<span class="icon" aria-hidden="true">📬</span>
-<div class="body">
+<aside class="note">
 
-[\*\*Add your email\*\*](https://cscsc.notion.site/286d8cae0cfe8031833ac1a301824aa0?pvs=105)
+[**Add your email**](https://cscsc.notion.site/286d8cae0cfe8031833ac1a301824aa0?pvs=105)
 
 for monthly updates on conferences, publications, and research opportunities
 
-</div>
 </aside>
 
-<aside class="callout bg-teal">
-<span class="icon" aria-hidden="true">notion://custom_emoji/24716bf2-6d5a-4250-901b-819a4e14a08d/2afd8cae-0cfe-8072-99b9-007af6e3b1dd</span>
-<div class="body">
+<aside class="note">
 
-[\*\*Join our Hylo community forum\*\*](https://www.hylo.com/groups/cscsc/join/FfOYDYCOfG)
+[**Join our Hylo community forum**](https://www.hylo.com/groups/cscsc/join/FfOYDYCOfG)
 
 for research discussions, sharing related events, organizing local meetups
 
-</div>
 </aside>
 
 <div class="columns" style="--cols:50.0fr 50.0fr">
 <div class="col">
 
-### 🎥 CSCSC25 Conference
+### CSCSC25 Conference
 
-<aside class="callout">
-<span class="icon" aria-hidden="true">🌱</span>
-<div class="body">
+<aside class="note">
 
 Our inaugural workshop brought together researchers exploring complexity science and contemplative studies.
 
 [Watch recordings on YouTube](https://www.youtube.com/@cscs.conference/streams) <br>[CSCSC25 Conference](/gatherings/cscsc25/)<br>[Key Themes and Insights](/gatherings/cscsc25/key-themes/)
 
-</div>
 </aside>
 
 </div>
 <div class="col">
 
-### 📚 From Our Community
+### From Our Community
 
-<aside class="callout">
-<span class="icon" aria-hidden="true">💡</span>
-<div class="body">
+<aside class="note">
 
 **Dive Deeper**
 
 Explore key essays and perspectives, and emerging research directions bridging science, contemplation, consciousness and mindfulness.
 
-[Learning center](/learn/)<br>[Research Programs](/research/) 
+[Learning center](/learn/)<br>[Research Programs](/research/)
 
-</div>
 </aside>
 
 </div>
@@ -104,29 +88,24 @@ Explore key essays and perspectives, and emerging research directions bridging s
 <div class="columns" style="--cols:50.0fr 50.0fr">
 <div class="col">
 
-### 🗺️ Explore Resources
+### Explore Resources
 
-<aside class="callout">
-<span class="icon" aria-hidden="true">📖</span>
-<div class="body">
+<aside class="note">
 
 **Research Infrastructure**
 
 Browse our curated lists of funding opportunities, research centers, and publication outlets sympathetic to bridging complexity and contemplation.
 
-[Research Centers](/resources/centers/)<br>[Funding Opportunities](/resources/funding/) <br>[Publication Outlets](/resources/outlets/) 
+[Research Centers](/resources/centers/)<br>[Funding Opportunities](/resources/funding/) <br>[Publication Outlets](/resources/outlets/)
 
-</div>
 </aside>
 
 </div>
 <div class="col">
 
-### 🧘 Practice & Language
+### Practice & Language
 
-<aside class="callout">
-<span class="icon" aria-hidden="true">🌊</span>
-<div class="body">
+<aside class="note">
 
 **Experience it**
 
@@ -134,7 +113,6 @@ Explore our menu of 10-min contemplative practices across traditions, and shared
 
 [Practice Menu](/learn/practices/) <br>[Our Language](/learn/glossary/)
 
-</div>
 </aside>
 
 </div>
@@ -142,21 +120,21 @@ Explore our menu of 10-min contemplative practices across traditions, and shared
 
 ---
 
-[**🗓️ Next Conference:**](/) [Fall 2026!](/) 
+[**Next Conference:**](/) [Fall 2026!](/)
 
-**🤝 Collaboration Opportunities:** [BLOG & UPDATES](/writing/)
+**Collaboration Opportunities:** [BLOG & UPDATES](/writing/)
 
 Questions, ideas, want to collaborate on something? Reach out to us at [cscs.conference@gmail.com](mailto:cscs.conference@gmail.com)
 
 ---
 
-<a class="page-link" href="/about/"><span class="ic" aria-hidden="true">🌀</span>ABOUT CSCSC</a>
+<a class="page-link" href="/about/">ABOUT CSCSC</a>
 
-<a class="page-link" href="/gatherings/"><span class="ic" aria-hidden="true"></span>LIVE EVENTS</a>
+<a class="page-link" href="/gatherings/">LIVE EVENTS</a>
 
-<a class="page-link" href="/resources/"><span class="ic" aria-hidden="true">📚</span>RESOURCES</a>
+<a class="page-link" href="/resources/">RESOURCES</a>
 
-<a class="page-link" href="/writing/"><span class="ic" aria-hidden="true">📝</span>BLOG & UPDATES</a>
+<a class="page-link" href="/writing/">BLOG & UPDATES</a>
 
 [https://intp.science/en/events/mindful-co-working-retreat-2025](https://intp.science/en/events/mindful-co-working-retreat-2025)
 

@@ -6,20 +6,15 @@ notion_edited: "2026-06-06"
 icon: "🌳"
 ---
 
-<aside class="callout bg-brown">
-<span class="icon" aria-hidden="true">🌳</span>
-<div class="body">
+<div class="standfirst">
 
 **You're already in the conversation.** Here are concrete references for what CSCSC is working on — and the perspectives that anchor it.
 
 </div>
-</aside>
 
 ## Core Perspectives
 
-<aside class="callout bg-blue">
-<span class="icon" aria-hidden="true">🧭</span>
-<div class="body">
+<section class="panel">
 
 ### **Why Honest Science is Spiritual**
 
@@ -29,12 +24,9 @@ A complexity view on scientific research itself: how rigorous inquiry, done sinc
 
 [Read the essay →](https://www.pchvykov.com/post/honest-science-is-spirituality)
 
-</div>
-</aside>
+</section>
 
-<aside class="callout bg-blue">
-<span class="icon" aria-hidden="true">🌳</span>
-<div class="body">
+<section class="panel">
 
 ### **Ecology, Complexity, and the Trinity**
 
@@ -44,12 +36,9 @@ How a relational ontology naturally necessitates complexity science and ecologic
 
 [Read on Substack →](https://walden.substack.com/p/logos-ut-verbum)
 
-</div>
-</aside>
+</section>
 
-<aside class="callout bg-teal">
-<span class="icon" aria-hidden="true">🧬</span>
-<div class="body">
+<section class="panel">
 
 ### **Living Things Are Not Machines**
 
@@ -59,12 +48,9 @@ Agency, goal-directedness, and intelligence as causal explanations at every biol
 
 [Read on Noema →](https://www.noemamag.com/living-things-are-not-machines-also-they-totally-are/)
 
-</div>
-</aside>
+</section>
 
-<aside class="callout bg-purple">
-<span class="icon" aria-hidden="true">💭</span>
-<div class="body">
+<section class="panel">
 
 ### **Beyond Computational Models of Mind**
 
@@ -74,12 +60,11 @@ The limits of mind-as-computation, pointing toward frameworks that honor both co
 
 [Read on Frontiers →](https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2024.1362658/full)
 
-</div>
-</aside>
+</section>
 
 ---
 
-## 🎥 Watch the community think
+## Watch the community think
 
 *Keynotes from our inaugural CSCSC conference:*
 
@@ -102,14 +87,12 @@ The limits of mind-as-computation, pointing toward frameworks that honor both co
 
 ---
 
-## 🔭 What we're working on
+## What we're working on
 
-<aside class="callout noicon bg-gray">
-<div class="body">
+<aside class="note">
 
 [**Research Programs**](/research/) — current and emerging research directions, our core questions, and active projects.
 
-</div>
 </aside>
 
 - **Working groups:** Telics (toward a science of goals) and Foundations of Causality.
@@ -118,11 +101,8 @@ The limits of mind-as-computation, pointing toward frameworks that honor both co
 
 ---
 
-<aside class="callout bg-yellow">
-<span class="icon" aria-hidden="true">💡</span>
-<div class="body">
+<aside class="note">
 
 [**Stay in touch**](https://app.notion.com/p/286d8cae0cfe8031833ac1a301824aa0) *for updates* · [Join our forum](https://www.hylo.com/groups/cscsc/join/FfOYDYCOfG)
 
-</div>
 </aside>

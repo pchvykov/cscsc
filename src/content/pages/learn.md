@@ -6,77 +6,66 @@ notion_edited: "2026-07-30"
 icon: "🧭"
 ---
 
-<aside class="callout bg-blue">
-<span class="icon" aria-hidden="true">✨</span>
-<div class="body">
+<div class="standfirst">
 
 **Start here — our vision in 2 minutes.** A short animation for what this is all about — no background needed.
 
-[▶ Watch our animation](/vision/)
+[Watch our animation](/vision/)
 
 <div class="embed tall"><iframe src="/vision/" loading="lazy" title="Embedded content"></iframe></div>
 
 </div>
-</aside>
 
 > **Complexity science: the study of how simple parts can do smart things together without anyone in charge <br>– from proteins, to organisms, to societies and minds.**
 
 *CSCSC asks what this rigorous science of self-organization can learn from — and offer back to — contemplative traditions.*
 
-<aside class="callout noicon bg-yellow">
-<div class="body">
+<aside class="note">
 
-[**Our Language**](/learn/glossary/) defines how we think.  
+[**Our Language**](/learn/glossary/) defines how we think.
 
-[Best place to start learning:](/learn/glossary/) look through this map of terms we curated. The terms that feel unfamiliar are your personalized map of what to learn to dive into the dialogue. 
+[Best place to start learning:](/learn/glossary/) look through this map of terms we curated. The terms that feel unfamiliar are your personalized map of what to learn to dive into the dialogue.
 
-</div>
 </aside>
 
 ---
 
-## 🗺️ <u>Choose</u> <u>your path</u> 🗺️
+##  <u>Choose</u> <u>your path</u>
 
-### **However much time you've got, there's a way in.** Every path below has a 5-minute spark, an afternoon, and a weekend deep-dive — pick your depth and dive. 🤿
+### **However much time you've got, there's a way in.** Every path below has a 5-minute spark, an afternoon, and a weekend deep-dive — pick your depth and dive.
 
 <div class="columns" style="--cols:42.9fr 42.9fr 14.3fr">
 <div class="col">
 
-<aside class="callout noicon bg-blue">
-<div class="body">
+<div class="card-box">
 
-[New to complexity?](/learn/new-to-complexity/) 
+[New to complexity?](/learn/new-to-complexity/)
 
 Intro or deepen into the profound insights of **complex systems science** – through videos, interactive animations and further reading
 
 </div>
-</aside>
 
 </div>
 <div class="col">
 
-<aside class="callout noicon bg-teal">
-<div class="body">
+<div class="card-box">
 
-[Why contemplation?](/learn/why-contemplation/) 
+[Why contemplation?](/learn/why-contemplation/)
 
-The trouble with the common scientific episteme – and how rigorously engaging it forces us to look beyond. 
+The trouble with the common scientific episteme – and how rigorously engaging it forces us to look beyond.
 
 </div>
-</aside>
 
 </div>
 <div class="col">
 
-<aside class="callout noicon bg-purple">
-<div class="body">
+<div class="card-box">
 
-[Already in the conversation](/learn/already-in-the-conversation/)? 
+[Already in the conversation](/learn/already-in-the-conversation/)?
 
 Dive deeper into concrete references, readings and videos best representing what we're doing and thinking about.
 
 </div>
-</aside>
 
 </div>
 </div>
@@ -88,7 +77,7 @@ Dive deeper into concrete references, readings and videos best representing what
 <div class="columns" style="--cols:50.0fr 50.0fr">
 <div class="col">
 
-### 🎤 Conference talk · 12 min
+### Conference talk · 12 min
 
 An accessible overview of how complexity science meets Eastern philosophy — the gentler entry point. Pairs with our [accompanying Psyche magazine publication](https://psyche.co/ideas/complexity-science-unravels-the-deeper-power-of-mindfulness).
 
@@ -99,7 +88,7 @@ An accessible overview of how complexity science meets Eastern philosophy — th
 </div>
 <div class="col">
 
-### 🎙️ Podcast · 58 min
+### Podcast · 58 min
 
 A deeper, more technical conversation with Francis Heylighen — consciousness, autopoiesis, cybernetics and phenomenology, right in the space of questions we sit with.
 
@@ -110,17 +99,14 @@ A deeper, more technical conversation with Francis Heylighen — consciousness, 
 </div>
 </div>
 
-<aside class="callout">
-<span class="icon" aria-hidden="true">💡</span>
-<div class="body">
+<aside class="note">
 
-[\*\*Stay in touch\*\*](https://cscsc.notion.site/286d8cae0cfe8031833ac1a301824aa0?pvs=105) *for updates*
+[**Stay in touch**](https://cscsc.notion.site/286d8cae0cfe8031833ac1a301824aa0?pvs=105) *for updates*
 
-</div>
 </aside>
 
-<a class="page-link" href="/learn/new-to-complexity/"><span class="ic" aria-hidden="true">🔭</span>New to complexity?</a>
+<a class="page-link" href="/learn/new-to-complexity/">New to complexity?</a>
 
-<a class="page-link" href="/learn/why-contemplation/"><span class="ic" aria-hidden="true">⚛️</span>Why contemplation?</a>
+<a class="page-link" href="/learn/why-contemplation/">Why contemplation?</a>
 
-<a class="page-link" href="/learn/already-in-the-conversation/"><span class="ic" aria-hidden="true">🌳</span>Already in the conversation</a>
+<a class="page-link" href="/learn/already-in-the-conversation/">Already in the conversation</a>

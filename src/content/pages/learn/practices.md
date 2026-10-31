@@ -6,7 +6,11 @@ notion_edited: "2025-11-01"
 icon: "🧘"
 ---
 
+<div class="standfirst">
+
 *Contemplative practices from Buddhist, Christian, Hindu, Daoist, Sufi, and Indigenous traditions*
+
+</div>
 
 We want to invite you to try an experiment.
 
@@ -28,4 +32,4 @@ We have put together a **Practice Menu** below of some of our favorite contempla
 - How could this inform research methodology or theory?
 - What assumptions about mind/body/reality does this challenge?
 
-<a class="page-link" href="/learn/practices/contemplative-prayer/"><span class="ic" aria-hidden="true"></span>Contemplative Prayer</a>
+<a class="page-link" href="/learn/practices/contemplative-prayer/">Contemplative Prayer</a>

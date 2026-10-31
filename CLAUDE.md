@@ -9,6 +9,17 @@ Astro static site (pinned `astro` in package.json). `npm install`, then `npm run
 - `src/styles/global.css` - all tokens and shared components; `home.css` only for the home page.
 - `public/` - files served as-is: the vision animation (`/vision/`), CCS26 QR pages (`/ccs26/`), page images (`/media/`), home/card images (`/assets/`).
 
+## Writing content: the building blocks
+Markdown for text. For anything more, use these few HTML wrappers (leave a blank line inside each so Markdown still works) - nothing else, so every page looks like the same site:
+- `<div class="standfirst">` - the opening line of a page, set large.
+- `<section class="panel">` starting with a `##` heading - a titled section.
+- `<aside class="note">` - a short aside to the main text.
+- `<div class="columns" style="--cols:1fr 1fr">` with `<div class="col">` children - side by side; put `<div class="card-box">` in each col for a grid of parallel items.
+- `<details class="toggle"><summary>Title</summary><div class="body">...</div></details>` - an accordion row (HTML only inside `<summary>`).
+- `<a class="page-link" href="...">Title</a>` - a link to another page, as an index row; `<a class="more-link" href="...">See more ...</a>` - a button-style link.
+- `<dl class="terms">` with `<div><dt>Term</dt><dd>Definition</dd></div>` - term/definition lists (glossary).
+- No emoji as icons, no colour classes. Headings start at `##` (the page title is the h1) and don't skip levels.
+
 ## Rules
 - Text migrated from Notion stays verbatim. New copy follows the voice guide (prose-style) and gets Pavel's review.
 - No personal email addresses or other PII in this public repo. Contact email is obfuscated (`a.mail` with data-u / data-d).

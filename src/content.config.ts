@@ -22,6 +22,7 @@ const pages = defineCollection({
     path: z.string(),
     description: z.string().optional(),
     draft: z.boolean().default(false),
+    layout: z.enum(["page", "glossary"]).default("page"),
     ...notion,
   }),
 });

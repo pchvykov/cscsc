@@ -4,22 +4,18 @@ path: "/writing/"
 notion_id: "286d8cae-0cfe-8154-963b-e1012a87f930"
 notion_edited: "2026-06-04"
 icon: "📝"
-cover: "/media/286d8cae0cfe87f930.webp"
 ---
 
 ## Community Updates & Reflections
 
-*Updates from our conferences, reflections on key questions in the field, and opportunities for collaboration.* 
+*Updates from our conferences, reflections on key questions in the field, and opportunities for collaboration.*
 
-<aside class="callout">
-<span class="icon" aria-hidden="true">📬</span>
-<div class="body">
+<aside class="note">
 
-[\*\*Stay in touch\*\*](https://cscsc.notion.site/286d8cae0cfe8031833ac1a301824aa0?pvs=105)
+[**Stay in touch**](https://cscsc.notion.site/286d8cae0cfe8031833ac1a301824aa0?pvs=105)
 
 for updates on new posts, conferences, publications, and research opportunities
 
-</div>
 </aside>
 
 ---
@@ -27,10 +23,9 @@ for updates on new posts, conferences, publications, and research opportunities
 <div class="columns" style="--cols:62.5fr 37.5fr">
 <div class="col">
 
-<aside class="callout noicon bg-purple">
-<div class="body">
+<div class="card-box">
 
-#### 🌱 CSCSC Inaugural Workshop 2025
+#### CSCSC Inaugural Workshop 2025
 
 **October 8-10, 2025**
 
@@ -41,29 +36,26 @@ Our first conference brought together 47 researchers from 30+ institutions to ex
 [CSCSC25 Conference](/gatherings/cscsc25/)<br>[Key Themes and Insights](/gatherings/cscsc25/key-themes/) <br>[Conference Schedule](/gatherings/cscsc25/schedule/)
 
 </div>
-</aside>
 
 </div>
 <div class="col">
 
-<aside class="callout noicon bg-teal">
-<div class="body">
+<div class="card-box">
 
-#### [Practice Menu](/learn/practices/) 
+#### [Practice Menu](/learn/practices/)
 
 We've created a curated menu of 10-min contemplative practices from diverse traditions (Buddhist, Christian, Hindu, Daoist, Sufi, Indigenous) to help community members expand their experiential horizons and prepare for deeper engagement with the field.
 
 [Practice Menu](/learn/practices/)
 
 </div>
-</aside>
 
 </div>
 </div>
 
 ---
 
-<!-- database view: Blog Posts  (rendered by the page template) -->
+<!-- database view: Blog Posts (rendered by the page template) -->
 
 ---
 
@@ -71,30 +63,27 @@ We've created a curated menu of 10-min contemplative practices from diverse trad
 
 We welcome contributions from community members! Share your research updates, event reflections, resource discoveries, or philosophical contemplations.
 
-<aside class="callout">
-<span class="icon" aria-hidden="true">✍️</span>
-<div class="body">
+<aside class="note">
 
 **Ready to write?**
 
-New Post Template 
+New Post Template
 
 Duplicate the template to your own Notion workspace, write your post, and then share it with us for review at [cscs.conference@gmail.com](mailto:cscs.conference@gmail.com)
 
-</div>
 </aside>
 
 ---
 
 **Suggested Post Categories:**
 
-- 🔬 **Research Updates** - Latest findings, paper announcements, theoretical insights
-- 🎯 **Event Reflections** - Conference summaries, workshop outcomes, discussion highlights
-- 🤝 **Collaboration** - Partnership announcements, joint research opportunities
-- 📚 **Resource Shares** - Book recommendations, tool discoveries, methodological insights
-- 💭 **Contemplations** - Philosophical reflections, integration challenges, future directions
+- **Research Updates** - Latest findings, paper announcements, theoretical insights
+- **Event Reflections** - Conference summaries, workshop outcomes, discussion highlights
+- **Collaboration** - Partnership announcements, joint research opportunities
+- **Resource Shares** - Book recommendations, tool discoveries, methodological insights
+- **Contemplations** - Philosophical reflections, integration challenges, future directions
 
 ---
 
-<a class="page-link" href="/learn/practices/"><span class="ic" aria-hidden="true">🧘</span>Practice Menu</a>
+<a class="page-link" href="/learn/practices/">Practice Menu</a>
 

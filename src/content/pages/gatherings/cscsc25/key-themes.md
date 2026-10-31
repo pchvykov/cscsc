@@ -12,9 +12,7 @@ icon: "📜"
 
 ---
 
-<aside class="callout bg-blue">
-<span class="icon" aria-hidden="true">🎤</span>
-<div class="body">
+<section class="panel">
 
 ### Keynote Themes
 
@@ -53,14 +51,11 @@ Professor Lupyan explored how language fundamentally shapes thought and its impl
 
 **Discussion themes**: Non-human communication, unique properties of human language, and implications for artificial general intelligence.
 
-</div>
-</aside>
+</section>
 
 ---
 
-<aside class="callout bg-teal">
-<span class="icon" aria-hidden="true">🔬</span>
-<div class="body">
+<section class="panel">
 
 ### Research Presentations
 
@@ -95,14 +90,11 @@ Presented "bit from it" approach where measurements and observations derive from
 - Bridged physics and phenomenology through measurement theory
 - Showed how observer-dependence emerges even in classical systems
 
-</div>
-</aside>
+</section>
 
 ---
 
-<aside class="callout bg-purple">
-<span class="icon" aria-hidden="true">🧘</span>
-<div class="body">
+<section class="panel">
 
 ### Contemplative Practices Integration
 
@@ -116,14 +108,11 @@ Throughout the conference, contemplative practices were woven into the scientifi
 
 **Key insight**: Contemplative practice doesn't frame the world in terms of problems to solve, but rather invites direct experience and integration—complementing problem-oriented scientific approaches.
 
-</div>
-</aside>
+</section>
 
 ---
 
-<aside class="callout bg-yellow">
-<span class="icon" aria-hidden="true">💬</span>
-<div class="body">
+<section class="panel">
 
 ### Breakout Discussions: Key Themes
 
@@ -166,14 +155,11 @@ Discussions explored:
 - Need for shared vocabulary between complexity science and contemplative traditions
 - **"Transjunctions"**: Places where different traditions use different language for similar insights
 
-</div>
-</aside>
+</section>
 
 ---
 
-<aside class="callout bg-orange">
-<span class="icon" aria-hidden="true">🤝</span>
-<div class="body">
+<section class="panel">
 
 ### Community Identity & Core Commitments
 
@@ -201,14 +187,11 @@ The conference culminated in articulating what defines CSCSC:
 - **Relational ontology**: Interactions and relationships are as fundamental as components themselves
 - **"Seed-Grow-Harvest" epistemology**: Recognizing cycles from spontaneous insight through analytic unfolding to mature fruits that yield new seeds
 
-</div>
-</aside>
+</section>
 
 ---
 
-<aside class="callout bg-pink">
-<span class="icon" aria-hidden="true">🌱</span>
-<div class="body">
+<section class="panel">
 
 ### Next Steps: Community Directions
 
@@ -241,8 +224,7 @@ The conference culminated in articulating what defines CSCSC:
 - Create rigorous frameworks for discussing wisdom and transformation
 - Explore scaling of contemplative principles to collective systems
 
-</div>
-</aside>
+</section>
 
 ---
 

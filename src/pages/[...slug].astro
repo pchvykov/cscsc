@@ -15,5 +15,28 @@ const outline = headings.filter((h) => h.depth <= 3);
 const toc = outline.length >= 5 ? outline.map((h) => ({ ...h, text: h.text.replace(/^[^\p{L}\p{N}]+/u, "") })) : [];
 ---
 <Page title={titleCase(entry.data.title)} cover={entry.data.cover} toc={toc} description={entry.data.description ?? summarize(entry.body)}>
+  {entry.data.layout === "glossary" && (
+    <>
+      <label class="visually-hidden" for="term-q">Filter terms</label>
+      <input id="term-q" class="term-filter" type="search" placeholder="Find a term" />
+    </>
+  )}
   <Content />
+  {entry.data.layout === "glossary" && (
+    <script is:inline>
+      (function () {
+        var q = document.getElementById("term-q");
+        var h = document.querySelector(".prose h2"); if (h) h.before(q);
+        q.addEventListener("input", function () {
+          var t = q.value.trim().toLowerCase();
+          document.querySelectorAll(".terms > div").forEach(function (d) { d.hidden = t && d.textContent.toLowerCase().indexOf(t) < 0; });
+          document.querySelectorAll(".prose h2, .prose h3").forEach(function (h) {
+            var el = h.nextElementSibling, any = false;
+            while (el && !/^H[23]$/.test(el.tagName)) { if (el.matches(".terms") && [].some.call(el.children, function (c) { return !c.hidden; })) any = true; el = el.nextElementSibling; }
+            h.hidden = !!t && !any;
+          });
+        });
+      })();
+    </script>
+  )}
 </Page>

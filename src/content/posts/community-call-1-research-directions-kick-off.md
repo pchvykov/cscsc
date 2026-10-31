@@ -13,7 +13,7 @@ icon: "⚛️"
 
 [**Watch Recording on YouTube**](https://www.youtube.com/watch?v=e8ImSvvBbSk)
 
-## **Mapping a New Research Frontier: Core Questions in Complex Systems & Contemplative Studies** 
+## **Mapping a New Research Frontier: Core Questions in Complex Systems & Contemplative Studies**
 
 This document synthesizes discussions from a nascent interdisciplinary community exploring the intersection of complex systems science and contemplative studies. Our goal is to identify promising, concrete research directions that bridge first-person experience with third-person formal modeling, with an eye toward foundational questions and potential funding opportunities (e.g., Templeton Foundation).
 

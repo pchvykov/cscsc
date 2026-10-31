@@ -11,7 +11,11 @@ notion_edited: "2026-05-08"
 icon: "🫵🏽"
 ---
 
+<div class="standfirst">
+
 *Blog post drafted from a discussion between Pavel, Jordan and Atul*
+
+</div>
 
 > **A note before we begin.** These are exactly the questions we'll be sitting with — together, in person — at our September retreat, the [Honest Science Workshop](/gatherings/honest-science-2026/). If anything below resonates, consider this an invitation.
 

@@ -11,7 +11,11 @@ icon: "😇"
 authors: ["matthew-mccarthy"]
 ---
 
-*Inspired by the April community call led by Jordan Borgman* 
+<div class="standfirst">
+
+*Inspired by the April community call led by Jordan Borgman*
+
+</div>
 
 Imagine walking into a museum and lifting a single object from a carefully arranged room — a compass, say, or a ceremonial bowl — and carrying it home. The object is real. It is in your hands. But something has changed. Removed from its context, from the other objects it was in conversation with, from the light falling on it in a particular way, it is also somehow less than what it was. It is the same thing and not the same thing.
 

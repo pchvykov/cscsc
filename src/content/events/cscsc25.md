@@ -16,13 +16,10 @@ summary: "October 8-10, 2025 | Virtual (Zoom) | 47 researchers from 30+ institut
 
 **Complexity Science & Contemplative Studies Conference**<br>**October 8-10, 2025** | Virtual (Zoom) | 47 researchers from 30+ institutions
 
-<aside class="callout">
-<span class="icon" aria-hidden="true">🎥</span>
-<div class="body">
+<aside class="note">
 
 **Watch the recordings:** [CSCSC YouTube Channel](https://www.youtube.com/@cscs.conference/streams)
 
-</div>
 </aside>
 
 ---
@@ -45,19 +42,19 @@ Acknowledging the long history and challenges of attempts to formalize contempla
 
 ### Keynote Speakers
 
-#### 🧬 Michael Levin (Tufts University)
+#### Michael Levin (Tufts University)
 
 **"Minds in the Platonic Space"**
 
 Exploring the Platonic space and a modern version of minds that are not "in" the physical space, including controversial ideas around the claim that there are no "dumb machines" or "inanimate matter." Working to understand how to recognize, build, and ethically relate to embodied minds in the physical world.
 
-#### ✨ Martin Nowak (Harvard University)
+#### Martin Nowak (Harvard University)
 
 **"The Beyond Within"**
 
 Discussion of his recent contemplative books "Beyond" and "Within," which explore science, mathematics, and philosophy as ways to understanding. These books discuss how to lead life and describe the eternity that is before us—or actually within us.
 
-#### 🗣️ Gary Lupyan (University of Wisconsin–Madison)
+#### Gary Lupyan (University of Wisconsin–Madison)
 
 **"How Language Helps Structure the Human Mind"**
 
@@ -65,7 +62,7 @@ Exploring whether language merely reflects objective categories of our mental wo
 
 ---
 
-### [Conference Schedule](/gatherings/cscsc25/schedule/) 
+### [Conference Schedule](/gatherings/cscsc25/schedule/)
 
 The three-day conference followed a dialectical progression:
 
@@ -84,11 +81,11 @@ Each day included:
 - Short talks from community members
 - Integration and reflection practices
 
-<a class="page-link" href="/gatherings/cscsc25/schedule/"><span class="ic" aria-hidden="true">📅</span>Conference Schedule</a>
+<a class="page-link" href="/gatherings/cscsc25/schedule/">Conference Schedule</a>
 
 ---
 
-### [Key Themes and Insights](/gatherings/cscsc25/key-themes/) 
+### [Key Themes and Insights](/gatherings/cscsc25/key-themes/)
 
 **Foundations Workshop** explored the territory through discussions on:
 
@@ -109,7 +106,7 @@ Each day included:
 
 **Core Questions Workshop** used Open Space Technology format for consensus-building on the field's fundamental inquiries and future directions.
 
-<a class="page-link" href="/gatherings/cscsc25/key-themes/"><span class="ic" aria-hidden="true">📜</span>Key Themes and Insights</a>
+<a class="page-link" href="/gatherings/cscsc25/key-themes/">Key Themes and Insights</a>
 
 ---
 
@@ -117,11 +114,11 @@ Each day included:
 
 From this conference, we are developing:
 
-✅ **Consensus on core questions, methods, and objectives** of this field<br>✅ **Resource maps:** funding sources, publication outlets, research centers, participant directory<br>✅ **Recorded talks and discussions** converted to essays and [uploaded to YouTube](https://www.youtube.com/@cscs.conference/streams)<br>✅ **Glossary of key terms** with agreed-upon definitions: [Our Language](/learn/glossary/) <br>✅ **Online research hub** for ongoing collaboration and resource sharing (this site)<br>✅ **Planning for in-person meeting** in 2026
+**Consensus on core questions, methods, and objectives** of this field<br>**Resource maps:** funding sources, publication outlets, research centers, participant directory<br>**Recorded talks and discussions** converted to essays and [uploaded to YouTube](https://www.youtube.com/@cscs.conference/streams)<br>**Glossary of key terms** with agreed-upon definitions: [Our Language](/learn/glossary/) <br>**Online research hub** for ongoing collaboration and resource sharing (this site)<br>**Planning for in-person meeting** in 2026
 
 ---
 
-### [Next steps](/gatherings/cscsc25/next-steps/) 
+### [Next steps](/gatherings/cscsc25/next-steps/)
 
 **Join the Community**
 
@@ -139,4 +136,4 @@ From this conference, we are developing:
 
 **Organizing Committee:** Pavel Chvykov, Robert Marsland, Matthieu Barbier<br>**Questions?** Contact [cscs.conference@gmail.com](mailto:cscs.conference@gmail.com)
 
-<a class="page-link" href="/gatherings/cscsc25/next-steps/"><span class="ic" aria-hidden="true">🪜</span>Next steps</a>
+<a class="page-link" href="/gatherings/cscsc25/next-steps/">Next steps</a>

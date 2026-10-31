@@ -6,19 +6,19 @@ notion_edited: "2025-11-01"
 icon: "❓"
 ---
 
-## Core Questions of CSCSC
+<div class="standfirst">
 
 *Emerging from collective dialogue at CSCSC25 conference*
 
+</div>
+
 ---
 
-<aside class="callout bg-blue">
-<span class="icon" aria-hidden="true">🎯</span>
-<div class="body">
+<section class="panel">
 
-### Foundational Framing
+## Foundational Framing
 
-#### The Why
+### The Why
 
 **What about the current moment calls us to explore the intersection of complexity and contemplative science?**
 
@@ -31,7 +31,7 @@ We stand at a unique historical juncture where:
 
 *Why these two fields?* Both deal with systems that cannot be understood by examining parts in isolation—whether neurons in a brain or practitioners in a sangha. Both recognize that the observer changes what is observed.
 
-#### The What
+### The What
 
 **What kind of research community are we forming?**
 
@@ -39,7 +39,7 @@ We stand at a unique historical juncture where:
 - A community that practices what it studies—embodying contemplative principles in our collaborative research
 - A bridge between first-person experiential knowledge and third-person reproducible findings
 
-#### The How
+### The How
 
 **What shared practices produce the wisdom we seek?**
 
@@ -48,16 +48,13 @@ We stand at a unique historical juncture where:
 - Maintaining curiosity through dialogue rather than premature closure
 - "Seed-grow-harvest" epistemology—valuing insight, analysis, and integration equally
 
-</div>
-</aside>
+</section>
 
 ---
 
-<aside class="callout bg-purple">
-<span class="icon" aria-hidden="true">⚡</span>
-<div class="body">
+<section class="panel">
 
-### Core Tensions & Polarities
+## Core Tensions & Polarities
 
 **How do we differentiate and hold the tensions between wisdom (contemplative) and knowledge (complexity science)?**
 
@@ -90,18 +87,15 @@ This is not a problem to solve but a creative tension to maintain:
 
 **The integration:** Wisdom without knowledge risks dogmatism; knowledge without wisdom risks irrelevance. Complexity science offers formal frameworks (network dynamics, emergence, attractor landscapes) that may help translate contemplative insights into testable models while respecting what cannot be reduced.
 
-</div>
-</aside>
+</section>
 
 ---
 
-<aside class="callout bg-teal">
-<span class="icon" aria-hidden="true">🔬</span>
-<div class="body">
+<section class="panel">
 
-### Methodological Frontiers
+## Methodological Frontiers
 
-#### Science & Depth of Being
+### Science & Depth of Being
 
 **How can science discuss 'depth of being'?**
 
@@ -114,7 +108,7 @@ Traditional science brackets subjective experience. Yet complexity approaches of
 
 The question is not *whether* to quantify experience, but *what formal languages* might honor its depth without reducing it to mechanism.
 
-#### Generating Knowledge from Practice
+### Generating Knowledge from Practice
 
 **What, if anything, in contemplative practices can we generate knowledge about?**
 
@@ -132,18 +126,15 @@ Domains where contemplative practices yield systematic knowledge:
 - As *meta-cognitive skill*—knowing what kind of knowledge is relevant in what context
 - Through case studies and exemplars rather than only abstract principles
 
-</div>
-</aside>
+</section>
 
 ---
 
-<aside class="callout bg-yellow">
-<span class="icon" aria-hidden="true">📈</span>
-<div class="body">
+<section class="panel">
 
-### Scaling & Application
+## Scaling & Application
 
-#### How Does Contemplative Science Scale?
+### How Does Contemplative Science Scale?
 
 **From individual practice to collective transformation**
 
@@ -161,28 +152,25 @@ Critical questions:
 - **Network rituals** - how practices synchronize and align community values
 - **Phase transitions** - contemplative breakthroughs as critical phenomena in personal and social systems
 
-</div>
-</aside>
+</section>
 
 ---
 
-<aside class="callout bg-orange">
-<span class="icon" aria-hidden="true">🌉</span>
-<div class="body">
+<section class="panel">
 
-### Building Common Ground
+## Building Common Ground
 
-#### Shared Language & Transjunctions
+### Shared Language & Transjunctions
 
 **What concepts bridge contemplative and complexity logics?**
 
 Promising bridge concepts:
 
-- **Emergence** ↔️ **Emptiness** - properties not in parts but in relationships
-- **Attractors** ↔️ **Habits/Karma** - stable patterns that self-reinforce
-- **Self-organization** ↔️ **Spontaneous wisdom** - order without external control
-- **Complementarity** ↔️ **Non-duality** - observer-dependence, context-sensitivity
-- **Networks** ↔️ **Interdependence** - relational ontology
+- **Emergence** **Emptiness** - properties not in parts but in relationships
+- **Attractors** **Habits/Karma** - stable patterns that self-reinforce
+- **Self-organization** **Spontaneous wisdom** - order without external control
+- **Complementarity** **Non-duality** - observer-dependence, context-sensitivity
+- **Networks** **Interdependence** - relational ontology
 
 **"Transjunctions"** - places where contemplative and complexity thinking:
 
@@ -191,18 +179,15 @@ Promising bridge concepts:
 - Find complementary rather than contradictory truths
 - Mutually illuminate blind spots
 
-</div>
-</aside>
+</section>
 
 ---
 
-<aside class="callout bg-pink">
-<span class="icon" aria-hidden="true">📚</span>
-<div class="body">
+<section class="panel">
 
-### Essential Context
+## Essential Context
 
-#### Grounding Questions
+### Grounding Questions
 
 To build shared understanding, we must map:
 
@@ -224,22 +209,18 @@ To build shared understanding, we must map:
 - Methodological innovations (micro-phenomenology, contemplative neuroscience)
 - Theoretical frameworks (4E cognition, predictive processing, free energy principle)
 
-</div>
-</aside>
+</section>
 
 ---
 
-<aside class="callout">
-<span class="icon" aria-hidden="true">💫</span>
-<div class="body">
+<section class="panel">
 
-### Living Questions
+## Living Questions
 
 These questions are not meant to be answered once and for all. They are **koans for our community**—meant to be held, explored, lived with. As we deepen our practice and refine our science, these questions will evolve.
 
 **What new questions are emerging for you?** Share in discussions or [reach out](mailto:cscs.conference@gmail.com).
 
-</div>
-</aside>
+</section>
 
 *Compiled from CSCSC25 core questions dialogue | October 2025*

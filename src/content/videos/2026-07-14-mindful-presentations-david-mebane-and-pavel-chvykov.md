@@ -5,3 +5,4 @@ date: "2026-07-14"
 duration: "32:33"
 kind: "talk"
 ---
+
