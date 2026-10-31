@@ -22,6 +22,9 @@ Markdown for text. For anything more, use these few HTML wrappers (leave a blank
 - Applied automatically to every page by `src/lib/enhance.ts` (don't hand-write these): sections are numbered; a page with 3+ sections (or 4+ main headings) gets a section map under its opening line; a reference (heading, summary, optional italic author line, link line) becomes a compact entry; a toggle holding several references shows the count.
 - No emoji as icons, no colour classes. Headings start at `##` (the page title is the h1) and don't skip levels.
 
+## Design review
+After a design change or a new kind of block, run the `design-critic` agent (`.claude/agents/design-critic.md`) on desktop (1280 px) and phone (390 px) screenshots of the affected page types. It checks for both failure modes - the wall of undifferentiated text and the Notion-style patchwork of colours and boxes - and returns site-wide fixes.
+
 ## Rules
 - Text migrated from Notion stays verbatim. New copy follows the voice guide (prose-style) and gets Pavel's review.
 - No personal email addresses or other PII in this public repo. Contact email is obfuscated (`a.mail` with data-u / data-d).
