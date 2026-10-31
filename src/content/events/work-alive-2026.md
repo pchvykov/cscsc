@@ -97,17 +97,17 @@ A final work block. A closing circle. Reflection. Not *"what should you change?"
 
 </div>
 
-<aside class="note">
+<div class="card-box">
 
 **Contemplative, not heavy** — Morning yoga, mindful work blocks, evening practices — woven in lightly. The awareness practice *is* the work.
 
-</aside>
+</div>
 
-<aside class="note">
+<div class="card-box">
 
 **The facilitator works alongside you.** I'll be sitting next to you struggling with my own writing. I don't have this figured out. I just noticed that struggling together, out loud, changes something.
 
-</aside>
+</div>
 
 </div>
 <div class="col">
@@ -118,11 +118,11 @@ A final work block. A closing circle. Reflection. Not *"what should you change?"
 
 </div>
 
-<aside class="note">
+<div class="card-box">
 
 **No fixing, no systems** — Nobody tells you what's wrong or gives you a framework. You already know what you need — you just need the space to hear it.
 
-</aside>
+</div>
 
 </div>
 </div>
@@ -146,7 +146,7 @@ Some contemplative experience helps but isn't required. What matters is honesty.
 ---
 
 <details class="toggle">
-<summary><h3>Why this matters beyond you</h3></summary>
+<summary>Why this matters beyond you</summary>
 <div class="body">
 
 75% of young Europeans say the future is frightening. Suicide is the leading cause of death for 15–29 year-olds in Europe. Our parents and grandparents poured their lives into building a more comfortable world for us — and somehow created a generation that is more miserable than any before.
@@ -167,7 +167,7 @@ This retreat is a small experiment in that direction.
 ---
 
 <details class="toggle">
-<summary><h3>A typical day</h3></summary>
+<summary>A typical day</summary>
 <div class="body">
 
 | **Time** | **Activity** |
@@ -216,7 +216,7 @@ Weekend: unstructured. Hike, explore ancient cave art, rest, or head out.
 ---
 
 <details class="toggle">
-<summary><h3>About the facilitator</h3></summary>
+<summary>About the facilitator</summary>
 <div class="body">
 
 **Pavel Chvykov** — [pchvykov.com](http://pchvykov.com)
@@ -235,7 +235,7 @@ I'll be doing my own work alongside you, having my own struggles, naming my own 
 ---
 
 <details class="toggle">
-<summary><h3>Logistics</h3></summary>
+<summary>Logistics</summary>
 <div class="body">
 
 | |  |

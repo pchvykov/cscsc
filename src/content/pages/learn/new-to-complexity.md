@@ -34,7 +34,7 @@ Then **play** with it — watch collective intelligence (or lack thereof) self-o
 > Don't memorize it — *scan* it. The terms that feel unfamiliar are your personalized map of what to learn. Focus on the **Complexity Science** section
 
 <details class="toggle">
-<summary><h2>Got an afternoon — get oriented</h2></summary>
+<summary>Got an afternoon — get oriented</summary>
 <div class="body">
 
 *An hour or two to actually get it — three ways in:*
@@ -69,7 +69,7 @@ Then **play** with it — watch collective intelligence (or lack thereof) self-o
 </details>
 
 <details class="toggle">
-<summary><h2>Got a weekend — build a foundation</h2></summary>
+<summary>Got a weekend — build a foundation</summary>
 <div class="body">
 
 *A weekend to build real intuition. Start with the course; pick a book to go deeper.*
@@ -95,7 +95,7 @@ Then **play** with it — watch collective intelligence (or lack thereof) self-o
 </details>
 
 <details class="toggle">
-<summary><h2>More worth watching</h2></summary>
+<summary>More worth watching</summary>
 <div class="body">
 
 30-min gorgeous and deep video about emergence of complexity from simplicity:
@@ -140,7 +140,7 @@ Then **play** with it — watch collective intelligence (or lack thereof) self-o
 </div>
 </div>
 
-<aside class="note">
+<div class="card-box">
 
 **YouTube Channels worth a rabbit hole:**
 
@@ -149,15 +149,15 @@ Then **play** with it — watch collective intelligence (or lack thereof) self-o
 - [**Emergent Garden**](https://www.youtube.com/@EmergentGarden) — artificial life & the Game of Life (start with [*Emergent Complexity*](https://www.youtube.com/watch?v=0HqUYpGQIfs)).
   <a class="bookmark" href=""><b>Emergent Garden</b><span></span></a>
 
-</aside>
+</div>
 
 </div>
 </details>
 
 ---
 
-<aside class="note">
+<div class="card-box">
 
 The best way in is a conversation. [Join our forum →](https://www.hylo.com/groups/cscsc/join/FfOYDYCOfG) — or come to a community call.
 
-</aside>
+</div>

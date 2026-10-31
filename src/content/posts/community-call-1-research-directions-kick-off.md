@@ -13,16 +13,14 @@ icon: "⚛️"
 
 [**Watch Recording on YouTube**](https://www.youtube.com/watch?v=e8ImSvvBbSk)
 
-## **Mapping a New Research Frontier: Core Questions in Complex Systems & Contemplative Studies**
-
+## Mapping a New Research Frontier: Core Questions in Complex Systems & Contemplative Studies
 This document synthesizes discussions from a nascent interdisciplinary community exploring the intersection of complex systems science and contemplative studies. Our goal is to identify promising, concrete research directions that bridge first-person experience with third-person formal modeling, with an eye toward foundational questions and potential funding opportunities (e.g., Templeton Foundation).
 
 The ideas are organized into three interconnected thematic areas: **Meta-Methodology**, **Telos and Wholes**, and **State Induction & Optimization**.
 
 ---
 
-## **1. Meta-Methodology: Foundations for a New Interdisciplinary Science**
-
+## 1. Meta-Methodology: Foundations for a New Interdisciplinary Science
 Before tackling specific questions, we must establish how we will work together. This section addresses the foundational practices and assumptions of our community.
 
 - **Shared Axioms and the Ineffable:** What shared axioms can we take for granted when studying subjective experience (the "ineffable") with formal tools? How do we maintain meta-awareness of our own experience and of the process of formalization itself?
@@ -35,8 +33,7 @@ Before tackling specific questions, we must establish how we will work together.
 
 ---
 
-## **2. Telos: Explaining Parts from Wholes, Roles, and Meaning**
-
+## 2. Telos: Explaining Parts from Wholes, Roles, and Meaning
 This theme focuses on a fundamental shift in perspective: understanding components of a complex system not from the bottom-up, but in terms of their role, purpose, or meaning within a larger whole that we intuitively understand.
 
 - **Core Challenge: Formalizing "Wholes":** Mainstream fields like anatomy, sociology, and linguistics already explain parts (organs, individuals, words) by their function within a whole (body, society, language). The challenge is to **mathematically formalize concepts like "role," "purpose," and "meaning."**
@@ -46,8 +43,7 @@ This theme focuses on a fundamental shift in perspective: understanding componen
 
 ---
 
-## **3. State Induction & Optimization: Bridging Theory, Experience, and Intervention**
-
+## 3. State Induction & Optimization: Bridging Theory, Experience, and Intervention
 This theme addresses the practical challenge of understanding, inducing, and optimizing specific states of consciousness (e.g., meditative states) for both scientific inquiry and public health benefit.
 
 - **The Central Gap: Between Brain and Experience:** A significant gap exists between advanced complex systems methods for analyzing brain data and the rich landscape of psychological states (levels of "selfing," identification, reification, focused attention). **How do we rigorously bridge brain states with subjective experience?**
@@ -62,8 +58,7 @@ This theme addresses the practical challenge of understanding, inducing, and opt
 
 ---
 
-## **Synthesized Core Directions for Grant Proposals**
-
+## Synthesized Core Directions for Grant Proposals
 1. **A Pilot Project on a Single Question:** Fund a focused, interdisciplinary working group to take one question (e.g., "the experience of free will") and develop the novel methodologies required to study it, from first-person practices to formal modeling.
 2. **The Mathematics of Telos:** Support research to develop a formal, mathematical framework for understanding "roles," "purposes," and "context-dependent identity" in complex systems, potentially using multiscale information theory.
 3. **The State Induction Bridge:** Fund a large-scale project to collect high-density, multi-modal data (brain, physiology, subjective report) during contemplative practices and various induction methods. The goal is to build a control-theoretic model of state transitions to bridge the gap between brain dynamics and subjective experience, with direct applications to mental health and well-being.

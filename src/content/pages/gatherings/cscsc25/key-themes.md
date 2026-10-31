@@ -14,9 +14,9 @@ icon: "📜"
 
 <section class="panel">
 
-### Keynote Themes
+## Keynote Themes
 
-#### Martin Nowak: Mathematics, Evolution, and Divine Thought
+### Martin Nowak: Mathematics, Evolution, and Divine Thought
 
 Professor Nowak presented a scientific worldview integrating three fundamental origins: the universe, life, and language. Key insights:
 
@@ -27,7 +27,7 @@ Professor Nowak presented a scientific worldview integrating three fundamental o
 
 **Discussion themes**: The role of time in observer-dependent cosmos, whether free will can be expressed mathematically, and how mathematical laws reflect eternal truths.
 
-#### Michael Levin: Continuum of Mind and Biological Intelligence
+### Michael Levin: Continuum of Mind and Biological Intelligence
 
 Dr. Levin presented groundbreaking research on the scaling of cognition across biological systems:
 
@@ -39,7 +39,7 @@ Dr. Levin presented groundbreaking research on the scaling of cognition across b
 
 **Philosophical implications**: Challenged boundaries between living/non-living, individual/collective, and raised questions about consciousness distribution in nature.
 
-#### Gary Lupyan: Language, Cognition, and AI
+### Gary Lupyan: Language, Cognition, and AI
 
 Professor Lupyan explored how language fundamentally shapes thought and its implications for AI:
 
@@ -57,9 +57,9 @@ Professor Lupyan explored how language fundamentally shapes thought and its impl
 
 <section class="panel">
 
-### Research Presentations
+## Research Presentations
 
-#### Adam Goldstein: Organic Alignment in AI Collectives
+### Adam Goldstein: Organic Alignment in AI Collectives
 
 Introduced mathematical frameworks for measuring emergence and collective benefit in AI systems:
 
@@ -68,21 +68,21 @@ Introduced mathematical frameworks for measuring emergence and collective benefi
 - **"Care attractors"**: Self-sustaining patterns of care within collectives
 - Roadmap for different levels of alignment (physical to cultural)
 
-#### Adam Safron: Rhythmic Entrainment and Consciousness
+### Adam Safron: Rhythmic Entrainment and Consciousness
 
 Explored how shared rhythms alter consciousness and enable human connection:
 
 - Rhythmic activities lead to both **"unselfing"** (letting go of suffering self) and **"co-selfing"** (bonding through shared rhythms)
 - Implications for understanding collective consciousness and synchronization
 
-#### Matthieu Barbier: Downward Explanation in Science
+### Matthieu Barbier: Downward Explanation in Science
 
 Emphasized importance of functional roles and context over purely compositional explanations:
 
 - Top-down causation complements bottom-up mechanisms
 - Context and function matter as much as constituent parts
 
-#### David Theurel: Classical Physics and First-Person Experience
+### David Theurel: Classical Physics and First-Person Experience
 
 Presented "bit from it" approach where measurements and observations derive from physical interactions:
 
@@ -96,7 +96,7 @@ Presented "bit from it" approach where measurements and observations derive from
 
 <section class="panel">
 
-### Contemplative Practices Integration
+## Contemplative Practices Integration
 
 Throughout the conference, contemplative practices were woven into the scientific dialogue:
 
@@ -114,15 +114,15 @@ Throughout the conference, contemplative practices were woven into the scientifi
 
 <section class="panel">
 
-### Breakout Discussions: Key Themes
+## Breakout Discussions: Key Themes
 
-#### Science and Contemplation Integration Challenges
+### Science and Contemplation Integration Challenges
 
 - **Modern framing problem**: Current academic structures create artificial barriers between complexity studies and contemplative practices
 - **Generational shift**: Younger scientists increasingly open to integrative approaches, particularly influenced by psychedelic research and consciousness studies
 - **Bridging communities**: Need for concrete ways to connect complexity science and contemplative research networks
 
-#### The Problem vs. Contemplative Approach
+### The Problem vs. Contemplative Approach
 
 Key tension emerged between:
 
@@ -131,7 +131,7 @@ Key tension emerged between:
 
 Rather than resolving this tension, the community recognized it as a **generative polarity** to maintain.
 
-#### Scientific Creativity and Intuition
+### Scientific Creativity and Intuition
 
 Discussions explored:
 
@@ -140,7 +140,7 @@ Discussions explored:
 - The nature of insight and its relationship to formal reasoning
 - Systems thinking applied to personal contemplative practice
 
-#### Wisdom vs. Knowledge
+### Wisdom vs. Knowledge
 
 **Wisdom framework emerged:**
 
@@ -149,7 +149,7 @@ Discussions explored:
 - Requires integration of first-person (introspection), second-person (dialogue), and third-person (objective) perspectives
 - Emerges through practice over time, not just conceptual learning
 
-#### Language and Conceptual Schemes
+### Language and Conceptual Schemes
 
 - How language shapes what we can think and perceive
 - Need for shared vocabulary between complexity science and contemplative traditions
@@ -161,11 +161,11 @@ Discussions explored:
 
 <section class="panel">
 
-### Community Identity & Core Commitments
+## Community Identity & Core Commitments
 
 The conference culminated in articulating what defines CSCSC:
 
-#### What We Agree On
+### What We Agree On
 
 - **Reality is fundamentally relational and emergent**, not built from isolated parts
 - **The universe is made of adaptive, intelligent parts**, not inert mechanisms
@@ -179,7 +179,7 @@ The conference culminated in articulating what defines CSCSC:
 - **Complexity as humility**: Recognizing closure isn't possible, allowing for openness and epistemic provision
 - **Open non-sectarianism**: Balance among various contemplative and scientific traditions
 
-#### Shared Foundational Assumptions
+### Shared Foundational Assumptions
 
 - **Primacy of tacit knowledge & practice**: Engaging through practice (meditation, technology) is ontologically fundamental, not secondary to theory
 - **Science as mode of revealing**: Valid explanation is a tool to enhance perception, not just a predictive model
@@ -193,15 +193,15 @@ The conference culminated in articulating what defines CSCSC:
 
 <section class="panel">
 
-### Next Steps: Community Directions
+## Next Steps: Community Directions
 
-#### Immediate Actions
+### Immediate Actions
 
 - **Personal connections**: Each member to reach out to one person from the directory for 1-on-1 conversations
 - **Share resources**: Reading lists, research proposals, funding opportunities
 - **Form local groups**: Regional clusters for in-person gatherings
 
-#### Ongoing Community Structure
+### Ongoing Community Structure
 
 - **Regular gatherings**: Monthly 90-120 min topical meetings
 - Each starting with contemplative practice to maintain group identity
@@ -210,14 +210,14 @@ The conference culminated in articulating what defines CSCSC:
 - **Community platform**: Exploring Hylo for project coordination, discussions, resource sharing
 - **Newsletter**: Research updates and opportunities
 
-#### Future Conferences
+### Future Conferences
 
 - **Next gathering**: Spring 2026 (format TBD)
 - Strong interest in in-person meeting
 - Possibility of co-locating with existing conferences (Complexity, ISCR)
 - Alternative: Mindful research retreat format
 
-#### Research Directions
+### Research Directions
 
 - Formalize core research questions at the intersection
 - Develop shared language and "transjunctions" between fields

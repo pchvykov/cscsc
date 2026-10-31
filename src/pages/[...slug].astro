@@ -11,8 +11,9 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content, headings } = await render(entry);
 // Long pages get an "On this page" list from their top-level headings.
-const outline = headings.filter((h) => h.depth <= 3);
-const toc = outline.length >= 5 ? outline.map((h) => ({ ...h, text: h.text.replace(/^[^\p{L}\p{N}]+/u, "") })) : [];
+// Only the page's own sections (h2), not the items inside them.
+const outline = headings.filter((h) => h.depth === 2);
+const toc = outline.length >= 3 ? outline.map((h) => ({ ...h, text: h.text.replace(/^[^\p{L}\p{N}]+/u, "") })) : [];
 ---
 <Page title={titleCase(entry.data.title)} cover={entry.data.cover} toc={toc} description={entry.data.description ?? summarize(entry.body)}>
   {entry.data.layout === "glossary" && (

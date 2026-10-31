@@ -99,11 +99,11 @@ A deeper, more technical conversation with Francis Heylighen — consciousness, 
 </div>
 </div>
 
-<aside class="note">
+<div class="card-box">
 
 [**Stay in touch**](https://cscsc.notion.site/286d8cae0cfe8031833ac1a301824aa0?pvs=105) *for updates*
 
-</aside>
+</div>
 
 <a class="page-link" href="/learn/new-to-complexity/">New to complexity?</a>
 

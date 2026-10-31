@@ -25,7 +25,7 @@ for updates on new posts, conferences, publications, and research opportunities
 
 <div class="card-box">
 
-#### CSCSC Inaugural Workshop 2025
+### CSCSC Inaugural Workshop 2025
 
 **October 8-10, 2025**
 
@@ -42,7 +42,7 @@ Our first conference brought together 47 researchers from 30+ institutions to ex
 
 <div class="card-box">
 
-#### [Practice Menu](/learn/practices/)
+### [Practice Menu](/learn/practices/)
 
 We've created a curated menu of 10-min contemplative practices from diverse traditions (Buddhist, Christian, Hindu, Daoist, Sufi, Indigenous) to help community members expand their experiential horizons and prepare for deeper engagement with the field.
 

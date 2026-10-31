@@ -11,7 +11,7 @@ icon: "notion://custom_emoji/24716bf2-6d5a-4250-901b-819a4e14a08d/289d8cae-0cfe-
 
 <section class="panel">
 
-### Bridging Rigorous Science with Contemplative Wisdom
+## Bridging Rigorous Science with Contemplative Wisdom
 
 We are an emerging research community studying how complexity science and contemplative studies illuminate each other—to understand minds, societies, and human flourishing through both empirical rigor and experiential depth.
 
@@ -59,20 +59,20 @@ for research discussions, sharing related events, organizing local meetups
 
 ### CSCSC25 Conference
 
-<aside class="note">
+<div class="card-box">
 
 Our inaugural workshop brought together researchers exploring complexity science and contemplative studies.
 
 [Watch recordings on YouTube](https://www.youtube.com/@cscs.conference/streams) <br>[CSCSC25 Conference](/gatherings/cscsc25/)<br>[Key Themes and Insights](/gatherings/cscsc25/key-themes/)
 
-</aside>
+</div>
 
 </div>
 <div class="col">
 
 ### From Our Community
 
-<aside class="note">
+<div class="card-box">
 
 **Dive Deeper**
 
@@ -80,7 +80,7 @@ Explore key essays and perspectives, and emerging research directions bridging s
 
 [Learning center](/learn/)<br>[Research Programs](/research/)
 
-</aside>
+</div>
 
 </div>
 </div>
@@ -90,7 +90,7 @@ Explore key essays and perspectives, and emerging research directions bridging s
 
 ### Explore Resources
 
-<aside class="note">
+<div class="card-box">
 
 **Research Infrastructure**
 
@@ -98,14 +98,14 @@ Browse our curated lists of funding opportunities, research centers, and publica
 
 [Research Centers](/resources/centers/)<br>[Funding Opportunities](/resources/funding/) <br>[Publication Outlets](/resources/outlets/)
 
-</aside>
+</div>
 
 </div>
 <div class="col">
 
 ### Practice & Language
 
-<aside class="note">
+<div class="card-box">
 
 **Experience it**
 
@@ -113,7 +113,7 @@ Explore our menu of 10-min contemplative practices across traditions, and shared
 
 [Practice Menu](/learn/practices/) <br>[Our Language](/learn/glossary/)
 
-</aside>
+</div>
 
 </div>
 </div>

@@ -257,7 +257,7 @@ The day ends. Informal continuation over dinner for those who want it - we’ll 
 The threads running through the talks and discussions, along the same continuum - from cracks in observer-independence in physics, through collective systems where meaning shapes dynamics, to the fully first-person domain of contemplative practice:
 
 <details class="toggle">
-<summary><h3><strong>Observer-Dependence Beyond Quantum Mechanics</strong></h3></summary>
+<summary><strong>Observer-Dependence Beyond Quantum Mechanics</strong></summary>
 <div class="body">
 
 Complementarity, observer-dependence, and information-theoretic principles appear throughout classical physics and social systems - not just quantum mechanics. When agents' models of the world feed back into system dynamics, observer-independence breaks down. What are the formal implications for complexity modeling? How do observation and relationship fundamentally shape what we call "objective”?
@@ -266,7 +266,7 @@ Complementarity, observer-dependence, and information-theoretic principles appea
 </details>
 
 <details class="toggle">
-<summary><h3><strong>Agency and Goal-Directedness Across Scales</strong></h3></summary>
+<summary><strong>Agency and Goal-Directedness Across Scales</strong></summary>
 <div class="body">
 
 Agency and goal-directedness operate as real causal explanations from cells to ecosystems, from molecular motors to social movements. Complexity science typically *represents* agents - modeling their rules, simulating their behavior. But agents themselves *know things*: they have first-person perspectives that feed back into the dynamics. How do we build formal frameworks that take that seriously - without collapsing into either mechanism or mysticism?
@@ -275,7 +275,7 @@ Agency and goal-directedness operate as real causal explanations from cells to e
 </details>
 
 <details class="toggle">
-<summary><h3><strong>Social Reality as Emergent from Collective Intentionality</strong></h3></summary>
+<summary><strong>Social Reality as Emergent from Collective Intentionality</strong></summary>
 <div class="body">
 
 Shared visions, rituals, and social imaginaries act as attractors pulling social reality into being. How do we model meaning-making - not just information transfer - as a fundamental driver of social complexity?
@@ -284,7 +284,7 @@ Shared visions, rituals, and social imaginaries act as attractors pulling social
 </details>
 
 <details class="toggle">
-<summary><h3><strong>Meditation as Complex Dynamical System</strong></h3></summary>
+<summary><strong>Meditation as Complex Dynamical System</strong></summary>
 <div class="body">
 
 Contemplative practices offer rich empirical access to attention dynamics, phase transitions in phenomenological state-spaces, and mechanisms of behavioral transformation. What does a complexity science of meditation look like?

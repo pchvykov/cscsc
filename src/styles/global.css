@@ -140,7 +140,7 @@ section.block { padding-top: 64px; }
 .prose > :first-child { margin-top: 0; }
 .prose p { margin: 0 0 1.05em; }
 .prose h2 { font-size: 2.05rem; line-height: 1.12; margin: 3.4rem 0 1rem; padding-top: 1.3rem; border-top: 1px solid var(--rule); }
-.prose h3 { font-size: 1.5rem; line-height: 1.2; margin: 2.4rem 0 0.6rem; }
+.prose h3 { font-size: 1.42rem; line-height: 1.22; margin: 2.2rem 0 0.5rem; }
 .prose h4 { font-family: var(--font-body); font-weight: 600; font-size: 1.02rem; line-height: 1.4; margin: 1.8rem 0 0.4rem; }
 .prose > h2:first-child, .prose > h3:first-child { border-top: 0; padding-top: 0; margin-top: 0; }
 .prose strong { font-weight: 600; }
@@ -171,11 +171,14 @@ section.block { padding-top: 64px; }
 .standfirst p:last-child { margin-bottom: 0; }
 .standfirst strong { font-weight: 500; }
 
-/* Panel: a titled section (was a coloured callout with a heading) */
-.panel { margin: 0; }
-.panel > :first-child { font-size: 2.05rem; line-height: 1.12; margin: 3.4rem 0 1rem; padding-top: 1.3rem; border-top: 1px solid var(--rule); font-family: var(--font-display); font-weight: 400; }
-.prose > .panel:first-child > :first-child { margin-top: 0; }
+/* Panel: a titled section that stands as its own block, so it is always clear
+   which text belongs to it (was a coloured callout with a heading) */
+.panel { margin: 2.2rem 0; padding: 30px 34px 28px; background: var(--bg-raised); border: 1px solid var(--rule-soft); border-radius: 4px; }
+.panel + .panel { margin-top: 1.2rem; }
+.panel > :first-child { font-size: 1.85rem; line-height: 1.15; margin: 0 0 0.9rem; padding: 0; border: 0; font-family: var(--font-display); font-weight: 400; }
 .panel > :last-child { margin-bottom: 0; }
+.panel h3 { font-size: 1.3rem; margin-top: 1.8rem; }
+@media (max-width: 640px) { .panel { padding: 22px 18px 20px; margin-left: -4px; margin-right: -4px; } }
 
 /* Note: an aside to the main text (was a short callout) */
 .note { margin: 1.8em 0; padding: 2px 0 2px 1.2em; border-left: 1px solid var(--accent); font-size: 0.98rem; }
@@ -192,11 +195,13 @@ section.block { padding-top: 64px; }
 @media (max-width: 760px) { .columns { grid-template-columns: 1fr !important; gap: 16px; } }
 
 /* Card box: one of several parallel items (was a callout inside a column) */
-.card-box { height: 100%; padding: 22px 22px 20px; border: 1px solid var(--rule-soft); border-radius: 3px; background: var(--bg-raised); font-size: 0.95rem; line-height: 1.6; }
+.card-box { padding: 22px 22px 20px; border: 1px solid var(--rule-soft); border-radius: 3px; background: var(--bg-raised); font-size: 0.95rem; line-height: 1.6; }
 .card-box > :first-child { margin-top: 0; }
 .card-box > :last-child { margin-bottom: 0; }
-.card-box > p:first-child, .card-box > h3:first-child, .card-box > h4:first-child { font-family: var(--font-display); font-size: 1.3rem; line-height: 1.25; font-weight: 400; margin-bottom: 0.5rem; }
-.card-box > p:first-child strong, .card-box > p:first-child a { font-weight: 400; text-decoration: none; }
+/* The card's title is its heading or its opening bold phrase / link; the rest stays body text */
+.card-box > h3:first-child, .card-box > h4:first-child { font-family: var(--font-display); font-size: 1.3rem; line-height: 1.25; font-weight: 400; margin: 0 0 0.5rem; padding: 0; border: 0; }
+.card-box > p:first-child > strong:first-child, .card-box > p:first-child > a:first-child { font-family: var(--font-display); font-size: 1.28rem; line-height: 1.25; font-weight: 400; text-decoration: none; }
+.card-box > p:first-child:has(> strong:only-child, > a:only-child) { margin-bottom: 0.45rem; }
 .card-box > p:first-child a:hover { color: var(--accent); }
 .card-box em { color: var(--muted); }
 
@@ -208,10 +213,14 @@ details.toggle > summary { cursor: pointer; list-style: none; padding: 13px 34px
 details.toggle > summary::-webkit-details-marker { display: none; }
 details.toggle > summary::after { content: "+"; position: absolute; right: 6px; top: 10px; font-family: var(--font-body); font-size: 1.2rem; color: var(--accent); transition: transform .2s; }
 details.toggle[open] > summary::after { content: "–"; }
-details.toggle > summary:hover { color: var(--accent); }
+details.toggle > summary:hover, details.toggle[open] > summary { color: var(--accent); }
 details.toggle > summary strong { font-weight: 500; }
 details.toggle > summary h2, details.toggle > summary h3, details.toggle > summary h4 { display: inline; margin: 0; padding: 0; border: 0; font-size: inherit; font-weight: 400; font-family: inherit; }
-details.toggle > .body { padding: 2px 0 18px; font-size: 0.98rem; }
+/* Opened content hangs from its row: indented behind a rule, so it reads as inside the toggle */
+details.toggle > .body { margin: 0 0 18px 2px; padding: 4px 0 4px 1.25rem; border-left: 2px solid var(--rule); font-size: 0.98rem; }
+details.toggle > .body h3, details.toggle > .body h4 { font-size: 1.18rem; margin: 1.6rem 0 0.35rem; font-family: var(--font-display); font-weight: 400; }
+details.toggle > .body > :first-child { margin-top: 0.4rem; }
+.panel details.toggle:last-child { border-bottom: 1px solid var(--rule-soft); }
 details.toggle > .body > :last-child { margin-bottom: 0; }
 
 /* Links to other pages: an index row with an arrow */
@@ -347,3 +356,16 @@ details.toggle > .body > :last-child { margin-bottom: 0; }
   .facts dd { margin: 0; }
   .facts .btn { display: none; }
 }
+
+/* Several cards stacked in one column; a lone card fills its column's height */
+.col > .card-box:only-child { height: 100%; }
+.col > .card-box + .card-box { margin-top: 18px; }
+/* Headings never look like links */
+.prose h2 u, .prose h3 u, .panel > :first-child u { text-decoration: none; }
+/* Items inside an opened toggle or a section block are separated by a hairline */
+details.toggle > .body > h3:not(:first-child), details.toggle > .body > h4:not(:first-child),
+.panel > h3:not(:first-child) { border-top: 1px solid var(--rule-soft); padding-top: 1.1rem; }
+/* Video placeholder: the thumbnail and a play button until clicked */
+.embed .yt { position: absolute; inset: 0; width: 100%; height: 100%; padding: 0; border: 0; cursor: pointer; background: #111 center / cover no-repeat; }
+.embed .yt::after { content: ""; position: absolute; left: 50%; top: 50%; width: 64px; height: 44px; transform: translate(-50%, -50%); border-radius: 10px; background: rgba(20,20,20,0.78) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M9 7v10l8-5z'/%3E%3C/svg%3E") center / 28px no-repeat; transition: background-color .2s; }
+.embed .yt:hover::after { background-color: var(--accent); }

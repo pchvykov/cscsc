@@ -38,7 +38,7 @@ Most of us trained in science will happily *say* the world is systems, emergence
 > Scan it and notice what's unfamiliar — for this page, focus on **Philosophy**, **Contemplative Studies**, and **Cognitive Science**. The unfamiliar terms are your map of what to explore.
 
 <details class="toggle">
-<summary><h3>Got an hour — sit with the problem</h3></summary>
+<summary>Got an hour — sit with the problem</summary>
 <div class="body">
 
 *The careful argument, in three moves — open any one:*
@@ -76,7 +76,7 @@ Most of us trained in science will happily *say* the world is systems, emergence
 </details>
 
 <details class="toggle">
-<summary><h3>Got a weekend — dive in</h3></summary>
+<summary>Got a weekend — dive in</summary>
 <div class="body">
 
 <aside class="note">
@@ -117,19 +117,19 @@ The constructive flip-side: how simple local rules and tiny differences generate
 
 ---
 
-<aside class="note">
+<div class="card-box">
 
 **Go further on the channel:** [**SubAnima**](https://www.youtube.com/@SubAnima) patiently takes mechanistic biology apart — beyond the two videos above, [**You've Been Lied To About Genetics**](https://www.youtube.com/watch?v=zpIqQ0pGs1E) is a great next watch.
 
 <a class="bookmark" href=""><b>SubAnima</b><span></span></a>
 
-</aside>
+</div>
 
 </div>
 </details>
 
 <details class="toggle">
-<summary><h3>For inspiration, not argument</h3></summary>
+<summary>For inspiration, not argument</summary>
 <div class="body">
 
 *Two short Alan Watts animations to stretch how you hold all this. Poetry for a broader perspective, not proof.*

@@ -16,8 +16,7 @@ icon: "🌳"
 
 <section class="panel">
 
-### **Why Honest Science is Spiritual**
-
+## Why Honest Science is Spiritual
 A complexity view on scientific research itself: how rigorous inquiry, done sincerely, becomes a spiritual endeavor.
 
 *Pavel Chvykov*
@@ -28,8 +27,7 @@ A complexity view on scientific research itself: how rigorous inquiry, done sinc
 
 <section class="panel">
 
-### **Ecology, Complexity, and the Trinity**
-
+## Ecology, Complexity, and the Trinity
 How a relational ontology naturally necessitates complexity science and ecological thinking.
 
 *Robert Marsland*
@@ -40,8 +38,7 @@ How a relational ontology naturally necessitates complexity science and ecologic
 
 <section class="panel">
 
-### **Living Things Are Not Machines**
-
+## Living Things Are Not Machines
 Agency, goal-directedness, and intelligence as causal explanations at every biological scale — making formal, empirical research of intentionality and awareness possible without abandoning scientific explanation.
 
 *Michael Levin*
@@ -52,8 +49,7 @@ Agency, goal-directedness, and intelligence as causal explanations at every biol
 
 <section class="panel">
 
-### **Beyond Computational Models of Mind**
-
+## Beyond Computational Models of Mind
 The limits of mind-as-computation, pointing toward frameworks that honor both contemplative wisdom and scientific rigor.
 
 *Jager, Riedl, Djedovic, Vervaeke, Walsh*
@@ -89,11 +85,11 @@ The limits of mind-as-computation, pointing toward frameworks that honor both co
 
 ## What we're working on
 
-<aside class="note">
+<div class="card-box">
 
 [**Research Programs**](/research/) — current and emerging research directions, our core questions, and active projects.
 
-</aside>
+</div>
 
 - **Working groups:** Telics (toward a science of goals) and Foundations of Causality.
 - **Embodied reading group:** workshopping new ways to think and discuss together while staying connected to our embodied truth (e.g., “I’m feeling tense because I notice I want to be right”)
@@ -101,8 +97,8 @@ The limits of mind-as-computation, pointing toward frameworks that honor both co
 
 ---
 
-<aside class="note">
+<div class="card-box">
 
 [**Stay in touch**](https://app.notion.com/p/286d8cae0cfe8031833ac1a301824aa0) *for updates* · [Join our forum](https://www.hylo.com/groups/cscsc/join/FfOYDYCOfG)
 
-</aside>
+</div>

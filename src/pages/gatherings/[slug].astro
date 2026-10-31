@@ -36,12 +36,6 @@ const subpages = (await getCollection("pages", (p) => p.data.path.startsWith(`/g
     </div></aside>
   )}
   <Content />
-  {subpages.length > 0 && (
-    <section class="block" style="padding-top:40px">
-      <h2>More from {e.data.title}</h2>
-      {subpages.map((p) => <a class="page-link" href={p.data.path}><span class="ic" aria-hidden="true">{p.data.icon}</span>{p.data.title}</a>)}
-    </section>
-  )}
   {pubs.length > 0 && (
     <section id="outputs" class="block" style="padding-top:40px">
       <h2>Outputs</h2>

@@ -20,7 +20,7 @@ We are an emerging research community at the intersection of complexity science 
 
 <section class="panel">
 
-### Our Mission
+## Our Mission
 
 Acknowledging the long history and challenges of attempts to formalize contemplative philosophy as a hard science, we propose that the young field of complexity science provides new opportunities for this age-old quest.
 
@@ -36,7 +36,7 @@ Acknowledging the long history and challenges of attempts to formalize contempla
 
 <section class="panel">
 
-### Our Approach
+## Our Approach
 
 We navigate between two essential polarities:
 
@@ -54,7 +54,7 @@ We pursue rigorous mathematical and computational frameworks while remaining gro
 
 <section class="panel">
 
-### Key Research Themes
+## Key Research Themes
 
 <div class="columns" style="--cols:43.8fr 56.2fr">
 <div class="col">
@@ -93,7 +93,7 @@ We pursue rigorous mathematical and computational frameworks while remaining gro
 
 <section class="panel">
 
-### Our DNA: Ideas We Agree On
+## Our DNA: Ideas We Agree On
 
 **Core ideas that identify our community:**
 
@@ -115,7 +115,7 @@ We pursue rigorous mathematical and computational frameworks while remaining gro
 
 <section class="panel">
 
-### Our Shared Assumptions
+## Our Shared Assumptions
 
 **Foundational commitments that guide our work:**
 
@@ -170,7 +170,7 @@ Critical reflection on the process of research, going beyond mere data acquisiti
 
 <section class="panel">
 
-### Resonate? Join Our Community!
+## Resonate? Join Our Community!
 
 Whether you're a complexity researcher curious about contemplative dimensions, a contemplative scholar interested in formal modeling, or someone working directly at this intersection, we welcome your participation.
 

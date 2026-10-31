@@ -122,7 +122,7 @@ These aren't idle philosophy. Your implicit answers determine what questions you
 ---
 
 <details class="toggle">
-<summary><h2>Why complexity science?</h2></summary>
+<summary>Why complexity science?</summary>
 <div class="body">
 
 In simple systems, you rarely need to think about worldview. The reductionist toolkit handles most of what you encounter, and materialism works well enough as a background assumption.
@@ -177,7 +177,7 @@ Complexity science, modeling, data
 ---
 
 <details class="toggle">
-<summary><h2>Why this matters for your work</h2></summary>
+<summary>Why this matters for your work</summary>
 <div class="body">
 
 | |  |
@@ -200,7 +200,7 @@ We can stop being dry, incomprehensible scientists performing expertise. We can 
 ---
 
 <details class="toggle">
-<summary><h2>The format</h2></summary>
+<summary>The format</summary>
 <div class="body">
 
 - **10–20 participants** (small enough for real intimacy, large enough for intellectual diversity)
@@ -224,7 +224,7 @@ We're explicitly designing against the stuffy conference vibe. **Circle seating.
 ---
 
 <details class="toggle">
-<summary><h2>What this is NOT</h2></summary>
+<summary>What this is NOT</summary>
 <div class="body">
 
 - A meditation retreat (though contemplative practice is woven in as epistemic method)
