@@ -282,9 +282,7 @@ I'll be doing my own work alongside you, having my own struggles, naming my own 
 | 🛏 **Accommodation** | Shared rooms (2 people). We'll try to accommodate special needs. |
 | 🥗 **Meals** | Vegetarian, prepared in teams. Communal cooking is an easy place to practice turning tasks into pleasure. |
 | ✈️ **Travel** | Fly to Toulouse or Barcelona, then train/carpool to the Pyrenees. |
-| 💶 **Cost** | **Early bird**: €550 — 8 spots, until May 31
-**Standard**: €650 — until Aug 15
-**Late**: €750 — Aug 15 onwards<br>Includes accommodation + vegetarian meals.<br>Few scholarships available — reach out.<br>Also joining Honest Science the week before? €200 off the combined price. |
+| 💶 **Cost** | **Early bird**: €550 — 8 spots, until May 31<br>**Standard**: €650 — until Aug 15<br>**Late**: €750 — Aug 15 onwards<br>Includes accommodation + vegetarian meals.<br>Few scholarships available — reach out.<br>Also joining Honest Science the week before? €200 off the combined price. |
 | 🔄 **Refunds** | Full refund up to 1 month before (by Aug 27); 50% up to 2 weeks before (by Sep 13). Not sure if you can make it? Register at early bird now — you can always cancel for a full refund if your plans change. |
 
 </div>

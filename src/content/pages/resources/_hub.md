@@ -13,7 +13,7 @@ Each database below contains carefully curated entries to help you find collabor
 
 ---
 
-### [Research Centers](/resources/centers/) 
+## [Research Centers](/resources/centers/) 
 
 Leading institutions bridging complexity, contemplation, and consciousness research worldwide.
 
@@ -97,7 +97,7 @@ Unique integration of AI, Buddhist philosophy, and biological complexity science
 
 ---
 
-### [Funding Opportunities](/resources/funding/) 
+## [Funding Opportunities](/resources/funding/) 
 
 Major funding sources supporting contemplative science, consciousness research, and complex systems.
 
@@ -181,7 +181,7 @@ European Varela Awards specifically for contemplative science research. Includes
 
 ---
 
-### [Publication Outlets](/resources/outlets/) 
+## [Publication Outlets](/resources/outlets/) 
 
 High-quality venues for sharing research bridging complexity, contemplation, and consciousness.
 

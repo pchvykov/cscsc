@@ -1,7 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import Page from "../../layouts/Page.astro";
-import { fmtDate } from "../../lib/text";
+import { fmtDate, summarize } from "../../lib/text";
 
 export async function getStaticPaths() {
   return (await getCollection("posts", (p) => !p.data.draft)).map((p) => ({ params: { slug: p.id }, props: { p } }));
@@ -15,7 +15,7 @@ const i = all.findIndex((x) => x.id === p.id);
 const newer = all[i - 1], older = all[i + 1];
 const meta = [fmtDate(p.data.date, { day: "numeric", month: "long", year: "numeric" }), authors.map((a) => a!.data.name).join(", "), p.data.reading_time].filter(Boolean).join(" · ");
 ---
-<Page title={p.data.title} description={p.data.excerpt} crumbs={[{ label: "Writing", href: "/writing/" }, ...(p.data.category ? [{ label: p.data.category, href: "/writing/" }] : [])]} local={false}>
+<Page title={p.data.title} description={p.data.excerpt ?? summarize(p.body)} crumbs={[{ label: "Writing", href: "/writing/" }, ...(p.data.category ? [{ label: p.data.category, href: "/writing/" }] : [])]} local={false}>
   <Fragment slot="aside">
     <dl>
       <dt>Published</dt><dd>{fmtDate(p.data.date, { day: "numeric", month: "long", year: "numeric" })}</dd>

@@ -15,13 +15,13 @@ icon: "🌳"
 </div>
 </aside>
 
-### Core Perspectives
+## Core Perspectives
 
 <aside class="callout bg-blue">
 <span class="icon" aria-hidden="true">🧭</span>
 <div class="body">
 
-#### **Why Honest Science is Spiritual**
+### **Why Honest Science is Spiritual**
 
 A complexity view on scientific research itself: how rigorous inquiry, done sincerely, becomes a spiritual endeavor.
 
@@ -36,7 +36,7 @@ A complexity view on scientific research itself: how rigorous inquiry, done sinc
 <span class="icon" aria-hidden="true">🌳</span>
 <div class="body">
 
-#### **Ecology, Complexity, and the Trinity**
+### **Ecology, Complexity, and the Trinity**
 
 How a relational ontology naturally necessitates complexity science and ecological thinking.
 
@@ -51,7 +51,7 @@ How a relational ontology naturally necessitates complexity science and ecologic
 <span class="icon" aria-hidden="true">🧬</span>
 <div class="body">
 
-#### **Living Things Are Not Machines**
+### **Living Things Are Not Machines**
 
 Agency, goal-directedness, and intelligence as causal explanations at every biological scale — making formal, empirical research of intentionality and awareness possible without abandoning scientific explanation.
 
@@ -66,7 +66,7 @@ Agency, goal-directedness, and intelligence as causal explanations at every biol
 <span class="icon" aria-hidden="true">💭</span>
 <div class="body">
 
-#### **Beyond Computational Models of Mind**
+### **Beyond Computational Models of Mind**
 
 The limits of mind-as-computation, pointing toward frameworks that honor both contemplative wisdom and scientific rigor.
 
@@ -79,7 +79,7 @@ The limits of mind-as-computation, pointing toward frameworks that honor both co
 
 ---
 
-### 🎥 Watch the community think
+## 🎥 Watch the community think
 
 *Keynotes from our inaugural CSCSC conference:*
 
@@ -102,7 +102,7 @@ The limits of mind-as-computation, pointing toward frameworks that honor both co
 
 ---
 
-### 🔭 What we're working on
+## 🔭 What we're working on
 
 <aside class="callout noicon bg-gray">
 <div class="body">

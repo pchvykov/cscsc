@@ -2,7 +2,7 @@
 import { getCollection, render } from "astro:content";
 import Page from "../../layouts/Page.astro";
 import { kindOf, when } from "../../lib/events";
-import { fmtDate } from "../../lib/text";
+import { fmtDate, summarize } from "../../lib/text";
 import DateSwitch from "../../components/DateSwitch.astro";
 import { iso, buildDay } from "../../lib/dates";
 
@@ -16,7 +16,7 @@ const pubs = await getCollection("publications", (p) => p.data.event === e.id);
 const endDay = iso(e.data.end_date ?? e.data.date);
 const subpages = (await getCollection("pages", (p) => p.data.path.startsWith(`/gatherings/${e.id}/`))).sort((a, b) => a.data.path.localeCompare(b.data.path));
 ---
-<Page title={e.data.title} cover={e.data.cover} crumbs={[{ label: "Gatherings", href: "/gatherings/" }]}
+<Page title={e.data.title} docTitle={e.data.featured ? e.data.title : `${e.data.title}, ${fmtDate(e.data.date)}`} cover={e.data.cover} description={e.data.summary ?? summarize(e.body)} image={e.data.image ?? e.data.cover} crumbs={[{ label: "Gatherings", href: "/gatherings/" }]}
   local={false}>
   <Fragment slot="aside">
     <dl>

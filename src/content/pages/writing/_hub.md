@@ -98,4 +98,3 @@ Duplicate the template to your own Notion workspace, write your post, and then s
 
 <a class="page-link" href="/learn/practices/"><span class="ic" aria-hidden="true">🧘</span>Practice Menu</a>
 
-<a class="page-link" href="/writing/what-if-the-most-important-part-of-an-experience-is-what-com/"><span class="ic" aria-hidden="true">⏳</span>What If the Most Important Part of an Experience Is What Comes After?</a>

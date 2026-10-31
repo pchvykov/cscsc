@@ -43,7 +43,7 @@ Interested? [Sign up for an intro call](https://www.notion.so/31fd8cae0cfe802988
 </div>
 </div>
 
-### The core idea
+## The core idea
 
 What actually drives your science? Not the fundable version—the real thing. The questions you think about in the shower. The worldview you're not sure you're allowed to admit. The intuitions that feel too personal to put in a paper.
 
@@ -64,7 +64,7 @@ The honest science we seek already exists—it's happening in the margins, in th
 
 ---
 
-### What we'll actually do
+## What we'll actually do
 
 The workshop runs two intertwined arcs across the week. They support each other: the inner work makes the research more honest; the research gives the inner work substance and direction.
 
@@ -103,7 +103,7 @@ You arrive in performance mode. Everyone does. The first days soften that—thro
 
 ---
 
-### Our worldview: the implicit assumptions
+## Our worldview: the implicit assumptions
 
 Your worldview is the set of deep assumptions that shape your life and research before you even start. Everyone has one. Many scientists have never examined theirs explicitly — which means these assumptions operate invisibly, creating blind spots, unquestioned defaults, and failure modes we can't see because we’re inside them.
 
@@ -143,7 +143,7 @@ These aren't idle philosophy. Your implicit answers determine what questions you
 ---
 
 <details class="toggle">
-<summary><h3>Why complexity science?</h3></summary>
+<summary><h2>Why complexity science?</h2></summary>
 <div class="body">
 
 In simple systems, you rarely need to think about worldview. The reductionist toolkit handles most of what you encounter, and materialism works well enough as a background assumption.
@@ -207,7 +207,7 @@ Complexity science, modeling, data
 ---
 
 <details class="toggle">
-<summary><h3>Why this matters for your work</h3></summary>
+<summary><h2>Why this matters for your work</h2></summary>
 <div class="body">
 
 |  |  |
@@ -233,7 +233,7 @@ We can stop being dry, incomprehensible scientists performing expertise. We can 
 ---
 
 <details class="toggle">
-<summary><h3>The format</h3></summary>
+<summary><h2>The format</h2></summary>
 <div class="body">
 
 - 👥 **10–20 participants** (small enough for real intimacy, large enough for intellectual diversity)
@@ -260,7 +260,7 @@ We're explicitly designing against the stuffy conference vibe. **Circle seating.
 ---
 
 <details class="toggle">
-<summary><h3>What this is NOT</h3></summary>
+<summary><h2>What this is NOT</h2></summary>
 <div class="body">
 
 - ❌ A meditation retreat (though contemplative practice is woven in as epistemic method)
@@ -273,7 +273,7 @@ We're explicitly designing against the stuffy conference vibe. **Circle seating.
 
 ---
 
-### Logistics
+## Logistics
 
 |  |  |
 |---|---|
@@ -283,9 +283,7 @@ We're explicitly designing against the stuffy conference vibe. **Circle seating.
 | 🛏 **Accommodation** | Shared rooms (2 people). We'll try to accommodate special needs. |
 | 🥗 **Meals** | Vegetarian, included in cost. |
 | ✈️ **Travel** | Fly to Toulouse or Barcelona, then train/carpool to the Pyrenees. |
-| 💶 **Cost** | **Early bird**: €550 — 8 spots, until May 31
-**Standard**: €650 — until Aug 15
-**Late**: €750 — Aug 15 onwards<br>Includes accommodation + vegetarian meals.<br>Few scholarships available — reach out.<br>Also joining [Work Alive Retreat](/gatherings/work-alive-2026/)  the week after? €200 off the combined price. |
+| 💶 **Cost** | **Early bird**: €550 — 8 spots, until May 31<br>**Standard**: €650 — until Aug 15<br>**Late**: €750 — Aug 15 onwards<br>Includes accommodation + vegetarian meals.<br>Few scholarships available — reach out.<br>Also joining [Work Alive Retreat](/gatherings/work-alive-2026/)  the week after? €200 off the combined price. |
 | 🔄 **Refunds** | Full refund up to 1 month before (by Aug 20); 50% up to 2 weeks before (by Sep 6). <br>Not sure if you can make it? Register at early bird now — you can always cancel for a full refund if your plans change. |
 
 The workshop includes research presentations, collaborative sessions, and planned publication outputs—designed to be legible for institutional travel funding.
@@ -296,7 +294,7 @@ The workshop includes research presentations, collaborative sessions, and planne
 
 ---
 
-### [Interested in Honest Science?](https://cscsc.notion.site/31fd8cae0cfe8029884dfd39f3b2f684) 
+## [Interested in Honest Science?](https://cscsc.notion.site/31fd8cae0cfe8029884dfd39f3b2f684) 
 
 <aside class="callout bg-blue">
 <span class="icon" aria-hidden="true">📝</span>
@@ -313,7 +311,7 @@ The [Work Alive Retreat](/gatherings/work-alive-2026/)  runs September 27– Oct
 
 ---
 
-### Related
+## Related
 
 - [CSCSC25 Conference](/gatherings/cscsc25/) — Our inaugural virtual workshop (October 2025)
 - [Core questions](/research/questions/) — The questions driving our community

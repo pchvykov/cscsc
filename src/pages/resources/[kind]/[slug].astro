@@ -15,7 +15,7 @@ const { Content } = await render(e);
 const fmt = (v: any) => Array.isArray(v) ? v.join(", ") : String(v);
 const rows = cfg.fields.filter(([k]) => d[k] !== undefined && d[k] !== null && !(Array.isArray(d[k]) && d[k].length === 0));
 ---
-<Page title={d.title} crumbs={[{ label: "Resources", href: "/resources/" }, { label: cfg.title, href: `/resources/${kind}/` }]} local={false}>
+<Page title={d.title} description={d[cfg.blurb]} docTitle={`${d.title} · ${cfg.title}`} crumbs={[{ label: "Resources", href: "/resources/" }, { label: cfg.title, href: `/resources/${kind}/` }]} local={false}>
   {d.website && <p><a class="btn ghost" href={d.website}>Visit website →</a></p>}
   <dl class="props">
     {rows.map(([k, label]) => <><dt>{label}</dt><dd>{fmt(d[k])}</dd></>)}

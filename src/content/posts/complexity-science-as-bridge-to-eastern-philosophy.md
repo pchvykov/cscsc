@@ -19,7 +19,7 @@ Watch the full talk on YouTube:
 
 <div class="embed"><iframe src="https://www.youtube-nocookie.com/embed/dS_YOVex7-0" title="Video" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 
-### The Problem: Mindfulness Without Its Foundation
+## The Problem: Mindfulness Without Its Foundation
 
 Modern mindfulness research has achieved something remarkable: it brought meditation into clinical settings, workplaces, and schools. But in doing so, it stripped away the philosophical bedrock that gives the practice its transformative power.
 
@@ -29,7 +29,7 @@ The result? Bible study without the Bible. A practice orphaned from its roots.
 
 We're now seeing the consequences: replication studies showing that isolated mindfulness interventions can produce negative effects—increased isolation, reduced social cohesion, a kind of spiritual bypassing where "I can solve all my problems myself." The practice works, but without proper context and theory, we're fumbling in the dark about how and when to use it.
 
-### The Solution: Complexity Science as the Missing Bridge
+## The Solution: Complexity Science as the Missing Bridge
 
 Here's my proposal: complexity science provides the rigorous, hard-science language needed to translate Eastern philosophical wisdom into terms the modern scientific community can validate and build upon.
 
@@ -49,13 +49,13 @@ This isn't just philosophical musing. It has concrete research implications:
 - Emergence engineering: Building systems (like swarm robots or xenobots) that adapt and self-heal, inspired by organic rather than mechanical paradigms
 - Language and metaphor: Rigorously studying how all concepts—including scientific ones—are partial metaphors that capture only fragments of reality
 
-### Scientists as Shamans of Modernity
+## Scientists as Shamans of Modernity
 
 We're living through multiple crises: loneliness, meaning, ecological catastrophe. Scientists have become the "shamans of modernity"—the ones society turns to for truth and guidance. But if we only focus on objective, external knowledge, we fail to provide the wisdom about inner experience and values that our role demands.
 
 My spiritual transformation eight years ago moved me from goal-chasing disappointment to genuine depth and meaning. That personal shift convinced me that spirituality, brought rigorously into science, is essential to addressing the meta-crisis. Not as religious dogma, but as validated frameworks for understanding consciousness, interconnection, and transformation.
 
-### Join the Exploration
+## Join the Exploration
 
 This talk represents ongoing work in the [Complexity Science and Contemplative Studies Community (CSCSC)](/)—a collaborative effort to:
 

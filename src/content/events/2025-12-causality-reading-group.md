@@ -12,6 +12,6 @@ The first meeting of the Causality reading group will be on Thursday December 4t
 
 More info: [https://docs.google.com/document/d/1jlTDx8yc\_r8ZHHClTNSIMCFoIYBrQdmEUo05Dv4aae4/edit?usp=sharing](https://docs.google.com/document/d/1jlTDx8yc_r8ZHHClTNSIMCFoIYBrQdmEUo05Dv4aae4/edit?usp=sharing)
 
-Email [xavier@orbitalstudies.com](mailto:xavier@orbitalstudies.com) to get added to the calendar event. We're still looking for interesting readings from a diversity of fields, so please send me an email if you have a paper to recommend or would like to offer to host a session.
+Email <a href="#" class="mail" data-u="xavier" data-d="orbitalstudies.com">Xavier</a> to get added to the calendar event. We're still looking for interesting readings from a diversity of fields, so please send me an email if you have a paper to recommend or would like to offer to host a session.
 
 Attended: Xavier and Gen

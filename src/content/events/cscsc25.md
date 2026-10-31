@@ -117,9 +117,7 @@ Each day included:
 
 From this conference, we are developing:
 
-✅ **Consensus on core questions, methods, and objectives** of this field<br>✅ **Resource maps:** funding sources, publication outlets, research centers, participant directory<br>✅ **Recorded talks and discussions** converted to essays and [uploaded to YouTube](https://www.youtube.com/@cscs.conference/streams)
-✅ **Glossary of key terms** with agreed-upon definitions: [Our Language](/learn/glossary/) 
-✅ **Online research hub** for ongoing collaboration and resource sharing (this site)<br>✅ **Planning for in-person meeting** in 2026
+✅ **Consensus on core questions, methods, and objectives** of this field<br>✅ **Resource maps:** funding sources, publication outlets, research centers, participant directory<br>✅ **Recorded talks and discussions** converted to essays and [uploaded to YouTube](https://www.youtube.com/@cscs.conference/streams)<br>✅ **Glossary of key terms** with agreed-upon definitions: [Our Language](/learn/glossary/) <br>✅ **Online research hub** for ongoing collaboration and resource sharing (this site)<br>✅ **Planning for in-person meeting** in 2026
 
 ---
 
@@ -139,7 +137,6 @@ From this conference, we are developing:
 
 ---
 
-**Organizing Committee:** Pavel Chvykov, Robert Marsland, Matthieu Barbier
-**Questions?** Contact [cscs.conference@gmail.com](mailto:cscs.conference@gmail.com)
+**Organizing Committee:** Pavel Chvykov, Robert Marsland, Matthieu Barbier<br>**Questions?** Contact [cscs.conference@gmail.com](mailto:cscs.conference@gmail.com)
 
 <a class="page-link" href="/gatherings/cscsc25/next-steps/"><span class="ic" aria-hidden="true">🪜</span>Next steps</a>

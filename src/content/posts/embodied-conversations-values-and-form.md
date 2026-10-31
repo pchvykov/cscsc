@@ -10,13 +10,13 @@ icon: "⚜️"
 authors: ["matthew-mccarthy"]
 ---
 
-### The Aim
+## The Aim
 
 We are essentially just trying to experiment with different methods of inquiry; by ‘different’ we mean different than some traditional academic forms or atmospheres many of us have been exposed to, which can sometimes feel too uptight, rigid, or clenched into certainty. The aim then is not to be right, or to arrive at the right opinion, but to move through something together and attend to what it opens. In this respect, it is also not just about ‘thinking differently’ but about ‘doing things differently’. 
 
 Keeping this in mind, the form is deliberately flexible. Below we have provided an anchor schedule (which is more or less a reading group that focuses on one article) but if people would like to experiment with their own formats and ways of doing dialogue this is welcome. 
 
-### Values
+## Values
 
 Three values that guide the sessions:
 
@@ -26,7 +26,7 @@ Three values that guide the sessions:
 
 **Curiosity** Curiosity keeps us both humble and open to learning new things.
 
-### Anchor Schedule
+## Anchor Schedule
 
 Since people are free to suggest their own practices and methods for inquiry, we have this as an anchor schedule but people are more than welcome to reach out and propose new formats to switch things up.
 
@@ -42,7 +42,7 @@ Since people are free to suggest their own practices and methods for inquiry, we
 | **11:55 – 12:20** | *Group discussion*  | Open conversation following what's alive, then a brief closing round to land the session. | Flowing style (anyone can speak at any time) |
 | **12:20- 12:30** | *Check-out* | Reflecting on the session and how we’re leaving.  | Popcorn style  |
 
-### Themes We're Drawn To
+## Themes We're Drawn To
 
 Any contributions are welcome here, but a few currents run through this community and are especially alive for us to explore:
 
@@ -53,7 +53,7 @@ Any contributions are welcome here, but a few currents run through this communit
 - **Institutionalizing new ways of knowing** — how these modes might be held, supported, and grown inside (or alongside) existing structures, rather than remaining marginal.
 - **Social imaginaries** — the shared, often unspoken pictures of the world that organize how we live, and how they might be sensed, questioned, and re-formed.
 
-### Logistics and details
+## Logistics and details
 
 Meeting time: Bi-weekly 11:00 am EST / 5:00pm CET (Starts on June 15th, 2026)
 

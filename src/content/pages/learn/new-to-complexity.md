@@ -40,7 +40,7 @@ Then **play** with it — watch collective intelligence (or lack thereof) self-o
 > Don't memorize it — *scan* it. The terms that feel unfamiliar are your personalized map of what to learn. Focus on the **Complexity Science** section
 
 <details class="toggle">
-<summary><h4>🕑 Got an afternoon — get oriented</h4></summary>
+<summary><h2>🕑 Got an afternoon — get oriented</h2></summary>
 <div class="body">
 
 *An hour or two to actually get it — three ways in:*
@@ -60,8 +60,7 @@ Then **play** with it — watch collective intelligence (or lack thereof) self-o
 
 **📖 Read one short classic:**
 
-**Donella Meadows — Leverage Points: Places to Intervene in a System** 
-a free 12-page essay that rewires how you see systems. 
+**Donella Meadows — Leverage Points: Places to Intervene in a System** <br>a free 12-page essay that rewires how you see systems. 
 
 <a class="bookmark" href=""><b>Leverage Points: Places to Intervene in a System</b><span></span></a>
 
@@ -78,7 +77,7 @@ a free 12-page essay that rewires how you see systems.
 </details>
 
 <details class="toggle">
-<summary><h4>🕒 Got a weekend — build a foundation</h4></summary>
+<summary><h2>🕒 Got a weekend — build a foundation</h2></summary>
 <div class="body">
 
 *A weekend to build real intuition. Start with the course; pick a book to go deeper.*
@@ -106,7 +105,7 @@ a free 12-page essay that rewires how you see systems.
 </details>
 
 <details class="toggle">
-<summary><h4>📺 More worth watching</h4></summary>
+<summary><h2>📺 More worth watching</h2></summary>
 <div class="body">
 
 30-min gorgeous and deep video about emergence of complexity from simplicity: 

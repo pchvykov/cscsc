@@ -11,6 +11,7 @@ const hub = await getEntry("pages", "writing/_hub");
 const Hub = hub ? (await render(hub)).Content : null;
 ---
 <Page title="Writing" dek="Updates from our conferences, reflections on key questions in the field, and write-ups of community calls." wide local={false}>
+  <h2 class="visually-hidden">All posts</h2>
   <div class="dv-bar" data-filter-root>
     <div class="dv-filters" role="group" aria-label="Filter by category">
       <button type="button" aria-pressed="true" data-cat="">All</button>

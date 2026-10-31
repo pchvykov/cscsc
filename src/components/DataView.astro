@@ -13,6 +13,7 @@ const show = (v: Row["values"][string], c: Col) => Array.isArray(v) ? v.join(", 
 const sortVal = (v: Row["values"][string]) => Array.isArray(v) ? v.join(", ") : v ?? "";
 const dots = (v: number, max: number) => Array.from({ length: Math.min(max, 10) }, (_, i) => i < Math.round((v / max) * Math.min(max, 10)));
 ---
+<h2 class="visually-hidden">All {noun}</h2>
 <div class="dataview" data-view={defaultView} data-sort={defaultSort ?? ""} data-noun={noun}>
   <div class="dv-bar">
     <label class="visually-hidden" for="dv-q">Search</label>

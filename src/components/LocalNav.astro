@@ -1,7 +1,7 @@
 ---
 import { nav } from "../data/site";
 // Sibling pages in the current section, so visitors arriving deep can move sideways.
-const { section } = Astro.props as { section?: string };
+const { section, toc = [] } = Astro.props as { section?: string; toc?: { depth: number; slug: string; text: string }[] };
 const path = Astro.url.pathname.endsWith("/") ? Astro.url.pathname : Astro.url.pathname + "/";
 const s = nav.find((x) => x.label === section) ?? nav.find((x) => x.items.some((i) => path.startsWith(i.href) && i.href !== "/"));
 ---
@@ -9,5 +9,11 @@ const s = nav.find((x) => x.label === section) ?? nav.find((x) => x.items.some((
   <nav class="local-nav" aria-label={`${s.label} pages`}>
     <span class="k">{s.label}</span>
     <ul>{s.items.map((i) => <li><a href={i.href} aria-current={path === i.href ? "page" : undefined}>{i.label}</a></li>)}</ul>
+    {toc.length > 0 && (
+      <div class="toc">
+        <span class="k">On this page</span>
+        <ul>{toc.map((h) => <li><a href={`#${h.slug}`} style={h.depth > 2 ? "padding-left:26px" : undefined}>{h.text}</a></li>)}</ul>
+      </div>
+    )}
   </nav>
 )}

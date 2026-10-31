@@ -21,7 +21,7 @@ Most of us trained in science will happily *say* the world is systems, emergence
 
 *Pick your depth: ten minutes for the spark, an hour to sit with the argument, or a weekend down the rabbit hole.*
 
-### 🕐 Got 10 minutes — the crack in the worldview
+## 🕐 Got 10 minutes — the crack in the worldview
 
 <aside class="callout bg-teal">
 <span class="icon" aria-hidden="true">🧬</span>
@@ -44,7 +44,7 @@ Most of us trained in science will happily *say* the world is systems, emergence
 > Scan it and notice what's unfamiliar — for this page, focus on **Philosophy**, **Contemplative Studies**, and **Cognitive Science**. The unfamiliar terms are your map of what to explore.
 
 <details class="toggle">
-<summary><h4>🕑 Got an hour — sit with the problem</h4></summary>
+<summary><h3>🕑 Got an hour — sit with the problem</h3></summary>
 <div class="body">
 
 *The careful argument, in three moves — open any one:*
@@ -85,7 +85,7 @@ Most of us trained in science will happily *say* the world is systems, emergence
 </details>
 
 <details class="toggle">
-<summary><h4>🕒 Got a weekend — dive in</h4></summary>
+<summary><h3>🕒 Got a weekend — dive in</h3></summary>
 <div class="body">
 
 <aside class="callout bg-gray">
@@ -104,7 +104,7 @@ Most of us trained in science will happily *say* the world is systems, emergence
 
 ---
 
-#### 🎬 **Two landmark lectures** — Robert Sapolsky's Stanford pair (about 90 min each), best watched as a chaos → emergence two-parter:
+### 🎬 **Two landmark lectures** — Robert Sapolsky's Stanford pair (about 90 min each), best watched as a chaos → emergence two-parter:
 
 <div class="columns" style="--cols:50.0fr 50.0fr">
 <div class="col">
@@ -144,7 +144,7 @@ The constructive flip-side: how simple local rules and tiny differences generate
 </details>
 
 <details class="toggle">
-<summary><h4>✨ For inspiration, not argument</h4></summary>
+<summary><h3>✨ For inspiration, not argument</h3></summary>
 <div class="body">
 
 *Two short Alan Watts animations to stretch how you hold all this. Poetry for a broader perspective, not proof.*

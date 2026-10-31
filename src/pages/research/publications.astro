@@ -6,6 +6,7 @@ const pubs = (await getCollection("publications")).sort((a, b) => +b.data.date -
 const label = { proceedings: "Proceedings", report: "Report", paper: "Paper", preprint: "Preprint", essay: "Essay" };
 ---
 <Page title="Publications" dek="Proceedings and reports from our gatherings, and papers by the community.">
+  <h2 class="visually-hidden">All publications</h2>
   <ul class="rows">
     {pubs.map((p) => (
       <li><div class="when"><b>{label[p.data.kind]}</b>{fmtDate(p.data.date)}</div>

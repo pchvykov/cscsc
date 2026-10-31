@@ -131,7 +131,7 @@ We pursue rigorous mathematical and computational frameworks while remaining gro
 **Foundational commitments that guide our work:**
 
 <details class="toggle">
-<summary>**The Primacy of Tacit Knowledge & Practice**</summary>
+<summary><strong>The Primacy of Tacit Knowledge & Practice</strong></summary>
 <div class="body">
 
 Engaging in the world through practice (meditation, prayer, technology) is ontologically fundamental, not secondary to theory.
@@ -140,7 +140,7 @@ Engaging in the world through practice (meditation, prayer, technology) is ontol
 </details>
 
 <details class="toggle">
-<summary>**Science as a Mode of Revealing**</summary>
+<summary><strong>Science as a Mode of Revealing</strong></summary>
 <div class="body">
 
 A valid explanation is not just a model, but a tool to enhance our perception of the world, where scientific analysis acts as a "linguistic cue" to deeper insight
@@ -149,7 +149,7 @@ A valid explanation is not just a model, but a tool to enhance our perception of
 </details>
 
 <details class="toggle">
-<summary>**The Insufficiency of Reductionism**</summary>
+<summary><strong>The Insufficiency of Reductionism</strong></summary>
 <div class="body">
 
 Phenomena cannot be fully explained by their lower-level components alone; reductionism is necessary but insufficient.
@@ -158,7 +158,7 @@ Phenomena cannot be fully explained by their lower-level components alone; reduc
 </details>
 
 <details class="toggle">
-<summary>**Relational Ontology**</summary>
+<summary><strong>Relational Ontology</strong></summary>
 <div class="body">
 
 Interactions and relationships are just as fundamental as the components themselves, necessitating top-down explanation where parts are explained by the whole.
@@ -167,7 +167,7 @@ Interactions and relationships are just as fundamental as the components themsel
 </details>
 
 <details class="toggle">
-<summary>**A "Seed-Grow-Harvest" Epistemology**</summary>
+<summary><strong>A "Seed-Grow-Harvest" Epistemology</strong></summary>
 <div class="body">
 
 Critical reflection on the process of research, going beyond mere data acquisition and generalization. In general, recognizing a cycle from an initial spontaneous insight through analytic unfolding, culminating in a mature fruit that can be shared, and yields new seeds.

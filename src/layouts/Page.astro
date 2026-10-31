@@ -3,11 +3,11 @@ import Base from "./Base.astro";
 import LocalNav from "../components/LocalNav.astro";
 import { sectionOf } from "../data/site";
 
-interface Props { title: string; description?: string; dek?: string; cover?: string; crumbs?: { label: string; href: string }[]; meta?: string; section?: string; wide?: boolean; local?: boolean }
-const { title, description, dek, cover, crumbs = [], meta, section, wide = false, local = true } = Astro.props;
+interface Props { title: string; docTitle?: string; image?: string; toc?: { depth: number; slug: string; text: string }[]; description?: string; dek?: string; cover?: string; crumbs?: { label: string; href: string }[]; meta?: string; section?: string; wide?: boolean; local?: boolean }
+const { title, docTitle, image, toc = [], description, dek, cover, crumbs = [], meta, section, wide = false, local = true } = Astro.props;
 const sec = section ?? sectionOf(Astro.url.pathname);
 ---
-<Base title={title} description={description ?? dek}>
+<Base title={docTitle ?? title} description={description ?? dek} image={image ?? cover}>
   <div class="wrap">
     <header class="page-head">
       {cover && <img class="cover" src={cover} alt="" />}
@@ -26,7 +26,7 @@ const sec = section ?? sectionOf(Astro.url.pathname);
       </div>
     ) : local ? (
       <div class="with-local">
-        <LocalNav section={sec} />
+        <LocalNav section={sec} toc={toc} />
         <div class:list={["prose", { wide }]}><slot /></div>
       </div>
     ) : (

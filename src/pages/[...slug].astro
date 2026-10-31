@@ -2,15 +2,18 @@
 // Free-standing pages carried over from Notion (About, Research, Learn ...).
 import { getCollection, render } from "astro:content";
 import Page from "../layouts/Page.astro";
-import { titleCase } from "../lib/text";
+import { titleCase, summarize } from "../lib/text";
 
 export async function getStaticPaths() {
   const pages = await getCollection("pages", (p) => !p.data.draft && !p.id.includes("_hub") && !p.id.startsWith("_"));
   return pages.map((p) => ({ params: { slug: p.data.path.replace(/^\/|\/$/g, "") || undefined }, props: { entry: p } }));
 }
 const { entry } = Astro.props;
-const { Content } = await render(entry);
+const { Content, headings } = await render(entry);
+// Long pages get an "On this page" list from their top-level headings.
+const outline = headings.filter((h) => h.depth <= 3);
+const toc = outline.length >= 5 ? outline.map((h) => ({ ...h, text: h.text.replace(/^[^\p{L}\p{N}]+/u, "") })) : [];
 ---
-<Page title={titleCase(entry.data.title)} cover={entry.data.cover}>
+<Page title={titleCase(entry.data.title)} cover={entry.data.cover} toc={toc} description={entry.data.description ?? summarize(entry.body)}>
   <Content />
 </Page>

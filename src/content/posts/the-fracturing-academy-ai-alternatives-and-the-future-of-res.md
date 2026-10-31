@@ -15,7 +15,7 @@ authors: ["matthew-mccarthy"]
 
 ---
 
-### Event Overview
+## Event Overview
 
 **What:** CSCSC Monthly Community Call
 
@@ -27,7 +27,7 @@ authors: ["matthew-mccarthy"]
 
 ---
 
-### The Core Question
+## The Core Question
 
 Academic research is often described as a stable engine of knowledge production, but that picture is increasingly strained. Rising submission volumes, worsening PhD mental health, uncertain career prospects, and the growing presence of AI are exposing deeper structural problems, while new research models are beginning to challenge the university's monopoly on serious inquiry.
 
@@ -35,15 +35,15 @@ This raises a fundamental question: **Is traditional academia on the path to obs
 
 ---
 
-### The Problems Are Real
+## The Problems Are Real
 
-#### Peer Review Under Siege
+### Peer Review Under Siege
 
 Consider peer review first — a cornerstone of scientific validation now under siege. Conferences like NeurIPS saw 12,343 submissions in 2023, ballooning to over 15,000 the following year — a deluge that overwhelms the volunteer-based system of expert reviewers it relies upon. As Smith (2006) observed, the process has long been criticized as slow, costly, and prone to subjectivity, with Bornmann and Daniel (2009) highlighting the often poor levels of agreement among reviewers.
 
 Yet it would be premature to declare peer review irredeemable; innovations such as open review, post-publication scrutiny, and portable review formats are emerging (Tennant et al., 2017), offering potential paths forward.
 
-#### PhD Mental Health Crisis
+### PhD Mental Health Crisis
 
 The evidence on PhD mental health paints an even more troubling picture. Levecque et al. (2017) revealed that PhD students are **2.4 times more likely** than the general population with comparable education to develop psychiatric disorders. Similarly, Evans et al. (2018) found that 41% of graduate students reported moderate-to-severe anxiety, while 39% indicated depression at similar levels. Woolston (2019) noted that 36% had sought professional help specifically for program-related anxiety or depression.
 
@@ -51,7 +51,7 @@ Compounding this, only about 20% of biomedical PhDs secure tenure-track position
 
 ---
 
-### What AI Actually Reveals
+## What AI Actually Reveals
 
 Proclamations that AI surpasses human advisors in mentorship often reflect more on the shortcomings of current advisors than on AI's true capabilities. Tools like ChatGPT excel at delivering immediate, targeted technical feedback (Mollick & Mollick, 2023), which can be invaluable during the research process. However, true mentorship encompasses far more: psychosocial guidance, career advocacy, and the transmission of subtle, experiential knowledge forged through human relationships — elements that no prompt can replicate.
 
@@ -59,21 +59,21 @@ A sharper insight emerges: **certain advisors already lag behind AI in technical
 
 ---
 
-### The Alternatives: Promising, but Unproven
+## The Alternatives: Promising, but Unproven
 
-#### Focused Research Organizations (FROs)
+### Focused Research Organizations (FROs)
 
 FROs aim to blend academic rigor with streamlined, professional management within fixed time horizons tied to specific missions. The NSF's announcement of FRO initiatives in late 2024, drawing inspiration from the ARPA model, signals growing institutional interest.
 
 Nevertheless, as nascent entities, FROs face real uncertainties: their typical five-to-seven-year lifespans may prove insufficient for fields where breakthroughs unfold over decades, and the absence of tenure-like security could merely shift the nature of precarity rather than resolve it.
 
-#### Corporate Laboratories
+### Corporate Laboratories
 
 Corporate laboratories have undeniably delivered landmark achievements, from AlphaFold to the GPT series. Yet this narrative is skewed by selection bias — triumphs dominate headlines while quieter failures remain unseen. Pivotal foundational advances continue to originate primarily in academia: think CRISPR from Doudna and Charpentier, or the groundwork for mRNA vaccines laid by Karikó. The balance sheet of corporate versus academic impact appears far more nuanced than popular accounts suggest.
 
 ---
 
-### Who Funds What — and What That Shapes
+## Who Funds What — and What That Shapes
 
 At its core, funding has always steered the direction of research agendas — a dynamic as old as organized science itself. Well-documented biases in pharmaceutical sponsorship are a case in point. Now, infusions from crypto billionaires and tech moguls into FROs carry analogous risks of distortion, albeit under lighter regulatory oversight.
 
@@ -81,7 +81,7 @@ Research attuned to market signals naturally clusters around lucrative challenge
 
 ---
 
-### What the Conversation Tends to Miss
+## What the Conversation Tends to Miss
 
 Discussions of research's future often fixate on elite figures in generously funded disciplines, inadvertently sidelining broader concerns:
 
@@ -92,7 +92,7 @@ Discussions of research's future often fixate on elite figures in generously fun
 
 ---
 
-### Ecosystem Diversification, Not Replacement
+## Ecosystem Diversification, Not Replacement
 
 Rather than supplanting universities wholesale, the research landscape calls for thoughtful diversification. As Azoulay and Li (2020) advocate, a portfolio strategy makes sense — supporting diverse people and projects, veterans alongside newcomers, reliable increments next to high-risk ventures, all spanning varied institutional homes.
 
@@ -107,7 +107,7 @@ Rather than supplanting universities wholesale, the research landscape calls for
 
 ---
 
-### What Would Actually Help
+## What Would Actually Help
 
 Practical reforms could address many pain points:
 
@@ -120,7 +120,7 @@ Practical reforms could address many pain points:
 
 ---
 
-### Open Questions for the Community
+## Open Questions for the Community
 
 - How might complexity science perspectives inform more adaptive institutional designs?
 - What role can contemplative practice play in addressing the mental health crisis in graduate education?
@@ -129,7 +129,7 @@ Practical reforms could address many pain points:
 
 ---
 
-### References
+## References
 
 - Alberts, B., et al. (2014). Rescuing US Biomedical Research from Its Systemic Flaws. *PNAS*, 111(16), 5773–5777.
 - Azoulay, P., & Li, D. (2020). Scientific Grant Funding. *Innovation Policy and the Economy*, 20, 1–39.

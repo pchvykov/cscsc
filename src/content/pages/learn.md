@@ -37,7 +37,7 @@ icon: "🧭"
 
 ## 🗺️ <u>Choose</u> <u>your path</u> 🗺️
 
-#### **However much time you've got, there's a way in.** Every path below has a 5-minute spark, an afternoon, and a weekend deep-dive — pick your depth and dive. 🤿
+### **However much time you've got, there's a way in.** Every path below has a 5-minute spark, an afternoon, and a weekend deep-dive — pick your depth and dive. 🤿
 
 <div class="columns" style="--cols:42.9fr 42.9fr 14.3fr">
 <div class="col">
@@ -88,7 +88,7 @@ Dive deeper into concrete references, readings and videos best representing what
 <div class="columns" style="--cols:50.0fr 50.0fr">
 <div class="col">
 
-#### 🎤 Conference talk · 12 min
+### 🎤 Conference talk · 12 min
 
 An accessible overview of how complexity science meets Eastern philosophy — the gentler entry point. Pairs with our [accompanying Psyche magazine publication](https://psyche.co/ideas/complexity-science-unravels-the-deeper-power-of-mindfulness).
 
@@ -99,7 +99,7 @@ An accessible overview of how complexity science meets Eastern philosophy — th
 </div>
 <div class="col">
 
-#### 🎙️ Podcast · 58 min
+### 🎙️ Podcast · 58 min
 
 A deeper, more technical conversation with Francis Heylighen — consciousness, autopoiesis, cybernetics and phenomenology, right in the space of questions we sit with.
 
