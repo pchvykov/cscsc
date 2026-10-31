@@ -10,11 +10,11 @@ icon: "🧭"
 
 **Start here — our vision in 3 minutes.** A short animation for what this is all about — no background needed.
 
-[Watch our animation](/vision/)
-
-<div class="embed tall"><iframe src="/vision/" loading="lazy" title="Embedded content"></iframe></div>
-
 </div>
+
+<div class="embed"><iframe src="/vision/" loading="lazy" title="Our vision in 3 minutes"></iframe></div>
+
+[Watch our animation](/vision/)
 
 > **Complexity science: the study of how simple parts can do smart things together without anyone in charge <br>– from proteins, to organisms, to societies and minds.**
 
@@ -61,7 +61,7 @@ The trouble with the common scientific episteme – and how rigorously engaging 
 
 <div class="card-box">
 
-[Already in the conversation](/learn/already-in-the-conversation/)?
+[Already in the conversation?](/learn/already-in-the-conversation/)
 
 Dive deeper into concrete references, readings and videos best representing what we're doing and thinking about.
 

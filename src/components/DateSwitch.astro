@@ -5,6 +5,7 @@
 //   [data-after="YYYY-MM-DD"]  shown once today > that date (past items, "took place" notes)
 //   [data-next-group]          its first visible [data-until] child gets class "next"
 //   [data-empty-for="id"]      shown when the element with that id has no visible items
+//   [data-hide-empty="id"]     hidden when the element with that id has no visible items
 ---
 <script is:inline>
   (function () {
@@ -23,6 +24,10 @@
     document.querySelectorAll("[data-empty-for]").forEach(function (el) {
       var box = document.getElementById(el.dataset.emptyFor);
       el.hidden = !!box && [].some.call(box.children, function (c) { return !c.hidden; });
+    });
+    document.querySelectorAll("[data-hide-empty]").forEach(function (el) {
+      var box = document.getElementById(el.dataset.hideEmpty);
+      el.hidden = !box || ![].some.call(box.children, function (c) { return !c.hidden; });
     });
   })();
 </script>

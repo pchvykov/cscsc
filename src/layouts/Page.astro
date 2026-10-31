@@ -3,8 +3,8 @@ import Base from "./Base.astro";
 import LocalNav from "../components/LocalNav.astro";
 import { sectionOf } from "../data/site";
 
-interface Props { title: string; docTitle?: string; image?: string; toc?: { depth: number; slug: string; text: string }[]; description?: string; dek?: string; cover?: string; crumbs?: { label: string; href: string }[]; meta?: string; section?: string; wide?: boolean; local?: boolean }
-const { title, docTitle, image, toc = [], description, dek, cover, crumbs = [], meta, section, wide = false, local = true } = Astro.props;
+interface Props { title: string; docTitle?: string; image?: string; toc?: { depth: number; slug: string; text: string }[]; description?: string; dek?: string; cover?: string; crumbs?: { label: string; href: string }[]; meta?: string; section?: string; wide?: boolean; local?: boolean; kind?: string }
+const { title, docTitle, image, toc = [], description, dek, cover, crumbs = [], meta, section, wide = false, local = true, kind } = Astro.props;
 const sec = section ?? sectionOf(Astro.url.pathname);
 ---
 <Base title={docTitle ?? title} description={description ?? dek} image={image ?? cover}>
@@ -20,7 +20,7 @@ const sec = section ?? sectionOf(Astro.url.pathname);
     </header>
     {cover && <figure class="page-photo"><img src={cover} alt="" /></figure>}
     {Astro.slots.has("aside") ? (
-      <div class="with-aside">
+      <div class:list={["with-aside", kind]}>
         <div class:list={["prose", { wide }]}><slot /></div>
         <aside class="facts"><slot name="aside" /></aside>
       </div>

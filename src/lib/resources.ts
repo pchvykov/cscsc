@@ -6,6 +6,7 @@ type Kind = "centers" | "funding" | "outlets";
 export const RES: Record<Kind, {
   title: string; noun: string; dek: string; cols: Col[]; facet: { key: string; label: string };
   sort: string; blurb: string; fields: [string, string][];
+  key: string[]; // short fields shown in the facts panel of a detail page
 }> = {
   centers: {
     title: "Research centers", noun: "centers",
@@ -19,6 +20,7 @@ export const RES: Record<Kind, {
       { key: "activity_tags", label: "Activity" },
     ],
     facet: { key: "primary_emphasis_tags", label: "emphasis" }, sort: "cscsc_relevance", blurb: "research_focus",
+    key: ["country", "city", "year_founded", "institution_type_tags", "primary_emphasis_tags", "activity_tags", "cscsc_relevance", "academic_rigor"],
     fields: [
       ["research_focus", "Research focus"], ["key_programs", "Key programs"], ["notable_leaders", "Notable leaders"],
       ["city", "City"], ["country", "Country"], ["year_founded", "Founded"], ["academic_affiliations", "Academic affiliations"],
@@ -41,6 +43,7 @@ export const RES: Record<Kind, {
       { key: "status", label: "Status" },
     ],
     facet: { key: "relevance_tag", label: "relevance" }, sort: "", blurb: "relevance_explanation",
+    key: ["status", "relevance_tag", "grant_size_range", "deadline_type", "geographic_focus", "competitiveness"],
     fields: [
       ["relevance_tag", "Relevance"], ["relevance_explanation", "Why it is relevant"], ["funding_purpose", "Funding purpose"],
       ["funding_purpose_details", "Purpose details"], ["values_priorities", "Values and priorities"], ["grant_size_tag", "Grant size"],
@@ -62,6 +65,7 @@ export const RES: Record<Kind, {
       { key: "deadline_type", label: "Deadlines" },
     ],
     facet: { key: "type", label: "type" }, sort: "relevance_score", blurb: "relevance_reasoning",
+    key: ["publisher", "type", "relevance_score", "open_access", "publication_fee", "impact_factor", "competitiveness"],
     fields: [
       ["publisher", "Publisher"], ["type", "Type"], ["content_tags", "Topics"], ["content_topics", "Content"],
       ["relevance_score", "Relevance (/5)"], ["relevance_reasoning", "Why it is relevant"], ["values_tags", "Values"],

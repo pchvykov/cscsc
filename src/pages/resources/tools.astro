@@ -20,7 +20,7 @@ import { links, episteme } from "../../data/site";
     </div>
   </article>
   <article class="tool">
-    <div class="ic" aria-hidden="true">🧘</div>
+    <div class="ic" aria-hidden="true"><span class="tile"><span class="enso" style="width:56px"></span></span></div>
     <div>
       <h2>Practice menu</h2>
       <p>10-minute practices across traditions.</p>
@@ -31,7 +31,7 @@ import { links, episteme } from "../../data/site";
 <style>
   .tool { display: grid; grid-template-columns: 180px 1fr; gap: 24px; padding: 24px 0; border-bottom: 1px solid var(--rule-soft); }
   .tool img { width: 180px; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 4px; }
-  .tool .ic { width: 180px; aspect-ratio: 4 / 3; display: grid; place-items: center; font-size: 2.6rem; background: var(--bg-raised); border-radius: 4px; }
+  .tool .ic { width: 180px; aspect-ratio: 4 / 3; display: grid; place-items: center; background: var(--bg-raised); border-radius: 4px; color: var(--muted); }
   .tool h2 { font-size: 1.6rem; margin: 0 0 8px; }
   @media (max-width: 600px) { .tool { grid-template-columns: 1fr; } .tool img, .tool .ic { width: 100%; } }
 </style>

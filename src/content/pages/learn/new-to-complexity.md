@@ -22,7 +22,7 @@ icon: "🔭"
 
 Then **play** with it — watch collective intelligence (or lack thereof) self-organize from simple rules, right in your browser (about 10 min, and unforgettable):
 
-<a class="bookmark" href=""><b>Parable of the Polygons</b><span></span></a>
+<a class="bookmark" href="https://ncase.me/polygons/"><b>Parable of the Polygons</b><span>ncase.me</span></a>
 
 </aside>
 
@@ -43,11 +43,11 @@ Then **play** with it — watch collective intelligence (or lack thereof) self-o
 
 - **The Evolution of Trust** — why cooperation evolves or collapses (Nicky Case).
 
-<a class="bookmark" href=""><b>The Evolution of Trust</b><span></span></a>
+<a class="bookmark" href="https://ncase.me/trust/"><b>The Evolution of Trust</b><span>ncase.me</span></a>
 
 - **Going Critical** — tipping points, contagion & criticality (Kevin Simler).
 
-<a class="bookmark" href=""><b>Going Critical</b><span></span></a>
+<a class="bookmark" href="https://meltingasphalt.com/interactive/going-critical/"><b>Going Critical</b><span>meltingasphalt.com</span></a>
 
 <aside class="note">
 
@@ -55,7 +55,7 @@ Then **play** with it — watch collective intelligence (or lack thereof) self-o
 
 **Donella Meadows — Leverage Points: Places to Intervene in a System** <br>a free 12-page essay that rewires how you see systems.
 
-<a class="bookmark" href=""><b>Leverage Points: Places to Intervene in a System</b><span></span></a>
+<a class="bookmark" href="https://donellameadows.org/archives/leverage-points-places-to-intervene-in-a-system/"><b>Leverage Points: Places to Intervene in a System</b><span>donellameadows.org</span></a>
 
 </aside>
 
@@ -78,7 +78,7 @@ Then **play** with it — watch collective intelligence (or lack thereof) self-o
 
 **SFI Complexity Explorer — Introduction to Complexity** (Melanie Mitchell). Sample unit 1 in under 30 minutes.
 
-<a class="bookmark" href=""><b>Complexity Explorer</b><span></span></a>
+<a class="bookmark" href="https://www.complexityexplorer.org/courses/185-introduction-to-complexity"><b>Complexity Explorer</b><span>complexityexplorer.org</span></a>
 
 <aside class="note">
 
@@ -145,9 +145,9 @@ Then **play** with it — watch collective intelligence (or lack thereof) self-o
 **YouTube Channels worth a rabbit hole:**
 
 - [**Primer**](https://www.youtube.com/@PrimerBlobs) — gorgeous agent-based evolution & game-theory simulations.
-  <a class="bookmark" href=""><b>Primer</b><span></span></a>
+  <a class="bookmark" href="https://www.youtube.com/@PrimerBlobs"><b>Primer</b><span>youtube.com</span></a>
 - [**Emergent Garden**](https://www.youtube.com/@EmergentGarden) — artificial life & the Game of Life (start with [*Emergent Complexity*](https://www.youtube.com/watch?v=0HqUYpGQIfs)).
-  <a class="bookmark" href=""><b>Emergent Garden</b><span></span></a>
+  <a class="bookmark" href="https://www.youtube.com/@EmergentGarden"><b>Emergent Garden</b><span>youtube.com</span></a>
 
 </div>
 

@@ -12,12 +12,14 @@ export async function getStaticPaths() {
 }
 const { e } = Astro.props;
 const body = enhance(e.rendered?.html ?? "", { mapHeadings: true }).html;
+const emptyBody = !body.replace(/<[^>]+>/g, "").trim();
 const videos = (await getCollection("videos", (v) => v.data.event === e.id)).sort((a, b) => +a.data.date - +b.data.date);
+const oneKind = new Set(videos.map((v) => v.data.kind)).size === 1;
 const pubs = await getCollection("publications", (p) => p.data.event === e.id);
 const endDay = iso(e.data.end_date ?? e.data.date);
 const subpages = (await getCollection("pages", (p) => p.data.path.startsWith(`/gatherings/${e.id}/`))).sort((a, b) => a.data.path.localeCompare(b.data.path));
 ---
-<Page title={e.data.title} docTitle={e.data.featured ? e.data.title : `${e.data.title}, ${fmtDate(e.data.date)}`} cover={e.data.cover} description={e.data.summary ?? summarize(e.body)} image={e.data.image ?? e.data.cover} crumbs={[{ label: "Gatherings", href: "/gatherings/" }]}
+<Page title={e.data.title} docTitle={e.data.featured ? e.data.title : `${e.data.title}, ${fmtDate(e.data.date)}`} cover={e.data.cover} description={e.data.summary ?? summarize(e.body)} image={e.data.image ?? e.data.cover} crumbs={[{ label: "Gatherings", href: "/gatherings/" }]} dek={emptyBody ? e.data.summary : undefined}
   local={false}>
   <Fragment slot="aside">
     <dl>
@@ -48,7 +50,7 @@ const subpages = (await getCollection("pages", (p) => p.data.path.startsWith(`/g
       <h2>Recordings</h2>
       <ul class="rows">
         {videos.map((v) => (
-          <li><div class="when"><b>{v.data.kind}</b>{v.data.duration}</div>
+          <li><div class="when">{!oneKind && <b>{v.data.kind}</b>}{v.data.duration}</div>
           <div><h3><a href={`https://www.youtube.com/watch?v=${v.data.youtube}`}>{v.data.title}</a></h3></div></li>
         ))}
       </ul>

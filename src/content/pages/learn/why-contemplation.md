@@ -121,7 +121,7 @@ The constructive flip-side: how simple local rules and tiny differences generate
 
 **Go further on the channel:** [**SubAnima**](https://www.youtube.com/@SubAnima) patiently takes mechanistic biology apart — beyond the two videos above, [**You've Been Lied To About Genetics**](https://www.youtube.com/watch?v=zpIqQ0pGs1E) is a great next watch.
 
-<a class="bookmark" href=""><b>SubAnima</b><span></span></a>
+<a class="bookmark" href="https://www.youtube.com/@SubAnima"><b>SubAnima</b><span>youtube.com</span></a>
 
 </div>
 

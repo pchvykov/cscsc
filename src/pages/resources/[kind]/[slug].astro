@@ -13,13 +13,23 @@ const cfg = RES[kind as keyof typeof RES];
 const d = e.data as Record<string, any>;
 const { Content } = await render(e);
 const fmt = (v: any) => Array.isArray(v) ? v.join(", ") : String(v);
-const rows = cfg.fields.filter(([k]) => d[k] !== undefined && d[k] !== null && !(Array.isArray(d[k]) && d[k].length === 0));
+const has = (v: any) => v !== undefined && v !== null && v !== "NA" && !(Array.isArray(v) && (v.length === 0 || v.every((x) => x === "NA")));
+// A field is read as text when it runs long; short ones are facts - the key ones beside the text, the rest small at the end.
+const isText = (v: any) => typeof v === "string" && v.length >= 70;
+const fields = cfg.fields.filter(([k]) => has(d[k]));
+const text = fields.filter(([k]) => isText(d[k]));
+const key = cfg.key.map((k) => fields.find(([f]) => f === k)).filter((f): f is [string, string] => !!f && !isText(d[f[0]]));
+const minor = fields.filter(([k]) => !isText(d[k]) && !cfg.key.includes(k));
 ---
 <Page title={d.title} description={d[cfg.blurb]} docTitle={`${d.title} · ${cfg.title}`} crumbs={[{ label: "Resources", href: "/resources/" }, { label: cfg.title, href: `/resources/${kind}/` }]} local={false}>
-  {d.website && <p><a class="btn ghost" href={d.website}>Visit website →</a></p>}
-  <dl class="props">
-    {rows.map(([k, label]) => <><dt>{label}</dt><dd>{fmt(d[k])}</dd></>)}
-  </dl>
+  <Fragment slot="aside">
+    <dl>{key.map(([k, label]) => <><dt>{label}</dt><dd>{fmt(d[k])}</dd></>)}</dl>
+    {d.website && <a class="btn ghost" href={d.website}>Visit website ↗</a>}
+  </Fragment>
+  <div class="res-why">
+    {text.map(([k, label]) => <><h2>{label}</h2><p>{d[k]}</p></>)}
+  </div>
   <Content />
+  {minor.length > 0 && <dl class="props minor">{minor.map(([k, label]) => <><dt>{label}</dt><dd>{fmt(d[k])}</dd></>)}</dl>}
   <p><a href={`/resources/${kind}/`}>← All {cfg.noun}</a></p>
 </Page>

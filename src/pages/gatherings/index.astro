@@ -20,7 +20,8 @@ const hub = await getEntry("pages", "gatherings/_hub");
 const Hub = hub ? (await render(hub)).Content : null;
 ---
 <Page title="Gatherings" dek="Retreats, conference sessions and online calls. We design how we meet as carefully as what we discuss." wide local={false}>
-  <section>
+  <p class="empty-line" data-empty-for="upcoming" hidden={soon.some((e) => end(e) >= buildDay)}>Nothing announced yet. The monthly email is the first place new gatherings appear. <a href="/gatherings/calls/">Calls and reading groups →</a></p>
+  <section data-hide-empty="upcoming" hidden={!soon.some((e) => end(e) >= buildDay)}>
     <div class="section-head"><h2>Upcoming</h2><a href="/gatherings/calls/">Calls and reading groups →</a></div>
     <ul class="rows" id="upcoming" data-next-group>
       {soon.map((e, n) => (
@@ -30,10 +31,9 @@ const Hub = hub ? (await render(hub)).Content : null;
         </li>
       ))}
     </ul>
-    <p class="muted" data-empty-for="upcoming" hidden={soon.some((e) => end(e) >= buildDay)}>Nothing announced yet. The monthly email is the first place new gatherings appear.</p>
   </section>
 
-  <section class="block">
+  <section class="block first">
     <div class="section-head"><h2>Main gatherings</h2></div>
     <div class="cards">
       {featured.map((e) => (
