@@ -2,12 +2,13 @@
 import { getCollection, render } from "astro:content";
 import Page from "../../layouts/Page.astro";
 import { fmtDate, summarize } from "../../lib/text";
+import { enhance } from "../../lib/enhance";
 
 export async function getStaticPaths() {
   return (await getCollection("posts", (p) => !p.data.draft)).map((p) => ({ params: { slug: p.id }, props: { p } }));
 }
 const { p } = Astro.props;
-const { Content } = await render(p);
+const body = enhance(p.rendered?.html ?? "").html;
 const people = await getCollection("people");
 const authors = p.data.authors.map((id) => people.find((x) => x.id === id)).filter(Boolean);
 const all = (await getCollection("posts", (x) => !x.data.draft)).sort((a, b) => +b.data.date - +a.data.date);
@@ -26,7 +27,7 @@ const meta = [fmtDate(p.data.date, { day: "numeric", month: "long", year: "numer
     </dl>
     <a class="btn ghost" href="/writing/">All writing</a>
   </Fragment>
-  <Content />
+  <Fragment set:html={body} />
   <nav class="block" style="padding-top:40px" aria-label="More writing">
     {older && <a class="page-link" href={`/writing/${older.id}/`}><span class="ic" aria-hidden="true">←</span>{older.data.title}</a>}
     {newer && <a class="page-link" href={`/writing/${newer.id}/`}><span class="ic" aria-hidden="true">→</span>{newer.data.title}</a>}

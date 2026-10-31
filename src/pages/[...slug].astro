@@ -3,17 +3,19 @@
 import { getCollection, render } from "astro:content";
 import Page from "../layouts/Page.astro";
 import { titleCase, summarize } from "../lib/text";
+import { enhance } from "../lib/enhance";
 
 export async function getStaticPaths() {
   const pages = await getCollection("pages", (p) => !p.data.draft && !p.id.includes("_hub") && !p.id.startsWith("_"));
   return pages.map((p) => ({ params: { slug: p.data.path.replace(/^\/|\/$/g, "") || undefined }, props: { entry: p } }));
 }
 const { entry } = Astro.props;
-const { Content, headings } = await render(entry);
+const { headings } = await render(entry);
+const body = enhance(entry.rendered?.html ?? "", { mapHeadings: true });
 // Long pages get an "On this page" list from their top-level headings.
 // Only the page's own sections (h2), not the items inside them.
 const outline = headings.filter((h) => h.depth === 2);
-const toc = outline.length >= 3 ? outline.map((h) => ({ ...h, text: h.text.replace(/^[^\p{L}\p{N}]+/u, "") })) : [];
+const toc = !body.hasMap && outline.length >= 3 ? outline.map((h) => ({ ...h, text: h.text.replace(/^[^\p{L}\p{N}]+/u, "") })) : [];
 ---
 <Page title={titleCase(entry.data.title)} cover={entry.data.cover} toc={toc} description={entry.data.description ?? summarize(entry.body)}>
   {entry.data.layout === "glossary" && (
@@ -22,7 +24,7 @@ const toc = outline.length >= 3 ? outline.map((h) => ({ ...h, text: h.text.repla
       <input id="term-q" class="term-filter" type="search" placeholder="Find a term" />
     </>
   )}
-  <Content />
+  <Fragment set:html={body.html} />
   {entry.data.layout === "glossary" && (
     <script is:inline>
       (function () {

@@ -18,6 +18,8 @@ Markdown for text. For anything more, use these few HTML wrappers (leave a blank
 - `<details class="toggle"><summary>Title</summary><div class="body">...</div></details>` - an accordion row (HTML only inside `<summary>`).
 - `<a class="page-link" href="...">Title</a>` - a link to another page, as an index row; `<a class="more-link" href="...">See more ...</a>` - a button-style link.
 - `<dl class="terms">` with `<div><dt>Term</dt><dd>Definition</dd></div>` - term/definition lists (glossary).
+- Research themes: add `data-theme-id="relational|agency|imaginaries|practice|epistemology"` to a `<section class="panel">` and it takes that theme's number, colour and glyph (defined once in `src/data/themes.ts`, glyphs in `public/assets/glyphs/`). Colour is used only for themes.
+- Applied automatically to every page by `src/lib/enhance.ts` (don't hand-write these): sections are numbered; a page with 3+ sections (or 4+ main headings) gets a section map under its opening line; a reference (heading, summary, optional italic author line, link line) becomes a compact entry; a toggle holding several references shows the count.
 - No emoji as icons, no colour classes. Headings start at `##` (the page title is the h1) and don't skip levels.
 
 ## Rules

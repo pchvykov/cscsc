@@ -4,13 +4,14 @@ import Page from "../../layouts/Page.astro";
 import { kindOf, when } from "../../lib/events";
 import { fmtDate, summarize } from "../../lib/text";
 import DateSwitch from "../../components/DateSwitch.astro";
+import { enhance } from "../../lib/enhance";
 import { iso, buildDay } from "../../lib/dates";
 
 export async function getStaticPaths() {
   return (await getCollection("events")).map((e) => ({ params: { slug: e.id }, props: { e } }));
 }
 const { e } = Astro.props;
-const { Content } = await render(e);
+const body = enhance(e.rendered?.html ?? "", { mapHeadings: true }).html;
 const videos = (await getCollection("videos", (v) => v.data.event === e.id)).sort((a, b) => +a.data.date - +b.data.date);
 const pubs = await getCollection("publications", (p) => p.data.event === e.id);
 const endDay = iso(e.data.end_date ?? e.data.date);
@@ -35,7 +36,7 @@ const subpages = (await getCollection("pages", (p) => p.data.path.startsWith(`/g
       {videos.length > 0 && <> <a href="#recordings">Recordings</a></>}{pubs.length > 0 && <> · <a href="#outputs">Outputs</a></>}</p>
     </div></aside>
   )}
-  <Content />
+  <Fragment set:html={body} />
   {pubs.length > 0 && (
     <section id="outputs" class="block" style="padding-top:40px">
       <h2>Outputs</h2>

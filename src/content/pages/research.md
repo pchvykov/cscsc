@@ -14,7 +14,7 @@ icon: "🔬"
 
 ---
 
-<section class="panel">
+<section class="panel" data-theme-id="relational">
 
 ## Relational Ontology & the Construction of Reality
 Revealing that observer-dependence, complementarity, and information-theoretic principles are not unique to quantum mechanics but appear throughout classical physics, social systems, and scientific method—validating contemplative insights about the participatory, constructed nature of reality while providing rigorous frameworks for understanding how observation and relationship fundamentally shape what we call "objective."
@@ -56,7 +56,7 @@ The relationship between information and physical reality from a complexity pers
 
 </section>
 
-<section class="panel">
+<section class="panel" data-theme-id="agency">
 
 ## Agency & Intelligence as Causes
 Moving beyond mechanistic views of life to understand organisms as goal-directed, intelligent agents challenges reductionist frameworks and opens space for contemplative perspectives on consciousness, purpose, and the nature of mind across scales—from cells to ecosystems to AI.
@@ -126,7 +126,7 @@ This proposal bridges modern ecological modeling and contemplative inquiry of th
 
 </section>
 
-<section class="panel">
+<section class="panel" data-theme-id="imaginaries">
 
 ## Social Reality as Collective Imaginaries
 Just as embryogenesis is shaped by target morphologies—where cells organize toward an envisioned form—societies are shaped by their collective beliefs, rituals, and social imaginaries. These shared visions of what ought to be serve as attractors that pull social reality into being, making the imagined manifest. This perspective challenges mechanistic social network models by recognizing ritual and collective intentionality as fundamental technologies for coordinating behavior, transmitting values, and literally constructing the social world we inhabit.
@@ -182,7 +182,7 @@ In Hindu thought, reality is constructed at three levels (Bhavana): individual p
 
 </section>
 
-<section class="panel">
+<section class="panel" data-theme-id="practice">
 
 ## Complexity Understanding of Contemplative Practices
 Understanding meditation and contemplative practices through complexity science provides rigorous frameworks for studying their mechanisms and effects—validating contemplative knowledge while opening new research directions in health, cognition, and transformation.
@@ -249,7 +249,7 @@ Develop a computational theory of mindfulness and related practices by integrati
 
 </section>
 
-<section class="panel">
+<section class="panel" data-theme-id="epistemology">
 
 ## Alternative Epistemologies & Methodologies
 Acknowledging multiple valid ways of knowing—lyric, contemplative, relational—alongside analytic approaches enriches scientific methodology and honors the full spectrum of human understanding necessary for bridging scientific and contemplative domains.

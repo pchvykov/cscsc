@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import { themeCss } from "../data/themes";
 
 interface Props { title?: string; description?: string; image?: string; noindex?: boolean }
 const { title, description = "A research community bringing complexity science and contemplative practice together: how order arises without anyone in charge, in cells, minds and societies.", image = "/og-image.jpg", noindex = false } = Astro.props;
@@ -35,6 +36,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet" />
+  <style is:inline set:html={themeCss}></style>
   <slot name="head" />
   <script is:inline data-goatcounter="https://cscsc.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </head>
