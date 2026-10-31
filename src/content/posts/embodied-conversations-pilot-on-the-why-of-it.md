@@ -7,6 +7,7 @@ reading_time: "~8 min read"
 notion_id: "37cd8cae-0cfe-801d-8e26-fed3899cbcfb"
 notion_edited: "2026-06-18"
 icon: "🎭"
+authors: ["matthew-mccarthy"]
 ---
 
 ## Embodied Conversations Pilot: On the Why of It

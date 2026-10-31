@@ -15,7 +15,8 @@ export function when(e: Ev) {
 export async function allEvents() {
   const evs = await getCollection("events");
   const today = new Date(new Date().toISOString().slice(0, 10)); // start of today, UTC
-  const upcoming = evs.filter((e) => (e.data.end_date ?? e.data.date) >= today).sort((a, b) => +a.data.date - +b.data.date);
+  const slack = new Date(today.getTime() - 2 * 864e5);
+  const upcoming = evs.filter((e) => (e.data.end_date ?? e.data.date) >= slack).sort((a, b) => +a.data.date - +b.data.date);
   const past = evs.filter((e) => (e.data.end_date ?? e.data.date) < today).sort((a, b) => +b.data.date - +a.data.date);
   return { evs, upcoming, past };
 }

@@ -8,6 +8,7 @@ reading_time: "6 min read"
 notion_id: "352d8cae-0cfe-80e2-8ed9-ff0b2cd0b1af"
 notion_edited: "2026-05-06"
 icon: "😇"
+authors: ["matthew-mccarthy"]
 ---
 
 *Inspired by the April community call led by Jordan Borgman* 

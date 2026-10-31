@@ -7,6 +7,7 @@ reading_time: "~8 min read"
 notion_id: "375d8cae-0cfe-80e9-99da-d4c4681bdecb"
 notion_edited: "2026-06-18"
 icon: "⏳"
+authors: ["matthew-mccarthy"]
 ---
 
 **What If the Most Important Part of an Experience Is What Comes After?**

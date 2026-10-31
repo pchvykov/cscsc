@@ -8,6 +8,7 @@ reading_time: "7 min read"
 notion_id: "344d8cae-0cfe-8150-816f-de9fc9bb8cff"
 notion_edited: "2026-04-30"
 icon: "📰"
+authors: ["matthew-mccarthy"]
 ---
 
 *Based on the February 2026 Community Call discussion led by Eric Lacosse.*

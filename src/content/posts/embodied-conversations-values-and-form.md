@@ -7,6 +7,7 @@ reading_time: "1 min read"
 notion_id: "389d8cae-0cfe-8095-9106-e200398bcc5e"
 notion_edited: "2026-06-25"
 icon: "⚜️"
+authors: ["matthew-mccarthy"]
 ---
 
 ### The Aim

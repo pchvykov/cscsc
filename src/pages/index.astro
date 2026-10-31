@@ -10,19 +10,26 @@ import { fmtDate } from "../lib/text";
 const today = new Date(new Date().toISOString().slice(0, 10)); // start of today, UTC
 const cutoff = new Date(today.getTime() - 1000 * 60 * 60 * 24 * 120);
 const events = (await getCollection("events")).map((e) => ({
-  date: e.data.date, label: e.data.tags.includes("call") ? "Community call" : e.data.tags.includes("retreat") ? "Retreat" : e.data.tags.includes("conference") ? "Conference" : "Gathering",
+  date: e.data.date, end: e.data.end_date, label: e.data.tags.includes("call") ? "Community call" : e.data.tags.includes("retreat") ? "Retreat" : e.data.tags.includes("conference") ? "Conference" : "Gathering",
   title: e.data.title, blurb: e.data.summary ?? "", href: `/gatherings/${e.id}/`, featured: e.data.featured,
 }));
 const posts = (await getCollection("posts", (p) => !p.data.draft)).map((p) => ({
-  date: p.data.date, label: "Writing", title: p.data.title, blurb: p.data.excerpt ?? "", href: `/writing/${p.id}/`, featured: false,
+  date: p.data.date, end: undefined, label: "Writing", title: p.data.title, blurb: p.data.excerpt ?? "", href: `/writing/${p.id}/`, featured: false,
 }));
 const pubs = (await getCollection("publications")).map((p) => ({
-  date: p.data.date, label: p.data.kind === "proceedings" ? "Proceedings" : "Publication", title: p.data.title, blurb: p.data.summary ?? "", href: p.data.href, featured: true,
+  date: p.data.date, end: undefined, label: p.data.kind === "proceedings" ? "Proceedings" : "Publication", title: p.data.title, blurb: p.data.summary ?? "", href: p.data.href, featured: true,
 }));
 const all = [...events, ...posts, ...pubs];
-const upcoming = all.filter((x) => x.date >= today).sort((a, b) => +a.date - +b.date).slice(0, 1).map((x) => ({ ...x, next: true }));
-const recent = all.filter((x) => x.date < today && x.date >= cutoff).sort((a, b) => +b.date - +a.date);
-const latest = [...upcoming, ...recent].slice(0, 4);
+const iso = (d: Date) => d.toISOString().slice(0, 10);
+// Candidates for "Latest": anything from the last 120 days or still to come.
+// The list is computed here for the build date, and recomputed in the browser
+// on load (script at the bottom), so it stays current between deploys.
+const pool = all.filter((x) => x.date >= cutoff).sort((a, b) => +b.date - +a.date).map((x) => ({ ...x, d: iso(x.date), e: iso(x.end ?? x.date) }));
+const t0 = iso(today);
+const upcoming = pool.filter((x) => x.e >= t0).sort((a, b) => a.d.localeCompare(b.d)).slice(0, 1);
+const recent = pool.filter((x) => x.e < t0);
+const shown = new Set([...upcoming, ...recent].slice(0, 4));
+const latest = pool.map((x) => ({ ...x, next: upcoming.includes(x), on: shown.has(x) }));
 ---
 <Base>
   <section class="hero">
@@ -96,8 +103,8 @@ const latest = [...upcoming, ...recent].slice(0, 4);
     <div class="section-head"><h2 id="latest-h">Latest</h2><a href="/gatherings/">All gatherings and outputs →</a></div>
     <ul class="latest" id="latest">
       {latest.map((x) => (
-        <li class={x.next ? "next" : undefined}>
-          <div class="when"><b>{x.next ? "Next · " : ""}{x.label}</b>{fmtDate(x.date)}</div>
+        <li class={x.next ? "next" : undefined} hidden={!x.on} data-d={x.d} data-e={x.e}>
+          <div class="when"><b><span class="nx" hidden={!x.next}>Next · </span>{x.label}</b>{fmtDate(x.date)}</div>
           <div><h3><a href={x.href}>{x.title}</a></h3>{x.blurb && <p>{x.blurb}</p>}</div>
         </li>
       ))}
@@ -153,6 +160,19 @@ const latest = [...upcoming, ...recent].slice(0, 4);
     </div>
   </section>
 <script is:inline>
+  // Latest: the next upcoming item first, then the most recent past items
+  // (last 120 days), four in all. Same rule as the build, using today's date.
+  (() => {
+    const d = new Date(), pad = (n) => String(n).padStart(2, "0");
+    const t = d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate());
+    const c = new Date(d.getTime() - 120 * 864e5), cut = c.getFullYear() + "-" + pad(c.getMonth() + 1) + "-" + pad(c.getDate());
+    const items = [...document.querySelectorAll("#latest > li")];
+    const up = items.filter((li) => li.dataset.e >= t).sort((a, b) => a.dataset.d.localeCompare(b.dataset.d)).slice(0, 1);
+    const past = items.filter((li) => li.dataset.e < t && li.dataset.d >= cut);
+    const show = [...up, ...past].slice(0, 4);
+    items.forEach((li) => { li.hidden = !show.includes(li); li.classList.toggle("next", up.includes(li)); li.querySelector(".nx").hidden = !up.includes(li); });
+    if (up[0]) up[0].parentElement.prepend(up[0]);
+  })();
   // Quotes: two visible (one on phones), step one at a time every 12 s.
   // Pauses on hover and keyboard focus; wraps to the start with a fade.
   (() => {

@@ -3,21 +3,25 @@ import Page from "../../layouts/Page.astro";
 import { allEvents, kindOf, when } from "../../lib/events";
 import { getCollection } from "astro:content";
 import { links } from "../../data/site";
+import DateSwitch from "../../components/DateSwitch.astro";
+import { iso, buildDay } from "../../lib/dates";
 
-const { upcoming, past } = await allEvents();
+const { evs, upcoming } = await allEvents();
+const endOf = (e: (typeof evs)[number]) => iso(e.data.end_date ?? e.data.date);
 const isSeries = (t: string[]) => t.includes("call") || t.length === 0;
 const nextCalls = upcoming.filter((e) => e.data.tags.includes("call"));
-const pastCalls = past.filter((e) => !e.data.featured && !e.data.tags.includes("conference") && !e.data.tags.includes("retreat") && !e.data.tags.includes("external"));
+const pastCalls = [...evs].sort((a, b) => +b.data.date - +a.data.date).filter((e) => !e.data.featured && !e.data.tags.includes("conference") && !e.data.tags.includes("retreat") && !e.data.tags.includes("external"));
 const recs = (await getCollection("videos", (v) => v.data.kind === "recording")).sort((a, b) => +b.data.date - +a.data.date);
 ---
 <Page title="Calls and reading groups" dek="A monthly call, open to anyone curious, and reading groups that come and go." section="Gatherings">
   <p><a class="btn solid" href={links.calendar}>Calendar</a> <a class="btn ghost" href={links.emailSignup}>Get the monthly email</a></p>
   {nextCalls.length > 0 && (<>
     <h2>Next</h2>
-    <ul class="rows">{nextCalls.map((e) => <li><div class="when"><b>{kindOf(e)}</b>{when(e)}</div><div><h3><a href={`/gatherings/${e.id}/`}>{e.data.title}</a></h3>{e.data.summary && <p>{e.data.summary}</p>}</div></li>)}</ul>
+    <ul class="rows">{nextCalls.map((e) => <li data-until={endOf(e)} hidden={endOf(e) < buildDay}><div class="when"><b>{kindOf(e)}</b>{when(e)}</div><div><h3><a href={`/gatherings/${e.id}/`}>{e.data.title}</a></h3>{e.data.summary && <p>{e.data.summary}</p>}</div></li>)}</ul>
   </>)}
   <h2>Recordings</h2>
   <ul class="rows">{recs.map((v) => <li><div class="when">{when({ data: { date: v.data.date } } as any)}</div><div><h3><a href={`https://www.youtube.com/watch?v=${v.data.youtube}`}>{v.data.title}</a></h3></div></li>)}</ul>
   <h2>Past calls and groups</h2>
-  <ul class="rows">{pastCalls.map((e) => <li><div class="when"><b>{kindOf(e)}</b>{when(e)}</div><div><h3><a href={`/gatherings/${e.id}/`}>{e.data.title}</a></h3>{e.data.summary && <p>{e.data.summary}</p>}</div></li>)}</ul>
+  <ul class="rows">{pastCalls.map((e) => <li data-after={endOf(e)} hidden={endOf(e) >= buildDay}><div class="when"><b>{kindOf(e)}</b>{when(e)}</div><div><h3><a href={`/gatherings/${e.id}/`}>{e.data.title}</a></h3>{e.data.summary && <p>{e.data.summary}</p>}</div></li>)}</ul>
+  <DateSwitch />
 </Page>

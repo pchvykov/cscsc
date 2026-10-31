@@ -1,0 +1,28 @@
+---
+// Keeps date-dependent lists current without a rebuild. Pages render their
+// lists for the build date; on load, this script re-checks against today:
+//   [data-until="YYYY-MM-DD"]  shown while today <= that date (upcoming items)
+//   [data-after="YYYY-MM-DD"]  shown once today > that date (past items, "took place" notes)
+//   [data-next-group]          its first visible [data-until] child gets class "next"
+//   [data-empty-for="id"]      shown when the element with that id has no visible items
+---
+<script is:inline>
+  (function () {
+    var today = new Date();
+    var t = today.getFullYear() + "-" + String(today.getMonth() + 1).padStart(2, "0") + "-" + String(today.getDate()).padStart(2, "0");
+    document.querySelectorAll("[data-until]").forEach(function (el) { el.hidden = el.dataset.until < t; });
+    document.querySelectorAll("[data-after]").forEach(function (el) { el.hidden = !(el.dataset.after < t); });
+    document.querySelectorAll("[data-next-group]").forEach(function (g) {
+      var first = true;
+      g.querySelectorAll("[data-until]").forEach(function (el) {
+        el.classList.toggle("next", first && !el.hidden);
+        var b = el.querySelector("[data-next-label]"); if (b) b.hidden = !(first && !el.hidden);
+        if (!el.hidden) first = false;
+      });
+    });
+    document.querySelectorAll("[data-empty-for]").forEach(function (el) {
+      var box = document.getElementById(el.dataset.emptyFor);
+      el.hidden = !!box && [].some.call(box.children, function (c) { return !c.hidden; });
+    });
+  })();
+</script>

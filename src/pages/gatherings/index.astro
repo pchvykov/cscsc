@@ -2,11 +2,17 @@
 import { getEntry, render } from "astro:content";
 import Page from "../../layouts/Page.astro";
 import { allEvents, kindOf, when } from "../../lib/events";
+import DateSwitch from "../../components/DateSwitch.astro";
+import { iso, buildDay, slackDay } from "../../lib/dates";
 
-const { upcoming, past } = await allEvents();
-const featured = past.filter((e) => e.data.featured);
-const byYear = new Map<number, typeof past>();
-for (const e of past.filter((e) => !e.data.featured)) {
+const { evs } = await allEvents();
+const end = (e: (typeof evs)[number]) => iso(e.data.end_date ?? e.data.date);
+// Everything is rendered; DateSwitch decides on load what counts as upcoming.
+const soon = evs.filter((e) => end(e) >= slackDay).sort((a, b) => +a.data.date - +b.data.date);
+const all = [...evs].sort((a, b) => +b.data.date - +a.data.date);
+const featured = all.filter((e) => e.data.featured);
+const byYear = new Map<number, typeof all>();
+for (const e of all.filter((e) => !e.data.featured)) {
   const y = e.data.date.getUTCFullYear();
   byYear.set(y, [...(byYear.get(y) ?? []), e]);
 }
@@ -16,23 +22,22 @@ const Hub = hub ? (await render(hub)).Content : null;
 <Page title="Gatherings" dek="Retreats, conference sessions and online calls. We design how we meet as carefully as what we discuss." wide local={false}>
   <section>
     <div class="section-head"><h2>Upcoming</h2><a href="/gatherings/calls/">Calls and reading groups →</a></div>
-    {upcoming.length ? (
-      <ul class="rows">
-        {upcoming.map((e, n) => (
-          <li class={n === 0 ? "next" : undefined}>
-            <div class="when"><b>{n === 0 ? "Next · " : ""}{kindOf(e)}</b>{when(e)}</div>
-            <div><h3><a href={`/gatherings/${e.id}/`}>{e.data.title}</a></h3>{e.data.summary && <p>{e.data.summary}</p>}</div>
-          </li>
-        ))}
-      </ul>
-    ) : <p class="muted">Nothing announced yet. The monthly email is the first place new gatherings appear.</p>}
+    <ul class="rows" id="upcoming" data-next-group>
+      {soon.map((e, n) => (
+        <li class={n === 0 && end(e) >= buildDay ? "next" : undefined} data-until={end(e)} hidden={end(e) < buildDay}>
+          <div class="when"><b><span data-next-label hidden={n !== 0}>Next · </span>{kindOf(e)}</b>{when(e)}</div>
+          <div><h3><a href={`/gatherings/${e.id}/`}>{e.data.title}</a></h3>{e.data.summary && <p>{e.data.summary}</p>}</div>
+        </li>
+      ))}
+    </ul>
+    <p class="muted" data-empty-for="upcoming" hidden={soon.some((e) => end(e) >= buildDay)}>Nothing announced yet. The monthly email is the first place new gatherings appear.</p>
   </section>
 
   <section class="block">
     <div class="section-head"><h2>Main gatherings</h2></div>
     <div class="cards">
       {featured.map((e) => (
-        <a class="card" href={`/gatherings/${e.id}/`}>
+        <a class="card" href={`/gatherings/${e.id}/`} data-after={end(e)} hidden={end(e) >= buildDay}>
           <div class="thumb"><img src={e.data.image ?? e.data.cover} alt="" loading="lazy" /></div>
           <span class="k">{kindOf(e)} · {when(e)}</span>
           <h3>{e.data.title}</h3>
@@ -49,7 +54,7 @@ const Hub = hub ? (await render(hub)).Content : null;
         <h3 class="eyebrow" style="margin:28px 0 4px">{y}</h3>
         <ul class="rows">
           {list.map((e) => (
-            <li>
+            <li data-after={end(e)} hidden={end(e) >= buildDay}>
               <div class="when"><b>{kindOf(e)}</b>{when(e)}</div>
               <div><h3><a href={`/gatherings/${e.id}/`}>{e.data.title}</a></h3>{e.data.summary && <p>{e.data.summary}</p>}</div>
             </li>
@@ -59,4 +64,5 @@ const Hub = hub ? (await render(hub)).Content : null;
     ))}
   </section>
   {Hub && <section class="block prose"><Hub /></section>}
+  <DateSwitch />
 </Page>

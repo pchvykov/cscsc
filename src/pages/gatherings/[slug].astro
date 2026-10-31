@@ -3,6 +3,8 @@ import { getCollection, render } from "astro:content";
 import Page from "../../layouts/Page.astro";
 import { kindOf, when } from "../../lib/events";
 import { fmtDate } from "../../lib/text";
+import DateSwitch from "../../components/DateSwitch.astro";
+import { iso, buildDay } from "../../lib/dates";
 
 export async function getStaticPaths() {
   return (await getCollection("events")).map((e) => ({ params: { slug: e.id }, props: { e } }));
@@ -11,7 +13,7 @@ const { e } = Astro.props;
 const { Content } = await render(e);
 const videos = (await getCollection("videos", (v) => v.data.event === e.id)).sort((a, b) => +a.data.date - +b.data.date);
 const pubs = await getCollection("publications", (p) => p.data.event === e.id);
-const past = (e.data.end_date ?? e.data.date) < new Date(new Date().toISOString().slice(0, 10));
+const endDay = iso(e.data.end_date ?? e.data.date);
 const subpages = (await getCollection("pages", (p) => p.data.path.startsWith(`/gatherings/${e.id}/`))).sort((a, b) => a.data.path.localeCompare(b.data.path));
 ---
 <Page title={e.data.title} cover={e.data.cover} crumbs={[{ label: "Gatherings", href: "/gatherings/" }]}
@@ -27,8 +29,8 @@ const subpages = (await getCollection("pages", (p) => p.data.path.startsWith(`/g
     </dl>
     <a class="btn ghost" href="/gatherings/">All gatherings</a>
   </Fragment>
-  {past && e.data.tags.includes("retreat") && (
-    <aside class="callout noicon record"><div class="body">
+  {e.data.tags.includes("retreat") && (
+    <aside class="callout noicon record" data-after={endDay} hidden={endDay >= buildDay}><div class="body">
       <p><b>This gathering took place {when(e)}.</b> The page below is the original invitation, kept as a record.
       {videos.length > 0 && <> <a href="#recordings">Recordings</a></>}{pubs.length > 0 && <> · <a href="#outputs">Outputs</a></>}</p>
     </div></aside>
@@ -57,4 +59,5 @@ const subpages = (await getCollection("pages", (p) => p.data.path.startsWith(`/g
       </ul>
     </section>
   )}
+  <DateSwitch />
 </Page>
