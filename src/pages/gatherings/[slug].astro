@@ -29,7 +29,7 @@ const subpages = (await getCollection("pages", (p) => p.data.path.startsWith(`/g
     </dl>
     <a class="btn ghost" href="/gatherings/">All gatherings</a>
   </Fragment>
-  {e.data.tags.includes("retreat") && (
+  {e.data.featured && e.id !== "cscsc25" && (
     <aside class="callout noicon record" data-after={endDay} hidden={endDay >= buildDay}><div class="body">
       <p><b>This gathering took place {when(e)}.</b> The page below is the original invitation, kept as a record.
       {videos.length > 0 && <> <a href="#recordings">Recordings</a></>}{pubs.length > 0 && <> · <a href="#outputs">Outputs</a></>}</p>
