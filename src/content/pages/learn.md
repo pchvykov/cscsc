@@ -8,7 +8,7 @@ icon: "🧭"
 
 <div class="standfirst">
 
-**Start here — our vision in 2 minutes.** A short animation for what this is all about — no background needed.
+**Start here — our vision in 3 minutes.** A short animation for what this is all about — no background needed.
 
 [Watch our animation](/vision/)
 

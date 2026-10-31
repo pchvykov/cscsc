@@ -67,9 +67,7 @@ We welcome contributions from community members! Share your research updates, ev
 
 **Ready to write?**
 
-New Post Template
-
-Duplicate the template to your own Notion workspace, write your post, and then share it with us for review at [cscs.conference@gmail.com](mailto:cscs.conference@gmail.com)
+Email your post, or just the idea for one, to [cscs.conference@gmail.com](mailto:cscs.conference@gmail.com) and we'll review it with you.
 
 </aside>
 
