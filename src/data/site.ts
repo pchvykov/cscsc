@@ -82,3 +82,5 @@ export function sectionOf(path: string): string | undefined {
   if (p.startsWith("/writing/") || p.startsWith("/videos/") || p.startsWith("/vision/")) return "Watch & read";
   return nav.find((s) => p.startsWith(s.base + "/"))?.label;
 }
+
+export const episteme = "https://docs.google.com/forms/d/e/1FAIpQLSe8AJZI5L1pYQMsgnN19smBsMw11G3uc_Ap_U9uRkjdEQoBbw/viewform";

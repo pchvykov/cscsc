@@ -12,9 +12,9 @@ icon: "🧭"
 
 **Start here — our vision in 2 minutes.** A short animation for what this is all about — no background needed.
 
-[▶ Watch our animation](https://pchvykov.github.io/cscsc/)
+[▶ Watch our animation](/vision/)
 
-<div class="embed tall"><iframe src="https://pchvykov.github.io/cscsc/" loading="lazy" title="Embedded content"></iframe></div>
+<div class="embed tall"><iframe src="/vision/" loading="lazy" title="Embedded content"></iframe></div>
 
 </div>
 </aside>

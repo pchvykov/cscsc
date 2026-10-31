@@ -11,11 +11,22 @@ const { e } = Astro.props;
 const { Content } = await render(e);
 const videos = (await getCollection("videos", (v) => v.data.event === e.id)).sort((a, b) => +a.data.date - +b.data.date);
 const pubs = await getCollection("publications", (p) => p.data.event === e.id);
-const past = (e.data.end_date ?? e.data.date) < new Date();
+const past = (e.data.end_date ?? e.data.date) < new Date(new Date().toISOString().slice(0, 10));
 const subpages = (await getCollection("pages", (p) => p.data.path.startsWith(`/gatherings/${e.id}/`))).sort((a, b) => a.data.path.localeCompare(b.data.path));
 ---
 <Page title={e.data.title} cover={e.data.cover} crumbs={[{ label: "Gatherings", href: "/gatherings/" }]}
-  meta={[kindOf(e), when(e), e.data.place].filter(Boolean).join(" · ")} local={false}>
+  local={false}>
+  <Fragment slot="aside">
+    <dl>
+      <dt>When</dt><dd>{when(e)}</dd>
+      {e.data.place && <><dt>Where</dt><dd>{e.data.place}</dd></>}
+      <dt>Kind</dt><dd>{kindOf(e)}</dd>
+      {subpages.length > 0 && <><dt>Pages</dt><dd><ul>{subpages.map((p) => <li><a href={p.data.path}>{p.data.title}</a></li>)}</ul></dd></>}
+      {videos.length > 0 && <><dt>Recordings</dt><dd><a href="#recordings">{videos.length} video{videos.length > 1 ? "s" : ""}</a></dd></>}
+      {pubs.length > 0 && <><dt>Outputs</dt><dd><ul>{pubs.map((p) => <li><a href={p.data.href}>{p.data.title}</a></li>)}</ul></dd></>}
+    </dl>
+    <a class="btn ghost" href="/gatherings/">All gatherings</a>
+  </Fragment>
   {past && e.data.tags.includes("retreat") && (
     <aside class="callout noicon record"><div class="body">
       <p><b>This gathering took place {when(e)}.</b> The page below is the original invitation, kept as a record.

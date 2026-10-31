@@ -18,7 +18,7 @@ cover: "/media/286d8cae0cfecd731c.webp"
 
 We are an emerging research community studying how complexity science and contemplative studies illuminate each other—to understand minds, societies, and human flourishing through both empirical rigor and experiential depth.
 
-[See our vision animation](https://pchvykov.github.io/cscsc/) | [**▶ Watch CSCSC25 Recordings**](https://www.youtube.com/@cscs.conference/streams)
+[See our vision animation](/vision/) | [**▶ Watch CSCSC25 Recordings**](https://www.youtube.com/@cscs.conference/streams)
 
 JOIN US!  [Add your email here for updates](https://cscsc.notion.site/286d8cae0cfe8031833ac1a301824aa0?pvs=105) on our online discussions and events
 

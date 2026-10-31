@@ -7,7 +7,7 @@ import { getCollection } from "astro:content";
 import { links } from "../data/site";
 import { fmtDate } from "../lib/text";
 
-const today = new Date();
+const today = new Date(new Date().toISOString().slice(0, 10)); // start of today, UTC
 const cutoff = new Date(today.getTime() - 1000 * 60 * 60 * 24 * 120);
 const events = (await getCollection("events")).map((e) => ({
   date: e.data.date, label: e.data.tags.includes("call") ? "Community call" : e.data.tags.includes("retreat") ? "Retreat" : e.data.tags.includes("conference") ? "Conference" : "Gathering",

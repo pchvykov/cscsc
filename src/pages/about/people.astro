@@ -1,0 +1,75 @@
+---
+import { getCollection, render } from "astro:content";
+import Page from "../../layouts/Page.astro";
+
+const people = (await getCollection("people")).sort((a, b) => a.data.order - b.data.order);
+const withBio = await Promise.all(people.map(async (p) => ({ p, Bio: (await render(p)).Content, hasBio: p.body?.trim().length })));
+const organizers = withBio.filter((x) => x.p.data.roles.includes("organizer"));
+const advisors = withBio.filter((x) => x.p.data.roles.includes("advisor"));
+const speakers = people.filter((p) => p.data.roles.includes("speaker") && !p.data.roles.includes("organizer"));
+const videos = await getCollection("videos");
+const talksBy = (name: string) => videos.filter((v) => v.data.title.includes(name)).sort((a, b) => +b.data.date - +a.data.date);
+const initials = (n: string) => n.split(" ").map((w) => w[0]).slice(0, 2).join("");
+---
+<Page title="People" dek="CSCSC is run by volunteers. Below are the organizers, our advisory board, and some of the people who have spoken at our gatherings." wide local={false}>
+  <section>
+    <div class="section-head"><h2>Organizers</h2></div>
+    <div class="people-grid">
+      {organizers.map(({ p, Bio }) => (
+        <article class="person">
+          {p.data.photo && p.data.photo_ok ? <img class="ph" src={p.data.photo} alt="" /> : <span class="ph mono" aria-hidden="true">{initials(p.data.name)}</span>}
+          <div>
+            <h3>{p.data.website ? <a href={p.data.website}>{p.data.name}</a> : p.data.name}</h3>
+            <p class="aff">{[p.data.field, p.data.affiliation].filter(Boolean).join(" · ")}</p>
+            <div class="bio"><Bio /></div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="section-head"><h2>Advisory board</h2></div>
+    <div class="people-grid">
+      {advisors.map(({ p, Bio }) => (
+        <article class="person">
+          {p.data.photo && p.data.photo_ok ? <img class="ph" src={p.data.photo} alt="" /> : <span class="ph mono" aria-hidden="true">{initials(p.data.name)}</span>}
+          <div>
+            <h3>{p.data.website ? <a href={p.data.website}>{p.data.name}</a> : p.data.name}</h3>
+            <p class="aff">{[p.data.field, p.data.affiliation].filter(Boolean).join(" · ")}</p>
+            <div class="bio"><Bio /></div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="section-head"><h2>Some past speakers</h2><a href="/videos/">All talks →</a></div>
+    <ul class="rows">
+      {speakers.map((p) => {
+        const talks = talksBy(p.data.name);
+        return (
+          <li>
+            <div class="when"><b>{p.data.affiliation}</b>{p.data.field}</div>
+            <div><h3>{p.data.name}</h3>
+              {talks.length > 0 && <p>{talks.map((t, i) => <>{i > 0 && " · "}<a href={`https://www.youtube.com/watch?v=${t.data.youtube}`}>{t.data.title.replace(/^.*?:\s*/, "").replace(new RegExp(`^${p.data.name},?\\s*`), "")}</a></>)}</p>}
+            </div>
+          </li>
+        );
+      })}
+    </ul>
+  </section>
+  <p class="muted" style="margin-top:40px">And the 150 or so members of the community, who find each other on the <a href="/join/">forum and the monthly calls</a>.</p>
+</Page>
+<style>
+  .people-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 440px), 1fr)); gap: 40px 48px; }
+  .person { display: grid; grid-template-columns: 88px 1fr; gap: 20px; align-items: start; }
+  .ph { width: 88px; height: 88px; border-radius: 50%; object-fit: cover; }
+  .mono { display: grid; place-items: center; background: var(--bg-raised); border: 1px solid var(--rule-soft); font-family: var(--font-display); font-size: 1.7rem; color: var(--muted); }
+  .person h3 { font-size: 1.5rem; }
+  .person h3 a { text-decoration: none; }
+  .person .aff { color: var(--muted); font-size: 0.88rem; margin: 2px 0 10px; }
+  .person .bio :global(p) { font-size: 0.97rem; margin: 0; }
+  @media (max-width: 520px) { .person { grid-template-columns: 1fr; } }
+</style>

@@ -1,0 +1,40 @@
+---
+import Page from "../layouts/Page.astro";
+import { links } from "../data/site";
+---
+<Page title="Join" dek="About 150 researchers and practitioners take part. There is no membership fee and no application." local={false} wide>
+  <div class="join-grid">
+    <article class="join-card">
+      <span class="k">Once a month</span>
+      <h2>The monthly email</h2>
+      <p>Monthly updates on conferences, publications, and research opportunities.</p>
+      <a class="btn solid" href={links.emailSignup}>Add your email</a>
+    </article>
+    <article class="join-card">
+      <span class="k">Any time</span>
+      <h2>The forum</h2>
+      <p>Our Hylo community forum, for research discussions, sharing related events, organizing local meetups. It has a map of members.</p>
+      <a class="btn ghost" href={links.forum}>Join the forum</a>
+    </article>
+    <article class="join-card">
+      <span class="k">Monthly, online</span>
+      <h2>Calls and reading groups</h2>
+      <p>A monthly call, open to anyone curious, and reading groups that come and go. Dates are on the calendar.</p>
+      <a class="btn ghost" href="/gatherings/calls/">Calls and reading groups</a>
+      <p style="margin-top:10px"><a href={links.calendar}>Calendar →</a></p>
+    </article>
+  </div>
+
+  <section class="block prose">
+    <h2>Taking part more</h2>
+    <p>Write for the blog: see <a href="/writing/#contribute">contributing to the blog</a>. To host a call, propose a reading group or a working group, or bring us to your institution, <a href="#" class="mail" data-u="cscs.conference" data-d="gmail.com">write to us</a>.</p>
+    <p>Already a member? The <a href={links.membersDirectory}>members directory</a> is shared with members only.</p>
+  </section>
+</Page>
+<style>
+  .join-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+  .join-card { padding: 26px; border: 1px solid var(--rule-soft); border-radius: 10px; background: var(--bg-raised); display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
+  .join-card h2 { font-size: 1.7rem; }
+  .join-card p { margin: 0; color: var(--muted); }
+  .join-card .btn { margin-top: auto; }
+</style>

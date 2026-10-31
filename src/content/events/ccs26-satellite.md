@@ -351,7 +351,7 @@ This satellite is organized by the **Complexity Science and Contemplative Studie
 
 We held our **inaugural CSCSC25 conference** in October 2025, featuring speakers including Michael Levin (Tufts), Martin Nowak (Harvard), and Gary Lupyan (Madison). We also run online seminars, working groups, and an in-person research workshop (most recently in [France, September 2026](https://app.notion.com/p/303d8cae0cfe81d1bb87d6d473d189fa)).
 
-[Our mission in an interactive animation →](https://pchvykov.github.io/cscsc/)
+[Our mission in an interactive animation →](/vision/)
 
 [Learn more about CSCSC →](/)
 

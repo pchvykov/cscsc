@@ -42,4 +42,6 @@ const Hub = hub ? (await render(hub)).Content : null;
     items.forEach((li) => { const show = !b.dataset.cat || li.dataset.cat === b.dataset.cat; li.hidden = !show; if (show) n++; });
     count.textContent = `${n} post${n === 1 ? "" : "s"}`;
   }));
+  const want = new URLSearchParams(location.search).get("cat");
+  if (want) root.querySelector<HTMLButtonElement>(`button[data-cat="${CSS.escape(want)}"]`)?.click();
 </script>

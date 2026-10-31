@@ -19,7 +19,12 @@ const sec = section ?? sectionOf(Astro.url.pathname);
       {meta && <p class="meta">{meta}</p>}
       <slot name="head" />
     </header>
-    {local ? (
+    {Astro.slots.has("aside") ? (
+      <div class="with-aside">
+        <div class:list={["prose", { wide }]}><slot /></div>
+        <aside class="facts"><slot name="aside" /></aside>
+      </div>
+    ) : local ? (
       <div class="with-local">
         <LocalNav section={sec} />
         <div class:list={["prose", { wide }]}><slot /></div>

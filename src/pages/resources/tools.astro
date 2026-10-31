@@ -1,0 +1,37 @@
+---
+import Page from "../../layouts/Page.astro";
+import { links, episteme } from "../../data/site";
+---
+<Page title="Tools" dek="Things we have built and tested, for others to use." section="Resources">
+  <article class="tool">
+    <img src="/assets/app.webp" alt="" loading="lazy" />
+    <div>
+      <h2>Work Alive</h2>
+      <p>Can our work be our prayer? Work Alive sessions are built from modules - grounding in the body, kindling motivation, connecting with the people working beside you, then deep work - which a facilitator or a group composes for the day.</p>
+      <p><a href={links.workAlivePractice}>The practice and the sessions →</a><br /><a href={links.workAliveApp}>The Work Alive app</a> <span class="muted">· an AI voice guide for focused, mindful work, built with Eric Lacosse; by invitation for now</span></p>
+    </div>
+  </article>
+  <article class="tool">
+    <img src="/assets/postits.webp" alt="" loading="lazy" />
+    <div>
+      <h2>How do you come to know things?</h2>
+      <p>A questionnaire on the habits of mind researchers bring to their work: what makes a question interesting to them, what they draw on to understand something new, how thinking works in their head, and what makes a claim count. Designed by Matthieu Barbier for the Honest Science workshop; about 8 minutes.</p>
+      <p><a href={episteme}>Take the questionnaire →</a> <span class="muted">· first version; a revised one is in the works</span></p>
+    </div>
+  </article>
+  <article class="tool">
+    <div class="ic" aria-hidden="true">🧘</div>
+    <div>
+      <h2>Practice menu</h2>
+      <p>10-minute practices across traditions.</p>
+      <p><a href="/learn/practices/">Open the practice menu →</a></p>
+    </div>
+  </article>
+</Page>
+<style>
+  .tool { display: grid; grid-template-columns: 180px 1fr; gap: 24px; padding: 24px 0; border-bottom: 1px solid var(--rule-soft); }
+  .tool img { width: 180px; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 4px; }
+  .tool .ic { width: 180px; aspect-ratio: 4 / 3; display: grid; place-items: center; font-size: 2.6rem; background: var(--bg-raised); border-radius: 4px; }
+  .tool h2 { font-size: 1.6rem; margin: 0 0 8px; }
+  @media (max-width: 600px) { .tool { grid-template-columns: 1fr; } .tool img, .tool .ic { width: 100%; } }
+</style>
