@@ -277,14 +277,14 @@ Notes on the relationship between mathematical thinking, spiritual insight, and 
 
 *Martin Nowak*
 
-<a class="bookmark" href="attachment:ea25b26e-81e2-4fcc-842f-43a93531a62a:Science_and_Inspiration.pdf"><b>attachment:ea25b26e-81e2-4fcc-842f-43a93531a62a:Science_and_Inspiration.pdf</b><span>attachment:ea25b26e-81e2-4fcc-842f-43a93531a62a:Science_and_Inspiration.pdf</span></a>
+<a class="bookmark" href="https://cscsc.notion.site/signed/attachment%3Aea25b26e-81e2-4fcc-842f-43a93531a62a%3AScience_and_Inspiration.pdf?table=block&amp;id=5a8d6885-e7f4-44b1-a38c-67899cd8c282&amp;spaceId=24716bf2-6d5a-4250-901b-819a4e14a08d"><b>Science_and_Inspiration.pdf</b><span>PDF</span></a>
 
 ### What is Lyric Philosophy?
 The importance of lyric, resonant truth as a peer of analytic truth in understanding reality.
 
 *Jan Zwicky*
 
-<a class="bookmark" href="attachment:41c90011-d7c3-4bc0-aaa5-82c035789ccf:2013__What_is_Lyric_Philosophy___-Zwicky_J..pdf"><b>attachment:41c90011-d7c3-4bc0-aaa5-82c035789ccf:2013__What_is_Lyric_Philosophy___-Zwicky_J..pdf</b><span>attachment:41c90011-d7c3-4bc0-aaa5-82c035789ccf:2013__What_is_Lyric_Philosophy___-Zwicky_J..pdf</span></a>
+<a class="bookmark" href="https://cscsc.notion.site/signed/attachment%3A41c90011-d7c3-4bc0-aaa5-82c035789ccf%3A2013__What_is_Lyric_Philosophy___-Zwicky_J..pdf?table=block&amp;id=91a73e01-2a84-4e71-941b-752e65574dc1&amp;spaceId=24716bf2-6d5a-4250-901b-819a4e14a08d"><b>2013__What_is_Lyric_Philosophy___-Zwicky_J..pdf</b><span>PDF</span></a>
 
 </div>
 </details>

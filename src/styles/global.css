@@ -483,3 +483,5 @@ section[data-hide-empty][hidden] + section.block { padding-top: 40px; }
 @media (max-width: 900px) { .facts .btn { display: inline-block; margin-top: 12px; } }
 /* Standfirst and dek: one voice for every page intro */
 .standfirst p > em:only-child, .page-head .dek em:only-child { font-style: normal; }
+/* Long unbroken strings (file names, URLs) wrap instead of widening the page */
+.ref-meta, .bookmark b, .bookmark { overflow-wrap: anywhere; min-width: 0; }
