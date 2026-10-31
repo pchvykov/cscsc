@@ -66,7 +66,7 @@ p { margin: 0 0 1em; }
 .lockup b { display: block; font-family: var(--font-display); font-weight: 500; font-size: 1.32rem; letter-spacing: 0.01em; line-height: 1.1; white-space: nowrap; }
 .lockup i { display: block; font-family: var(--font-display); font-size: 0.74rem; line-height: 1.2; letter-spacing: 0.02em; color: var(--muted); margin-top: 3px; }
 @media (max-width: 1240px) and (min-width: 981px) { .lockup i { display: none; } }
-@media (max-width: 480px) { .lockup i { display: none; } .lockup b { font-size: 1.12rem; } .lockup .enso { width: 38px; } }
+@media (max-width: 480px) { .lockup i { display: none; } .lockup b { font-size: 1.02rem; white-space: normal; max-width: 9.5em; } .lockup .enso { width: 34px; } .lockup { gap: 9px; } .site-header .wrap { gap: 6px; } .theme-toggle { margin-left: 0; } }
 .nav { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
 .nav > ul { list-style: none; display: flex; gap: 2px; margin: 0; padding: 0; }
 .nav li { position: relative; }

@@ -6,7 +6,9 @@ export type Col = { key: string; label: string; num?: boolean; max?: number; sor
 export type Row = { title: string; href: string; blurb?: string; values: Record<string, string | number | string[] | undefined> };
 interface Props { rows: Row[]; cols: Col[]; facet?: { key: string; label: string }; defaultSort?: string; defaultView?: "table" | "cards"; noun?: string }
 const { rows, cols, facet, defaultSort, defaultView = "table", noun = "entries" } = Astro.props;
-const facetValues = facet ? [...new Set(rows.flatMap((r) => [r.values[facet.key]].flat().filter(Boolean) as string[]))].sort() : [];
+const rank = ["Very High", "High", "Medium-High", "Medium", "Low", "NA"];
+const facetValues = facet ? [...new Set(rows.flatMap((r) => [r.values[facet.key]].flat().filter(Boolean) as string[]))]
+  .sort((a, b) => (rank.indexOf(a) + 1 || 99) - (rank.indexOf(b) + 1 || 99) || a.localeCompare(b)) : [];
 const show = (v: Row["values"][string], c: Col) => Array.isArray(v) ? v.join(", ") : v ?? "";
 const sortVal = (v: Row["values"][string]) => Array.isArray(v) ? v.join(", ") : v ?? "";
 const dots = (v: number, max: number) => Array.from({ length: Math.min(max, 10) }, (_, i) => i < Math.round((v / max) * Math.min(max, 10)));
@@ -122,12 +124,15 @@ const dots = (v: number, max: number) => Array.from({ length: Math.min(max, 10) 
       dir = sortKey === k ? -dir : (b.hasAttribute("data-num") ? -1 : 1);
       sortKey = k; apply();
     }));
-    root.querySelectorAll<HTMLButtonElement>("[data-v]").forEach((b) => b.addEventListener("click", () => {
+    root.querySelectorAll<HTMLButtonElement>("[data-v]").forEach((b) => b.addEventListener("click", (e) => {
       root.dataset.view = b.dataset.v;
       root.querySelectorAll("[data-v]").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
-      try { localStorage.setItem("dv-view", b.dataset.v!); } catch {}
+      if (e.isTrusted) try { localStorage.setItem("dv-view", b.dataset.v!); } catch {}
     }));
-    try { const v = localStorage.getItem("dv-view"); if (v) root.querySelector<HTMLButtonElement>(`[data-v="${v}"]`)?.click(); } catch {}
+    let saved: string | null = null;
+    try { saved = localStorage.getItem("dv-view"); } catch {}
+    const v = saved ?? (matchMedia("(max-width: 700px)").matches ? "cards" : null);
+    if (v) root.querySelector<HTMLButtonElement>(`[data-v="${v}"]`)?.click();
     if (params.get("q")) q.value = params.get("q")!;
     if (params.get("f")) { const b = root.querySelector<HTMLButtonElement>(`button[data-f="${CSS.escape(params.get("f")!)}"]`); if (b) { b.click(); return; } }
     apply();
