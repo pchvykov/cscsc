@@ -11,7 +11,9 @@
 //  5. Shapes Notion left behind get a proper role:
 //     - a page whose body opens with its only h2 (a repeated page title) gets that
 //       line as its standfirst, and its h3/h4 sections move up a level;
-//     - a paragraph that is all bold is a lead-in label (.lead-in);
+//     - a page opening with a quote, or with a heading and an italic line, gets them as its standfirst;
+//     - a short paragraph that is all bold is a label (.lead-in), or, right under a heading,
+//       that heading's question (.dek); a heading that is a bold sentence plus more becomes a .dek too;
 //     - a list whose items all open with a bold or linked name, and run long, is a
 //       list of labelled items (.leads);
 //     - a card whose first line is just a link or a bold name gets that line as its title (.ct).
@@ -22,13 +24,22 @@ const strip = (h: string) => h.replace(/<[^>]+>/g, "").trim();
 
 export function enhance(html: string, opts: { mapHeadings?: boolean } = {}): { html: string; hasMap: boolean } {
   // 5. Notion shapes
+  html = html.replace(/(<h[2-4][^>]*>)(?:\s|\u00a0|&nbsp;)+/g, "$1"); // stray leading spaces in headings
   const h2s = html.match(/<h2[ >]/g) || [];
   const lead = html.match(/^\s*<h2 id="[^"]+">([\s\S]*?)<\/h2>\n/);
   if (lead && h2s.length === 1 && /<h3[ >]/.test(html)) {
     html = html.replace(lead[0], `<div class="standfirst"><p>${lead[1]}</p></div>\n`)
       .replace(/<(\/?)h3([ >])/g, "<$1h2$2").replace(/<(\/?)h4([ >])/g, "<$1h3$2").replace(/<(\/?)h5([ >])/g, "<$1h4$2");
   }
-  html = html.replace(/<p><strong>((?:(?!<\/?(?:p|strong)>)[\s\S])+)<\/strong><\/p>/g, `<p class="lead-in">$1</p>`);
+  html = html.replace(/^\s*<blockquote>\n?([\s\S]*?)<\/blockquote>\n/, `<div class="standfirst">$1</div>\n`);
+  html = html.replace(/^\s*<h2 id="[^"]+">([\s\S]*?)<\/h2>\n(<p><em>[\s\S]*?<\/em><\/p>)\n/, `<div class="standfirst"><p><strong>$1</strong></p>$2</div>\n`);
+  // a card's title first, so a bold-only first line of a card stays its title
+  html = html.replace(/(<div class="card-box">\n)<p>((?:<a [^>]+>(?:(?!<\/?a[ >])[\s\S])*<\/a>|<strong>[^<]*<\/strong>))<\/p>/g, '$1<p class="ct">$2</p>');
+  // a short bold-only line is a label; right under a heading it is that heading's question (.dek)
+  html = html.replace(/(<\/h[23]>\n|<\/p>\n|<\/ul>\n|<\/ol>\n|<div class="[\w-]+">\n|^)?<p><strong>((?:(?!<\/?(?:p|strong)>)[\s\S])+)<\/strong><\/p>/g, (m, before = "", text) =>
+    /^<\/h[23]>/.test(before) ? (strip(text).length > 160 ? m : `${before}<p class="dek">${text}</p>`) : strip(text).length > 80 ? m : `${before}<p class="lead-in">${text}</p>`);
+  // a heading that is really a sentence or two reads as the dek of the heading above it
+  html = html.replace(/<h([34]) id="[^"]+">([\s\S]*?)<\/h\1>/g, (m, _l, inner) => (strip(inner).length > 90 && /^<strong>[^<]+<\/strong>\s*\S/.test(inner) ? `<p class="dek">${inner}</p>` : m));
   html = html.replace(/<ul>\n?((?:(?!<\/?ul>)[\s\S])*)<\/ul>/g, (m, inner) => {
     const items = inner.match(/<li>[\s\S]*?<\/li>/g) || [];
     if (items.length < 2 || !items.every((li: string) => /^<li>(?:<u>)?(?:<strong>|<a )/.test(li))) return m;
@@ -36,7 +47,6 @@ export function enhance(html: string, opts: { mapHeadings?: boolean } = {}): { h
     // the name now stands on its own line, so a non-breaking space after it would indent the text
     return avg > 80 ? m.replace("<ul>", '<ul class="leads">').replace(/(<li>(?:<u>)?<strong>[^<]*<\/strong>(?:<\/u>)?)\u00a0/g, "$1 ") : m;
   });
-  html = html.replace(/(<div class="card-box">\n)<p>((?:<a [^>]+>(?:(?!<\/?a[ >])[\s\S])*<\/a>|<strong>[^<]*<\/strong>))<\/p>/g, '$1<p class="ct">$2</p>');
 
   // 3. references
   html = html.replace(

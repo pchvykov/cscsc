@@ -30,7 +30,7 @@ icon: "🧭"
 
 ---
 
-##  <u>Choose</u> <u>your path</u>
+## <u>Choose</u> <u>your path</u>
 
 ### **However much time you've got, there's a way in.** Every path below has a 5-minute spark, an afternoon, and a weekend deep-dive — pick your depth and dive.
 

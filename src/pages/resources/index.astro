@@ -1,9 +1,10 @@
 ---
 import { getEntry, render } from "astro:content";
 import Page from "../../layouts/Page.astro";
+import { enhance } from "../../lib/enhance";
 const hub = (await getEntry("pages", "resources/_hub"))!;
-const { Content } = await render(hub);
+const body = enhance(hub.rendered?.html ?? "", { mapHeadings: true }).html;
 ---
 <Page title="Resources" cover={hub.data.cover}>
-  <Content />
+  <Fragment set:html={body} />
 </Page>

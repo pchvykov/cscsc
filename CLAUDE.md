@@ -21,6 +21,13 @@ Markdown for text. For anything more, use these few HTML wrappers (leave a blank
 - Research themes: add `data-theme-id="relational|agency|imaginaries|practice|epistemology"` to a `<section class="panel">` and it takes that theme's number, colour and glyph (defined once in `src/data/themes.ts`, glyphs in `public/assets/glyphs/`). Colour is used only for themes.
 - Applied automatically to every page by `src/lib/enhance.ts` (don't hand-write these): sections are numbered; a page with 3+ sections (or 4+ main headings) gets a section map under its opening line; a reference (heading, summary, optional italic author line, link line) becomes a compact entry; a toggle holding several references shows the count.
 - No emoji as icons, no colour classes. Headings start at `##` (the page title is the h1) and don't skip levels.
+- Also applied by `enhance.ts`, so Notion-shaped text reads right without hand markup: a page opening with a quote, or a heading plus an italic line, gets them as its standfirst; a short all-bold line becomes a label (`.lead-in`), or under a heading, that heading's question (`.dek`); a list whose items open with a bold name becomes labelled items (`.leads`); a card's opening link or bold name becomes its title (`.ct`).
+
+## Design rules (site-wide)
+- **Accent colour** only where it means something: research themes, section numbers, the Join button, the current page, an open toggle, links on hover. Labels, list dashes, arrows and counts are muted. One solid accent button per view (Join).
+- **Type:** the display face (Cormorant) at 1.3rem and up; smaller labels in the body face (Source Serif, 600). Text keeps the reading measure (`--measure`); grids and tables may use the full column.
+- **Boxes mean something:** a framed, coloured section is a research theme; other sections are a quiet tint without a frame; a lone card outside a grid is an aside.
+- **Reading-column styles never reach components.** `.prose` element rules are written as `.prose :where(x):not(:where(UI) *)`; a new component root (a list, card grid, panel built by a template) goes into that UI list in `global.css`.
 
 ## Design review
 After a design change or a new kind of block, run the `design-critic` agent (`.claude/agents/design-critic.md`) on desktop (1280 px) and phone (390 px) screenshots of the affected page types. It checks for both failure modes - the wall of undifferentiated text and the Notion-style patchwork of colours and boxes - and returns site-wide fixes.

@@ -2,6 +2,7 @@
 import { getCollection, render } from "astro:content";
 import Page from "../../../layouts/Page.astro";
 import { RES, KINDS } from "../../../lib/resources";
+import { enhance } from "../../../lib/enhance";
 
 export async function getStaticPaths() {
   const out = [];
@@ -11,7 +12,7 @@ export async function getStaticPaths() {
 const { e, kind } = Astro.props;
 const cfg = RES[kind as keyof typeof RES];
 const d = e.data as Record<string, any>;
-const { Content } = await render(e);
+const extra = enhance(e.rendered?.html ?? "").html;
 const fmt = (v: any) => Array.isArray(v) ? v.join(", ") : String(v);
 const has = (v: any) => v !== undefined && v !== null && v !== "NA" && !(Array.isArray(v) && (v.length === 0 || v.every((x) => x === "NA")));
 // A field is read as text when it runs long; short ones are facts - the key ones beside the text, the rest small at the end.
@@ -29,7 +30,7 @@ const minor = fields.filter(([k]) => !isText(d[k]) && !cfg.key.includes(k));
   <div class="res-why">
     {text.map(([k, label]) => <><h2>{label}</h2><p>{d[k]}</p></>)}
   </div>
-  <Content />
+  <Fragment set:html={extra} />
   {minor.length > 0 && <dl class="props minor">{minor.map(([k, label]) => <><dt>{label}</dt><dd>{fmt(d[k])}</dd></>)}</dl>}
   <p><a href={`/resources/${kind}/`}>← All {cfg.noun}</a></p>
 </Page>

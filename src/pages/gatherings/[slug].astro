@@ -21,7 +21,7 @@ const subpages = (await getCollection("pages", (p) => p.data.path.startsWith(`/g
 ---
 <Page title={e.data.title} docTitle={e.data.featured ? e.data.title : `${e.data.title}, ${fmtDate(e.data.date)}`} cover={e.data.cover} description={e.data.summary ?? summarize(e.body)} image={e.data.image ?? e.data.cover} crumbs={[{ label: "Gatherings", href: "/gatherings/" }]} dek={emptyBody ? e.data.summary : undefined}
   local={false}>
-  <Fragment slot="aside">
+  {!emptyBody && <Fragment slot="aside">
     <dl>
       <dt>When</dt><dd>{when(e)}</dd>
       {e.data.place && <><dt>Where</dt><dd>{e.data.place}</dd></>}
@@ -31,7 +31,14 @@ const subpages = (await getCollection("pages", (p) => p.data.path.startsWith(`/g
       {pubs.length > 0 && <><dt>Outputs</dt><dd><ul>{pubs.map((p) => <li><a href={p.data.href}>{p.data.title}</a></li>)}</ul></dd></>}
     </dl>
     <a class="btn ghost" href="/gatherings/">All gatherings</a>
-  </Fragment>
+  </Fragment>}
+  {emptyBody && (
+    <dl class="props">
+      <dt>When</dt><dd>{when(e)}</dd>
+      {e.data.place && <><dt>Where</dt><dd>{e.data.place}</dd></>}
+      <dt>Kind</dt><dd>{kindOf(e)}</dd>
+    </dl>
+  )}
   {e.data.featured && e.id !== "cscsc25" && (
     <aside class="note" data-after={endDay} hidden={endDay >= buildDay}><div>
       <p><b>This gathering took place {when(e)}.</b> The page below is the original invitation, kept as a record.
