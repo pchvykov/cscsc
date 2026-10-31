@@ -16,7 +16,7 @@ const strip = (h: string) => h.replace(/<[^>]+>/g, "").trim();
 export function enhance(html: string, opts: { mapHeadings?: boolean } = {}): { html: string; hasMap: boolean } {
   // 3. references
   html = html.replace(
-    /<h([34]) id="([^"]+)">([\s\S]*?)<\/h\1>\n((?:<p>(?!<em>[^<]*<\/em><\/p>)(?!<a )[\s\S]*?<\/p>\n){1,2})(?:<p><em>([^<]+)<\/em><\/p>\n)?<p>((?:<a [^>]+>[\s\S]*?<\/a>(?:\s*(?:·|\||and|,)\s*)?)+)<\/p>/g,
+    /<h([34]) id="([^"]+)">([\s\S]*?)<\/h\1>\n((?:<p>(?!<em>[^<]*<\/em><\/p>)(?!<a )(?:(?!<\/?p>)[\s\S])*?<\/p>\n){1,2})(?:<p><em>([^<]+)<\/em><\/p>\n)?<p>((?:<a (?![^>]*class="page-link")[^>]+>(?:(?!<\/?p>)[\s\S])*?<\/a>(?:\s*(?:·|\||and|,)\s*)?)+)<\/p>/g,
     (_m, lvl, id, title, summary, who, links) =>
       `<article class="ref"><h${lvl} id="${id}">${title}</h${lvl}>\n${summary}<p class="ref-meta">${who ? `<span class="who">${who}</span>` : ""}<span class="links">${links}</span></p></article>`,
   );
