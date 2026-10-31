@@ -1,0 +1,29 @@
+---
+title: "What changes when the body is made part of the inquiry?"
+date: "2026-07-30"
+category: "Resource Shares"
+excerpt: "Some recent research on how to engage the body more within scientific inquiry ."
+reading_time: "~5 min read"
+authors: ["matthew-mccarthy"]
+notion_id: "3add8cae-0cfe-8019-ad13-ddf3184efa02"
+notion_edited: "2026-07-30"
+icon: "🤸‍♂️"
+---
+
+---
+
+Tomorrow's community call features Marc Santolini, whose recent research has been exploring a question that sits at an angle to most conversations about scientific practice: what happens when the body is treated not as a distraction from research but as one of its instruments? A paper he recently co-authored with Louise Massacrier and Zoe Lina Wehmeyer gives a sense of the territory his work is moving through, and offers a useful way into the questions he will be bringing to the call.
+
+The paper describes a small but careful study in which two researchers brought social arts practices into their collaborative research process — not as a warm-up activity or wellness supplement, but as a genuine methodological tool for sensing what was happening in the collaboration that conceptual analysis alone might miss. One practice involved each collaborator recording a short daily video of themselves moving from one body posture to another each morning, sending it to the other, who would offer back a single word reflecting what they sensed in what they saw. Another, conducted at three key moments across the project, involved arranging physical materials on a surface to represent the project's ecosystem — stakeholders, concepts, felt senses, even things that resisted easy categorisation, like a feather placed for its quality of preciousness — and using aesthetic judgment rather than analytical reasoning to decide what to move, add, or change. Harmony and dissonance, rather than truth and falsity, were the operative categories.
+
+Over three months, alongside a conventional research project involving literature review and stakeholder interviews, the team collected traces of what shifted: body posture coded across dimensions of openness and direction, the emotional valence of the resonance words exchanged, first-person journal accounts, and facilitated retrospective dialogues. What they found is quietly interesting. Bodies moved from closed to open postures within sessions, consistently and significantly. The language exchanged shifted over time — from words expressing uncertainty, instability, and unease toward words expressing expansion, flow, and trust. The 3D mapping practice, despite lasting around three hours, was experienced as restorative rather than draining. And something about being witnessed at the level of the body — not as a researcher presenting ideas but as a person arriving somewhere each morning, vulnerable and without having to prove anything — appeared to build a quality of relational trust that shaped the intellectual collaboration itself.
+
+One of the practitioners described it this way: the practice became a way of saying, I see you as the researcher, but I also see you as the body you have. That is a small sentence with larger implications. Most research collaborations are organised around the exchange of propositions — ideas, findings, arguments. The resonance practice was organised around something prior to that: a daily acknowledgment of where each person actually was, before the intellectual work began. Whether this constitutes a methodological innovation or simply a more honest accounting of what collaboration has always involved is one of the questions worth sitting with.
+
+The paper is careful about what it claims. It is a prototype, a two-person study in a specific context, not a generalisation to research practice at large. The practitioners themselves noted that their backgrounds in applied arts and architecture gave them a pre-existing aesthetic vocabulary that shaped what they could do with the practices — and that researchers without that formation might need different onboarding. Scaling this, if scaling is even the right word, would require something the paper calls aesthetic literacy: a trained capacity to read harmony and dissonance as meaningful rather than decorative. That is not a minor ask of institutions currently organised almost entirely around the production of propositions.
+
+This connects to something the earlier conversations in our community have been circling: that scientific practice already involves a somatic curriculum, unnamed and therefore largely unexamined. The desk, the seminar room, the conference presentation — these are already body practices, training specific relationships to knowledge, to attention, to what counts as evidence. The resonance practice and the 3D mapping do not introduce the body into research from the outside. They make a body that was always already there legible, and offer it as a site of information rather than a source of interference to be managed.
+
+What changes when that shift is made deliberately rather than incidentally? And what remains the same regardless? The paper is honest that the observation problem is structural — the act of watching for somatic change in oneself is not entirely separable from the change it is watching for. There is no clean view from outside. But the paper's suggestion is that this difficulty is not a reason to abandon the inquiry. It may be a reason to take it more seriously.
+
+The question it leaves most alive is perhaps the one it cannot answer from within its own method: is what becomes available when the body is named and made intentional a genuine expansion of what can be known — or a more sophisticated form of the same self-monitoring the academic body has always been trained to perform? Marc will be exploring questions in this territory tomorrow, and we are looking forward to continuing the conversation together.

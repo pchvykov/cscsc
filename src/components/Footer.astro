@@ -1,0 +1,28 @@
+---
+import Enso from "./Enso.astro";
+import { links, email } from "../data/site";
+---
+<footer class="site-footer">
+  <div class="wrap cols">
+    <div>
+      <a class="lockup" href="/"><Enso size={36} /><span><b>Complexity &amp; Contemplation</b></span></a>
+      <p style="margin:10px 0 0">Complexity Science &amp; Contemplative Studies Consortium</p>
+      <p><a href="#" class="mail" data-u={email.user} data-d={email.domain}>Write to us</a></p>
+    </div>
+    <div><h4>Explore</h4><ul>
+      <li><a href="/research/">Research</a></li><li><a href="/gatherings/">Gatherings</a></li>
+      <li><a href="/learn/">Learn</a></li><li><a href="/resources/">Resources</a></li><li><a href="/about/">About</a></li>
+    </ul></div>
+    <div><h4>Watch &amp; read</h4><ul>
+      <li><a href="/vision/">The vision animation</a></li><li><a href="/videos/">Videos</a></li>
+      <li><a href="/writing/">Writing</a></li><li><a href={links.youtube}>YouTube</a></li>
+    </ul></div>
+    <div><h4>Connect</h4><ul>
+      <li><a href={links.emailSignup}>Monthly email</a></li><li><a href={links.forum}>Forum (Hylo)</a></li>
+      <li><a href={links.calendar}>Calendar</a></li><li><a href="/join/">All the ways to join</a></li>
+    </ul></div>
+  </div>
+</footer>
+<script>
+  document.querySelectorAll<HTMLAnchorElement>("a.mail").forEach((a) => { a.href = "mailto:" + a.dataset.u + "@" + a.dataset.d; });
+</script>

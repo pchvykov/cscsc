@@ -1,0 +1,26 @@
+---
+import { getCollection } from "astro:content";
+import Page from "../../../layouts/Page.astro";
+import DataView from "../../../components/DataView.astro";
+import { RES, KINDS } from "../../../lib/resources";
+
+export function getStaticPaths() {
+  return KINDS.map((kind) => ({ params: { kind } }));
+}
+const kind = Astro.params.kind as (typeof KINDS)[number];
+const cfg = RES[kind];
+const entries = (await getCollection(kind)).sort((a, b) => a.data.title.localeCompare(b.data.title));
+const rows = entries.map((e) => {
+  const d = e.data as Record<string, any>;
+  return { title: d.title, href: `/resources/${kind}/${e.id}/`, blurb: d[cfg.blurb], values: Object.fromEntries(cfg.cols.map((c) => [c.key, d[c.key]])) };
+});
+// Funders: order Very High > High > Medium by default
+if (kind === "funding") {
+  const rank = (v?: string[]) => (v?.includes("Very High") ? 0 : v?.includes("High") ? 1 : v?.includes("Medium") ? 2 : 3);
+  rows.sort((a, b) => rank(a.values.relevance_tag as string[]) - rank(b.values.relevance_tag as string[]));
+}
+---
+<Page title={cfg.title} dek={cfg.dek} crumbs={[{ label: "Resources", href: "/resources/" }]} wide local={false}>
+  <DataView rows={rows} cols={cfg.cols} facet={cfg.facet} defaultSort={cfg.sort || undefined} noun={cfg.noun} />
+  <p class="muted" style="margin-top:28px;font-size:.9rem">Something missing or out of date? <a href="#" class="mail" data-u="cscs.conference" data-d="gmail.com">Write to us</a>.</p>
+</Page>

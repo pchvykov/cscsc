@@ -1,0 +1,31 @@
+---
+import Base from "./Base.astro";
+import LocalNav from "../components/LocalNav.astro";
+import { sectionOf } from "../data/site";
+
+interface Props { title: string; description?: string; dek?: string; cover?: string; crumbs?: { label: string; href: string }[]; meta?: string; section?: string; wide?: boolean; local?: boolean }
+const { title, description, dek, cover, crumbs = [], meta, section, wide = false, local = true } = Astro.props;
+const sec = section ?? sectionOf(Astro.url.pathname);
+---
+<Base title={title} description={description ?? dek}>
+  <div class="wrap">
+    <header class="page-head">
+      {cover && <img class="cover" src={cover} alt="" />}
+      {(crumbs.length > 0 || sec) && (
+        <div class="crumb">{crumbs.length ? crumbs.map((c, n) => <>{n > 0 && <span aria-hidden="true">/</span>}<a href={c.href}>{c.label}</a></>) : <span>{sec}</span>}</div>
+      )}
+      <h1>{title}</h1>
+      {dek && <p class="dek">{dek}</p>}
+      {meta && <p class="meta">{meta}</p>}
+      <slot name="head" />
+    </header>
+    {local ? (
+      <div class="with-local">
+        <LocalNav section={sec} />
+        <div class:list={["prose", { wide }]}><slot /></div>
+      </div>
+    ) : (
+      <div class:list={["prose", { wide }]}><slot /></div>
+    )}
+  </div>
+</Base>

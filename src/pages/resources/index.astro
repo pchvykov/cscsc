@@ -1,0 +1,9 @@
+---
+import { getEntry, render } from "astro:content";
+import Page from "../../layouts/Page.astro";
+const hub = (await getEntry("pages", "resources/_hub"))!;
+const { Content } = await render(hub);
+---
+<Page title="Resources" cover={hub.data.cover}>
+  <Content />
+</Page>

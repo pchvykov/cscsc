@@ -1,0 +1,135 @@
+---
+// A filterable, sortable view of one collection: search box, facet buttons,
+// table or card layout. Rows are rendered at build time; the small script
+// below only hides, shows and reorders them.
+export type Col = { key: string; label: string; num?: boolean; max?: number; sort?: boolean };
+export type Row = { title: string; href: string; blurb?: string; values: Record<string, string | number | string[] | undefined> };
+interface Props { rows: Row[]; cols: Col[]; facet?: { key: string; label: string }; defaultSort?: string; defaultView?: "table" | "cards"; noun?: string }
+const { rows, cols, facet, defaultSort, defaultView = "table", noun = "entries" } = Astro.props;
+const facetValues = facet ? [...new Set(rows.flatMap((r) => [r.values[facet.key]].flat().filter(Boolean) as string[]))].sort() : [];
+const show = (v: Row["values"][string], c: Col) => Array.isArray(v) ? v.join(", ") : v ?? "";
+const sortVal = (v: Row["values"][string]) => Array.isArray(v) ? v.join(", ") : v ?? "";
+const dots = (v: number, max: number) => Array.from({ length: Math.min(max, 10) }, (_, i) => i < Math.round((v / max) * Math.min(max, 10)));
+---
+<div class="dataview" data-view={defaultView} data-sort={defaultSort ?? ""} data-noun={noun}>
+  <div class="dv-bar">
+    <label class="visually-hidden" for="dv-q">Search</label>
+    <input id="dv-q" type="search" placeholder={`Search ${rows.length} ${noun}`} data-q />
+    <div class="dv-views" role="group" aria-label="Layout">
+      <button type="button" data-v="table" aria-pressed={String(defaultView === "table")}>Table</button>
+      <button type="button" data-v="cards" aria-pressed={String(defaultView === "cards")}>Cards</button>
+    </div>
+    {facet && (
+      <div class="dv-filters" role="group" aria-label={`Filter by ${facet.label}`} style="flex-basis:100%">
+        <button type="button" aria-pressed="true" data-f="">All</button>
+        {facetValues.map((v) => <button type="button" aria-pressed="false" data-f={v}>{v}</button>)}
+      </div>
+    )}
+    <span class="dv-count" data-count>{rows.length} {noun}</span>
+  </div>
+
+  <div class="dv-scroll" data-pane="table">
+    <table class="dv-table">
+      <thead><tr>
+        <th scope="col"><button type="button" data-sort-key="title">Name</button></th>
+        {cols.map((c) => <th scope="col" class={c.num ? "num" : undefined}>{c.sort === false ? c.label : <button type="button" data-sort-key={c.key} data-num={c.num ? "1" : undefined}>{c.label}</button>}</th>)}
+      </tr></thead>
+      <tbody>
+        {rows.map((r) => (
+          <tr data-row data-text={(r.title + " " + (r.blurb ?? "") + " " + cols.map((c) => show(r.values[c.key], c)).join(" ")).toLowerCase()}
+            data-f={facet ? JSON.stringify([r.values[facet.key]].flat().filter(Boolean)) : undefined}
+            data-title={r.title} {...Object.fromEntries(cols.map((c) => [`data-k-${c.key}`, String(sortVal(r.values[c.key]))]))}>
+            <td><a href={r.href}>{r.title}</a></td>
+            {cols.map((c) => {
+              const v = r.values[c.key];
+              return <td class={c.num ? "num" : undefined}>{c.num && typeof v === "number" && c.max ? <span title={`${v} / ${c.max}`}>{v}</span> : show(v, c)}</td>;
+            })}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="dv-grid" data-pane="cards">
+    {rows.map((r) => (
+      <a class="dv-card" href={r.href} data-row data-text={(r.title + " " + (r.blurb ?? "") + " " + cols.map((c) => show(r.values[c.key], c)).join(" ")).toLowerCase()}
+        data-f={facet ? JSON.stringify([r.values[facet.key]].flat().filter(Boolean)) : undefined}
+        data-title={r.title} {...Object.fromEntries(cols.map((c) => [`data-k-${c.key}`, String(sortVal(r.values[c.key]))]))}>
+        <h3>{r.title}</h3>
+        <span class="meta">{cols.slice(0, 2).map((c) => show(r.values[c.key], c)).filter(Boolean).join(" · ")}</span>
+        {r.blurb && <p>{r.blurb}</p>}
+      </a>
+    ))}
+  </div>
+  <p class="dv-empty" data-empty hidden>Nothing matches. Try a different word or filter.</p>
+</div>
+
+<style>
+  .dataview[data-view="table"] [data-pane="cards"], .dataview[data-view="cards"] [data-pane="table"] { display: none; }
+</style>
+<script>
+  document.querySelectorAll<HTMLElement>(".dataview").forEach((root) => {
+    const q = root.querySelector<HTMLInputElement>("[data-q]")!;
+    const count = root.querySelector("[data-count]")!;
+    const empty = root.querySelector<HTMLElement>("[data-empty]")!;
+    const noun = root.dataset.noun;
+    let facet = "", sortKey = root.dataset.sort || "", dir = sortKey ? -1 : 1;
+    const params = new URLSearchParams(location.search);
+    const apply = () => {
+      const term = q.value.trim().toLowerCase();
+      let n = 0;
+      root.querySelectorAll<HTMLElement>("[data-pane]").forEach((pane, pi) => {
+        const rows = [...pane.querySelectorAll<HTMLElement>("[data-row]")];
+        rows.forEach((r) => {
+          const fs: string[] = r.dataset.f ? JSON.parse(r.dataset.f) : [];
+          const ok = (!term || r.dataset.text!.includes(term)) && (!facet || fs.includes(facet));
+          r.hidden = !ok; if (ok && pi === 0) n++;
+        });
+        if (sortKey) {
+          const key = sortKey === "title" ? "title" : "k-" + sortKey;
+          const num = root.querySelector(`[data-sort-key="${sortKey}"]`)?.hasAttribute("data-num");
+          const val = (r: HTMLElement) => r.dataset[key.replace(/-([a-z_])/g, (_, c) => c.toUpperCase())] ?? "";
+          rows.sort((a, b) => {
+            const x = val(a), y = val(b);
+            if (num) return dir * ((parseFloat(x) || -1) - (parseFloat(y) || -1));
+            return dir * x.localeCompare(y);
+          });
+          const parent = rows[0]?.parentElement;
+          rows.forEach((r) => parent!.appendChild(r));
+        }
+      });
+      count.textContent = `${n} ${noun}`;
+      empty.hidden = n > 0;
+      root.querySelectorAll("th").forEach((th) => th.removeAttribute("aria-sort"));
+      const th = root.querySelector(`[data-sort-key="${sortKey}"]`)?.closest("th");
+      th?.setAttribute("aria-sort", dir > 0 ? "ascending" : "descending");
+      const u = new URL(location.href);
+      facet ? u.searchParams.set("f", facet) : u.searchParams.delete("f");
+      term ? u.searchParams.set("q", term) : u.searchParams.delete("q");
+      history.replaceState(null, "", u);
+    };
+    q.addEventListener("input", apply);
+    root.querySelectorAll<HTMLButtonElement>("[data-f]").forEach((b) => {
+      if (b.tagName !== "BUTTON") return;
+      b.addEventListener("click", () => {
+        facet = b.dataset.f!;
+        root.querySelectorAll("button[data-f]").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+        apply();
+      });
+    });
+    root.querySelectorAll<HTMLButtonElement>("[data-sort-key]").forEach((b) => b.addEventListener("click", () => {
+      const k = b.dataset.sortKey!;
+      dir = sortKey === k ? -dir : (b.hasAttribute("data-num") ? -1 : 1);
+      sortKey = k; apply();
+    }));
+    root.querySelectorAll<HTMLButtonElement>("[data-v]").forEach((b) => b.addEventListener("click", () => {
+      root.dataset.view = b.dataset.v;
+      root.querySelectorAll("[data-v]").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+      try { localStorage.setItem("dv-view", b.dataset.v!); } catch {}
+    }));
+    try { const v = localStorage.getItem("dv-view"); if (v) root.querySelector<HTMLButtonElement>(`[data-v="${v}"]`)?.click(); } catch {}
+    if (params.get("q")) q.value = params.get("q")!;
+    if (params.get("f")) { const b = root.querySelector<HTMLButtonElement>(`button[data-f="${CSS.escape(params.get("f")!)}"]`); if (b) { b.click(); return; } }
+    apply();
+  });
+</script>

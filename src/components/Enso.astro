@@ -1,0 +1,5 @@
+---
+// The brush ensō as a mask, so it takes the ink colour of its context.
+const { size = 46, label } = Astro.props as { size?: number; label?: string };
+---
+<span class="tile"><span class="enso" style={`width:${size}px`} role={label ? "img" : undefined} aria-label={label} aria-hidden={label ? undefined : "true"}></span></span>

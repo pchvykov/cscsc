@@ -1,0 +1,16 @@
+---
+// Free-standing pages carried over from Notion (About, Research, Learn ...).
+import { getCollection, render } from "astro:content";
+import Page from "../layouts/Page.astro";
+import { titleCase } from "../lib/text";
+
+export async function getStaticPaths() {
+  const pages = await getCollection("pages", (p) => !p.data.draft && !p.id.includes("_hub") && !p.id.startsWith("_"));
+  return pages.map((p) => ({ params: { slug: p.data.path.replace(/^\/|\/$/g, "") || undefined }, props: { entry: p } }));
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+<Page title={titleCase(entry.data.title)} cover={entry.data.cover}>
+  <Content />
+</Page>

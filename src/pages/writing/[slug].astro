@@ -1,0 +1,26 @@
+---
+import { getCollection, render } from "astro:content";
+import Page from "../../layouts/Page.astro";
+import { fmtDate } from "../../lib/text";
+
+export async function getStaticPaths() {
+  return (await getCollection("posts", (p) => !p.data.draft)).map((p) => ({ params: { slug: p.id }, props: { p } }));
+}
+const { p } = Astro.props;
+const { Content } = await render(p);
+const people = await getCollection("people");
+const authors = p.data.authors.map((id) => people.find((x) => x.id === id)).filter(Boolean);
+const all = (await getCollection("posts", (x) => !x.data.draft)).sort((a, b) => +b.data.date - +a.data.date);
+const i = all.findIndex((x) => x.id === p.id);
+const newer = all[i - 1], older = all[i + 1];
+const meta = [fmtDate(p.data.date, { day: "numeric", month: "long", year: "numeric" }), authors.map((a) => a!.data.name).join(", "), p.data.reading_time].filter(Boolean).join(" · ");
+---
+<Page title={p.data.title} description={p.data.excerpt} crumbs={[{ label: "Writing", href: "/writing/" }, ...(p.data.category ? [{ label: p.data.category, href: "/writing/" }] : [])]} meta={meta} local={false}>
+  <Content />
+  {p.data.tags.length > 0 && <div class="chips" style="margin-top:40px">{p.data.tags.map((t) => <span class="chip">{t}</span>)}</div>}
+  <nav class="block" style="padding-top:40px" aria-label="More writing">
+    {older && <a class="page-link" href={`/writing/${older.id}/`}><span class="ic" aria-hidden="true">←</span>{older.data.title}</a>}
+    {newer && <a class="page-link" href={`/writing/${newer.id}/`}><span class="ic" aria-hidden="true">→</span>{newer.data.title}</a>}
+    <a class="page-link" href="/writing/">All writing</a>
+  </nav>
+</Page>

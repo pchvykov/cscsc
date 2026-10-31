@@ -1,0 +1,49 @@
+---
+import { getCollection, render } from "astro:content";
+import Page from "../../layouts/Page.astro";
+import { kindOf, when } from "../../lib/events";
+import { fmtDate } from "../../lib/text";
+
+export async function getStaticPaths() {
+  return (await getCollection("events")).map((e) => ({ params: { slug: e.id }, props: { e } }));
+}
+const { e } = Astro.props;
+const { Content } = await render(e);
+const videos = (await getCollection("videos", (v) => v.data.event === e.id)).sort((a, b) => +a.data.date - +b.data.date);
+const pubs = await getCollection("publications", (p) => p.data.event === e.id);
+const past = (e.data.end_date ?? e.data.date) < new Date();
+const subpages = (await getCollection("pages", (p) => p.data.path.startsWith(`/gatherings/${e.id}/`))).sort((a, b) => a.data.path.localeCompare(b.data.path));
+---
+<Page title={e.data.title} cover={e.data.cover} crumbs={[{ label: "Gatherings", href: "/gatherings/" }]}
+  meta={[kindOf(e), when(e), e.data.place].filter(Boolean).join(" · ")} local={false}>
+  {past && e.data.tags.includes("retreat") && (
+    <aside class="callout noicon record"><div class="body">
+      <p><b>This gathering took place {when(e)}.</b> The page below is the original invitation, kept as a record.
+      {videos.length > 0 && <> <a href="#recordings">Recordings</a></>}{pubs.length > 0 && <> · <a href="#outputs">Outputs</a></>}</p>
+    </div></aside>
+  )}
+  <Content />
+  {subpages.length > 0 && (
+    <section class="block" style="padding-top:40px">
+      <h2>More from {e.data.title}</h2>
+      {subpages.map((p) => <a class="page-link" href={p.data.path}><span class="ic" aria-hidden="true">{p.data.icon}</span>{p.data.title}</a>)}
+    </section>
+  )}
+  {pubs.length > 0 && (
+    <section id="outputs" class="block" style="padding-top:40px">
+      <h2>Outputs</h2>
+      {pubs.map((p) => <a class="page-link" href={p.data.href}>{p.data.title}</a>)}
+    </section>
+  )}
+  {videos.length > 0 && (
+    <section id="recordings" class="block" style="padding-top:40px">
+      <h2>Recordings</h2>
+      <ul class="rows">
+        {videos.map((v) => (
+          <li><div class="when"><b>{v.data.kind}</b>{v.data.duration}</div>
+          <div><h3><a href={`https://www.youtube.com/watch?v=${v.data.youtube}`}>{v.data.title}</a></h3></div></li>
+        ))}
+      </ul>
+    </section>
+  )}
+</Page>

@@ -1,0 +1,52 @@
+---
+import { getCollection } from "astro:content";
+import Page from "../../layouts/Page.astro";
+import { links } from "../../data/site";
+
+const videos = (await getCollection("videos")).sort((a, b) => +b.data.date - +a.data.date);
+const events = await getCollection("events");
+const evTitle = (id?: string) => events.find((e) => e.id === id)?.data.title;
+const featured = videos.filter((v) => v.data.featured);
+const groups: { title: string; href?: string; list: typeof videos }[] = [];
+for (const v of videos.filter((v) => !v.data.featured)) {
+  const key = v.data.event && ["cscsc25", "ccs26-satellite"].includes(v.data.event) ? v.data.event : v.data.kind === "recording" ? "recordings" : "talks";
+  const title = key === "recordings" ? "Calls and discussions" : key === "talks" ? "Talks" : evTitle(key)!;
+  let g = groups.find((x) => x.title === title);
+  if (!g) groups.push(g = { title, href: key.includes("-") || key === "cscsc25" ? `/gatherings/${key}/` : undefined, list: [] });
+  g.list.push(v);
+}
+const order = ["Complex Systems and Contemplative Studies @ CCS26", "Talks", "Calls and discussions", "CSCSC25 Conference"];
+groups.sort((a, b) => order.indexOf(a.title) - order.indexOf(b.title));
+const thumb = (id?: string) => id ? `https://i.ytimg.com/vi/${id}/mqdefault.jpg` : "";
+---
+<Page title="Videos" dek="Talks, recorded calls and short films." wide local={false}>
+  <Fragment slot="head"><p style="margin:14px 0 0"><a href={links.youtube}>All videos on YouTube →</a></p></Fragment>
+  <section>
+    <div class="section-head"><h2>Start here</h2></div>
+    <div class="cards">
+      <a class="card" href="/vision/">
+        <div class="thumb"><img src="/vision/landing_image_mid.webp" alt="" loading="lazy" /></div>
+        <span class="k">Animation · 3 min</span><h3>The vision</h3><p>An animated introduction to what we are exploring.</p>
+      </a>
+      {featured.map((v) => (
+        <a class="card" href={v.data.youtube ? `https://www.youtube.com/watch?v=${v.data.youtube}` : v.data.url}>
+          <div class="thumb"><img src={thumb(v.data.youtube)} alt="" loading="lazy" /></div>
+          <span class="k">{v.data.kind} · {v.data.duration}</span><h3>{v.data.title}</h3>
+        </a>
+      ))}
+    </div>
+  </section>
+  {groups.map((g) => (
+    <section class="block">
+      <div class="section-head"><h2>{g.title}</h2>{g.href && <a href={g.href}>About this gathering →</a>}</div>
+      <div class="cards">
+        {g.list.map((v) => (
+          <a class="card" href={`https://www.youtube.com/watch?v=${v.data.youtube}`}>
+            <div class="thumb"><img src={thumb(v.data.youtube)} alt="" loading="lazy" /></div>
+            <span class="k">{v.data.duration}</span><h3 style="font-size:1.2rem">{v.data.title.replace(/^(CSCSC 25|CCS26 Satellite( keynote)?): /, "")}</h3>
+          </a>
+        ))}
+      </div>
+    </section>
+  ))}
+</Page>

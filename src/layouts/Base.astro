@@ -1,0 +1,47 @@
+---
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+interface Props { title?: string; description?: string; image?: string; noindex?: boolean }
+const { title, description = "A research community bringing complexity science and contemplative practice together: how order arises without anyone in charge, in cells, minds and societies.", image = "/og-image.jpg", noindex = false } = Astro.props;
+const site = "Complexity & Contemplation";
+const fullTitle = title ? `${title} · ${site}` : site;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{fullTitle}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+  {noindex && <meta name="robots" content="noindex" />}
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content={site} />
+  <meta property="og:title" content={title ?? site} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={new URL(image, Astro.site)} />
+  <meta property="og:url" content={canonical} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="alternate" type="application/rss+xml" title="Writing" href="/writing/rss.xml" />
+  <script is:inline>
+    try { if (localStorage.getItem("theme") === "dark") document.documentElement.dataset.theme = "dark"; } catch (e) {}
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet" />
+  <slot name="head" />
+  <script is:inline data-goatcounter="https://cscsc.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <Header />
+  <main id="main"><slot /></main>
+  <Footer />
+</body>
+</html>
