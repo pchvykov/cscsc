@@ -2,7 +2,7 @@
 import { getCollection, render } from "astro:content";
 import Page from "../../layouts/Page.astro";
 // Bios are drafts awaiting review; set to true to show them.
-const showBios = false;
+const showBios = true;
 
 const people = (await getCollection("people")).sort((a, b) => a.data.order - b.data.order);
 const withBio = await Promise.all(people.map(async (p) => ({ p, Bio: (await render(p)).Content, hasBio: p.body?.trim().length })));
