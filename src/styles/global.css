@@ -485,3 +485,8 @@ section[data-hide-empty][hidden] + section.block { padding-top: 40px; }
 .standfirst p > em:only-child, .page-head .dek em:only-child { font-style: normal; }
 /* Long unbroken strings (file names, URLs) wrap instead of widening the page */
 .ref-meta, .bookmark b, .bookmark { overflow-wrap: anywhere; min-width: 0; }
+/* Under-construction notice (Base.astro); remove both when the site is finished */
+.wip { font-size: 0.85rem; color: var(--muted); border-bottom: 1px solid var(--rule-soft); }
+.wip .wrap { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 7px 0; }
+.wip button { background: none; border: 0; color: var(--muted); cursor: pointer; font-size: 0.85rem; padding: 4px 6px; }
+.wip button:hover { color: var(--ink); }

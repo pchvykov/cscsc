@@ -1,6 +1,8 @@
 ---
 import { getCollection, render } from "astro:content";
 import Page from "../../layouts/Page.astro";
+// Bios are drafts awaiting review; set to true to show them.
+const showBios = false;
 
 const people = (await getCollection("people")).sort((a, b) => a.data.order - b.data.order);
 const withBio = await Promise.all(people.map(async (p) => ({ p, Bio: (await render(p)).Content, hasBio: p.body?.trim().length })));
@@ -21,7 +23,7 @@ const initials = (n: string) => n.split(" ").map((w) => w[0]).slice(0, 2).join("
           <div>
             <h3>{p.data.website ? <a href={p.data.website}>{p.data.name}</a> : p.data.name}</h3>
             <p class="aff">{[p.data.field, p.data.affiliation].filter(Boolean).join(" · ")}</p>
-            <div class="bio"><Bio /></div>
+            {showBios ? <div class="bio"><Bio /></div> : <p class="bio muted"><em>Bio coming soon.</em></p>}
           </div>
         </article>
       ))}
@@ -37,7 +39,7 @@ const initials = (n: string) => n.split(" ").map((w) => w[0]).slice(0, 2).join("
           <div>
             <h3>{p.data.website ? <a href={p.data.website}>{p.data.name}</a> : p.data.name}</h3>
             <p class="aff">{[p.data.field, p.data.affiliation].filter(Boolean).join(" · ")}</p>
-            <div class="bio"><Bio /></div>
+            {showBios ? <div class="bio"><Bio /></div> : <p class="bio muted"><em>Bio coming soon.</em></p>}
           </div>
         </article>
       ))}

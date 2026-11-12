@@ -42,6 +42,9 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
+  <!-- Remove this block when the site is finished. -->
+  <div class="wip" id="wip"><div class="wrap"><span>This site is new and still being built. Spot something off? <a href="#" class="mail" data-u="cscs.conference" data-d="gmail.com">Write to us</a>.</span><button type="button" aria-label="Hide this notice" onclick="this.closest('.wip').hidden=true;try{localStorage.setItem('wip-hidden','1')}catch(e){}">✕</button></div></div>
+  <script is:inline>try{if(localStorage.getItem('wip-hidden'))document.getElementById('wip').hidden=true}catch(e){}</script>
   <Header />
   <main id="main"><slot /></main>
   <Footer />
