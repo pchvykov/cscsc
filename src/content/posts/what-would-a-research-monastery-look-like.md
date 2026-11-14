@@ -4,7 +4,7 @@ date: "2026-05-15"
 category: "Contemplations"
 tags: ["Contemplative Studies", "Philosophy", "Community"]
 excerpt: "What would it take to build institutions where how we know matters as much as what we know? An exploration of tacit knowledge, research monasteries, and whether contemplative depth can scale."
-reading_time: "~8 min read"
+reading_time: "5 min read"
 authors: ["matthew-mccarthy"]
 notion_id: "360d8cae-0cfe-8069-b184-f7a93fed5081"
 notion_edited: "2026-06-18"
@@ -13,10 +13,6 @@ image: "/media/blog/what-would-a-research-monastery-look-like.webp"
 image_credit: "anonymous, Public domain, via Wikimedia Commons"
 image_source: "https://commons.wikimedia.org/wiki/File:Anonymous_-_Buddhist_Temples_amid_Autumn_Mountains_-_1983.12_-_Metropolitan_Museum_of_Art.jpg"
 ---
-
----
-
-**What Would a Research Monastery Look Like?**
 
 Consider what it actually feels like to do science. You sit at a desk, often for many hours. You read papers on a screen, write on a screen, submit your work to be evaluated by people you will probably never meet. You attend conferences in interchangeable hotel rooms, present findings in a format that has barely changed in a century, and return home with a stack of business cards and, if you were lucky, one or two genuinely interesting conversations. The knowledge you produce is designed, above all, to travel — to be reproducible by strangers in different labs, legible across different languages and cultures, separable from the particular person who generated it.
 

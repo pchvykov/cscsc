@@ -4,7 +4,7 @@ date: "2026-03-27"
 category: "Event Reflections"
 tags: ["Complexity Science", "AI", "Philosophy"]
 excerpt: "Is traditional academia on the path to obsolescence, or undergoing a slow evolution toward a more adaptive form? In February's community call, Eric Lacosse led a wide-ranging discussion on peer review pressures, PhD mental health, AI's role in research, and the rise of alternative models like Focused Research Organizations. The conversation points toward ecosystem diversification — not wholesale replacement — as the path forward."
-reading_time: "7 min read"
+reading_time: "5 min read"
 notion_id: "344d8cae-0cfe-8150-816f-de9fc9bb8cff"
 notion_edited: "2026-04-30"
 icon: "📰"

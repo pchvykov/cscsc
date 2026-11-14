@@ -3,7 +3,7 @@ title: "What If the Foundations of Science Are Aesthetic Choices?"
 date: "2026-06-18"
 category: "Contemplations"
 excerpt: "Looking closer at the nature of axioms, or what Wittgenstein called ‘hinge positions’."
-reading_time: "~8 min read"
+reading_time: "5 min read"
 authors: ["matthew-mccarthy"]
 notion_id: "383d8cae-0cfe-804e-95d2-e403b4351a42"
 notion_edited: "2026-06-21"

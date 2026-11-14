@@ -4,7 +4,7 @@ date: "2026-02-09"
 category: "Research Updates"
 tags: ["Complexity Science", "Contemplative Studies"]
 excerpt: "Modern mindfulness has lost its philosophical roots. I explore how complexity science can rigorously validate ancient wisdom about self, interconnection & transformation"
-reading_time: "4 min read"
+reading_time: "3 min read"
 authors: ["pavel-chvykov"]
 notion_id: "302d8cae-0cfe-8014-b3e3-dbafd4764fa6"
 notion_edited: "2026-05-06"

@@ -2,8 +2,8 @@
 title: "What changes when the body is made part of the inquiry?"
 date: "2026-07-30"
 category: "Resource Shares"
-excerpt: "Some recent research on how to engage the body more within scientific inquiry ."
-reading_time: "~5 min read"
+excerpt: "Some recent research on how to engage the body more within scientific inquiry."
+reading_time: "4 min read"
 authors: ["matthew-mccarthy"]
 notion_id: "3add8cae-0cfe-8019-ad13-ddf3184efa02"
 notion_edited: "2026-07-30"

@@ -2,8 +2,8 @@
 title: "From systems thinking to systems sensing"
 date: "2026-08-07"
 category: "Contemplations"
-excerpt: "Reflecting on Julys community call"
-reading_time: "~ 5 min read"
+excerpt: "Reflecting on July's community call"
+reading_time: "4 min read"
 authors: ["matthew-mccarthy"]
 notion_id: "3b5d8cae-0cfe-8063-a143-fd61b698f334"
 notion_edited: "2026-08-18"

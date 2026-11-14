@@ -3,7 +3,7 @@ title: "What If the Ethics of Science Came Before the Science Itself?"
 date: "2026-05-31"
 category: "Event Reflections"
 excerpt: "Reflections of the May community call on a Post-Baconian science."
-reading_time: "~8 min read"
+reading_time: "7 min read"
 authors: ["matthew-mccarthy"]
 notion_id: "372d8cae-0cfe-80e8-a5f7-e84db0b6c783"
 notion_edited: "2026-06-18"

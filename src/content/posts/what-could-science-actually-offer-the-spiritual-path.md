@@ -3,7 +3,7 @@ title: "What Could Science Actually Offer the Spiritual Path?"
 date: "2026-08-18"
 category: "Contemplations"
 excerpt: "A few quick ideas on what science and spirituality might offer each other."
-reading_time: "~ 5 min read"
+reading_time: "6 min read"
 authors: ["matthew-mccarthy"]
 notion_id: "3c0d8cae-0cfe-80fb-85b7-c4a90753463c"
 notion_edited: "2026-08-18"

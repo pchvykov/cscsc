@@ -4,7 +4,7 @@ date: "2026-05-08"
 category: "Contemplations"
 tags: ["Philosophy", "Contemplative Studies", "Consciousness", "Practice"]
 excerpt: "What if the most honest epistemology isn't the one that explains the most, but one that admits it doesn't know everything — and means it? On translation, contemplative practice, and what it would actually take to meet another worldview without smuggling in a place to stand."
-reading_time: "~6 min"
+reading_time: "5 min read"
 authors: ["pavel-chvykov"]
 notion_id: "35ad8cae-0cfe-81b3-9c66-e205f7e8aedd"
 notion_edited: "2026-05-08"

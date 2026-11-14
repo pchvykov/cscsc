@@ -4,7 +4,7 @@ date: "2026-04-30"
 category: "Event Reflections"
 tags: ["Contemplative Studies", "Philosophy"]
 excerpt: "Explores how extracting contemplative practices from their traditions alters meaning, urging mindful, honest engagement within complexity science."
-reading_time: "6 min read"
+reading_time: "5 min read"
 notion_id: "352d8cae-0cfe-80e2-8ed9-ff0b2cd0b1af"
 notion_edited: "2026-05-06"
 icon: "😇"

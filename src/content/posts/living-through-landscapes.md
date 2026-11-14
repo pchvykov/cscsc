@@ -2,8 +2,8 @@
 title: "Living Through Landscapes"
 date: "2026-06-24"
 category: "Contemplations"
-excerpt: "A concise overview of complexity science and contemplative studies for researchers and practitioners."
-reading_time: "~8 min read"
+excerpt: "In Zangskar, in the Western Himalayas, the landscape is not a neutral place: what it means to live with a terrain that acts on its own terms."
+reading_time: "6 min read"
 authors: ["matthew-mccarthy"]
 notion_id: "389d8cae-0cfe-8067-b9b3-c0a08f914699"
 notion_edited: "2026-06-24"

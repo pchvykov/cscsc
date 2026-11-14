@@ -4,5 +4,6 @@ youtube: "ck7C-oL8CzQ"
 date: "2026-03-27"
 duration: "1:11:13"
 kind: "recording"
+event: "2026-03-community-call"
 ---
 

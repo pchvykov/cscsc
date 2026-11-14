@@ -3,7 +3,7 @@ title: "What Would A Research Monastery Look Like? Exploring Some Examples"
 date: "2026-05-22"
 category: "Contemplations"
 excerpt: "Building on recent community conversations about research monasteries, this post explores three real-world examples to think through what such an institution might actually require."
-reading_time: "~8 min read"
+reading_time: "6 min read"
 authors: ["matthew-mccarthy"]
 notion_id: "36ad8cae-0cfe-801e-83f4-e8a19d887a98"
 notion_edited: "2026-06-18"
@@ -13,11 +13,7 @@ image_credit: "Fang Shishu, Public domain, via Wikimedia Commons"
 image_source: "https://commons.wikimedia.org/wiki/File:Fang_Shishu_-_Album_of_Landscapes,_Plants,_Figures_and_Animals,_Jingfengsi_Temple_in_the_Mountains_-_y1962-111_c_-_Princeton_University_Art_Museum.jpg"
 ---
 
----
-
-**What Would A Research Monastery Look Like? Exploring Some Examples**
-
-Building on recent conversations in our community about research monasteries, this post aims to introduce three case studies that provide further examples to think through this theme. The idea that keeps surfacing is compelling and also genuinely difficult: a place, or a network of places, where serious intellectual inquiry and serious contemplative practice are held together as integrated activities — not one supplementing the other, but both as necessary dimensions of a single endeavour. Responses to the earlier post touched on questions that any serious attempt would have to face: how does such a place support itself economically? How do you balance personal space and time with genuine community life? What does self-sufficiency actually look like in practice? And how do you handle the inevitable frictions that arise when people try to live and work closely together over time? Rather than approaching these questions in the abstract, it seems worth looking carefully at three institutions that have each, in their own way, tried to hold some version of them. None is a perfect model. But each illuminates a different dimension of what building something like this actually requires.
+Building on recent conversations in our community about research monasteries, this post aims to introduce three case studies that provide further examples to think through this theme. The idea that keeps surfacing is compelling and also genuinely difficult: a place, or a network of places, where serious intellectual inquiry and serious contemplative practice are held together as integrated activities — not one supplementing the other, but both as necessary dimensions of a single endeavour. Responses to the [earlier post](/blog/what-would-a-research-monastery-look-like/) touched on questions that any serious attempt would have to face: how does such a place support itself economically? How do you balance personal space and time with genuine community life? What does self-sufficiency actually look like in practice? And how do you handle the inevitable frictions that arise when people try to live and work closely together over time? Rather than approaching these questions in the abstract, it seems worth looking carefully at three institutions that have each, in their own way, tried to hold some version of them. None is a perfect model. But each illuminates a different dimension of what building something like this actually requires.
 
 The Institute for Advanced Study in Princeton is the closest thing the twentieth century produced to a pure research community. Founded in 1930 on an explicit anti-utilitarian philosophy — the idea that genuine intellectual breakthroughs require freedom from teaching, administration, and the pressure to produce applicable work — it has housed Einstein, Gödel, and Clifford Geertz, among others. There are no students, no departments in the conventional sense, no tuition income. Visiting scholars arrive for a year or two with no formal obligations beyond their research. The campus is physically designed around a specific rhythm: individual offices for solitude, and a communal afternoon tea that functions as the mechanism through which interdisciplinary encounter actually happens. Not by schedule, not by mandate — by proximity and a shared table.
 

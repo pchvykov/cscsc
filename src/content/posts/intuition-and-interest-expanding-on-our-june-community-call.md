@@ -3,7 +3,7 @@ title: "Intuition and Interest: Expanding on our June Community Call"
 date: "2026-07-03"
 category: "Research Updates"
 excerpt: "Interest as an essential part of the knowledge production process"
-reading_time: "~ 8 min read"
+reading_time: "6 min read"
 authors: ["matthew-mccarthy"]
 notion_id: "392d8cae-0cfe-8009-a809-db623488ddef"
 notion_edited: "2026-07-03"
