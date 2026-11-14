@@ -9,6 +9,9 @@ authors: ["pavel-chvykov"]
 notion_id: "35ad8cae-0cfe-81b3-9c66-e205f7e8aedd"
 notion_edited: "2026-05-08"
 icon: "🫵🏽"
+image: "/media/blog/a-view-from-nowhere.webp"
+image_credit: "Caspar David Friedrich, Public domain, via Wikimedia Commons"
+image_source: "https://commons.wikimedia.org/wiki/File:Caspar_David_Friedrich_-_Der_M%C3%B6nch_am_Meer_-_Google_Art_Project.jpg"
 ---
 
 <div class="standfirst">

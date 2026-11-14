@@ -3,8 +3,8 @@ import Base from "./Base.astro";
 import LocalNav from "../components/LocalNav.astro";
 import { sectionOf } from "../data/site";
 
-interface Props { title: string; docTitle?: string; image?: string; toc?: { depth: number; slug: string; text: string }[]; description?: string; dek?: string; cover?: string; crumbs?: { label: string; href: string }[]; meta?: string; section?: string; wide?: boolean; local?: boolean; kind?: string }
-const { title, docTitle, image, toc = [], description, dek, cover, crumbs = [], meta, section, wide = false, local = true, kind } = Astro.props;
+interface Props { title: string; docTitle?: string; image?: string; toc?: { depth: number; slug: string; text: string }[]; description?: string; dek?: string; cover?: string; crumbs?: { label: string; href: string }[]; meta?: string; section?: string; wide?: boolean; local?: boolean; kind?: string; coverCredit?: string; coverSource?: string }
+const { title, docTitle, image, toc = [], description, dek, cover, crumbs = [], meta, section, wide = false, local = true, kind, coverCredit, coverSource } = Astro.props;
 const sec = section ?? sectionOf(Astro.url.pathname);
 // Where the page has section links beside its text, the intro opens the text column (as a standfirst does on Markdown pages).
 const inColumn = !!dek && local && !Astro.slots.has("aside");
@@ -20,7 +20,7 @@ const inColumn = !!dek && local && !Astro.slots.has("aside");
       {meta && <p class="meta">{meta}</p>}
       <slot name="head" />
     </header>
-    {cover && <figure class="page-photo"><img src={cover} alt="" /></figure>}
+    {cover && <figure class="page-photo"><img src={cover} alt="" />{coverCredit && <figcaption>{coverSource ? <a href={coverSource}>{coverCredit}</a> : coverCredit}</figcaption>}</figure>}
     {Astro.slots.has("aside") ? (
       <div class:list={["with-aside", kind]}>
         <div class:list={["prose", { wide }]}><slot /></div>

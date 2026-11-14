@@ -8,6 +8,9 @@ authors: ["matthew-mccarthy"]
 notion_id: "3b5d8cae-0cfe-8063-a143-fd61b698f334"
 notion_edited: "2026-08-18"
 icon: "🪢"
+image: "/media/blog/from-systems-thinking-to-systems-sensing.webp"
+image_credit: "NormanofOxfordshire, CC BY-SA 4.0, via Wikimedia Commons"
+image_source: "https://commons.wikimedia.org/wiki/File:West_Pier_at_dusk_with_murmuration_of_starlings.jpg"
 ---
 
 <div class="standfirst">

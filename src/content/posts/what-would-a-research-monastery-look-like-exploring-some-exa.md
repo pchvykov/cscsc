@@ -8,6 +8,9 @@ authors: ["matthew-mccarthy"]
 notion_id: "36ad8cae-0cfe-801e-83f4-e8a19d887a98"
 notion_edited: "2026-06-18"
 icon: "🌲"
+image: "/media/blog/what-would-a-research-monastery-look-like-exploring-some-exa.webp"
+image_credit: "Fang Shishu, Public domain, via Wikimedia Commons"
+image_source: "https://commons.wikimedia.org/wiki/File:Fang_Shishu_-_Album_of_Landscapes,_Plants,_Figures_and_Animals,_Jingfengsi_Temple_in_the_Mountains_-_y1962-111_c_-_Princeton_University_Art_Museum.jpg"
 ---
 
 ---

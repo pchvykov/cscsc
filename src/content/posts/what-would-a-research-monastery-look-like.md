@@ -9,6 +9,9 @@ authors: ["matthew-mccarthy"]
 notion_id: "360d8cae-0cfe-8069-b184-f7a93fed5081"
 notion_edited: "2026-06-18"
 icon: "🗻"
+image: "/media/blog/what-would-a-research-monastery-look-like.webp"
+image_credit: "anonymous, Public domain, via Wikimedia Commons"
+image_source: "https://commons.wikimedia.org/wiki/File:Anonymous_-_Buddhist_Temples_amid_Autumn_Mountains_-_1983.12_-_Metropolitan_Museum_of_Art.jpg"
 ---
 
 ---

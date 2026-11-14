@@ -16,7 +16,7 @@ const i = all.findIndex((x) => x.id === p.id);
 const newer = all[i - 1], older = all[i + 1];
 const meta = [fmtDate(p.data.date, { day: "numeric", month: "long", year: "numeric" }), authors.map((a) => a!.data.name).join(", "), p.data.reading_time].filter(Boolean).join(" · ");
 ---
-<Page title={p.data.title} description={p.data.excerpt ?? summarize(p.body)} crumbs={[{ label: "Blog", href: "/blog/" }, ...(p.data.category ? [{ label: p.data.category, href: "/blog/" }] : [])]} local={false} kind="post">
+<Page title={p.data.title} cover={p.data.image} coverCredit={p.data.image_credit} coverSource={p.data.image_source} image={p.data.image} description={p.data.excerpt ?? summarize(p.body)} crumbs={[{ label: "Blog", href: "/blog/" }, ...(p.data.category ? [{ label: p.data.category, href: "/blog/" }] : [])]} local={false} kind="post">
   <Fragment slot="aside">
     <dl>
       <dt>Published</dt><dd>{fmtDate(p.data.date, { day: "numeric", month: "long", year: "numeric" })}</dd>

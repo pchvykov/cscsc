@@ -8,6 +8,9 @@ notion_id: "375d8cae-0cfe-80e9-99da-d4c4681bdecb"
 notion_edited: "2026-06-18"
 icon: "⏳"
 authors: ["matthew-mccarthy"]
+image: "/media/blog/reflecting-on-restitution.webp"
+image_credit: "Caspar David Friedrich, Public domain, via Wikimedia Commons"
+image_source: "https://commons.wikimedia.org/wiki/File:Caspar_David_Friedrich_-_Mondaufgang_am_Meer_-_Google_Art_Project.jpg"
 ---
 
 **What If the Most Important Part of an Experience Is What Comes After?**

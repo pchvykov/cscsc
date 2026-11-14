@@ -9,6 +9,9 @@ notion_id: "352d8cae-0cfe-80e2-8ed9-ff0b2cd0b1af"
 notion_edited: "2026-05-06"
 icon: "😇"
 authors: ["matthew-mccarthy"]
+image: "/media/blog/on-spiritual-practice-translation-and-what-gets-left-behind.webp"
+image_credit: "Ole Worm (frontispiece engraving, 1655); photographed by Didier Descouens, Public domain, via Wikimedia Commons"
+image_source: "https://commons.wikimedia.org/wiki/File:1655_-_Frontispiece_of_Museum_Wormiani_Historia.jpg"
 ---
 
 <div class="standfirst">

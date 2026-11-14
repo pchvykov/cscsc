@@ -8,6 +8,9 @@ authors: ["matthew-mccarthy"]
 notion_id: "3c0d8cae-0cfe-80fb-85b7-c4a90753463c"
 notion_edited: "2026-08-18"
 icon: "⚛️"
+image: "/media/blog/what-could-science-actually-offer-the-spiritual-path.webp"
+image_credit: "Utagawa Hiroshige, Public domain, via Wikimedia Commons"
+image_source: "https://commons.wikimedia.org/wiki/File:Print,_Yui,_Summit_of_Mount_Satta,_in_The_Fifty-Three_Stations_of_the_Tokaido_Road_(Tokaido_Gojusan_Tsugi-no_Uchi),_ca._1834_(CH_18608835).jpg"
 ---
 
 It is worth asking the question honestly, without the usual diplomatic softening on either side. Science has transformed the material conditions of human life at a rate unprecedented in history — food production, disease, life expectancy, the basic infrastructure of comfort and safety. What has it done for the inner life? What has it actually contributed to the project of contemplative development, the transformation of the quality of attention and the sense of self that serious spiritual traditions have been working on for millennia?

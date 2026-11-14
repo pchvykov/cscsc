@@ -53,6 +53,9 @@ const posts = defineCollection({
     excerpt: z.string().optional(),
     reading_time: z.string().optional(),
     authors: list, // ids in the people collection
+    image: z.string().optional(), // picture for the blog list and the top of the post
+    image_credit: z.string().optional(), // e.g. "Ernst Haeckel, public domain, via Wikimedia Commons"
+    image_source: z.string().optional(), // link to the picture's source page
     draft: z.boolean().default(false),
     notion_loose_page: z.boolean().optional(),
     ...notion,

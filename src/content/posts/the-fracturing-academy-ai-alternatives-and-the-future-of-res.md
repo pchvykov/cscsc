@@ -9,6 +9,9 @@ notion_id: "344d8cae-0cfe-8150-816f-de9fc9bb8cff"
 notion_edited: "2026-04-30"
 icon: "📰"
 authors: ["matthew-mccarthy"]
+image: "/media/blog/the-fracturing-academy-ai-alternatives-and-the-future-of-res.webp"
+image_credit: "NPS Photo, Public domain, via Wikimedia Commons"
+image_source: "https://commons.wikimedia.org/wiki/File:Aerial_shot_of_braided_river_channel_(dde154ea-1dd8-b71c-07fa-4be8295a858c).jpg"
 ---
 
 <div class="standfirst">

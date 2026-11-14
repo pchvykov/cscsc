@@ -8,6 +8,9 @@ authors: ["matthew-mccarthy"]
 notion_id: "3add8cae-0cfe-8019-ad13-ddf3184efa02"
 notion_edited: "2026-07-30"
 icon: "🤸‍♂️"
+image: "/media/blog/what-changes-when-the-body-is-made-part-of-the-inquiry.webp"
+image_credit: "Hilaire-Germain-Edgar Degas, CC0, via Wikimedia Commons"
+image_source: "https://commons.wikimedia.org/wiki/File:Hilaire-Germain-Edgar_Degas,_The_Dance_Class,_c._1873,_NGA_165300.jpg"
 ---
 
 ---

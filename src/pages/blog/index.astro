@@ -19,23 +19,22 @@ const Hub = hub ? (await render(hub)).Content : null;
     </div>
     <span class="dv-count" data-count>{posts.length} posts</span>
   </div>
-  <ul class="rows" id="post-list">
+  <div class="cards blog-cards" id="post-list">
     {posts.map((p) => (
-      <li data-cat={p.data.category ?? ""}>
-        <div class="when"><b>{p.data.category ?? "Post"}</b>{fmtDate(p.data.date)}</div>
-        <div>
-          <h3><a href={`/blog/${p.id}/`}>{p.data.title}</a></h3>
-          {p.data.excerpt && <p>{p.data.excerpt}</p>}
-          {p.data.authors.length > 0 && <p style="font-size:.85rem;margin-top:6px">{p.data.authors.map(nameOf).join(", ")}{p.data.reading_time && ` · ${p.data.reading_time}`}</p>}
-        </div>
-      </li>
+      <a class="card" href={`/blog/${p.id}/`} data-cat={p.data.category ?? ""}>
+        {p.data.image && <div class="thumb"><img src={p.data.image} alt="" loading="lazy" /></div>}
+        <span class="k">{p.data.category ?? "Post"} · {fmtDate(p.data.date)}</span>
+        <h3>{p.data.title}</h3>
+        {p.data.excerpt && <p>{p.data.excerpt}</p>}
+        {p.data.authors.length > 0 && <p class="by">{p.data.authors.map(nameOf).join(", ")}{p.data.reading_time && ` · ${p.data.reading_time}`}</p>}
+      </a>
     ))}
-  </ul>
+  </div>
   {Hub && <section class="block prose" id="contribute"><Hub /></section>}
 </Page>
 <script>
   const root = document.querySelector("[data-filter-root]")!;
-  const items = [...document.querySelectorAll<HTMLElement>("#post-list > li")];
+  const items = [...document.querySelectorAll<HTMLElement>("#post-list > .card")];
   const count = root.querySelector("[data-count]")!;
   root.querySelectorAll<HTMLButtonElement>("button[data-cat]").forEach((b) => b.addEventListener("click", () => {
     root.querySelectorAll("button[data-cat]").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));

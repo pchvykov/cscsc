@@ -9,6 +9,9 @@ authors: ["pavel-chvykov"]
 notion_id: "2b2d8cae-0cfe-803e-8b9d-f35ef6a3d47f"
 notion_edited: "2025-11-21"
 icon: "⚛️"
+image: "/media/blog/community-call-1-research-directions-kick-off.webp"
+image_credit: "Unknown author, Public domain, via Wikimedia Commons"
+image_source: "https://commons.wikimedia.org/wiki/File:14th_century_Portolan_chart_of_the_Mediterranean_and_the_Black_Sea.tif"
 ---
 
 [**Watch Recording on YouTube**](https://www.youtube.com/watch?v=e8ImSvvBbSk)

@@ -9,6 +9,9 @@ authors: ["pavel-chvykov"]
 notion_id: "302d8cae-0cfe-8014-b3e3-dbafd4764fa6"
 notion_edited: "2026-05-06"
 icon: "📖"
+image: "/media/blog/complexity-science-as-bridge-to-eastern-philosophy.webp"
+image_credit: "Utagawa Hiroshige, Public domain, via Wikimedia Commons"
+image_source: "https://commons.wikimedia.org/wiki/File:Utagawa_Hiroshige_-_Evening_Shower_at_Atake_and_the_Great_Bridge_A.jpg"
 ---
 
 *Cross-posted from my main blog at* [*pchvykov.com/blog*](http://pchvykov.com/)

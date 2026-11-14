@@ -8,6 +8,9 @@ authors: ["matthew-mccarthy"]
 notion_id: "389d8cae-0cfe-8067-b9b3-c0a08f914699"
 notion_edited: "2026-06-24"
 icon: "🌲"
+image: "/media/blog/living-through-landscapes.webp"
+image_credit: "Nicholas Roerich, Public domain, via Wikimedia Commons"
+image_source: "https://commons.wikimedia.org/wiki/File:Nicholas_Roerich_-_Himalayas,_Sikkim.jpg"
 ---
 
 There is a valley in the Western Himalayas called Zangskar, and those who live there know it is not a neutral place. The terrain is populated by presences — spirits, powers, zones of danger — that are not decorative mythology layered over geology but operative forces with whom the community is in ongoing, practical relationship. When floods come, they are understood simultaneously as climate events, as karmic consequences, and as expressions of a landscape acting on its own terms, with its own interests and its own capacity to refuse or resist. These are not competing explanations that need to be reconciled. They are different registers of the same reality, and the inhabitants navigate all of them at once.

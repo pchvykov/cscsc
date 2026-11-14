@@ -8,6 +8,9 @@ authors: ["matthew-mccarthy"]
 notion_id: "383d8cae-0cfe-804e-95d2-e403b4351a42"
 notion_edited: "2026-06-21"
 icon: "🦚"
+image: "/media/blog/what-if-the-foundations-of-science-are-aesthetic-choices.webp"
+image_credit: "Ogata Kōrin, CC0, via Wikimedia Commons"
+image_source: "https://commons.wikimedia.org/wiki/File:%E6%B3%A2%E6%BF%A4%E5%9B%B3%E5%B1%8F%E9%A2%A8-Rough_Waves_MET_DT1615.jpg"
 ---
 
 ---

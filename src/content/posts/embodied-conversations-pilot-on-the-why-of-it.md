@@ -8,6 +8,9 @@ notion_id: "37cd8cae-0cfe-801d-8e26-fed3899cbcfb"
 notion_edited: "2026-06-18"
 icon: "🎭"
 authors: ["matthew-mccarthy"]
+image: "/media/blog/embodied-conversations-pilot-on-the-why-of-it.webp"
+image_credit: "Claude Monet, Public domain, via Wikimedia Commons"
+image_source: "https://commons.wikimedia.org/wiki/File:Claude_Monet_-_Seerosen.jpg"
 ---
 
 We've already announced the Embodied Conversations pilot, so we just wanted to dig a little deeper into the why.

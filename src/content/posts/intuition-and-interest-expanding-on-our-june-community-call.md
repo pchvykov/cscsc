@@ -8,6 +8,9 @@ authors: ["matthew-mccarthy"]
 notion_id: "392d8cae-0cfe-8009-a809-db623488ddef"
 notion_edited: "2026-07-03"
 icon: "🛰️"
+image: "/media/blog/intuition-and-interest-expanding-on-our-june-community-call.webp"
+image_credit: "Étienne Léopold Trouvelot, Public domain, via Wikimedia Commons"
+image_source: "https://commons.wikimedia.org/wiki/File:Trouvelot-_The_great_nebula_in_Orion_-_1875.jpg"
 ---
 
 ---

@@ -490,3 +490,9 @@ section[data-hide-empty][hidden] + section.block { padding-top: 40px; }
 .wip .wrap { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 7px 0; }
 .wip button { background: none; border: 0; color: var(--muted); cursor: pointer; font-size: 0.85rem; padding: 4px 6px; }
 .wip button:hover { color: var(--ink); }
+/* Blog list: picture cards; a post's picture credit sits under it */
+.blog-cards { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+.blog-cards .card p.by { font-size: 0.82rem; margin-top: 2px; }
+.blog-cards .card h3 { font-size: 1.35rem; }
+.page-photo figcaption { font-size: 0.78rem; color: var(--muted); margin-top: 6px; }
+.page-photo figcaption a { color: inherit; }

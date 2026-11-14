@@ -8,6 +8,9 @@ authors: ["matthew-mccarthy"]
 notion_id: "372d8cae-0cfe-80e8-a5f7-e84db0b6c783"
 notion_edited: "2026-06-18"
 icon: "🌊"
+image: "/media/blog/what-if-the-ethics-of-science-came-before-the-science-itself.webp"
+image_credit: "Utagawa Hiroshige, CC0, via Wikimedia Commons"
+image_source: "https://commons.wikimedia.org/wiki/File:%E8%BF%91%E6%B1%9F%E5%85%AB%E6%99%AF%E4%B9%8B%E5%86%85_%E7%9F%A2%E6%A9%8B%E5%B8%B0%E5%B8%86-Sailing_Boats_Returning_to_Yabase,_Lake_Biwa_MET_DP122121.jpg"
 ---
 
 There is a story we tend to tell about modern science in which the philosophy comes first. Nature, it turns out, is mechanical. Matter is the fundamental stuff of things. Consciousness is what brains do. And from these conclusions — arrived at through rigorous investigation — certain practical orientations follow: we can study nature, model it, predict it, and intervene in it for human benefit. The ethics, on this account, is downstream of the metaphysics.

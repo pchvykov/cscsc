@@ -8,6 +8,9 @@ notion_id: "389d8cae-0cfe-8095-9106-e200398bcc5e"
 notion_edited: "2026-06-25"
 icon: "⚜️"
 authors: ["matthew-mccarthy"]
+image: "/media/blog/embodied-conversations-values-and-form.webp"
+image_credit: "Hasegawa Tōhaku, Public domain, via Wikimedia Commons"
+image_source: "https://commons.wikimedia.org/wiki/File:Hasegawa_Tohaku_-_Pine_Trees_(Sh%C5%8Drin-zu_by%C5%8Dbu)_-_right_hand_screen.jpg"
 ---
 
 ## The Aim
