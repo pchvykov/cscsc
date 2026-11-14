@@ -12,7 +12,7 @@ icon: "🧭"
 
 </div>
 
-<div class="embed"><iframe src="/vision/" loading="lazy" title="Our vision in 3 minutes"></iframe></div>
+<a class="poster" href="/vision/" aria-label="Watch our vision, a 3-minute animation"><img src="/og-image.jpg" alt="" loading="lazy" /></a>
 
 [Watch our animation](/vision/)
 
