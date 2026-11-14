@@ -37,7 +37,8 @@ const events = defineCollection({
     place: z.string().optional(),
     summary: z.string().optional(), // one line for lists
     image: z.string().optional(), // card image
-    featured: z.boolean().default(false), // big gathering with its own card
+    featured: z.boolean().default(false), // big gathering: own card, and listed in the Gatherings menu
+    short: z.string().optional(), // its name in the menu, when the title is long
     ...notion,
   }),
 });

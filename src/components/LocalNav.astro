@@ -1,5 +1,6 @@
 ---
-import { nav } from "../data/site";
+import { siteNav } from "../lib/nav";
+const nav = await siteNav();
 // Sibling pages in the current section, so visitors arriving deep can move sideways.
 const { section, toc = [] } = Astro.props as { section?: string; toc?: { depth: number; slug: string; text: string }[] };
 const path = Astro.url.pathname.endsWith("/") ? Astro.url.pathname : Astro.url.pathname + "/";

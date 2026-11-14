@@ -8,8 +8,9 @@ icon: "notion://custom_emoji/24716bf2-6d5a-4250-901b-819a4e14a08d/289d8cae-0cfe-
 cover: "/media/31bd8cae0cfed7585f.webp"
 place: "Binghamton, New York"
 featured: true
+short: "CCS26 satellite"
 image: "/assets/chalk2.webp"
-summary: "About twenty people, keynotes by Michael Levin and Alan Rodrigues, and an afternoon of open space. Talks are going up on YouTube."
+summary: "About twenty people, with keynotes by Michael Levin and Alan Rodrigues."
 ---
 
 <div class="standfirst">
@@ -36,7 +37,11 @@ Heinz von Foerster called this second-order cybernetics - the study of observing
 
 Two keynotes - Michael Levin (Tufts) and Alan Rodrigues (Rockefeller) - four research talks, small-group discussions, and a few short practices in between.
 
+<div class="until-end">
+
 Attendance is through the main CCS26 conference registration, at a reduced rate if you want to join this satellite only or attend online. [**Register at CCS26 →**](https://ccs26.cssociety.org/)
+
+</div>
 
 [Join the CSCSC mailing list](https://cscsc.notion.site/286d8cae0cfe8031833ac1a301824aa0) to be notified of updates on this and related events.
 
@@ -314,6 +319,8 @@ Lunch and coffee breaks are provided by CCS26. The satellite is open to both in-
 
 ---
 
+<div class="until-end">
+
 ## Registration
 
 Attendance requires registration through the **CCS26 main conference** - there is no separate satellite registration. <br>A reduced rate applies if you only want to attend this satellite meeting, or if you are joining online.
@@ -321,6 +328,8 @@ Attendance requires registration through the **CCS26 main conference** - there i
 [**Register at CCS26 →**](https://ccs26.cssociety.org/)
 
 If you have already registered and would like to let us know you are coming, or if you would like to offer a contemplative practice from your own tradition during the day, just write to us at [cscs.conference@gmail.com](mailto:cscs.conference@gmail.com).
+
+</div>
 
 ---
 

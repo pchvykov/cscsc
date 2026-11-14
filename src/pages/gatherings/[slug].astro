@@ -11,7 +11,10 @@ export async function getStaticPaths() {
   return (await getCollection("events")).map((e) => ({ params: { slug: e.id }, props: { e } }));
 }
 const { e } = Astro.props;
-const body = enhance(e.rendered?.html ?? "", { mapHeadings: true }).html;
+const endDay0 = iso(e.data.end_date ?? e.data.date);
+// Prices, sign-ups and registration are wrapped in .until-end in the event file; they disappear once the event is over.
+const body = enhance(e.rendered?.html ?? "", { mapHeadings: true }).html
+  .replace(/class="until-end"/g, `class="until-end" data-until="${endDay0}"${endDay0 < buildDay ? " hidden" : ""}`);
 const emptyBody = !body.replace(/<[^>]+>/g, "").trim();
 const videos = (await getCollection("videos", (v) => v.data.event === e.id)).sort((a, b) => +a.data.date - +b.data.date);
 const oneKind = new Set(videos.map((v) => v.data.kind)).size === 1;
@@ -39,9 +42,9 @@ const subpages = (await getCollection("pages", (p) => p.data.path.startsWith(`/g
       <dt>Kind</dt><dd>{kindOf(e)}</dd>
     </dl>
   )}
-  {e.data.featured && e.id !== "cscsc25" && (
+  {!emptyBody && e.id !== "cscsc25" && (
     <aside class="note" data-after={endDay} hidden={endDay >= buildDay}><div>
-      <p><b>This gathering took place {when(e)}.</b> The page below is the original invitation, kept as a record.
+      <p><b>This {e.data.featured ? "gathering" : kindOf(e).toLowerCase()} took place {when(e)}.</b> The page below is the original {e.data.featured ? "invitation" : "announcement"}, kept as a record.
       {videos.length > 0 && <> <a href="#recordings">Recordings</a></>}{pubs.length > 0 && <> · <a href="#outputs">Outputs</a></>}</p>
     </div></aside>
   )}

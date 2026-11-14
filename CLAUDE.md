@@ -29,6 +29,9 @@ Markdown for text. For anything more, use these few HTML wrappers (leave a blank
 - **Boxes mean something:** a framed, coloured section is a research theme; other sections are a quiet tint without a frame; a lone card outside a grid is an aside.
 - **Reading-column styles never reach components.** `.prose` element rules are written as `.prose :where(x):not(:where(UI) *)`; a new component root (a list, card grid, panel built by a template) goes into that UI list in `global.css`.
 
+## Adding new content
+When CSCSC puts out something new (video, call, event, post, publication, gathering), follow `.claude/skills/site-update/SKILL.md`.
+
 ## Design review
 After a design change or a new kind of block, run the `design-critic` agent (`.claude/agents/design-critic.md`) on desktop (1280 px) and phone (390 px) screenshots of the affected page types. It checks for both failure modes - the wall of undifferentiated text and the Notion-style patchwork of colours and boxes - and returns site-wide fixes.
 

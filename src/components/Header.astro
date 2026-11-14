@@ -1,6 +1,8 @@
 ---
 import Enso from "./Enso.astro";
-import { nav, sectionOf } from "../data/site";
+import { sectionOf } from "../data/site";
+import { siteNav } from "../lib/nav";
+const nav = await siteNav();
 const here = sectionOf(Astro.url.pathname);
 ---
 <header class="site-header">

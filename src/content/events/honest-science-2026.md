@@ -9,8 +9,9 @@ cover: "/media/303d8cae0cfed189fa.webp"
 end_date: "2026-09-27"
 place: "INTP, French Pyrenees"
 featured: true
+short: "Honest Science"
 image: "/assets/group.webp"
-summary: "Nine talks, a map of the room's research questions, and a ritual arc the group wrote together. Proceedings are on the way."
+summary: "Nine talks, a map of the room's research questions, and a ritual arc the group wrote together. Proceedings in preparation."
 ---
 
 <div class="standfirst">
@@ -21,9 +22,14 @@ And about *who you are* when you're doing the science. This workshop lives there
 
 </div>
 
-**September 20 – 27, 2026** · [INTP.science](http://INTP.science), French Pyrenees · 10–20 participants · Early bird price ends May 31 (8 spots left)
+**September 20 – 27, 2026** · [INTP.science](http://INTP.science), French Pyrenees · 10–20 participants<span class="until-end"> · Early bird price ends May 31 (8 spots left)</span>
+
+<div class="until-end">
 
 Interested? [Sign up for an intro call](https://www.notion.so/31fd8cae0cfe8029884dfd39f3b2f684) to find out if it's a good fit.<br>Can't make it this time? [Tell us why](https://www.notion.so/31fd8cae0cfe8016bfc2d8f4eca7c02c) — you'll receive a **€50 discount** on the next retreat.
+
+</div>
+
 
 ---
 
@@ -237,6 +243,8 @@ We're explicitly designing against the stuffy conference vibe. **Circle seating.
 
 ---
 
+<div class="until-end">
+
 ## Logistics
 
 | |  |
@@ -250,6 +258,8 @@ We're explicitly designing against the stuffy conference vibe. **Circle seating.
 | **Cost** | **Early bird**: €550 — 8 spots, until May 31<br>**Standard**: €650 — until Aug 15<br>**Late**: €750 — Aug 15 onwards<br>Includes accommodation + vegetarian meals.<br>Few scholarships available — reach out.<br>Also joining [Work Alive Retreat](/gatherings/work-alive-2026/) the week after? €200 off the combined price. |
 | **Refunds** | Full refund up to 1 month before (by Aug 20); 50% up to 2 weeks before (by Sep 6). <br>Not sure if you can make it? Register at early bird now — you can always cancel for a full refund if your plans change. |
 
+</div>
+
 The workshop includes research presentations, collaborative sessions, and planned publication outputs—designed to be legible for institutional travel funding.
 
 <figure><img src="/media/320d8cae0cfea6ff0f.webp" alt="" loading="lazy" /></figure>
@@ -257,6 +267,8 @@ The workshop includes research presentations, collaborative sessions, and planne
 <figure><img src="/media/320d8cae0cfeab3eda.webp" alt="" loading="lazy" /></figure>
 
 ---
+
+<div class="until-end">
 
 ## [Interested in Honest Science?](https://cscsc.notion.site/31fd8cae0cfe8029884dfd39f3b2f684)
 
@@ -269,6 +281,8 @@ Can't make it this time? [Tell us why](https://www.notion.so/31fd8cae0cfe8016bfc
 The [Work Alive Retreat](/gatherings/work-alive-2026/) runs September 27– October 4 (the next week) at the same venue. Stay for this second week to deep-dive into your work with the newfound clarity. Come to both for a €200 off the combined price.
 
 </aside>
+
+</div>
 
 ---
 

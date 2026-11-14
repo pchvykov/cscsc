@@ -29,10 +29,7 @@ export const nav: NavSection[] = [
     label: "Gatherings", base: "/gatherings",
     items: [
       { label: "Upcoming and past", href: "/gatherings/" },
-      { label: "Honest Science", href: "/gatherings/honest-science-2026/", note: "Research workshop, French Pyrenees, 2026" },
-      { label: "Work Alive retreat", href: "/gatherings/work-alive-2026/", note: "French Pyrenees, 2026" },
-      { label: "CCS26 satellite", href: "/gatherings/ccs26-satellite/", note: "Binghamton NY, 2026" },
-      { label: "CSCSC25 conference", href: "/gatherings/cscsc25/", note: "Online, 2025" },
+      // featured gatherings are inserted here from the events collection (lib/nav.ts)
       { label: "Calls and reading groups", href: "/gatherings/calls/" },
     ],
   },

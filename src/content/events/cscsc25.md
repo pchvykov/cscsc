@@ -8,6 +8,7 @@ icon: "🎓"
 end_date: "2025-10-10"
 place: "Online"
 featured: true
+short: "CSCSC25 conference"
 image: "/assets/g-cscsc25.webp"
 summary: "October 8-10, 2025 | Virtual (Zoom) | 47 researchers from 30+ institutions"
 ---

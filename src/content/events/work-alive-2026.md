@@ -8,6 +8,7 @@ icon: "💻"
 cover: "/media/30cd8cae0cfe0d2303.webp"
 place: "INTP, French Pyrenees"
 featured: true
+short: "Work Alive retreat"
 image: "/assets/s-cowork.webp"
 summary: "A week of working as practice, and the first sessions with the Work Alive app."
 ---
@@ -18,9 +19,13 @@ summary: "A week of working as practice, and the first sessions with the Work Al
 
 </div>
 
-**September 27 – October 4, 2026** · [INTP.science](http://INTP.science), French Pyrenees · 10–20 participants · Early bird price ends May 31 (8 spots left)
+**September 27 – October 4, 2026** · [INTP.science](http://INTP.science), French Pyrenees · 10–20 participants<span class="until-end"> · Early bird price ends May 31 (8 spots left)</span>
+
+<div class="until-end">
 
 Interested? [Sign up for an intro call](https://cscsc.notion.site/31fd8cae0cfe80db92abf8b59256de51) to see if it’s a good fit<br>Can't make it this time? [Tell us why](https://cscsc.notion.site/31fd8cae0cfe8016bfc2d8f4eca7c02c?pvs=105) for a **€50 discount** on the next retreat.
+
+</div>
 
 <div class="embed"><iframe src="https://www.youtube-nocookie.com/embed/xJFYZrXo5BM" title="Video" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 
@@ -234,6 +239,8 @@ I'll be doing my own work alongside you, having my own struggles, naming my own 
 
 ---
 
+<div class="until-end">
+
 <details class="toggle">
 <summary>Logistics</summary>
 <div class="body">
@@ -252,7 +259,11 @@ I'll be doing my own work alongside you, having my own struggles, naming my own 
 </div>
 </details>
 
+</div>
+
 ---
+
+<div class="until-end">
 
 ## [**Interested in Work Alive?**](https://cscsc.notion.site/31fd8cae0cfe80db92abf8b59256de51)
 
@@ -261,6 +272,8 @@ I'll be doing my own work alongside you, having my own struggles, naming my own 
 Can't make it this time? [Tell us why](https://www.notion.so/31fd8cae0cfe8016bfc2d8f4eca7c02c) — you'll receive a **€50 discount** on the next retreat.
 
 **Staying for two weeks?** The [Honest Science Workshop](/gatherings/honest-science-2026/) runs September 20–27 (the week before) at the same venue. Different energy, complementary inquiry (specifically for researchers). Come to both for a €200 off the combined price.
+
+</div>
 
 ---
 
