@@ -57,7 +57,7 @@ Optional body: the announcement text or a short description.
 Before the date it shows as upcoming (Gatherings, Calls, home "Latest"); after the date it moves to past by itself, and a page with body text gets a note that it took place. An event without body text shows its summary under the title.
 
 ### A blog post
-Use the `cscsc-blog-post` skill in the cscsc-community repo for writing it. To publish, add `src/content/posts/<slug>.md` with frontmatter `title, date, category, tags, excerpt, reading_time, authors` (copy an existing post; `authors` are ids from `src/content/people/`, add a people file for a new author). It appears on /blog/, home "Latest" and the RSS feed.
+Use the `cscsc-blog-post` skill in the cscsc-community repo for writing it. To publish, add `src/content/posts/<slug>.md` with frontmatter `title, date, category, tags, excerpt, reading_time, authors` (copy an existing post; `authors` are ids from `src/content/people/`, add a people file for a new author). It appears on /blog/, home "Latest" and the RSS feed. Give it a picture: an open-licensed image (public domain, CC0, CC BY, CC BY-SA, e.g. from Wikimedia Commons) that evokes the post's central idea at a glance, in the same calm fine-art style as the others; save it as `public/media/blog/<slug>.webp` (1600 px wide) and add `image`, `image_credit` ("Author, license, via Wikimedia Commons") and `image_source` (the file page) to the frontmatter.
 
 ### A publication, proceedings or report
 Add `src/content/publications/<yyyy>-<slug>.md`:
