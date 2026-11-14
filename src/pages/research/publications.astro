@@ -1,0 +1,24 @@
+---
+import { getCollection } from "astro:content";
+import Page from "../../layouts/Page.astro";
+import { fmtDate } from "../../lib/text";
+const pubs = (await getCollection("publications")).sort((a, b) => +b.data.date - +a.data.date);
+const label = { proceedings: "Proceedings", report: "Report", paper: "Paper", preprint: "Preprint", essay: "Essay" };
+---
+<Page title="Publications" dek="Since our start in 2025: what has come out of our gatherings and our members' work so far.">
+  <h2 class="visually-hidden">All publications</h2>
+  <ul class="rows">
+    {pubs.map((p) => (
+      <li><div class="when"><b>{label[p.data.kind]}</b>{fmtDate(p.data.date)}</div>
+      <div><h3><a href={p.data.href}>{p.data.title}</a></h3>{p.data.summary && <p>{p.data.summary}</p>}{p.data.authors && <p style="font-size:.85rem">{p.data.authors}</p>}</div></li>
+    ))}
+  </ul>
+  <p class="muted" style="margin-top:20px;font-size:.92rem">The Honest Science proceedings are in preparation and will appear here.</p>
+
+  <h2>From our members</h2>
+  <ul class="rows">
+    <li><div class="when"><b>Magazine</b>Since 2026</div>
+    <div><h3><a href="https://orbitalstudies.com">Orbital Studies</a></h3>
+    <p>A literary science magazine created by Xavier Snelgrove, one of our members: writing and art in service of a more beautiful scientific culture. Its first issue, "Ways of Seeing the Living World", launched in May 2026.</p></div></li>
+  </ul>
+</Page>

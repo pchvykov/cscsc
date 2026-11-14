@@ -72,7 +72,7 @@ authors: "..."           # optional
 summary: "One line."
 ---
 ```
-It appears in the Outputs section at the bottom of /research/. If it replaces something "in preparation" (for example the Honest Science proceedings line in `src/pages/[...slug].astro`), remove that line.
+It appears on /research/publications/. If it replaces something "in preparation" (for example the Honest Science proceedings line in `src/pages/research/publications.astro`), remove that line. Members' own projects (a magazine, a book) go in that page's "From our members" section.
 
 ### A new main gathering (retreat, conference, workshop)
 1. Add its event file as above, with `featured: true`, `short: "<menu name>"`, `place`, `end_date`, and `image:` (card photo in `public/media/` or `public/assets/`).

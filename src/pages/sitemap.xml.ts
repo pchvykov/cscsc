@@ -3,7 +3,7 @@ import type { APIContext } from "astro";
 
 export async function GET({ site }: APIContext) {
   const { getCollection } = await import("astro:content");
-  const urls = new Set<string>(["/", "/vision/", "/join/", "/videos/", "/blog/", "/gatherings/", "/gatherings/calls/", "/resources/", "/resources/tools/", "/about/people/"]);
+  const urls = new Set<string>(["/", "/vision/", "/join/", "/videos/", "/research/publications/", "/blog/", "/gatherings/", "/gatherings/calls/", "/resources/", "/resources/tools/", "/about/people/"]);
   for (const p of await getCollection("pages", (p) => !p.data.draft && !p.id.startsWith("_") && !p.id.includes("_hub"))) urls.add(p.data.path);
   for (const e of await getCollection("events")) urls.add(`/gatherings/${e.id}/`);
   for (const p of await getCollection("posts", (p) => !p.data.draft)) urls.add(`/blog/${p.id}/`);

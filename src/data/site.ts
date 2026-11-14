@@ -22,7 +22,7 @@ export const nav: NavSection[] = [
     items: [
       { label: "Research programs", href: "/research/" },
       { label: "Core questions", href: "/research/questions/", note: "What we are asking" },
-      { label: "Outputs", href: "/research/#outputs", note: "Proceedings and reports" },
+      { label: "Publications", href: "/research/publications/", note: "Proceedings, reports and essays" },
     ],
   },
   {

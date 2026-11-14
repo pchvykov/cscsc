@@ -11,9 +11,8 @@ export default defineConfig({
     "/p2": "/ccs26/p2/",
     "/p3": "/ccs26/p3/",
     "/p4": "/ccs26/p4/",
-    // Writing became the Blog; Publications became the Outputs section of Research.
+    // Writing became the Blog.
     "/writing": "/blog/",
     "/writing/[slug]": "/blog/[slug]",
-    "/research/publications": "/research/#outputs",
   },
 });
