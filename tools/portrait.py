@@ -1,8 +1,29 @@
-"""Make a People-page portrait in the site's style: square crop around the face,
-then a warm ink-on-paper duotone with light grain, so all portraits read as one set.
+"""People-page portrait in the site's style. All portraits on /about/people/ were made with this.
+
 usage: python3 tools/portrait.py <input image> <person-id> <x> <y> <size>
-  (x, y, size) = the square to crop, in pixels of the input image (keep the face centred, filling ~60%).
-Writes public/media/people/<person-id>.webp; then set photo + photo_ok: true in src/content/people/<id>.md."""
+  Writes public/media/people/<person-id>.webp (480x480). Then set in src/content/people/<id>.md:
+    photo: "/media/people/<id>.webp"
+    photo_ok: true          # only with the person's consent
+
+What it does (keep it this way so the set stays consistent):
+  1. Square crop (x, y, size) in pixels of the input. The square may run past the photo's edges
+     (negative x/y, or size larger than the photo) to zoom out a tight shot; the extra space is
+     filled with the photo's own background colour (median of its border pixels). No fades, no
+     white bars. A transparent background becomes white first.
+  2. Grayscale, autocontrast (2% clip), contrast x1.25, light unsharp mask.
+  3. Warm ink-on-paper duotone: ink #100f0e, mid #8c7c68, paper #f7f0e2; 4% grain.
+  The page shows it as a circle (124 px desktop, 84 px phone), so the corners are hidden.
+
+Choosing the crop (what Pavel asked for, Nov 2026):
+  - Head and shoulders, not a tight face: head about 45-55% of the square's height, eyes a little
+    above centre, some shoulders visible. Too tight reads as cramped in the circle.
+  - Avoid padding at the bottom (a strip under the shirt shows); pad top/sides instead.
+  - Preview it as a circle against the dark page before committing.
+  Crops used: pavel-chvykov (closeup.png) 150 100 440; robert-marsland (Bobby.jpeg) -102 38 1035;
+  matthew-mccarthy (Matthew.jpeg) 16 50 330; francis-heylighen (Francis.webp) -80 -10 540;
+  john-dunne (JohnDunne_HS-2025.webp) 125 20 480.
+  Source photos: LiveDrive projects/cscsc-community/promo/AV_content/people/ (Pavel's: ~/Pictures/mepix/26eva/).
+"""
 import sys, random
 from PIL import Image, ImageOps, ImageFilter, ImageEnhance
 

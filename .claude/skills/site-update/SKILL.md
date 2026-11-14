@@ -75,7 +75,7 @@ summary: "One line."
 It appears on /research/publications/. If it replaces something "in preparation" (for example the Honest Science proceedings line in `src/pages/research/publications.astro`), remove that line. Members' own projects (a magazine, a book) go in that page's "From our members" section.
 
 ### A portrait for the People page
-Only with the person's consent. Run `python3 tools/portrait.py <image> <person-id> <x> <y> <size>` (a square crop with the face centred), which writes `public/media/people/<id>.webp` in the site's ink-on-paper style; then add `photo: "/media/people/<id>.webp"` and `photo_ok: true` to their file in `src/content/people/`.
+Only with the person's consent. Use `tools/portrait.py`; its header comment has the full recipe and the crop choices that were agreed (head and shoulders, zoom out by extending the photo's own background colour, never fades or white bars, preview as a circle). Run `python3 tools/portrait.py <image> <person-id> <x> <y> <size>`, check the result, then add `photo: "/media/people/<id>.webp"` and `photo_ok: true` to their file in `src/content/people/`. Keep source photos in LiveDrive `projects/cscsc-community/promo/AV_content/people/`.
 
 ### A new main gathering (retreat, conference, workshop)
 1. Add its event file as above, with `featured: true`, `short: "<menu name>"`, `place`, `end_date`, and `image:` (card photo in `public/media/` or `public/assets/`).
