@@ -2,7 +2,7 @@
 import Page from "../layouts/Page.astro";
 import { links } from "../data/site";
 ---
-<Page title="Join" dek="Physicists, biologists, cognitive scientists, philosophers and contemplative practitioners. There is no membership fee and no application." local={false} wide>
+<Page title="Join" dek="Physicists, biologists, cognitive scientists, philosophers and contemplative practitioners. Help build the scientific culture we wish existed." local={false} wide>
   <div class="join-grid">
     <article class="join-card">
       <span class="k">Stay in touch</span>
@@ -13,7 +13,7 @@ import { links } from "../data/site";
     <article class="join-card">
       <span class="k">Any time</span>
       <h2>The forum</h2>
-      <p>Our Hylo community forum, for research discussions, sharing related events, organizing local meetups. It has a map of members.</p>
+      <p>Our Hylo community forum, for research discussions, sharing related events, organizing local meetups (using a geographic map of members).</p>
       <a class="btn ghost" href={links.forum}>Join the forum</a>
     </article>
     <article class="join-card">
@@ -21,14 +21,13 @@ import { links } from "../data/site";
       <h2>Calls and reading groups</h2>
       <p>A monthly call, open to anyone curious, and reading groups that come and go. Dates are on the calendar.</p>
       <a class="btn ghost" href="/gatherings/calls/">Calls and reading groups</a>
-      <p style="margin-top:10px"><a href={links.calendar}>Calendar →</a></p>
+      <p style="margin-top:10px"><a href={links.calendar}>Calendar on Hylo →</a> <span class="muted">(join the forum first)</span></p>
     </article>
   </div>
 
   <section class="block prose">
     <h2>Taking part more</h2>
     <p>Write for the blog: see <a href="/writing/#contribute">contributing to the blog</a>. To host a call, propose a reading group or a working group, or bring us to your institution, <a href="#" class="mail" data-u="cscs.conference" data-d="gmail.com">write to us</a>.</p>
-    <p>Already a member? The <a href={links.membersDirectory}>members directory</a> is shared with members only.</p>
   </section>
 </Page>
 <style>

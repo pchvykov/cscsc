@@ -15,7 +15,7 @@ const oneKind = (list: typeof evs) => new Set(list.map(kindOf)).size === 1;
 const recs = (await getCollection("videos", (v) => v.data.kind === "recording")).sort((a, b) => +b.data.date - +a.data.date);
 ---
 <Page title="Calls and reading groups" dek="A monthly call, open to anyone curious, and reading groups that come and go." section="Gatherings">
-  <p><a class="btn solid" href={links.calendar}>Calendar</a> <a class="btn ghost" href={links.emailSignup}>Get updates by email</a></p>
+  <p><a class="btn solid" href={links.calendar}>Calendar on Hylo</a> <span class="muted">(join the forum first)</span> <a class="btn ghost" href={links.emailSignup}>Get updates by email</a></p>
   {nextCalls.length > 0 && (<section data-hide-empty="next-calls" hidden={!nextCalls.some((e) => endOf(e) >= buildDay)}>
     <h2>Next</h2>
     <ul class="rows" id="next-calls">{nextCalls.map((e) => <li data-until={endOf(e)} hidden={endOf(e) < buildDay}><div class="when">{!oneKind(nextCalls) && <b>{kindOf(e)}</b>}{when(e)}</div><div><h3><a href={`/gatherings/${e.id}/`}>{e.data.title}</a></h3>{e.data.summary && <p>{e.data.summary}</p>}</div></li>)}</ul>

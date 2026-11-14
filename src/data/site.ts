@@ -5,8 +5,7 @@ export const links = {
   emailSignup: "https://www.notion.so/286d8cae0cfe8031833ac1a301824aa0",
   forum: "https://www.hylo.com/groups/cscsc/join/FfOYDYCOfG",
   youtube: "https://www.youtube.com/@cscs.conference/videos",
-  calendar: "https://cscsc.notion.site/30cd8cae0cfe8035b132f5ba0d4ddc55?v=30cd8cae0cfe80a29eba000c185bc0a6",
-  membersDirectory: "https://cscsc.notion.site/286d8cae0cfe815d9a59de2c30a21407?v=286d8cae0cfe81c4b333000c682030be",
+  calendar: "https://www.hylo.com/groups/cscsc/events", // Hylo events; members only
   workAlivePractice: "https://workalive.lovable.app/",
   workAliveApp: "https://www.workalive.space/",
   vision: "/vision/",

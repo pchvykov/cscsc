@@ -11,7 +11,7 @@ const fullTitle = title ? `${title} · ${site}` : site;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -31,7 +31,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="alternate" type="application/rss+xml" title="Writing" href="/writing/rss.xml" />
   <script is:inline>
-    try { if (localStorage.getItem("theme") === "dark") document.documentElement.dataset.theme = "dark"; } catch (e) {}
+    try { if (localStorage.getItem("theme") === "light") document.documentElement.dataset.theme = "light"; } catch (e) {}
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
