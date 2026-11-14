@@ -14,7 +14,7 @@ const events = (await getCollection("events")).map((e) => ({
   title: e.data.title, blurb: e.data.summary ?? "", href: `/gatherings/${e.id}/`, featured: e.data.featured,
 }));
 const posts = (await getCollection("posts", (p) => !p.data.draft)).map((p) => ({
-  date: p.data.date, end: undefined, label: "Writing", title: p.data.title, blurb: p.data.excerpt ?? "", href: `/writing/${p.id}/`, featured: false,
+  date: p.data.date, end: undefined, label: "Blog", title: p.data.title, blurb: p.data.excerpt ?? "", href: `/blog/${p.id}/`, featured: false,
 }));
 const pubs = (await getCollection("publications")).map((p) => ({
   date: p.data.date, end: undefined, label: p.data.kind === "proceedings" ? "Proceedings" : "Publication", title: p.data.title, blurb: p.data.summary ?? "", href: p.data.href, featured: true,

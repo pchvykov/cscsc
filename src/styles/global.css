@@ -490,3 +490,4 @@ section[data-hide-empty][hidden] + section.block { padding-top: 40px; }
 .wip .wrap { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 7px 0; }
 .wip button { background: none; border: 0; color: var(--muted); cursor: pointer; font-size: 0.85rem; padding: 4px 6px; }
 .wip button:hover { color: var(--ink); }
+.outputs > p.muted { margin-top: 14px; font-size: 0.92rem; }

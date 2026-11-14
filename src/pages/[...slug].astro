@@ -4,12 +4,16 @@ import { getCollection, render } from "astro:content";
 import Page from "../layouts/Page.astro";
 import { titleCase, summarize } from "../lib/text";
 import { enhance } from "../lib/enhance";
+import { fmtDate } from "../lib/text";
 
 export async function getStaticPaths() {
   const pages = await getCollection("pages", (p) => !p.data.draft && !p.id.includes("_hub") && !p.id.startsWith("_"));
   return pages.map((p) => ({ params: { slug: p.data.path.replace(/^\/|\/$/g, "") || undefined }, props: { entry: p } }));
 }
 const { entry } = Astro.props;
+// The Research page ends with what came out of the work: proceedings, reports and papers.
+const outputs = entry.data.path === "/research/" ? (await getCollection("publications")).sort((a, b) => +b.data.date - +a.data.date) : [];
+const kindLabel: Record<string, string> = { proceedings: "Proceedings", report: "Report", paper: "Paper", preprint: "Preprint", essay: "Essay" };
 const { headings } = await render(entry);
 const body = enhance(entry.rendered?.html ?? "", { mapHeadings: true });
 // Long pages get an "On this page" list from their top-level headings.
@@ -25,6 +29,18 @@ const toc = !body.hasMap && outline.length >= 3 ? outline.map((h) => ({ ...h, te
     </>
   )}
   <Fragment set:html={body.html} />
+  {outputs.length > 0 && (
+    <section id="outputs" class="outputs">
+      <h2>Outputs</h2>
+      <ul class="rows">
+        {outputs.map((o) => (
+          <li><div class="when"><b>{kindLabel[o.data.kind]}</b>{fmtDate(o.data.date)}</div>
+          <div><h3><a href={o.data.href}>{o.data.title}</a></h3>{o.data.summary && <p>{o.data.summary}</p>}{o.data.authors && <p>{o.data.authors}</p>}</div></li>
+        ))}
+      </ul>
+      <p class="muted">The Honest Science proceedings are in preparation.</p>
+    </section>
+  )}
   {entry.data.layout === "glossary" && (
     <script is:inline>
       (function () {

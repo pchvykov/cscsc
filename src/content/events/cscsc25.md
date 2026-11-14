@@ -129,7 +129,7 @@ From this conference, we are developing:
 **Get Involved**
 
 - Read [Learning center](/learn/)
-- Propose collaboration ideas through [BLOG & UPDATES](/writing/)
+- Propose collaboration ideas through [BLOG & UPDATES](/blog/)
 - Watch for announcements about our **Spring 2026 conference**
 
 ---

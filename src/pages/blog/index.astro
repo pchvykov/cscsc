@@ -7,10 +7,10 @@ const posts = (await getCollection("posts", (p) => !p.data.draft)).sort((a, b) =
 const people = await getCollection("people");
 const nameOf = (id: string) => people.find((p) => p.id === id)?.data.name ?? id;
 const cats = [...new Set(posts.map((p) => p.data.category).filter(Boolean))] as string[];
-const hub = await getEntry("pages", "writing/_hub");
+const hub = await getEntry("pages", "blog/_hub");
 const Hub = hub ? (await render(hub)).Content : null;
 ---
-<Page title="Writing" dek="Updates from our conferences, reflections on key questions in the field, and write-ups of community calls." wide local={false}>
+<Page title="Blog" dek="Updates from our conferences, reflections on key questions in the field, and write-ups of community calls." wide local={false}>
   <h2 class="visually-hidden">All posts</h2>
   <div class="dv-bar" data-filter-root>
     <div class="dv-filters" role="group" aria-label="Filter by category">
@@ -22,9 +22,9 @@ const Hub = hub ? (await render(hub)).Content : null;
   <ul class="rows" id="post-list">
     {posts.map((p) => (
       <li data-cat={p.data.category ?? ""}>
-        <div class="when"><b>{p.data.category ?? "Writing"}</b>{fmtDate(p.data.date)}</div>
+        <div class="when"><b>{p.data.category ?? "Post"}</b>{fmtDate(p.data.date)}</div>
         <div>
-          <h3><a href={`/writing/${p.id}/`}>{p.data.title}</a></h3>
+          <h3><a href={`/blog/${p.id}/`}>{p.data.title}</a></h3>
           {p.data.excerpt && <p>{p.data.excerpt}</p>}
           {p.data.authors.length > 0 && <p style="font-size:.85rem;margin-top:6px">{p.data.authors.map(nameOf).join(", ")}{p.data.reading_time && ` · ${p.data.reading_time}`}</p>}
         </div>

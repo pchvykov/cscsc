@@ -23,7 +23,7 @@ JOIN US! [Add your email here for updates](https://cscsc.notion.site/286d8cae0cf
 
 ---
 
-| [ABOUT CSCSC](/about/) | [LIVE EVENTS](/gatherings/) | [RESOURCES](/resources/) | [BLOG & UPDATES](/writing/) |
+| [ABOUT CSCSC](/about/) | [LIVE EVENTS](/gatherings/) | [RESOURCES](/resources/) | [BLOG & UPDATES](/blog/) |
 |---|---|---|---|
 | [Core questions](/research/questions/) | [Honest Science Workshop](/gatherings/honest-science-2026/) | [Research Centers](/resources/centers/) | [CSCSC25 Conference](/gatherings/cscsc25/) |
 | [Learning center](/learn/) | [Work Alive Retreat](/gatherings/work-alive-2026/) | [Funding Opportunities](/resources/funding/) | [Practice Menu](/learn/practices/) |
@@ -122,7 +122,7 @@ Explore our menu of 10-min contemplative practices across traditions, and shared
 
 [**Next Conference:**](/) [Fall 2026!](/)
 
-**Collaboration Opportunities:** [BLOG & UPDATES](/writing/)
+**Collaboration Opportunities:** [BLOG & UPDATES](/blog/)
 
 Questions, ideas, want to collaborate on something? Reach out to us at [cscs.conference@gmail.com](mailto:cscs.conference@gmail.com)
 
@@ -134,7 +134,7 @@ Questions, ideas, want to collaborate on something? Reach out to us at [cscs.con
 
 <a class="page-link" href="/resources/">RESOURCES</a>
 
-<a class="page-link" href="/writing/">BLOG & UPDATES</a>
+<a class="page-link" href="/blog/">BLOG & UPDATES</a>
 
 [https://intp.science/en/events/mindful-co-working-retreat-2025](https://intp.science/en/events/mindful-co-working-retreat-2025)
 

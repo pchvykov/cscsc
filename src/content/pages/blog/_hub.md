@@ -1,6 +1,6 @@
 ---
 title: "BLOG & UPDATES"
-path: "/writing/"
+path: "/blog/"
 notion_id: "286d8cae-0cfe-8154-963b-e1012a87f930"
 notion_edited: "2026-06-04"
 icon: "📝"

@@ -22,7 +22,7 @@ export const nav: NavSection[] = [
     items: [
       { label: "Research programs", href: "/research/" },
       { label: "Core questions", href: "/research/questions/", note: "What we are asking" },
-      { label: "Publications", href: "/research/publications/", note: "Proceedings and reports" },
+      { label: "Outputs", href: "/research/#outputs", note: "Proceedings and reports" },
     ],
   },
   {
@@ -50,7 +50,7 @@ export const nav: NavSection[] = [
   {
     label: "Watch & read", base: "/watch",
     items: [
-      { label: "Writing", href: "/writing/", note: "Essays, reflections and call write-ups" },
+      { label: "Blog", href: "/blog/", note: "Essays, reflections and call write-ups" },
       { label: "Videos", href: "/videos/", note: "Talks, films and recordings" },
       { label: "The vision", href: "/vision/", note: "An animated introduction" },
     ],
@@ -78,7 +78,7 @@ export const nav: NavSection[] = [
 // Which top-level section a path belongs to (for the "you are here" mark).
 export function sectionOf(path: string): string | undefined {
   const p = path.endsWith("/") ? path : path + "/";
-  if (p.startsWith("/writing/") || p.startsWith("/videos/") || p.startsWith("/vision/")) return "Watch & read";
+  if (p.startsWith("/blog/") || p.startsWith("/videos/") || p.startsWith("/vision/")) return "Watch & read";
   return nav.find((s) => p.startsWith(s.base + "/"))?.label;
 }
 

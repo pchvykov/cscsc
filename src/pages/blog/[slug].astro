@@ -16,21 +16,21 @@ const i = all.findIndex((x) => x.id === p.id);
 const newer = all[i - 1], older = all[i + 1];
 const meta = [fmtDate(p.data.date, { day: "numeric", month: "long", year: "numeric" }), authors.map((a) => a!.data.name).join(", "), p.data.reading_time].filter(Boolean).join(" · ");
 ---
-<Page title={p.data.title} description={p.data.excerpt ?? summarize(p.body)} crumbs={[{ label: "Writing", href: "/writing/" }, ...(p.data.category ? [{ label: p.data.category, href: "/writing/" }] : [])]} local={false} kind="post">
+<Page title={p.data.title} description={p.data.excerpt ?? summarize(p.body)} crumbs={[{ label: "Blog", href: "/blog/" }, ...(p.data.category ? [{ label: p.data.category, href: "/blog/" }] : [])]} local={false} kind="post">
   <Fragment slot="aside">
     <dl>
       <dt>Published</dt><dd>{fmtDate(p.data.date, { day: "numeric", month: "long", year: "numeric" })}</dd>
       {authors.length > 0 && <><dt>By</dt><dd>{authors.map((a) => a!.data.name).join(", ")}</dd></>}
       {p.data.reading_time && <><dt>Reading time</dt><dd>{p.data.reading_time.replace(/^~/, "about ")}</dd></>}
-      {p.data.category && <><dt>Category</dt><dd><a href={`/writing/?cat=${encodeURIComponent(p.data.category)}`}>{p.data.category}</a></dd></>}
+      {p.data.category && <><dt>Category</dt><dd><a href={`/blog/?cat=${encodeURIComponent(p.data.category)}`}>{p.data.category}</a></dd></>}
       {p.data.tags.length > 0 && <><dt>Topics</dt><dd>{p.data.tags.join(", ")}</dd></>}
     </dl>
-    <a class="btn ghost" href="/writing/">All writing</a>
+    <a class="btn ghost" href="/blog/">All posts</a>
   </Fragment>
   <Fragment set:html={body} />
-  <nav class="block" style="padding-top:40px" aria-label="More writing">
-    {older && <a class="page-link" href={`/writing/${older.id}/`}><span class="ic" aria-hidden="true">←</span>{older.data.title}</a>}
-    {newer && <a class="page-link" href={`/writing/${newer.id}/`}><span class="ic" aria-hidden="true">→</span>{newer.data.title}</a>}
-    <a class="page-link" href="/writing/">All writing</a>
+  <nav class="block" style="padding-top:40px" aria-label="More posts">
+    {older && <a class="page-link" href={`/blog/${older.id}/`}><span class="ic" aria-hidden="true">←</span>{older.data.title}</a>}
+    {newer && <a class="page-link" href={`/blog/${newer.id}/`}><span class="ic" aria-hidden="true">→</span>{newer.data.title}</a>}
+    <a class="page-link" href="/blog/">All posts</a>
   </nav>
 </Page>
