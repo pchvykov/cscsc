@@ -12,16 +12,14 @@ im = Image.open(src)
 if im.mode in ("RGBA", "LA", "P"):  # transparent background -> white
     im = im.convert("RGBA"); bg = Image.new("RGBA", im.size, (255, 255, 255, 255)); bg.alpha_composite(im); im = bg
 im = im.convert("RGB")
-# a square that runs past the image edge (to zoom out a tight photo) is filled with white
-# and the photo's edges are feathered into it, so no seam shows
-canvas = Image.new("RGB", (s, s), (255, 255, 255))
-if x < 0 or y < 0 or x + s > im.width or y + s > im.height:
-    f = max(8, s // 12)
-    mask = Image.new("L", im.size, 0)
-    mask.paste(255, (f if x < 0 else 0, f if y < 0 else 0, im.width - (f if x + s > im.width else 0), im.height - (f if y + s > im.height else 0)))
-    canvas.paste(im, (-x, -y), mask.filter(ImageFilter.GaussianBlur(f / 2)))
-else:
-    canvas.paste(im, (-x, -y))
+# a square that runs past the image edge (to zoom out a tight photo) is filled with the photo's
+# own background colour: the median of its outermost pixels
+from statistics import median
+px = im.load()
+border = [px[i, 0] for i in range(im.width)] + [px[1, j] for j in range(im.height)] + [px[im.width - 2, j] for j in range(im.height)]
+fill = tuple(int(median(c[k] for c in border)) for k in range(3))
+canvas = Image.new("RGB", (s, s), fill)
+canvas.paste(im, (-x, -y))
 im = canvas.resize((480, 480), Image.LANCZOS)
 g = ImageOps.autocontrast(ImageOps.grayscale(im), cutoff=2)
 g = ImageEnhance.Contrast(g).enhance(1.25).filter(ImageFilter.UnsharpMask(2, 80, 2))
