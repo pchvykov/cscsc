@@ -21,6 +21,8 @@ const recs = (await getCollection("videos", (v) => v.data.kind === "recording"))
     <h2>Coming up</h2>
     <ul class="rows" id="next-calls">{nextCalls.map((e) => <li data-until={endOf(e)} hidden={endOf(e) < buildDay}><div class="when">{!oneKind(nextCalls) && <b>{kindOf(e)}</b>}{when(e)}</div><div><h3><a href={`/gatherings/${e.id}/`}>{e.data.title}</a></h3>{e.data.summary && <p>{e.data.summary}</p>}</div></li>)}</ul>
   </section>)}
+  <h2>Reading groups</h2>
+  <a class="page-link" href="/gatherings/embodied-conversations/">Embodied Conversations: how the sessions run</a>
   <h2>Recordings</h2>
   <ul class="rows">{recs.map((v) => <li><div class="when">{when({ data: { date: v.data.date } } as any)}</div><div><h3><a href={`https://www.youtube.com/watch?v=${v.data.youtube}`}>{v.data.title}</a></h3></div></li>)}</ul>
   <h2>Past calls and groups</h2>

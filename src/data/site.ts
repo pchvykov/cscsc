@@ -31,6 +31,7 @@ export const nav: NavSection[] = [
       { label: "Upcoming and past", href: "/gatherings/" },
       // featured gatherings are inserted here from the events collection (lib/nav.ts)
       { label: "Calls and reading groups", href: "/gatherings/calls/" },
+      { label: "Embodied Conversations", href: "/gatherings/embodied-conversations/", note: "A feeling-first reading group" },
     ],
   },
   {

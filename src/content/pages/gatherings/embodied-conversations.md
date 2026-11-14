@@ -1,16 +1,9 @@
 ---
-title: "Embodied Conversations: Values and Form"
-date: "2026-06-24"
-category: "Collaboration"
-excerpt: "The aim is not to be right, or to arrive at the right opinion, but to move through something together and attend to what it opens."
-reading_time: "3 min read"
+title: "Embodied Conversations"
+path: "/gatherings/embodied-conversations/"
+description: "A feeling-first reading group: how the sessions run, the values that guide them, and the themes we explore."
 notion_id: "389d8cae-0cfe-8095-9106-e200398bcc5e"
 notion_edited: "2026-06-25"
-icon: "⚜️"
-authors: ["matthew-mccarthy"]
-image: "/media/blog/embodied-conversations-values-and-form.webp"
-image_credit: "Hasegawa Tōhaku, Public domain, via Wikimedia Commons"
-image_source: "https://commons.wikimedia.org/wiki/File:Hasegawa_Tohaku_-_Pine_Trees_(Sh%C5%8Drin-zu_by%C5%8Dbu)_-_right_hand_screen.jpg"
 ---
 
 ## The Aim
@@ -58,8 +51,4 @@ Any contributions are welcome here, but a few currents run through this communit
 
 ## Logistics and details
 
-Meeting time: Bi-weekly 11:00 am EST / 5:00pm CET (Starts on June 15th, 2026)
-
-Link to join: [https://meet.google.com/bpc-ofmr-xvu](https://meet.google.com/bpc-ofmr-xvu)
-
-Contact: If you would like to be added to the event calendar, or if you have any other questions, please let us know at cscs.conference@gmail.com
+Sessions are online, every two weeks. Dates and the joining link go out with our email updates.

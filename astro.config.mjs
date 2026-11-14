@@ -13,6 +13,7 @@ export default defineConfig({
     "/p4": "/ccs26/p4/",
     // Writing became the Blog.
     "/writing": "/blog/",
+    "/blog/embodied-conversations-values-and-form": "/gatherings/embodied-conversations/",
     "/writing/[slug]": "/blog/[slug]",
   },
 });
