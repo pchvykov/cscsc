@@ -99,6 +99,6 @@ The limits of mind-as-computation, pointing toward frameworks that honor both co
 
 <div class="card-box">
 
-[**Stay in touch**](https://app.notion.com/p/286d8cae0cfe8031833ac1a301824aa0) *for updates* · [Join our forum](https://www.hylo.com/groups/cscsc/join/FfOYDYCOfG)
+[**Stay in touch**](https://cscsc.notion.site/286d8cae0cfe8031833ac1a301824aa0) *for updates* · [Join our forum](https://www.hylo.com/groups/cscsc/join/FfOYDYCOfG)
 
 </div>
