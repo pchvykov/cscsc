@@ -277,6 +277,8 @@ Notes on the relationship between mathematical thinking, spiritual insight, and 
 
 *Martin Nowak*
 
+<a class="bookmark" href="/media/nowak-science-and-inspiration.pdf"><b>Science and Inspiration</b><span>PDF</span></a>
+
 ### What is Lyric Philosophy?
 The importance of lyric, resonant truth as a peer of analytic truth in understanding reality.
 
