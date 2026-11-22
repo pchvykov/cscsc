@@ -8,7 +8,7 @@ export const org = {
   "@type": "Organization",
   "@id": `${SITE}/#org`,
   name: "Complexity Science & Contemplative Studies Consortium",
-  alternateName: ["CSCSC", "Complexity & Contemplation"],
+  alternateName: ["Complexity & Contemplation", "CSCSC"],
   url: `${SITE}/`,
   logo: abs("/favicon-512.png"),
   image: abs("/og-image.jpg"),
@@ -20,7 +20,7 @@ export const org = {
 export function homeLd() {
   return {
     "@context": "https://schema.org",
-    "@graph": [org, { "@type": "WebSite", "@id": `${SITE}/#website`, url: `${SITE}/`, name: "Complexity & Contemplation", alternateName: "CSCSC", publisher: { "@id": org["@id"] } }],
+    "@graph": [org, { "@type": "WebSite", "@id": `${SITE}/#website`, url: `${SITE}/`, name: org.name, alternateName: org.alternateName, publisher: { "@id": org["@id"] } }],
   };
 }
 
