@@ -6,6 +6,7 @@ import { fmtDate, summarize } from "../../lib/text";
 import DateSwitch from "../../components/DateSwitch.astro";
 import { enhance } from "../../lib/enhance";
 import { iso, buildDay } from "../../lib/dates";
+import { eventLd } from "../../lib/schema";
 
 export async function getStaticPaths() {
   return (await getCollection("events")).map((e) => ({ params: { slug: e.id }, props: { e } }));
@@ -20,9 +21,11 @@ const videos = (await getCollection("videos", (v) => v.data.event === e.id)).sor
 const oneKind = new Set(videos.map((v) => v.data.kind)).size === 1;
 const pubs = await getCollection("publications", (p) => p.data.event === e.id);
 const endDay = iso(e.data.end_date ?? e.data.date);
+const description = e.data.summary ?? summarize(e.body);
+const ld = eventLd({ ...e.data, description, image: e.data.image ?? e.data.cover, path: `/gatherings/${e.id}/` });
 const subpages = (await getCollection("pages", (p) => p.data.path.startsWith(`/gatherings/${e.id}/`))).sort((a, b) => a.data.path.localeCompare(b.data.path));
 ---
-<Page title={e.data.title} docTitle={e.data.featured ? e.data.title : `${e.data.title}, ${fmtDate(e.data.date)}`} cover={e.data.cover} description={e.data.summary ?? summarize(e.body)} image={e.data.image ?? e.data.cover} crumbs={[{ label: "Gatherings", href: "/gatherings/" }]} dek={emptyBody ? e.data.summary : undefined}
+<Page title={e.data.title} docTitle={e.data.featured ? e.data.title : `${e.data.title}, ${fmtDate(e.data.date)}`} cover={e.data.cover} description={description} jsonLd={ld} image={e.data.image ?? e.data.cover} crumbs={[{ label: "Gatherings", href: "/gatherings/" }]} dek={emptyBody ? e.data.summary : undefined}
   local={false}>
   {!emptyBody && <Fragment slot="aside">
     <dl>

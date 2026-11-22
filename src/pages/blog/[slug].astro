@@ -3,6 +3,7 @@ import { getCollection, render } from "astro:content";
 import Page from "../../layouts/Page.astro";
 import { fmtDate, summarize } from "../../lib/text";
 import { enhance } from "../../lib/enhance";
+import { postLd } from "../../lib/schema";
 
 export async function getStaticPaths() {
   return (await getCollection("posts", (p) => !p.data.draft)).map((p) => ({ params: { slug: p.id }, props: { p } }));
@@ -14,9 +15,11 @@ const authors = p.data.authors.map((id) => people.find((x) => x.id === id)).filt
 const all = (await getCollection("posts", (x) => !x.data.draft)).sort((a, b) => +b.data.date - +a.data.date);
 const i = all.findIndex((x) => x.id === p.id);
 const newer = all[i - 1], older = all[i + 1];
+const description = p.data.excerpt ?? summarize(p.body);
+const ld = postLd({ title: p.data.title, date: p.data.date, description, image: p.data.image, authors: authors.map((a) => a!.data.name), path: `/blog/${p.id}/` });
 const meta = [fmtDate(p.data.date, { day: "numeric", month: "long", year: "numeric" }), authors.map((a) => a!.data.name).join(", "), p.data.reading_time].filter(Boolean).join(" · ");
 ---
-<Page title={p.data.title} cover={p.data.image} coverCredit={p.data.image_credit} coverSource={p.data.image_source} image={p.data.image} description={p.data.excerpt ?? summarize(p.body)} crumbs={[{ label: "Blog", href: "/blog/" }, ...(p.data.category ? [{ label: p.data.category, href: "/blog/" }] : [])]} local={false} kind="post">
+<Page title={p.data.title} cover={p.data.image} coverCredit={p.data.image_credit} coverSource={p.data.image_source} image={p.data.image} description={description} ogType="article" jsonLd={ld} crumbs={[{ label: "Blog", href: "/blog/" }, ...(p.data.category ? [{ label: p.data.category, href: "/blog/" }] : [])]} local={false} kind="post">
   <Fragment slot="aside">
     <dl>
       <dt>Published</dt><dd>{fmtDate(p.data.date, { day: "numeric", month: "long", year: "numeric" })}</dd>

@@ -3,6 +3,7 @@
 // publications collections at build time.
 import "../styles/home.css";
 import Base from "../layouts/Base.astro";
+import { homeLd } from "../lib/schema";
 import { getCollection } from "astro:content";
 import { links } from "../data/site";
 import { fmtDate } from "../lib/text";
@@ -31,7 +32,7 @@ const recent = pool.filter((x) => x.e < t0);
 const shown = new Set([...upcoming, ...recent].slice(0, 4));
 const latest = pool.map((x) => ({ ...x, next: upcoming.includes(x), on: shown.has(x) }));
 ---
-<Base>
+<Base fullTitle="Complexity Science & Contemplative Studies Consortium (CSCSC)" jsonLd={homeLd()}>
   <section class="hero">
     <div class="wrap">
       <figure class="hero-mark" style="margin:0">
