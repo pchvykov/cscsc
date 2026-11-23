@@ -31,7 +31,7 @@ for updates on new posts, conferences, publications, and research opportunities
 
 Our first conference brought together 47 researchers from 30+ institutions to explore the intersection of complexity science and contemplative studies. The three-day virtual workshop featured keynote talks from Michael Levin (Tufts), Martin Nowak (Harvard), and Gary Lupyan (UW-Madison), alongside mindfulness practices, breakout discussions, and collaborative workshops.
 
-[Watch the recordings on YouTube](https://www.youtube.com/@cscs.conference/streams)
+[Watch the recordings on YouTube](https://www.youtube.com/@complexity.contemplation/streams)
 
 [CSCSC25 Conference](/gatherings/cscsc25/)<br>[Key Themes and Insights](/gatherings/cscsc25/key-themes/) <br>[Conference Schedule](/gatherings/cscsc25/schedule/)
 

@@ -352,7 +352,7 @@ We held our **inaugural CSCSC25 conference** in October 2025, featuring speakers
 
 [Learn more about CSCSC →](/)
 
-[Watch CSCSC25 recordings →](https://www.youtube.com/@cscs.conference/streams)
+[Watch CSCSC25 recordings →](https://www.youtube.com/@complexity.contemplation/streams)
 
 [Join our community forum →](https://www.hylo.com/groups/cscsc/join/FfOYDYCOfG)
 

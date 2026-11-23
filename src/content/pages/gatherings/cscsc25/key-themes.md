@@ -228,4 +228,4 @@ The conference culminated in articulating what defines CSCSC:
 
 ---
 
-*Conference recordings available on* [*CSCSC YouTube Channel*](https://www.youtube.com/@cscs.conference/streams)
+*Conference recordings available on* [*CSCSC YouTube Channel*](https://www.youtube.com/@complexity.contemplation/streams)

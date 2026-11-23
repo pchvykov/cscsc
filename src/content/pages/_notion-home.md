@@ -15,7 +15,7 @@ icon: "notion://custom_emoji/24716bf2-6d5a-4250-901b-819a4e14a08d/289d8cae-0cfe-
 
 We are an emerging research community studying how complexity science and contemplative studies illuminate each other—to understand minds, societies, and human flourishing through both empirical rigor and experiential depth.
 
-[See our vision animation](/vision/) | [**Watch CSCSC25 Recordings**](https://www.youtube.com/@cscs.conference/streams)
+[See our vision animation](/vision/) | [**Watch CSCSC25 Recordings**](https://www.youtube.com/@complexity.contemplation/streams)
 
 JOIN US! [Add your email here for updates](https://cscsc.notion.site/286d8cae0cfe8031833ac1a301824aa0?pvs=105) on our online discussions and events
 
@@ -63,7 +63,7 @@ for research discussions, sharing related events, organizing local meetups
 
 Our inaugural workshop brought together researchers exploring complexity science and contemplative studies.
 
-[Watch recordings on YouTube](https://www.youtube.com/@cscs.conference/streams) <br>[CSCSC25 Conference](/gatherings/cscsc25/)<br>[Key Themes and Insights](/gatherings/cscsc25/key-themes/)
+[Watch recordings on YouTube](https://www.youtube.com/@complexity.contemplation/streams) <br>[CSCSC25 Conference](/gatherings/cscsc25/)<br>[Key Themes and Insights](/gatherings/cscsc25/key-themes/)
 
 </div>
 

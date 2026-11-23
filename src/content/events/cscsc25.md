@@ -19,7 +19,7 @@ summary: "October 8-10, 2025 | Virtual (Zoom) | 47 researchers from 30+ institut
 
 <aside class="note">
 
-**Watch the recordings:** [CSCSC YouTube Channel](https://www.youtube.com/@cscs.conference/streams)
+**Watch the recordings:** [CSCSC YouTube Channel](https://www.youtube.com/@complexity.contemplation/streams)
 
 </aside>
 
@@ -115,7 +115,7 @@ Each day included:
 
 From this conference, we are developing:
 
-**Consensus on core questions, methods, and objectives** of this field<br>**Resource maps:** funding sources, publication outlets, research centers, participant directory<br>**Recorded talks and discussions** converted to essays and [uploaded to YouTube](https://www.youtube.com/@cscs.conference/streams)<br>**Glossary of key terms** with agreed-upon definitions: [Our Language](/learn/glossary/) <br>**Online research hub** for ongoing collaboration and resource sharing (this site)<br>**Planning for in-person meeting** in 2026
+**Consensus on core questions, methods, and objectives** of this field<br>**Resource maps:** funding sources, publication outlets, research centers, participant directory<br>**Recorded talks and discussions** converted to essays and [uploaded to YouTube](https://www.youtube.com/@complexity.contemplation/streams)<br>**Glossary of key terms** with agreed-upon definitions: [Our Language](/learn/glossary/) <br>**Online research hub** for ongoing collaboration and resource sharing (this site)<br>**Planning for in-person meeting** in 2026
 
 ---
 
