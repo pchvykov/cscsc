@@ -502,3 +502,38 @@ section[data-hide-empty][hidden] + section.block { padding-top: 40px; }
 .poster:hover img { transform: scale(1.02); }
 .poster::after { content: ""; position: absolute; left: 50%; top: 50%; width: 68px; height: 48px; transform: translate(-50%, -50%); border-radius: 12px; background: rgba(20,20,20,0.78) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M9 7v10l8-5z'/%3E%3C/svg%3E") center / 30px no-repeat; transition: background-color .2s; }
 .poster:hover::after { background-color: var(--accent); }
+
+/* ---------- Ink marks and dividers ----------
+   Marks (data/marks.ts, public/assets/marks/) are drawn like the theme glyphs but sit in
+   muted ink: they help the eye find a section, colour stays with the themes. Dividers are
+   hairlines that start from (or centre on) the site's ensō and fade out like a brush stroke.
+   Decoration only: nothing here adds height or moves text. */
+.mark { display: inline-block; flex: none; width: 24px; height: 24px; background: var(--muted);
+  -webkit-mask: var(--mark) center / contain no-repeat; mask: var(--mark) center / contain no-repeat; }
+.sec-mark .mark { width: 30px; height: 30px; margin-block: -6px; }
+.section-map a:has(.mark) { grid-template-columns: 18px 1.9em 1fr; column-gap: 8px; }
+.section-map a:has(.mark) .mark { grid-column: 1; width: 18px; height: 18px; align-self: center; }
+.section-map a:has(.mark) .num { grid-column: 2; }
+.section-map a:has(.mark) .t { grid-column: 3; }
+.section-map a:has(.mark):hover .mark { background: var(--accent); }
+.section-head h2 { display: flex; align-items: center; gap: 0.38em; }
+.section-head h2 .mark { width: 0.85em; height: 0.85em; }
+.page-head .crumb { align-items: center; }
+.page-head .crumb .mark { width: 18px; height: 18px; margin-block: -3px; }
+
+/* A heading's hairline starts from a small ensō and fades out */
+.prose > h2:not(:first-child, .section-map + h2) { position: relative;
+  border-image: linear-gradient(90deg, transparent 0 24px, var(--rule) 24px, var(--rule) 65%, transparent) 1; }
+.prose > h2:not(:first-child, .section-map + h2)::before { content: ""; position: absolute; left: 0; top: -9.5px; width: 18px; height: 18px;
+  background: var(--muted); opacity: 0.8; -webkit-mask: url("/assets/enso-mask.webp") center / contain no-repeat; mask: url("/assets/enso-mask.webp") center / contain no-repeat; }
+/* Index-page section heads: the rule under the heading fades out to the right */
+.section-head { border-image: linear-gradient(90deg, var(--rule), var(--rule) 60%, transparent) 1; }
+/* A divider between paragraphs: a small ensō between two short strokes (same height as the gap it replaces) */
+.prose hr { height: 14px; margin-block: calc(1.6rem - 7px); background: var(--muted); opacity: 0.75;
+  -webkit-mask: url("/assets/enso-mask.webp") center / 14px no-repeat, linear-gradient(#000 0 0) calc(50% - 30px) center / 36px 1px no-repeat, linear-gradient(#000 0 0) calc(50% + 30px) center / 36px 1px no-repeat;
+          mask: url("/assets/enso-mask.webp") center / 14px no-repeat, linear-gradient(#000 0 0) calc(50% - 30px) center / 36px 1px no-repeat, linear-gradient(#000 0 0) calc(50% + 30px) center / 36px 1px no-repeat; }
+/* The footer opens on an ensō centred in a rule that fades at both ends */
+.site-footer { position: relative;
+  border-image: linear-gradient(90deg, transparent, var(--rule) 25%, var(--rule) calc(50% - 22px), transparent calc(50% - 22px) calc(50% + 22px), var(--rule) calc(50% + 22px), var(--rule) 75%, transparent) 1; }
+.site-footer::before { content: ""; position: absolute; left: 50%; top: -11px; width: 20px; height: 20px; transform: translateX(-50%);
+  background: var(--muted); opacity: 0.8; -webkit-mask: url("/assets/enso-mask.webp") center / contain no-repeat; mask: url("/assets/enso-mask.webp") center / contain no-repeat; }

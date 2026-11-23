@@ -1,5 +1,6 @@
 ---
 import { getCollection } from "astro:content";
+import Mark from "../../components/Mark.astro";
 import Page from "../../layouts/Page.astro";
 import { links } from "../../data/site";
 
@@ -22,7 +23,7 @@ const thumb = (id?: string) => id ? `https://i.ytimg.com/vi/${id}/mqdefault.jpg`
 <Page title="Videos" dek="Talks, recorded calls and short films." wide local={false}>
   <Fragment slot="head"><p style="margin:14px 0 0"><a href={links.youtube}>All videos on YouTube →</a></p></Fragment>
   <section>
-    <div class="section-head"><h2>Start here</h2></div>
+    <div class="section-head"><h2><Mark for="Start here" />Start here</h2></div>
     <div class="cards">
       <a class="card" href="/vision/">
         <div class="thumb"><img src="/vision/landing_image_mid.webp" alt="" loading="lazy" /></div>
@@ -38,7 +39,7 @@ const thumb = (id?: string) => id ? `https://i.ytimg.com/vi/${id}/mqdefault.jpg`
   </section>
   {groups.map((g) => (
     <section class="block">
-      <div class="section-head"><h2>{g.title}</h2>{g.href && <a href={g.href}>About this gathering →</a>}</div>
+      <div class="section-head"><h2><Mark name={g.href ? "flame" : undefined} for={g.title} />{g.title}</h2>{g.href && <a href={g.href}>About this gathering →</a>}</div>
       <div class="cards">
         {g.list.map((v) => (
           <a class="card" href={`https://www.youtube.com/watch?v=${v.data.youtube}`}>

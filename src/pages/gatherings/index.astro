@@ -1,5 +1,6 @@
 ---
 import { getEntry, render } from "astro:content";
+import Mark from "../../components/Mark.astro";
 import Page from "../../layouts/Page.astro";
 import { allEvents, kindOf, when } from "../../lib/events";
 import DateSwitch from "../../components/DateSwitch.astro";
@@ -22,7 +23,7 @@ const Hub = hub ? (await render(hub)).Content : null;
 <Page title="Gatherings" dek="Retreats, conference sessions and online calls. We design how we meet as carefully as what we discuss." wide local={false}>
   <p class="empty-line" data-empty-for="upcoming" hidden={soon.some((e) => end(e) >= buildDay)}>Nothing announced yet. Our email updates are the first place new gatherings appear. <a href="/gatherings/calls/">Calls and reading groups →</a></p>
   <section data-hide-empty="upcoming" hidden={!soon.some((e) => end(e) >= buildDay)}>
-    <div class="section-head"><h2>Upcoming</h2><a href="/gatherings/calls/">Calls and reading groups →</a></div>
+    <div class="section-head"><h2><Mark for="Upcoming" />Upcoming</h2><a href="/gatherings/calls/">Calls and reading groups →</a></div>
     <ul class="rows" id="upcoming" data-next-group>
       {soon.map((e, n) => (
         <li class={n === 0 && end(e) >= buildDay ? "next" : undefined} data-until={end(e)} hidden={end(e) < buildDay}>
@@ -34,7 +35,7 @@ const Hub = hub ? (await render(hub)).Content : null;
   </section>
 
   <section class="block first">
-    <div class="section-head"><h2>Main gatherings</h2></div>
+    <div class="section-head"><h2><Mark for="Main gatherings" />Main gatherings</h2></div>
     <div class="cards">
       {featured.map((e) => (
         <a class="card" href={`/gatherings/${e.id}/`} data-after={end(e)} hidden={end(e) >= buildDay}>
@@ -48,7 +49,7 @@ const Hub = hub ? (await render(hub)).Content : null;
   </section>
 
   <section class="block">
-    <div class="section-head"><h2>Past calls and meetings</h2></div>
+    <div class="section-head"><h2><Mark for="Past calls and meetings" />Past calls and meetings</h2></div>
     {[...byYear].map(([y, list]) => (
       <>
         <h3 class="eyebrow" style="margin:28px 0 4px">{y}</h3>

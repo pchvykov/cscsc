@@ -2,6 +2,8 @@
 import Base from "./Base.astro";
 import LocalNav from "../components/LocalNav.astro";
 import { sectionOf } from "../data/site";
+import Mark from "../components/Mark.astro";
+import { sectionMark } from "../data/marks";
 
 interface Props { title: string; docTitle?: string; image?: string; toc?: { depth: number; slug: string; text: string }[]; description?: string; dek?: string; cover?: string; crumbs?: { label: string; href: string }[]; meta?: string; section?: string; wide?: boolean; local?: boolean; kind?: string; coverCredit?: string; coverSource?: string; ogType?: "website" | "article"; jsonLd?: object | object[] }
 const { title, docTitle, image, toc = [], description, dek, cover, crumbs = [], meta, section, wide = false, local = true, kind, coverCredit, coverSource, ogType, jsonLd } = Astro.props;
@@ -13,7 +15,7 @@ const inColumn = !!dek && local && !Astro.slots.has("aside");
   <div class="wrap">
     <header class="page-head">
       {(crumbs.length > 0 || sec) && (
-        <div class="crumb">{crumbs.length ? crumbs.map((c, n) => <>{n > 0 && <span aria-hidden="true">/</span>}<a href={c.href}>{c.label}</a></>) : <span>{sec}</span>}</div>
+        <div class="crumb">{sec && sectionMark[sec] && <Mark name={sectionMark[sec]} />}{crumbs.length ? crumbs.map((c, n) => <>{n > 0 && <span aria-hidden="true">/</span>}<a href={c.href}>{c.label}</a></>) : <span>{sec}</span>}</div>
       )}
       <h1>{title}</h1>
       {dek && !inColumn && <p class="dek">{dek}</p>}

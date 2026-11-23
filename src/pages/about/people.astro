@@ -1,5 +1,6 @@
 ---
 import { getCollection, render } from "astro:content";
+import Mark from "../../components/Mark.astro";
 import Page from "../../layouts/Page.astro";
 // Bios are drafts awaiting review; set to true to show them.
 const showBios = true;
@@ -15,7 +16,7 @@ const initials = (n: string) => n.split(" ").map((w) => w[0]).slice(0, 2).join("
 ---
 <Page title="People" dek="CSCSC is run by volunteers. Below are the organizers, our advisory board, and some of the people who have spoken at our gatherings." wide local={false}>
   <section>
-    <div class="section-head"><h2>Organizers</h2></div>
+    <div class="section-head"><h2><Mark for="Organizers" />Organizers</h2></div>
     <div class="people-grid">
       {organizers.map(({ p, Bio }) => (
         <article class="person">
@@ -31,7 +32,7 @@ const initials = (n: string) => n.split(" ").map((w) => w[0]).slice(0, 2).join("
   </section>
 
   <section class="block">
-    <div class="section-head"><h2>Advisory board</h2></div>
+    <div class="section-head"><h2><Mark for="Advisory board" />Advisory board</h2></div>
     <div class="people-grid">
       {advisors.map(({ p, Bio }) => (
         <article class="person">
@@ -47,7 +48,7 @@ const initials = (n: string) => n.split(" ").map((w) => w[0]).slice(0, 2).join("
   </section>
 
   <section class="block">
-    <div class="section-head"><h2>Some past speakers</h2><a href="/videos/">All talks →</a></div>
+    <div class="section-head"><h2><Mark for="Some past speakers" />Some past speakers</h2><a href="/videos/">All talks →</a></div>
     <ul class="rows">
       {speakers.map((p) => {
         const talks = talksBy(p.data.name);

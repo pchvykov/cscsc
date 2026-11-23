@@ -2,6 +2,7 @@
 // Home page: prototype F. "Latest" is built from the events, posts and
 // publications collections at build time.
 import "../styles/home.css";
+import Mark from "../components/Mark.astro";
 import Base from "../layouts/Base.astro";
 import { homeLd } from "../lib/schema";
 import { getCollection } from "astro:content";
@@ -59,7 +60,7 @@ const latest = pool.map((x) => ({ ...x, next: upcoming.includes(x), on: shown.ha
 
 
   <section class="wrap" id="what" aria-labelledby="what-h">
-    <div class="section-head"><h2 id="what-h">What we do</h2></div>
+    <div class="section-head"><h2 id="what-h"><Mark for="What we do" />What we do</h2></div>
     <p class="lead">Contemplative traditions suggest the hypotheses. Complexity science looks for the mechanisms. We keep ourselves honest by practicing what we study.</p>
     <div class="doing">
       <a href="/research/">
@@ -87,7 +88,7 @@ const latest = pool.map((x) => ({ ...x, next: upcoming.includes(x), on: shown.ha
   </section>
 
   <section class="wrap" aria-labelledby="room-h">
-    <div class="section-head"><div><h2 id="room-h">From the room</h2><p class="muted" style="margin:6px 0 0;font-size:.92rem">What changes when a meeting is designed differently</p></div>
+    <div class="section-head"><div><h2 id="room-h"><Mark for="From the room" />From the room</h2><p class="muted" style="margin:6px 0 0;font-size:.92rem">What changes when a meeting is designed differently</p></div>
       <div class="qnav"><span class="qcount" aria-live="polite">1 / 5</span><button class="qprev" type="button" aria-label="Previous quote">‹</button><button class="qnext" type="button" aria-label="Next quote">›</button></div></div>
     <div class="quotes" aria-roledescription="carousel" aria-label="Quotes from participants">
       <div class="qtrack">
@@ -102,7 +103,7 @@ const latest = pool.map((x) => ({ ...x, next: upcoming.includes(x), on: shown.ha
   </section>
 
   <section class="wrap" aria-labelledby="latest-h">
-    <div class="section-head"><h2 id="latest-h">Latest</h2><a href="/gatherings/">All gatherings and outputs →</a></div>
+    <div class="section-head"><h2 id="latest-h"><Mark for="Latest" />Latest</h2><a href="/gatherings/">All gatherings and outputs →</a></div>
     <ul class="latest" id="latest">
       {latest.map((x) => (
         <li class={x.next ? "next" : undefined} hidden={!x.on} data-d={x.d} data-e={x.e}>
@@ -115,7 +116,7 @@ const latest = pool.map((x) => ({ ...x, next: upcoming.includes(x), on: shown.ha
 
 
   <section class="wrap" aria-labelledby="who-h">
-    <div class="section-head"><h2 id="who-h">People</h2><a href="/about/people/">People and advisors →</a></div>
+    <div class="section-head"><h2 id="who-h"><Mark for="People" />People</h2><a href="/about/people/">People and advisors →</a></div>
     <div class="people">
       <figure class="carousel" aria-roledescription="carousel" aria-label="Photos from our gatherings">
         <div class="frame">

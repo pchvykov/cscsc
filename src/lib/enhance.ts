@@ -3,7 +3,8 @@
 // Markdown produced; the words are untouched.
 //
 //  1. Sections (<section class="panel">) are numbered 01, 02 ... and, when they
-//     belong to a research theme (data-theme-id), carry its glyph and colour.
+//     belong to a research theme (data-theme-id), carry its glyph and colour;
+//     other sections carry an ink mark picked from their heading (data/marks.ts).
 //  2. A page with three or more sections gets a section map under its opening line.
 //  3. A reference - heading, summary, optional author line, link line - becomes
 //     one compact entry (.ref) with the author and link on a meta line.
@@ -18,6 +19,7 @@
 //       list of labelled items (.leads);
 //     - a card whose first line is just a link or a bold name gets that line as its title (.ct).
 import { themes } from "../data/themes";
+import { markFor, markUrl } from "../data/marks";
 
 const themeName = new Map(themes.map((t) => [t.id, t]));
 const strip = (h: string) => h.replace(/<[^>]+>/g, "").trim();
@@ -62,13 +64,15 @@ export function enhance(html: string, opts: { mapHeadings?: boolean } = {}): { h
   });
 
   // 1. numbered (and themed) sections
-  const sections: { id: string; title: string; theme?: string; n: string }[] = [];
+  const sections: { id: string; title: string; theme?: string; mark?: string; n: string }[] = [];
   let k = 0;
-  html = html.replace(/<section class="panel"( data-theme-id="([\w-]+)")?>\n<h2 id="([^"]+)">([\s\S]*?)<\/h2>/g, (_m, _a, theme, id, title) => {
+  html = html.replace(/<section class="panel"(?: data-theme-id="([\w-]+)")?(?: data-mark="([\w-]+)")?>\n<h2 id="([^"]+)">([\s\S]*?)<\/h2>/g, (_m, theme, mk, id, title) => {
     const t = theme && themeName.get(theme);
     const n = t ? t.n : String(++k).padStart(2, "0");
-    sections.push({ id, title: strip(title), theme, n });
-    return `<section class="panel"${theme ? ` data-theme-id="${theme}"` : ""}>\n<p class="sec-mark" aria-hidden="true">${theme ? `<span class="glyph"></span>` : ""}<span class="num">${n}</span></p>\n<h2 id="${id}">${title}</h2>`;
+    const mark = theme ? undefined : mk || markFor(strip(title));
+    sections.push({ id, title: strip(title), theme, mark, n });
+    const icon = theme ? `<span class="glyph"></span>` : `<span class="mark" style="--mark:${markUrl(mark!)}"></span>`;
+    return `<section class="panel"${theme ? ` data-theme-id="${theme}"` : ""}>\n<p class="sec-mark" aria-hidden="true">${icon}<span class="num">${n}</span></p>\n<h2 id="${id}">${title}</h2>`;
   });
 
   // 2. section map. Pages without section blocks can map their main headings instead.
@@ -80,7 +84,7 @@ export function enhance(html: string, opts: { mapHeadings?: boolean } = {}): { h
   if (sections.length >= 3) {
     hasMap = true;
     const map = `<nav class="section-map" aria-label="Sections on this page">${sections
-      .map((s) => `<a href="#${s.id}"${s.theme ? ` data-theme-id="${s.theme}"` : ""}>${s.theme ? `<span class="glyph" aria-hidden="true"></span>` : ""}${s.n ? `<span class="num">${s.n}</span>` : ""}<span class="t">${s.title}</span></a>`)
+      .map((s) => `<a href="#${s.id}"${s.theme ? ` data-theme-id="${s.theme}"` : ""}>${s.theme ? `<span class="glyph" aria-hidden="true"></span>` : s.mark ? `<span class="mark" aria-hidden="true" style="--mark:${markUrl(s.mark)}"></span>` : ""}${s.n ? `<span class="num">${s.n}</span>` : ""}<span class="t">${s.title}</span></a>`)
       .join("")}</nav>`;
     const sf = html.match(/^\s*<div class="standfirst">[\s\S]*?<\/div>\n?/);
     html = sf ? html.replace(sf[0], sf[0] + map + "\n") : map + "\n" + html;

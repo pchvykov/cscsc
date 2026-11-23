@@ -1,0 +1,6 @@
+---
+// An ink mark (data/marks.ts) beside a heading: by name, or picked from the heading's text.
+import { markFor, markUrl } from "../data/marks";
+const { name, for: text = "" } = Astro.props as { name?: string; for?: string };
+---
+<span class="mark" aria-hidden="true" style={`--mark:${markUrl(name ?? markFor(text))}`}></span>
