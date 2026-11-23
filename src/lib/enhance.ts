@@ -66,10 +66,11 @@ export function enhance(html: string, opts: { mapHeadings?: boolean } = {}): { h
   // 1. numbered (and themed) sections
   const sections: { id: string; title: string; theme?: string; mark?: string; n: string }[] = [];
   let k = 0;
+  const usedMarks = new Set<string>(); // a mark never repeats on one page
   html = html.replace(/<section class="panel"(?: data-theme-id="([\w-]+)")?(?: data-mark="([\w-]+)")?>\n<h2 id="([^"]+)">([\s\S]*?)<\/h2>/g, (_m, theme, mk, id, title) => {
     const t = theme && themeName.get(theme);
     const n = t ? t.n : String(++k).padStart(2, "0");
-    const mark = theme ? undefined : mk || markFor(strip(title));
+    const mark = theme ? undefined : mk ? (usedMarks.add(mk), mk) : markFor(strip(title), usedMarks);
     sections.push({ id, title: strip(title), theme, mark, n });
     const icon = theme ? `<span class="glyph"></span>` : `<span class="mark" style="--mark:${markUrl(mark!)}"></span>`;
     return `<section class="panel"${theme ? ` data-theme-id="${theme}"` : ""}>\n<p class="sec-mark" aria-hidden="true">${icon}<span class="num">${n}</span></p>\n<h2 id="${id}">${title}</h2>`;

@@ -39,7 +39,7 @@ const thumb = (id?: string) => id ? `https://i.ytimg.com/vi/${id}/mqdefault.jpg`
   </section>
   {groups.map((g) => (
     <section class="block">
-      <div class="section-head"><h2><Mark name={g.href ? "flame" : undefined} for={g.title} />{g.title}</h2>{g.href && <a href={g.href}>About this gathering →</a>}</div>
+      <div class="section-head"><h2><Mark for={g.title} />{g.title}</h2>{g.href && <a href={g.href}>About this gathering →</a>}</div>
       <div class="cards">
         {g.list.map((v) => (
           <a class="card" href={`https://www.youtube.com/watch?v=${v.data.youtube}`}>
