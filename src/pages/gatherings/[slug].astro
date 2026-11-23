@@ -61,12 +61,14 @@ const subpages = (await getCollection("pages", (p) => p.data.path.startsWith(`/g
   {videos.length > 0 && (
     <section id="recordings" class="block" style="padding-top:40px">
       <h2>Recordings</h2>
-      <ul class="rows">
+      <div class="cards">
         {videos.map((v) => (
-          <li><div class="when">{!oneKind && <b>{v.data.kind}</b>}{v.data.duration}</div>
-          <div><h3><a href={`https://www.youtube.com/watch?v=${v.data.youtube}`}>{v.data.title}</a></h3></div></li>
+          <a class="card" href={`https://www.youtube.com/watch?v=${v.data.youtube}`}>
+            <div class="thumb"><img src={`https://i.ytimg.com/vi/${v.data.youtube}/mqdefault.jpg`} alt="" loading="lazy" /></div>
+            <span class="k">{!oneKind && <>{v.data.kind} · </>}{v.data.duration}</span><h3 style="font-size:1.2rem">{v.data.title}</h3>
+          </a>
         ))}
-      </ul>
+      </div>
     </section>
   )}
   <DateSwitch />

@@ -32,6 +32,7 @@ Markdown for text. For anything more, use these few HTML wrappers (leave a blank
 - **Dividers come from the ensō.** Heading rules start from a small ensō and fade out; a paragraph divider is a centred ensō between two short strokes; the footer opens on a centred ensō. Rules fade rather than stop hard. Reuse these, don't invent new divider styles.
 - **Decoration never moves layout.** Marks and dividers sit inside existing rows (negative margins, absolute pseudo-elements, `border-image`) so adding or changing them adds no height and moves no text.
 - **Phone is a first-class view (390 px).** Nothing may run past the screen edge: long unbroken strings get `overflow-wrap: anywhere`; a row with a title and a side link wraps the link below on phones. Check at a true 390 px viewport - headless Chrome clamps windows narrower than ~500 px, so load the page in a 390 px iframe instead.
+- **Recordings show their frame.** Any page listing videos (videos page, the Recordings section of every gathering page) uses the `.cards` / `.card` thumbnail markup (YouTube `mqdefault.jpg` + kind/duration + title), never a bare text link. New templates that list videos copy it.
 - **Reading-column styles never reach components.** `.prose` element rules are written as `.prose :where(x):not(:where(UI) *)`; a new component root (a list, card grid, panel built by a template) goes into that UI list in `global.css`.
 
 ## Adding new content
