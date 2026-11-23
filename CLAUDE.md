@@ -37,6 +37,8 @@ Markdown for text. For anything more, use these few HTML wrappers (leave a blank
 ## Adding new content
 When CSCSC puts out something new (video, call, event, post, publication, gathering), follow `.claude/skills/site-update/SKILL.md`.
 
+**Standing rule: an upcoming event always carries its practical details on the site** - time (with timezone, plus a second zone for the list) and the join link (online) or place - as the first line of its body, wrapped in `<div class="until-end">` so it disappears after the event. Take them from the announcement email draft or `LINKS.md` in the community repo; if either is missing, ask rather than guess.
+
 ## Design review
 After a design change or a new kind of block, run the `design-critic` agent (`.claude/agents/design-critic.md`) on desktop (1280 px) and phone (390 px) screenshots of the affected page types. It checks for both failure modes - the wall of undifferentiated text and the Notion-style patchwork of colours and boxes - and returns site-wide fixes.
 

@@ -52,8 +52,15 @@ date: "YYYY-MM-DD"
 tags: ["call"]                 # call | reading-group | working-group | retreat | conference | external
 summary: "One plain line on what it was about."
 ---
-Optional body: the announcement text or a short description.
+<div class="until-end">
+
+**Friday 27 November, 11:00am-12:30pm EST (17:00-18:30 CET)** · [Join on Jitsi](https://meet.jit.si/<room>)
+
+</div>
+
+The announcement text or a short description.
 ```
+Time (with timezone) and join link or place are **required** on every upcoming event (standing rule, CLAUDE.md); the `until-end` wrapper hides them after the event.
 Before the date it shows as upcoming (Gatherings, Calls, home "Latest"); after the date it moves to past by itself, and a page with body text gets a note that it took place. An event without body text shows its summary under the title.
 
 ### A blog post
