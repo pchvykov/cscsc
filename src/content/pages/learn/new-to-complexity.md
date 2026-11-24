@@ -1,7 +1,7 @@
 ---
 title: "New to complexity?"
 path: "/learn/new-to-complexity/"
-description: "An introduction to complexity science and complex systems for contemplatives: videos, interactive animations and further reading, at any depth."
+description: "An introduction to complex systems for contemplatives: videos, interactive animations and further reading, at any depth."
 notion_id: "376d8cae-0cfe-817d-966e-eb50198449b0"
 notion_edited: "2026-06-06"
 icon: "🔭"

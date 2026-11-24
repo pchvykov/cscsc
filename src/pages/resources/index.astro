@@ -5,6 +5,6 @@ import { enhance } from "../../lib/enhance";
 const hub = (await getEntry("pages", "resources/_hub"))!;
 const body = enhance(hub.rendered?.html ?? "", { mapHeadings: true }).html;
 ---
-<Page title="Resources" cover={hub.data.cover} description="Research centers, funding and publication outlets for work on complex systems and contemplative studies.">
+<Page title="Resources" cover={hub.data.cover} description="Research centers, funding and publication outlets for work on complexity science and contemplative studies.">
   <Fragment set:html={body} />
 </Page>
