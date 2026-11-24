@@ -1,7 +1,7 @@
 ---
 title: "Learning center"
 path: "/learn/"
-description: "Complexity science and contemplative practice explained: a 3-minute animation, a glossary, and reading paths for scientists and contemplatives."
+description: "Complex systems and contemplative practice explained: a 3-minute animation, a glossary, and reading paths for scientists and contemplatives."
 notion_id: "286d8cae-0cfe-81f4-9136-c6a07e20fdbe"
 notion_edited: "2026-07-30"
 icon: "🧭"

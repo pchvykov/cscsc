@@ -1,6 +1,7 @@
 ---
 title: "Our Language"
 path: "/learn/glossary/"
+description: "Key terms spanning complex systems, contemplative studies, philosophy and cognitive science: the shared language of our community."
 layout: "glossary"
 notion_id: "286d8cae-0cfe-813f-98a1-de8e991e31d8"
 notion_edited: "2026-06-06"

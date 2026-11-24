@@ -1,7 +1,7 @@
 ---
 title: "Research Programs"
 path: "/research/"
-description: "Where complexity science meets contemplative science: relational ontology, agency, social reality, contemplative frameworks and alternative ways of knowing."
+description: "Where complex systems meet contemplative science: relational ontology, agency, social reality, contemplative frameworks and alternative ways of knowing."
 notion_id: "9c6bdd65-cb89-454e-819b-f670241aecbe"
 notion_edited: "2025-12-25"
 icon: "🔬"
