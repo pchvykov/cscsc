@@ -14,7 +14,7 @@ const pastCalls = [...evs].sort((a, b) => +b.data.date - +a.data.date).filter((e
 const oneKind = (list: typeof evs) => new Set(list.map(kindOf)).size === 1;
 const recs = (await getCollection("videos", (v) => v.data.kind === "recording")).sort((a, b) => +b.data.date - +a.data.date);
 ---
-<Page title="Calls and reading groups" dek="A monthly call, open to anyone curious, and reading groups that come and go." section="Gatherings">
+<Page title="Calls and reading groups" description="Monthly community calls and reading groups on complexity science and contemplative practice, open to anyone curious." dek="A monthly call, open to anyone curious, and reading groups that come and go." section="Gatherings">
   <p>Dates for calls and events are announced by email. <a class="btn solid" href={links.emailSignup} style="margin-left:6px">Get updates by email</a></p>
   <p class="muted" style="font-size:.85rem">Forum members can also see a <a href={links.calendar}>calendar on Hylo</a>, though it is not always up to date.</p>
   {nextCalls.length > 0 && (<section data-hide-empty="next-calls" hidden={!nextCalls.some((e) => endOf(e) >= buildDay)}>

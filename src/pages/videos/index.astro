@@ -20,7 +20,7 @@ const order = ["Complex Systems and Contemplative Studies @ CCS26", "Talks", "Ca
 groups.sort((a, b) => order.indexOf(a.title) - order.indexOf(b.title));
 const thumb = (id?: string) => id ? `https://i.ytimg.com/vi/${id}/mqdefault.jpg` : "";
 ---
-<Page title="Videos" dek="Talks, recorded calls and short films." wide local={false}>
+<Page title="Videos" dek="Talks, recorded calls and short films." description="Talks, community calls and reading groups on complexity science, contemplative traditions and meditation research." wide local={false}>
   <Fragment slot="head"><p style="margin:14px 0 0"><a href={links.youtube}>All videos on YouTube →</a></p></Fragment>
   <section>
     <div class="section-head"><h2><Mark for="Start here" />Start here</h2></div>

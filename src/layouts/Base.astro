@@ -5,7 +5,7 @@ import Footer from "../components/Footer.astro";
 import { themeCss } from "../data/themes";
 
 interface Props { title?: string; fullTitle?: string; description?: string; image?: string; noindex?: boolean; ogType?: "website" | "article"; jsonLd?: object | object[] }
-const { title, description: rawDescription = "A research community bringing complexity science and contemplative practice together: how order arises without anyone in charge, in cells, minds and societies.", image = "/og-image.jpg", noindex = false, ogType = "website", jsonLd } = Astro.props;
+const { title, description: rawDescription = "Complexity science and contemplative practice, from meditation and mindfulness research to prayer: how order arises in cells, minds and societies.", image = "/og-image.jpg", noindex = false, ogType = "website", jsonLd } = Astro.props;
 const site = "Complexity & Contemplation";
 const siteFull = "Complexity Science & Contemplative Studies Consortium";
 const fullTitle = Astro.props.fullTitle ?? (title ? `${title} · ${site}` : site);

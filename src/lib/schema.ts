@@ -12,7 +12,8 @@ export const org = {
   url: `${SITE}/`,
   logo: abs("/favicon-512.png"),
   image: abs("/og-image.jpg"),
-  description: "A research community bringing complexity science and contemplative practice together: how order arises without anyone in charge, in cells, minds and societies.",
+  description: "Complexity science and contemplative practice, from meditation and mindfulness research to prayer: how order arises in cells, minds and societies.",
+  knowsAbout: ["Complexity science", "Complex systems", "Contemplative science", "Contemplative traditions", "Meditation research", "Mindfulness research", "Contemplative prayer"],
   // The old Notion site is listed so search engines tie its reputation to this one.
   sameAs: [links.youtube.replace(/\/videos$/, ""), "https://www.hylo.com/groups/cscsc", "https://cscsc.notion.site/CSCSC-286d8cae0cfe813290abf9eb6acd731c"],
 };

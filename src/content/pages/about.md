@@ -1,6 +1,7 @@
 ---
 title: "ABOUT CSCSC"
 path: "/about/"
+description: "Bridging complexity science and contemplative studies, from meditation and mindfulness research to contemplative prayer, to understand minds and societies."
 notion_id: "286d8cae-0cfe-8163-861c-eb37a8c3c0c0"
 notion_edited: "2026-05-09"
 icon: "🌀"
@@ -8,7 +9,7 @@ icon: "🌀"
 
 <div class="standfirst">
 
-*A research community bridging complexity science and contemplative studies to understand minds, societies, and human flourishing*
+*A research community bridging complexity science and contemplative studies (from meditation and mindfulness research to contemplative prayer and the wisdom traditions) to understand minds, societies, and human flourishing*
 
 </div>
 
